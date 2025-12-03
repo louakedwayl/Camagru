@@ -13,6 +13,7 @@ body
     grid-template-columns: repeat(12, 1fr);
     grid-template-rows: repeat(12, 1fr);
     gap: 0;
+    background-color:#fafafa ;
 }
 
 main
@@ -21,33 +22,66 @@ main
     grid-column-end: 12;
     grid-row-start: 2;
     grid-row-end: 12;
-    background-color: black;
+
 
     display: grid;                  /* transforme main en grille interne */
     grid-template-columns: 1fr 1fr; /* 2 colonnes : gauche 1/3, droite 2/3 */
+}
 
+main img
+{
+    max-width: 100%;      /* l'image ne dépasse jamais de .left */
+    max-height: 100%;     /* l'image ne dépasse jamais en hauteur */
+    object-fit: contain;  /* garde les proportions */
 }
 
 main .left
 {
-    display: flex;             /* active Flexbox */
+    max-width: 100%;   /* l'image ne dépasse jamais de .left */
+    max-height: 100%;  /* l'image ne dépasse jamais en hauteur */
+    object-fit: contain; /* garde les proportions */    display: flex;             /* active Flexbox */
     justify-content: center;   /* centre horizontalement */
     align-items: center;  
     background-color: green;
 
 }
+
+/*Top*/
+
 main .right
 {
+    display: flex;
+        flex-direction: column;
+
+    align-items: center;
+    justify-content: center;   /* centre horizontalement */
+
+}
+
+main .top
+{
+    max-width: 100%;  /* ne dépasse jamais la largeur du conteneur */
+    display: flex;
+    flex-direction: column;
     background-color: red;
 }
 
+main .bottom
+{
+    max-width: 100%;  /* ne dépasse jamais la largeur du conteneur */
+    display: flex;
+    flex-direction: column;
+    background-color: blue;
+}
 
 footer
 {   
+    display: flex;
     grid-column-start: 1;
     grid-column-end: 13;
     grid-row-start: 12;
     grid-row-end: 13;
-    background-color: blue;
-
+    justify-content: center;
+    align-items: center;
 }
+
