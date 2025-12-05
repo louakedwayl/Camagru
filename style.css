@@ -3,7 +3,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Courier New", monospace;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
 body 
@@ -20,10 +20,8 @@ main
 {
     grid-column-start: 2;
     grid-column-end: 12;
-    grid-row-start: 2;
+    grid-row-start: 1;
     grid-row-end: 12;
-
-
     display: grid;                  /* transforme main en grille interne */
     grid-template-columns: 1fr 1fr; /* 2 colonnes : gauche 1/3, droite 2/3 */
 }
@@ -50,8 +48,7 @@ main .left
 main .right
 {
     display: flex;
-        flex-direction: column;
-
+    flex-direction: column;
     align-items: center;
     justify-content: center;   /* centre horizontalement */
 
@@ -62,6 +59,10 @@ main .top
     max-width: 100%;  /* ne dépasse jamais la largeur du conteneur */
     display: flex;
     flex-direction: column;
+    background: white;
+    padding: 40px;
+    border: 1px solid #dbdbdb;
+    max-width: 550px;
 }
 
 main .bottom
@@ -82,3 +83,43 @@ footer
     align-items: center;
 }
 
+.bottom a {
+    color: #5063F9;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.bottom p
+{
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.right input
+{
+    width: 100%;
+    padding: 9px 0 7px 8px;
+    margin-bottom: 6px;
+    border: 1px solid #dbdbdb; 
+    border-radius: 3px; 
+    outline: none; 
+}
+
+.right button
+{
+    width: 100%;
+    padding: 7px 16px;
+    margin-top: 8px;
+    font-weight: 600;
+    color: white;
+    background: #828FFA;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+footer a
+{
+    color: #5063F9;
+    text-decoration: none;
+}
