@@ -42,7 +42,6 @@ main .left
     object-fit: contain; /* garde les proportions */    display: flex;             /* active Flexbox */
     justify-content: center;   /* centre horizontalement */
     align-items: center;  
-    background-color: green;
 
 }
 
@@ -63,7 +62,6 @@ main .top
     max-width: 100%;  /* ne dépasse jamais la largeur du conteneur */
     display: flex;
     flex-direction: column;
-    background-color: red;
 }
 
 main .bottom
@@ -71,7 +69,6 @@ main .bottom
     max-width: 100%;  /* ne dépasse jamais la largeur du conteneur */
     display: flex;
     flex-direction: column;
-    background-color: blue;
 }
 
 footer
