@@ -1,42 +1,34 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<?php
+// index.php
 
-    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
-    
-    <link rel="stylesheet" href="style.css">
-    <title>Camagru</title>
-</head>
-<body>
-    <main>
-        <div class="left">
-            <img src="/images/landing-2x.png" alt="">
-        </div>
-        <div class="right">
-           <div class="top">
-           <img src="/images/logo.png" alt="">
-           <input type="text" id ="input_login" placeholder="Email">
-           <input type="text" id ="input_password" placeholder="Password">
-           <button type="submit">Log in</button>
-           <div style="display: flex; align-items: center; text-align: center; margin: 20px 0;">
-            <div style="flex: 1; border-bottom: 1px solid #ddd;"></div>
-            <span style="padding: 0 10px; color: #666; font-weight: bold; ">OR</span>
-            <div style="flex: 1; border-bottom: 1px solid #ddd;"></div>
-            </div>    
-                <div class="bottom">
-                <p><a href="https://opensource.org/licenses/MIT" target="_blank"> Forgot password?</a></p>
-                <p>Don't have an account?<a href="https://opensource.org/licenses/MIT" target="_blank"> Sign up</a></p>
-                </div>
-        </div>
+// Connexion à la DB (PDO)
+$dsn = "mysql:host=db;dbname=camagru";
+$user = "camagru_user";
+$pass = "password";
+try {
+    $pdo = new PDO($dsn, $user, $pass);
+} catch (PDOException $e) {
+    die("DB connection failed: " . $e->getMessage());
+}
 
-    </main>
-    <footer>
-        <p>© 2025 Wayl Louaked . This project is licensed under the 
-    <a href="https://opensource.org/licenses/MIT" target="_blank">MIT License</a>.</p>
-    </footer>
-</body>
-</html>
+// Récupération de l'action
+$action = $_GET['action'] ?? 'home';
+
+// Mini routeur
+switch ($action) {
+    case 'register':
+        require 'controller/UserController.php';
+        $controller = new UserController();
+        $controller->register();
+        break;
+
+    case 'login':
+        require 'controller/UserController.php';
+        $controller = new UserController();
+        $controller->login();
+        break;
+
+    default:
+        require 'views/index.php';
+        break;
+}
