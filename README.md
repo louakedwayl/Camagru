@@ -10,3 +10,22 @@ Here are some key features I've implemented to make Camagru a functional and sec
 <p align="center">
   <img src="images/Camagru_layout.png" alt="Camagru Layout">
 </p>
+
+
+## Clone the repository
+```bash
+git clone git@github.com:louakedwayl/Camagru.git
+```
+
+## 🛠️ Installation
+```bash
+make && make run
+```
+
+## Access Camagru
+```bash
+http://localhost:8080/
+```
+
+## 📝 License
+© 2025 Wayl Louaked. This project is licensed under the MIT License.
