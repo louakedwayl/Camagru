@@ -2,7 +2,7 @@
 // index.php
 
 // Connexion à la DB (PDO)
-$dsn = "mysql:host=db;dbname=camagru";
+$dsn = "mysql:host=db;dbname=camagru_db";
 $user = "camagru_user";
 $pass = "password";
 try {

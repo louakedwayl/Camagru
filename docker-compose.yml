@@ -1,9 +1,8 @@
-version: '3'   # au lieu de '3.8'
 services:
   web:
-    build: .
+    build: .  #lance le dockerfile dans le repertoire courant
     ports:
-      - "80:80"
+      - "8080:80"
     volumes:
       - .:/var/www/html
     depends_on:
@@ -13,7 +12,7 @@ services:
     image: mysql:8.0
     environment:
       MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_DATABASE: camagru
+      MYSQL_DATABASE: camagru_db
       MYSQL_USER: camagru_user
       MYSQL_PASSWORD: password
     ports:
