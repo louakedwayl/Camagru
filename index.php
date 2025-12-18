@@ -5,11 +5,25 @@
 $dsn = "mysql:host=db;dbname=camagru_db";
 $user = "camagru_user";
 $pass = "password";
-try {
-    $pdo = new PDO($dsn, $user, $pass);
-} catch (PDOException $e) {
-    die("DB connection failed: " . $e->getMessage());
+
+$maxRetries = 10;
+$connected = false;
+
+for ($i = 0; $i < $maxRetries; $i++) {
+    try {
+        $pdo = new PDO($dsn, $user, $pass);
+        $connected = true;
+        break;
+    } catch (PDOException $e) {
+        echo "Waiting for DB... retry $i\n";
+        sleep(2);
+    }
 }
+
+if (!$connected) {
+    die("DB connection failed after $maxRetries retries.");
+}
+
 
 // Récupération de l'action
 $action = $_GET['action'] ?? 'home';
