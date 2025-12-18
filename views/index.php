@@ -6,19 +6,19 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="index_main.css">
-    <link rel="stylesheet" href="footer.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/index_main.css">
+    <link rel="stylesheet" href="assets/css/footer.css">
     <title>Camagru</title>
 </head>
 <body>
     <main>
         <div class="index_left">
-            <img src="/images/landing-2x.png" alt="Landing page image">
+            <img src="assets//images/landing-2x.png" alt="Landing page image">
         </div>
         <div class="index_right">
             <div class="top">
-            <img src="/images/logo.png" alt="">
+            <img src="assets//images/logo.png" alt="">
             <input type="text" id ="input_login" placeholder="Email">
             <input type="text" id ="input_password" placeholder="Password">
             <button type="submit">Log in</button>
