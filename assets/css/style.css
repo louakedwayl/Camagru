@@ -8,10 +8,6 @@
 
 body
 {
-    display: grid;
     min-height: 100vh;
-    grid-template-columns: repeat(12, 1fr);
-    grid-template-rows: repeat(12, 1fr);
-    gap: 0;
     background-color:#fafafa ;
 }

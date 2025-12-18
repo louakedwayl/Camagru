@@ -43,6 +43,6 @@ switch ($action) {
         break;
 
     default:
-        require 'views/index.php';
+        require 'views/register.php';
         break;
 }
