@@ -11,13 +11,19 @@
 </head>
 <body>
     <main>
-        <h1>Register</h1>
-        <!-- <form method="POST" action="index.php?action=register">
-            <input type="text" name="username" placeholder="Username" required>
-            <input type="email" name="email" placeholder="Email" required>
-            <input type="password" name="password" placeholder="Password" required>
-            <button type="submit">Register</button>
-        </form> -->
+        <div class="top">
+            <h1>Register</h1>
+            <form method="POST" action="index.php?action=register">
+                <input type="text" name="username" placeholder="Username" required>
+                <input type="email" name="email" placeholder="Email" required>
+                <input type="password" name="password" placeholder="Password" required>
+                <button type="submit">Register</button>
+            </form>
+        </div>
+        <div class="bottom">
+            
+        </div>
+    
     </main>
     <footer>
         <p>© 2025 Wayl Louaked . This project is licensed under the 
