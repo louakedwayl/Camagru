@@ -1,8 +1,125 @@
 main
 {
+    display: flex;
+    flex-direction: column;
     grid-column-start: 4;
     grid-column-end: 10;
     grid-row-start: 2;
     grid-row-end: 11;
-    background: red;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;              /* espace entre top et bottom */
+}
+
+main img
+{
+    max-width: 100%;      /* l'image ne dépasse jamais de .left */
+    max-height: 100%;     /* l'image ne dépasse jamais en hauteur */
+    object-fit: contain;  /* garde les proportions */
+}
+
+main p
+{
+    max-width: 270px;
+}
+
+.top
+{
+    display: flex;
+    border: 1px solid #dbdbdb;
+    flex-direction: column;
+    background: white;
+    align-items: center;
+    width: 350px;
+    padding-bottom: 15px;
+}
+
+.top a {
+    color: #5063F9;
+    text-decoration: none;
+}
+
+.top p:first-of-type
+{
+    margin-top: -30px; /* Remonte de 30 px*/
+    font-weight: 550;
+    color: #737373;
+    font-size: 14px;
+} 
+
+
+.bottom
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;    
+    width: 350px;
+    border: 1px solid #dbdbdb;
+    background: white;
+    padding-top: 25px;
+    padding-bottom: 20px;
+}
+
+.bottom p 
+{
+    font-size: 14px;
+    max-width: 250px;
+}
+
+.bottom a {
+    color: #5063F9;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+form
+{
+    display: flex;
+    flex-direction: column;
+    padding-right: 40px;
+    padding-left: 40px;
+    padding-left: 40px;
+    padding-top: 15px;
+    padding-bottom: 20px;
+}
+
+.top input
+{
+    width: 270px;
+    padding: 9px 0 7px 8px;
+    margin-bottom: 6px;
+    border: 1px solid #dbdbdb; 
+    border-radius: 3px; 
+    outline: none; 
+}
+
+.top button
+{
+    width: 100%;
+    padding: 7px 16px;
+    margin-top: 8px;
+    font-weight: 600;
+    color: white;
+    background: #828FFA;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.top p:nth-of-type(2),
+.top p:nth-of-type(3) 
+{
+    color: #6d6d6d;
+    font-size: 12px;
+    text-align: center;
+}
+
+.top p:nth-of-type(2)
+{
+    padding-bottom: 20px;
+}
+
+.top p:nth-of-type(3) 
+{
+    padding-bottom: 15px;
 }
