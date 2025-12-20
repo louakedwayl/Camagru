@@ -8,9 +8,8 @@ This project is built from scratch using vanilla PHP, HTML, CSS, and JavaScript,
 Here are some key features I've implemented to make Camagru a functional and secure photo-sharing platform:
 
 <p align="center">
-  <img src="images/Camagru_layout.png" alt="Camagru Layout">
+  <img src="assets/images/Camagru_layout.png" alt="Camagru Layout">
 </p>
-
 
 ## Clone the repository
 ```bash
