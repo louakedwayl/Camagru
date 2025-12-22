@@ -43,6 +43,6 @@ switch ($action) {
         break;
 
     default:
-        require 'views/index.php';
+        require 'views/dashboard.php';
         break;
 }
