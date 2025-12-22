@@ -7,7 +7,6 @@ main
     grid-column-end: 12;
     grid-row-start: 1;
     grid-row-end: 12;
-
 }
 
 main img
@@ -89,8 +88,6 @@ main .bottom
     cursor: pointer;
 }
 
-
-
 /* OR delimitation */
 
 .or 
@@ -123,12 +120,10 @@ span.or
     border-bottom: 1px solid #ddd;
 }
 
-
 @media (max-width: 950px) 
 {
     .landing.img
     {
         display: none;
     }
-
 }
