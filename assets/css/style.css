@@ -8,7 +8,7 @@
 
 body
 {
-    min-height: 100vh;
+    min-height: 100vh;  /* hauteur minimale du body = 100 % de la hauteur de l’écran */
     background-color:#fafafa ;
     display: grid;
     grid-template-columns: repeat(12, 1fr);
