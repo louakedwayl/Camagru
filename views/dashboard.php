@@ -13,36 +13,43 @@
 </head>
 <body>
     <nav>
-        <img class="logo" src="assets//images/logo.png" alt="Camagru Logo">
+        <img class="logo" src="assets/images/logo.png" alt="Camagru Logo">
+        <!-- <img src="assets/images/icon/camagru_icon_black_white.png" alt="Camagru Logo black and white" class="home icon black"> -->
         <ul>
             <li>
                 <a href="https://opensource.org/licenses/MIT">
-                    <img class="home icon" src="assets//images/home.svg" alt="home icon">
-                    <span>Home</span>
+                    <img class="icon home" src="assets/images/icon/home.svg" alt="home icon">
+                    <span class = "icon">Home</span>
                 </a>
             </li> 
             <li>
                 <a href="https://opensource.org/licenses/MIT">
-                    <img class="search icon" src="assets//images/search.svg" alt="search icon">
-                    <span>Search</span>
+                    <img class="icon search" src="assets/images/icon/search.svg" alt="search icon">
+                    <span class = "icon">Search</span>
                 </a>
             </li>
             <li>
                 <a href="https://opensource.org/licenses/MIT">
-                    <img class="explore icon" src="assets//images/compass.svg" alt="explore icon">
-                    <span>Explore</span>
+                    <img class="icon explore" src="assets/images/icon/compass.svg" alt="explore icon">
+                    <span class = "icon">Explore</span>
                 </a>
             </li>
             <li>
                 <a href="https://opensource.org/licenses/MIT">
-                    <img class="create icon" src="assets//images/create.svg" alt="create icon">
-                    <span>Create</span>
+                    <img class="icon create" src="assets/images/icon/create.svg" alt="create icon">
+                    <span class = "icon">Create</span>
                 </a>
             </li>
             <li>
                 <a href="https://opensource.org/licenses/MIT">
-                    <img class="profile icon" src="assets//images/profile.svg" alt="profile icon">
-                    <span>Profile</span>
+                    <img class="icon notifications" src="assets/images/icon/heart.svg" alt="profile icon">
+                    <span class = "icon">Notifications</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://opensource.org/licenses/MIT">
+                    <img class="icon profile" src="assets/images/icon/profile.svg" alt="profile icon">
+                    <span class = "icon">Profile</span>
                 </a>
             </li>
         </ul>
