@@ -24,51 +24,94 @@ nav img.icon
 {
     margin-left: 30px;
     margin-right: 20px;
-    max-width: 60px;      /* l'image ne dépasse jamais de .left */
-    max-height: 60px;     /* l'image ne dépasse jamais en hauteur */
-    object-fit: contain;  /* garde les proportions */
-    transform: translateY(-7px);
 }
 
-nav img.icon.explore,
-nav img.icon.search,
-nav img.icon.create,
-nav img.icon.notifications
+nav img.icon.home
 {
-    max-width: 55px;      /* l'image ne dépasse jamais de .left */
-    max-height: 55px;     /* l'image ne dépasse jamais en hauteur */
+    width: 26px;
+    height: 26px;
     object-fit: contain;  /* garde les proportions */
-}
-
-nav img.icon.explore
-{
-
+    transform: translateY(-4px);
 }
 
 nav img.icon.search
 {
-
+    width: 25px;
+    height: 25px;
+    object-fit: contain;  /* garde les proportions */
+    transform: translateY(-1px);
 }
 
-nav img.icon.create
+nav img.icon.explore
 {
-
+    width: 25px;
+    height: 25px;
+    object-fit: contain;  /* garde les proportions */
+    transform: translateY(-1px);
 }
 
 nav img.icon.notifications
 {
-    width: 55px;      /* l'image ne dépasse jamais de .left */
-    height: 55px;     /* l'image ne dépasse jamais en hauteur */
+    width: 25px;
+    height: 25px;
     object-fit: contain;  /* garde les proportions */
+    transform: translateY(-1px);
 }
 
+nav img.icon.create
+{
+    width: 30px;
+    height: 30px;
+    object-fit: contain;  /* garde les proportions */
+    transform: translateY(-3px);
+}
+
+
+
+nav img.icon.profile
+{
+    width: 35px;
+    height: 35px;
+    transform: translateY(-2px);
+}
+
+img.home.icon.black 
+{
+    display: none;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    width: 45px;
+    height: 45px;
+    object-fit: contain;
+    transform: translateX(-9px);
+}
+
+span.icon.home
+{
+  transform: translateX(-4px);
+}
+
+span.icon.profile
+{
+  transform: translate(-7px, -1px);
+}
+
+span.icon.search
+{
+  transform: translateX(-2px);
+}
+
+span.icon.create
+{
+  transform: translateX(-3px);
+}
 
 
 nav ul
 {
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 40px;
     list-style-type: none;
     width: 100%;
 }
@@ -87,7 +130,7 @@ nav a
     display: flex;
     text-decoration: none;
     color: black;
-    font-size: 27px;
+    font-size: 16px;
     align-items: center;
     width: 100%;
 }
@@ -111,15 +154,36 @@ main
     border-right: 1px solid #dbdbdb; 
 }
 
-@media (max-width: 1400px) 
+@media (max-width: 1439px) 
 {
+    .logo
+    {
+        display: none;
+    }
+
+    img.home.icon.black 
+    {
+        display: block;
+    }
+
+    nav
+    {
+        width: 107px;
+    }
+
     span.icon
     {
         display: none;
     }
+
+    .corner
+    {
+        width: 107px;
+    }
+
 }
 
-@media (max-width: 720px) 
+@media (max-width: 620px) 
 {
     nav 
     {

@@ -23,7 +23,7 @@
                 <input type="text" name="username" placeholder="Username" required>
                 <button type="submit">Next</button>
             </form>
-            <p>People who use our service may have uploaded your contact information to Instagram.<a href="https://opensource.org/licenses/MIT" target="_blank"> Learn More</a></p>
+            <p>People who use our service may have uploaded your contact information to Camagru.<a href="https://opensource.org/licenses/MIT" target="_blank"> Learn More</a></p>
             <p>By signing up, you agree to our <a href="https://opensource.org/licenses/MIT" target="_blank">Terms</a>. Learn how we collect, use and share your data in our <a href="https://opensource.org/licenses/MIT" target="_blank">Privacy Policy</a> and how we use cookies and similar technology in our <a href="https://opensource.org/licenses/MIT" target="_blank">Cookies Policy</a>.</p>
         </div>
         <div class="bottom">
