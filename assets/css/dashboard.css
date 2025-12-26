@@ -2,28 +2,20 @@ nav
 {
     display :flex;
     flex-direction: column;
-    height: 100%;
-    width: 100%;
+    width: 338px;
     grid-column-start: 1;
     grid-column-end: 3;
     grid-row-start: 1;
     grid-row-end: 12;
     border-right: 1px solid #dbdbdb; 
-    gap: 10px;
 }
 
 nav img.logo
 {
-    width: 300px;      /* l'image ne dépasse jamais de .left */
+    width: 200px;      /* l'image ne dépasse jamais de .left */
     height: 150px;     /* l'image ne dépasse jamais en hauteur */
     object-fit: contain;  /* garde les proportions */
-    transform: translatex(-30px);
-}
-
-nav img.icon
-{
-    margin-left: 30px;
-    margin-right: 20px;
+    transform: translatex(-5px);
 }
 
 nav img.icon.home
@@ -67,7 +59,6 @@ nav img.icon.create
 }
 
 
-
 nav img.icon.profile
 {
     width: 35px;
@@ -80,10 +71,12 @@ img.home.icon.black
     display: none;
     margin-top: 40px;
     margin-bottom: 40px;
+    margin-left: 40px;
     width: 45px;
     height: 45px;
     object-fit: contain;
-    transform: translateX(-9px);
+    transform: translate(-9px, -3px);
+
 }
 
 span.icon.home
@@ -114,25 +107,47 @@ nav ul
     gap: 40px;
     list-style-type: none;
     width: 100%;
+    transform: translateY(2px);
 }
 
 nav li
 {
-    display: flex;
+    display: inline-flex;
     list-style-type: none;
     font-weight: 500;
     width: 100%;
+    
 }
 
-
-nav a
-{
-    display: flex;
+nav a {
+    display: flex;  /* Changez inline-flex en flex */
     text-decoration: none;
     color: black;
     font-size: 16px;
     align-items: center;
-    width: 100%;
+    width: 100%;  /* Changez auto en 100% */
+    pointer-events: none;  /* Gardez ça */
+}
+
+.link-area {
+    display: flex;
+    align-items: center;
+    pointer-events: auto;  /* IMPORTANT : réactive les clics */
+    padding-top: 12px;
+    padding-bottom: 10px;
+    padding-right: 90px;
+    padding-left: 10px;
+    border-radius: 8px;
+    cursor: pointer;  /* Affiche le curseur main */
+    margin-left: 30px;  /* AJOUTEZ ceci */
+}
+
+.link-area img {
+    margin-right: 15px;  /* AJOUTEZ ceci */
+}
+
+.link-area:hover {
+    background-color: #ececec;  /* Optionnel */
 }
 
 main 
@@ -147,11 +162,59 @@ main
 
 .corner
 {
+    display: flex;
+    width: 338px;
     grid-column-start: 1;
     grid-column-end: 3;
     grid-row-start: 12;
     grid-row-end: 13;
-    border-right: 1px solid #dbdbdb; 
+    border-right: 1px solid #dbdbdb;
+    gap: 5px;
+    z-index: 10;         /* s'assurer qu'il est au-dessus */
+    align-items: center;  /* Centre le contenu dans .corner */
+    padding: 10px 0;      /* Espace en haut et en bas */
+}
+
+img.icon.more
+{
+    width: 30px;
+    height: 30px;
+    object-fit: contain;  /* garde les proportions */
+}
+
+a.icon.more
+{
+    display: inline-flex;
+    gap: 15px;
+    text-decoration: none;
+    width: auto;
+    margin-left: 33px;
+    border-radius: 8px; /* Optionnel : coins arrondis */
+    padding: 5px 10px;
+}
+
+span.icon.more
+{
+    transform: translateY(5px);
+    color: black;
+}
+
+a.icon.more:hover {
+    background-color: #ececec;  /* Optionnel */
+
+}
+
+
+@media (max-width: 1920px) 
+{
+    nav 
+    {
+        width: 245px;
+    }
+    .corner
+    {
+        width: 245px;
+    }
 }
 
 @media (max-width: 1439px) 
@@ -195,3 +258,4 @@ main
         display: none;
     }
 }
+
