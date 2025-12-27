@@ -250,6 +250,7 @@ a.icon.more:hover {
 
 div.hamburger
 {
+    display: none;
     position: absolute;
     bottom: 87px;
     left: 38px;
