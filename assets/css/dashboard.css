@@ -81,24 +81,19 @@ img.home.icon.black
 
 span.icon.home
 {
-  transform: translateX(-4px);
+    transform: translateY(-3px);
 }
 
-span.icon.profile
-{
-  transform: translate(-7px, -1px);
-}
-
-span.icon.search
-{
-  transform: translateX(-2px);
-}
 
 span.icon.create
 {
-  transform: translateX(-3px);
+    transform: translateY(-3px);
 }
 
+span.icon.nav
+{
+    margin-left: 15px;
+}
 
 nav ul
 {
@@ -133,18 +128,60 @@ nav a {
     display: flex;
     align-items: center;
     pointer-events: auto;  /* IMPORTANT : réactive les clics */
-    padding-top: 12px;
-    padding-bottom: 10px;
-    padding-right: 90px;
-    padding-left: 10px;
     border-radius: 8px;
     cursor: pointer;  /* Affiche le curseur main */
     margin-left: 30px;  /* AJOUTEZ ceci */
 }
 
-.link-area img {
-    margin-right: 15px;  /* AJOUTEZ ceci */
+.link-area.home 
+{
+    padding-top: 14px;
+    padding-bottom: 5px;
+    padding-right: 201px;
+    padding-left: 10px;
 }
+
+.link-area.search
+{
+    padding-top: 12px;
+    padding-bottom: 8px;
+    padding-right: 194px;
+    padding-left: 10px;
+}
+
+.link-area.explore
+{
+    padding-top: 12px;
+    padding-bottom: 10px;
+    padding-right: 192px;
+    padding-left: 10px;
+}
+
+.link-area.notifications
+{
+    padding-top: 14px;
+    padding-bottom: 10px;
+    padding-right: 159px;
+    padding-left: 10px;
+}
+
+.link-area.create
+{
+    padding-top: 14px;
+    padding-bottom: 8px;
+    padding-right: 194px;
+    padding-left: 10px;
+}
+
+.link-area.profile
+{
+    padding-top: 12px;
+    padding-bottom: 8px;
+    padding-right: 191px;
+    padding-left: 10px;
+}
+
+
 
 .link-area:hover {
     background-color: #ececec;  /* Optionnel */
@@ -190,7 +227,11 @@ a.icon.more
     width: auto;
     margin-left: 33px;
     border-radius: 8px; /* Optionnel : coins arrondis */
-    padding: 5px 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 200px;
+
 }
 
 span.icon.more
@@ -214,6 +255,40 @@ a.icon.more:hover {
     .corner
     {
         width: 245px;
+    }
+    .link-area.home 
+    {
+        padding-right: 111px;
+    }
+
+    .link-area.search 
+    {
+        padding-right: 105px;
+    }
+
+    .link-area.explore 
+    {
+        padding-right: 102px;
+    }
+    
+    .link-area.notifications 
+    {
+        padding-right: 68px;
+    }
+
+    .link-area.create 
+    {
+        padding-right: 102px;
+    }
+
+    .link-area.profile 
+    {
+        padding-right: 100px;
+    }
+
+    a.icon.more
+    {
+        padding-right: 110px;
     }
 }
 
@@ -243,7 +318,40 @@ a.icon.more:hover {
     {
         width: 107px;
     }
+       .link-area.home 
+    {
+        padding-right: 10px;
+    }
 
+    .link-area.search 
+    {
+        padding-right: 10px;
+    }
+
+    .link-area.explore 
+    {
+        padding-right: 10px;
+    }
+    
+    .link-area.notifications 
+    {
+        padding-right: 10px;
+    }
+
+    .link-area.create 
+    {
+        padding-right: 10px;
+    }
+
+    .link-area.profile 
+    {
+        padding-right: 10px;
+    }
+ 
+    a.icon.more
+    {
+        padding-right: 11px;
+    }
 }
 
 @media (max-width: 620px) 
