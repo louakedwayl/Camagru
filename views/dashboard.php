@@ -17,7 +17,7 @@
         <img src="assets/images/icon/Camagru_icon_black.png" alt="Camagru Logo black and white" class="home icon black">
         <ul>
             <li>
-                <a href="https://opensource.org/licenses/MIT">
+                <a href="#">
                     <span class="link-area home">
                         <img class="icon home" src="assets/images/icon/home.svg" alt="home icon">
                         <span class = "icon home nav">Home</span>
@@ -25,7 +25,7 @@
                 </a>
             </li> 
             <li>
-                <a href="https://opensource.org/licenses/MIT">
+                <a href="#">
                     <span class="link-area search">
                         <img class="icon search" src="assets/images/icon/search.svg" alt="search icon">
                         <span class = "icon search nav">Search</span>
@@ -33,7 +33,7 @@
                 </a>
             </li>
             <li>
-                <a href="https://opensource.org/licenses/MIT">
+                <a href="#">
                     <span class="link-area explore">
                         <img class="icon explore" src="assets/images/icon/compass.svg" alt="explore icon">
                         <span class = "icon explore nav">Explore</span>
@@ -42,7 +42,7 @@
             </li>
 
             <li>
-                <a href="https://opensource.org/licenses/MIT">
+                <a href="#">
                     <span class="link-area notifications">
                         <img class="icon notifications" src="assets/images/icon/heart.svg" alt="profile icon">
                         <span class = "icon notifications nav">Notifications</span>
@@ -51,7 +51,7 @@
             </li>
 
             <li>
-                <a href="https://opensource.org/licenses/MIT">
+                <a href="#">
                     <span class="link-area create">
                         <img class="icon create" src="assets/images/icon/create.svg" alt="create icon">
                         <span class = "icon create nav">Create</span>
@@ -59,7 +59,7 @@
                 </a>
             </li>
             <li>
-                <a href="https://opensource.org/licenses/MIT">
+                <a href="#">
                     <span class="link-area profile">
                         <img class="icon profile" src="assets/images/icon/profile.svg" alt="profile icon">
                         <span class = "icon profile nav">Profile</span>
@@ -71,10 +71,27 @@
     <main>
     </main>
     <div class="corner">
-        <a href="https://opensource.org/licenses/MIT" class = "icon more">
+        <a href="#" class = "icon more">
             <img class="icon more" src="assets/images/icon/more.svg" alt="more icon">
             <span class = "icon more">More</span>
         </a>
+          <div class="hamburger">
+            <ul>
+                <li>
+                    <a href="#" >
+                        <span class="link-area-hamburger report">
+                            <img class="icon report" src="assets/images/icon/report.svg" alt="report icon">
+                            <span class = "report">Report a problem</span>
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" >
+                        <span class = "link-area-hamburger logout">Log out</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
     </div>
     <?php require_once "footer.php" ?>
 </body>

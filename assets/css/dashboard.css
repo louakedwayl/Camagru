@@ -1,3 +1,4 @@
+
 nav
 {
     display :flex;
@@ -183,8 +184,10 @@ nav a {
 
 
 
-.link-area:hover {
-    background-color: #ececec;  /* Optionnel */
+.link-area:hover,
+.link-area-hamburger:hover
+{
+    background-color: #ececec;
 }
 
 main 
@@ -243,6 +246,75 @@ span.icon.more
 a.icon.more:hover {
     background-color: #ececec;  /* Optionnel */
 
+}
+
+div.hamburger
+{
+    position: absolute;
+    bottom: 87px;
+    left: 38px;
+    width: 235px;
+    height: 120px;
+    border-radius: 13px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    background: #fafafa;
+}
+
+div.hamburger ul
+{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    list-style-type: none;
+}
+
+div.hamburger li
+{
+    padding-top: 4px;
+    padding-bottom: 2px;
+}
+
+div.hamburger a 
+{
+    text-decoration: none;
+    color: black;
+}
+
+
+div.hamburger img.icon.report 
+{
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    /* transform: translateY(7px); */
+}
+
+.link-area-hamburger.report
+{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin-left: 5px;
+    width: 224px;
+    padding-left: 7px;
+    padding-top: 15px;
+    padding-bottom: 17px;
+    border-radius: 13px;
+    transform: translateY(2px);
+}
+
+.link-area-hamburger.logout
+{
+    display: flex;
+    align-items: center;
+    margin-left: 5px;
+    padding-top: 15px;
+    padding-bottom: 17px;
+    width: 224px;
+    padding-left: 53px;
+    border-radius: 10px;
+    transform: translateY(-6px);
 }
 
 
@@ -353,6 +425,15 @@ a.icon.more:hover {
         padding-right: 11px;
     }
 }
+
+@media (max-width: 850px) 
+{
+    footer
+    {
+        display: none;
+    }
+}
+
 
 @media (max-width: 620px) 
 {
