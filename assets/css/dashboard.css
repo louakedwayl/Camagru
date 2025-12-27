@@ -99,7 +99,7 @@ nav ul
 {
     display: flex;
     flex-direction: column;
-    gap: 40px;
+    gap: 14px;
     list-style-type: none;
     width: 100%;
     transform: translateY(2px);
