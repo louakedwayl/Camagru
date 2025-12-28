@@ -56,7 +56,7 @@ nav img.icon.create
     width: 30px;
     height: 30px;
     object-fit: contain;  /* garde les proportions */
-    transform: translateY(-3px);
+    transform: translate(-1px, -3px);
 }
 
 
@@ -64,7 +64,7 @@ nav img.icon.profile
 {
     width: 35px;
     height: 35px;
-    transform: translateY(-2px);
+    transform: translate(-2px, -3px);
 }
 
 img.home.icon.black 
@@ -88,13 +88,19 @@ span.icon.home
 
 span.icon.create
 {
-    transform: translateY(-3px);
+    transform: translate(-5px , -1px);
 }
 
 span.icon.nav
 {
     margin-left: 15px;
 }
+
+span.icon.profile
+{
+    transform : translateX(-8px)
+}
+
 
 nav ul
 {
@@ -239,7 +245,7 @@ a.icon.more
 
 span.icon.more
 {
-    transform: translateY(5px);
+    transform: translateY(8px);
     color: black;
 }
 
