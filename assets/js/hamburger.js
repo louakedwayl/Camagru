@@ -1,11 +1,33 @@
-const moreButton = document.querySelector("a.icon.more");
+const morelink = document.querySelector("a.icon.more");
+const moreButton = document.querySelector("img.icon.more");
 const menuHamburger = document.querySelector("div.hamburger");
 
-moreButton.addEventListener("click", (e) => {
+let flag = 0;
+
+morelink.addEventListener("click", (e) => 
+{
   e.stopPropagation(); // empeche la propagation jusqu'a document
-  menuHamburger.style.display = "inline";
+  if (flag == 0)
+  {
+    moreButton.setAttribute("src", "assets/images/icon/more_black.svg")
+    menuHamburger.style.display = "inline";
+    flag = 1;
+  }
+  else
+  {
+    flag = 0;
+    moreButton.setAttribute("src", "assets/images/icon/more.svg")
+    menuHamburger.style.display = "none";
+  }
+
 });
 
-document.addEventListener("click", () => {
-  menuHamburger.style.display = "none";
+document.addEventListener("click", () => 
+{
+  if (flag == 1)
+  {
+    flag = 0;
+    moreButton.setAttribute("src", "assets/images/icon/more.svg")
+    menuHamburger.style.display = "none";
+  }
 });
