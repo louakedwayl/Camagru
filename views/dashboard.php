@@ -13,6 +13,7 @@
     <script defer src="assets/js/hamburger.js"></script>
 </head>
 <body>
+    <div class="overlay"></div>
     <nav>
         <img class="logo" src="assets/images/logo.png" alt="Camagru Logo" >
         <img src="assets/images/icon/Camagru_icon_black.png" alt="Camagru Logo black and white" class="home icon black">
@@ -94,15 +95,20 @@
             </ul>
         </div>
     </div>
-    <!-- <div class = "report">
-        <div class = "report-title-cross">
-            <span class = "report-title-cross">Report a problem</span>
+    <div class = "modale report">
+        <div class = "modale report-title-cross">
+            <span class = "modale report-title-cross">Report a problem</span>
                 <a href="#">
-             <img class="cross" src="assets/images/icon/cross.svg" alt="cross icon">
+             <img class="modale cross" src="assets/images/icon/cross.svg" alt="cross icon">
             </a>
         </div>
-        <input type="text" classe="report" style="display:none">
-    </div> -->
+        <textarea class="report"> </textarea>
+        <div class="report button">
+            <button>Send report</button>
+            <button>Add file</button>
+        </div>
+        <p>Your Camagru username and browser information will be automatically included in your report.</p>
+    </div>
     <?php require_once "footer.php" ?>
 </body>
 </html>

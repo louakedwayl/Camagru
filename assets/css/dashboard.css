@@ -1,3 +1,9 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5); /* fond sombre semi-transparent */
+  z-index: 100;
+}
 
 nav
 {
@@ -11,12 +17,13 @@ nav
     border-right: 1px solid #dbdbdb; 
 }
 
+
 nav img.logo
 {
     width: 200px;      /* l'image ne dépasse jamais de .left */
     height: 150px;     /* l'image ne dépasse jamais en hauteur */
     object-fit: contain;  /* garde les proportions */
-    transform: translatex(-5px);
+
 }
 
 nav img.icon.home
@@ -324,34 +331,57 @@ div.hamburger img.icon.report
     transform: translateY(-6px);
 }
 
-div.report
+div.modale.report
 {
+    display: flex;
+    flex-direction: column;
     position:fixed;
+    align-items: center;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -100%);
-    width: 700px;
-    height: 400px;
-    background: red;
+    transform: translate(-50%, -105%);
+    width: 550px;
+    height: 270px;
+    background: #fafafa;
     border-radius: 20px;
+    z-index: 101;
 }
 
-div.report-title-cross
+div.modale.report-title-cross
 {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    width:700px;
-    height: 100px;
-    background-color: blue;
-    border-radius: 20px;
+    width:550px;
+    height: 43px;
+    border-bottom: 1px solid #ddd; 
 }
 
 span.report-title-cross
 {
+    position: relative;
     color: black;
-    font-size: 25px;
-    width: 300px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+img.modale.cross
+{
+    position: absolute;
+    top:12px;
+    right: 12px;
+    width: 19px;
+    height: 19px;
+    object-fit: contain;  /* garde les proportions */
+
+}
+
+textarea.report
+{
+    margin-top: 15px;
+    width: 515px;
+    height: 150px;
 }
 
 @media (max-width: 1920px) 
