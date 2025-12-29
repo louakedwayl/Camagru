@@ -94,6 +94,15 @@
             </ul>
         </div>
     </div>
+    <!-- <div class = "report">
+        <div class = "report-title-cross">
+            <span class = "report-title-cross">Report a problem</span>
+                <a href="#">
+             <img class="cross" src="assets/images/icon/cross.svg" alt="cross icon">
+            </a>
+        </div>
+        <input type="text" classe="report" style="display:none">
+    </div> -->
     <?php require_once "footer.php" ?>
 </body>
 </html>

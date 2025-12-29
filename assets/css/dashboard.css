@@ -324,6 +324,35 @@ div.hamburger img.icon.report
     transform: translateY(-6px);
 }
 
+div.report
+{
+    position:fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -100%);
+    width: 700px;
+    height: 400px;
+    background: red;
+    border-radius: 20px;
+}
+
+div.report-title-cross
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width:700px;
+    height: 100px;
+    background-color: blue;
+    border-radius: 20px;
+}
+
+span.report-title-cross
+{
+    color: black;
+    font-size: 25px;
+    width: 300px;
+}
 
 @media (max-width: 1920px) 
 {
