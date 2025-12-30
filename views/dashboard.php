@@ -80,7 +80,7 @@
           <div class="hamburger">
             <ul>
                 <li>
-                    <a href="#" >
+                    <a href="#" class= "report hamburger">
                         <span class="link-area-hamburger report">
                             <img class="icon report" src="assets/images/icon/report.svg" alt="report icon">
                             <span class = "report">Report a problem</span>
@@ -98,17 +98,19 @@
     <div class = "modale report">
         <div class = "modale report-title-cross">
             <span class = "modale report-title-cross">Report a problem</span>
-                <a href="#">
-             <img class="modale cross" src="assets/images/icon/cross.svg" alt="cross icon">
-            </a>
+                <a href="#" class ="modale cross">
+                    <img class="modale cross" src="assets/images/icon/cross.svg" alt="cross icon">
+                </a>
         </div>
-        <textarea class="report"> </textarea>
+        <textarea class="report" placeholder="Please include as much info as possible..."></textarea>
         <div class="report button">
-            <button>Send report</button>
-            <button>Add file</button>
+            <button class="report send"><span class="report button send">Send report</span></button>
+            <button class="report file"><span class="report button file">Add file</span></button>
         </div>
-        <p>Your Camagru username and browser information will be automatically included in your report.</p>
-    </div>
+            <div class="report p">
+            <p class = "report">Your Camagru username and browser information will be automatically included in your report.</p>
+            </div>
+        </div>
     <?php require_once "footer.php" ?>
 </body>
 </html>
