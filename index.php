@@ -1,21 +1,30 @@
 <?php
-// index.php
+declare(strict_types=1);
 
-// Connexion à la DB (PDO)
-$dsn = "mysql:host=db;dbname=camagru_db";
-$user = "camagru_user";
-$pass = "password";
+$DSN = "mysql:host=database;dbname=camagru_db";
+$USER = "camagru_usr";
+$PASS = "vDieYHfb70cjHl8U";
 
-$maxRetries = 10;
+$maxRetries = 3;
 $connected = false;
 
-for ($i = 0; $i < $maxRetries; $i++) {
-    try {
-        $pdo = new PDO($dsn, $user, $pass);
+for ($i = 0; $i < $maxRetries; $i++) 
+{
+    try 
+    {
+        $pdo = new PDO($DSN, $USER, $PASS);
         $connected = true;
         break;
-    } catch (PDOException $e) {
+    } 
+    catch (PDOException $e) 
+    {
         echo "Waiting for DB... retry $i\n";
+        echo "=== Erreur PDO ===\n";
+        echo "Message : " . $e->getMessage() . "\n";
+        echo "Code : " . $e->getCode() . "\n";
+        echo "Fichier : " . $e->getFile() . "\n";
+        echo "Ligne : " . $e->getLine() . "\n";
+        echo "Trace : \n" . $e->getTraceAsString() . "\n";
         sleep(2);
     }
 }
@@ -43,6 +52,6 @@ switch ($action) {
         break;
 
     default:
-        require 'views/dashboard.php';
+        require 'views/index.php';
         break;
 }
