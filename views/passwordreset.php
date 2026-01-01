@@ -15,8 +15,8 @@
     <header>
         <img src="assets//images/logo.png" alt="Camagru Logo">
         <div class="header-button">
-            <button>Log In</button>
-            <button>Sign Up</button>
+            <button class="header-button">Log In</button>
+            <a href="#">Sign Up</a>
         </div>
     </header>
     <main>
