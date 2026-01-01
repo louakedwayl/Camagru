@@ -2,9 +2,9 @@ footer
 {   
     display: flex;
     grid-column-start: 1;
-    grid-column-end: 13;
+    grid-column-end: -1;  
     grid-row-start: 12;
-    grid-row-end: 13;
+    grid-row-end: -1;
     justify-content: center;
     align-items: center;
 }

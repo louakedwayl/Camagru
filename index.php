@@ -2,7 +2,7 @@
 declare(strict_types=1);
 
 $DSN = "mysql:host=database;dbname=camagru_db";
-$USER = "camagru_usr";
+$USER = "camagru_user";
 $PASS = "vDieYHfb70cjHl8U";
 
 $maxRetries = 3;
@@ -52,6 +52,6 @@ switch ($action) {
         break;
 
     default:
-        require 'views/index.php';
+        require 'views/passwordreset.php';
         break;
 }
