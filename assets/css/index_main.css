@@ -18,9 +18,10 @@ main img
 
 .index_left
 {
+    display: flex;
     max-width: 100%;   /* l'image ne dépasse jamais de .left */
     max-height: 100%;  /* l'image ne dépasse jamais en hauteur */
-    object-fit: contain; /* garde les proportions */    display: flex;             /* active Flexbox */
+    object-fit: contain; /* garde les proportions */                 /* active Flexbox */
     justify-content: center;   /* centre horizontalement */
     align-items: center;  
 
