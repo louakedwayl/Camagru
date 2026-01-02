@@ -38,7 +38,8 @@ if (!$connected) {
 $action = $_GET['action'] ?? 'home';
 
 // Mini routeur
-switch ($action) {
+switch ($action) 
+{
     case 'register':
         require 'controller/UserController.php';
         $controller = new UserController();

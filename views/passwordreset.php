@@ -22,9 +22,10 @@
     <main>
         <img class="icon padlock" src="assets/images/icon/padlock.svg" alt="padlock icon">
         <p class="padlock1">Trouble logging in?</p>
-        <p class="padlock2">Enter your email, or username and we'll send you a link to get back into your account.</p>
+        <p class="padlock2">Enter your email, or username and we'll</p>
+        <p class="padlock3">send you a link to get back into your account.</p>
         <input type="text" placeholder ="Email or Username">
-        <button class = "send-link">Send login link</button>
+        <button class = "login-link">Send login link</button>
         <a href="#" class = "reset-password">Can't reset your password?</a>
         <div class="or" >
             <div class="left or" ></div>
