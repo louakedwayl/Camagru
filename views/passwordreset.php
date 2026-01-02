@@ -21,12 +21,16 @@
     </header>
     <main>
         <img class="icon padlock" src="assets/images/icon/padlock.svg" alt="padlock icon">
-        <p>Trouble logging in?</p>
-        <p>Enter your email, or username and we'll send you a link to get back into your account.</p>
+        <p class="padlock1">Trouble logging in?</p>
+        <p class="padlock2">Enter your email, or username and we'll send you a link to get back into your account.</p>
         <input type="text" placeholder ="Email or Username">
         <button>Send login link</button>
         <a href="#">Can't reset your password?</a>
-        <!-- line or-->
+        <div class="or" >
+            <div class="left or" ></div>
+                <span class="or">OR</span>
+                    <div class= "right or" ></div>
+        </div>
          <a href="#">Create new accont</a>
          <div class="bottom">
             <a href="#">Back to login</a>
