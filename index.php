@@ -46,13 +46,15 @@ switch ($action)
         $controller->register();
         break;
 
-    case 'login':
+    case 'password_reset':
         require 'controller/UserController.php';
         $controller = new UserController();
-        $controller->login();
+        $controller->password_reset();
         break;
 
-    default:
-        require 'views/passwordreset.php';
+    case 'index':
+        require 'controller/UserController.php';
+        $controller = new UserController();
+        $controller->index();
         break;
 }

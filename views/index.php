@@ -29,7 +29,7 @@
                     </div>
             </div>
             <div class="bottom">
-                <p><a href="https://opensource.org/licenses/MIT" target="_blank"> Forgot password?</a></p>
+                <p><a href="index.php?action=password_reset"> Forgot password?</a></p>
                 <p>Don't have an account?<a href="index.php?action=register"> Sign up</a></p>
             </div>
         </div>

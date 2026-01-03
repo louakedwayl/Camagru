@@ -7,7 +7,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon/favicon-16x16.png">
     <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/passwordreset.css">
+    <link rel="stylesheet" href="assets/css/password_reset.css">
     <link rel="stylesheet" href="assets/css/footer.css">
     <title>Camagru</title>
 </head>
@@ -15,8 +15,8 @@
     <header>
         <img src="assets//images/logo.png" alt="Camagru Logo">
         <div class="header-button">
-            <button class="header-button">Log In</button>
-            <a href="#">Sign Up</a>
+            <a href="index.php?action=index" class="button">Log In</a>
+            <a href="index.php?action=register" class="text">Sign Up</a>
         </div>
     </header>
     <main>
@@ -32,9 +32,9 @@
                 <span class="or">OR</span>
                     <div class= "right or" ></div>
         </div>
-            <a href="#" class="create-account">Create new account</a>
+            <a href="index.php?action=register" class="create-account">Create new account</a>
          <div class="bottom">
-            <a href="#" class = "login-back">Back to login</a>
+            <a href="index.php?action=index" class = "login-back">Back to login</a>
          </div>
     </main>
     <?php require_once "footer.php" ?>

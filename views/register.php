@@ -28,7 +28,7 @@
         </div>
         <div class="bottom">
             <p>Have an account?</p>
-            <p><a href="https://opensource.org/licenses/MIT" target="_blank">Log in</a></p>
+            <p><a href="index.php?action=index" target="_blank">Log in</a></p>
         </div> 
     </main>
     <?php require_once "footer.php" ?>
