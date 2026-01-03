@@ -31,6 +31,7 @@ main p
     background: white;
     align-items: center;
     width: 350px;
+    min-height: 570px;
     padding-bottom: 15px;
 }
 
@@ -39,7 +40,7 @@ main p
     text-decoration: none;
 }
 
-.top p:first-of-type
+p.logo
 {
     margin-top: -30px; /* Remonte de 30 px*/
     font-weight: 550;
@@ -87,10 +88,16 @@ form
 {
     width: 270px;
     padding: 9px 0 7px 8px;
-    margin-bottom: 6px;
     border: 1px solid #dbdbdb; 
     border-radius: 3px; 
     outline: none; 
+}
+
+p.error
+{
+    margin-left: 8px;
+    color : red;
+    font-size: 13px;
 }
 
 .top button
@@ -106,20 +113,21 @@ form
     cursor: pointer;
 }
 
-.top p:nth-of-type(2),
-.top p:nth-of-type(3) 
+.top p.first,
+.top p.second 
 {
     color: #6d6d6d;
     font-size: 12px;
     text-align: center;
 }
 
-.top p:nth-of-type(2)
+.top p.first
 {
     padding-bottom: 20px;
 }
 
-.top p:nth-of-type(3) 
+.top p.second 
 {
     padding-bottom: 15px;
 }
+
