@@ -31,8 +31,7 @@ main p
     background: white;
     align-items: center;
     width: 350px;
-    min-height: 570px;
-    padding-bottom: 15px;
+    /*632 avec error*/
 }
 
 .top a {
@@ -81,7 +80,7 @@ form
     padding-left: 40px;
     padding-left: 40px;
     padding-top: 15px;
-    padding-bottom: 20px;
+    padding-bottom: 12px;
 }
 
 .top input
@@ -93,18 +92,38 @@ form
     outline: none; 
 }
 
+input[name="email"]
+{
+    margin-bottom: 10px;
+}
+
+input[name="password"]
+{
+    margin-bottom: 10px;
+}
+
+input[name="fullname"]
+{
+    margin-bottom: 10px;
+}
+
+
 p.error
 {
-    margin-left: 8px;
-    color : red;
+    display: none;
+    margin-top: 3px;
+    margin-bottom: 7px;
+    margin-left: 9px;
+    color : #ED4956;
     font-size: 13px;
+    width: 268px;
 }
 
 .top button
 {
     width: 100%;
     padding: 7px 16px;
-    margin-top: 8px;
+    margin-top: 14px;
     font-weight: 600;
     color: white;
     background: #828FFA;
@@ -123,11 +142,10 @@ p.error
 
 .top p.first
 {
-    padding-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 .top p.second 
 {
-    padding-bottom: 15px;
+    margin-bottom: 20px;
 }
-

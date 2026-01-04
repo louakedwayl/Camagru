@@ -19,12 +19,12 @@
             <p class = "logo">Sign up to see photos from your friends.</p>
             <form method="POST" action="index.php?action=register">
                 <input type="email" name="email" placeholder="Email" required>
-                <p class="error">Enter a valid email address.</p>
+                <p class="error email">Enter a valid email address.</p>
                 <input type="password" name="password" placeholder="Password" required>
-                <p class="error">Create a password at least 6 characters long.</p>
+                <p class="error password">Create a password at least 6 characters long.</p>
                 <input type="text" name="fullname" placeholder="Fullname" required>
                 <input type="text" name="username" placeholder="Username" required>
-                <p class="error">This username isn't available.</p>
+                <p class="error username">This username isn't available.</p>
                 <button type="submit">Next</button>
             </form>
             <p class="first">People who use our service may have uploaded your contact information to Camagru.<a href="#"> Learn More</a></p>
