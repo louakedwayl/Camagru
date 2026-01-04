@@ -1,6 +1,8 @@
 <?php
 declare(strict_types=1);
 
+// metre dans .envv
+
 $DSN = "mysql:host=database;dbname=camagru_db";
 $USER = "camagru_user";
 $PASS = "vDieYHfb70cjHl8U";
@@ -52,7 +54,7 @@ switch ($action)
         $controller->password_reset();
         break;
 
-    case 'index':
+    default:
         require 'controller/UserController.php';
         $controller = new UserController();
         $controller->index();

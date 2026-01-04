@@ -31,7 +31,6 @@ main p
     background: white;
     align-items: center;
     width: 350px;
-    /*632 avec error*/
 }
 
 .top a {
@@ -107,12 +106,11 @@ input[name="fullname"]
     margin-bottom: 10px;
 }
 
-
 p.error
 {
     display: none;
-    margin-top: 3px;
-    margin-bottom: 7px;
+    margin-top: 5px;
+    margin-bottom: 2px;
     margin-left: 9px;
     color : #ED4956;
     font-size: 13px;
