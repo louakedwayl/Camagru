@@ -24,7 +24,6 @@ function checkpassword(password)
   return true;
 }
 
-
 emailInput.addEventListener("blur", ()=>
 {
   if (emailInput.value === "")
