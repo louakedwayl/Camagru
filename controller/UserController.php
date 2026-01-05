@@ -18,4 +18,9 @@ class UserController
     {
         require ("views/password_reset.php");
     }
+
+    public function email_signup()
+    {
+        require ("views/email_signup.php");
+    }
 }

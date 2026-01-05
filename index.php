@@ -42,6 +42,12 @@ $action = $_GET['action'] ?? 'home';
 // Mini routeur
 switch ($action) 
 {
+    case 'email_signup':
+        require 'controller/UserController.php';
+        $controller = new UserController();
+        $controller->email_signup();
+        break;
+
     case 'register':
         require 'controller/UserController.php';
         $controller = new UserController();
