@@ -18,10 +18,14 @@
             <p class="first">Enter Confirmation Code</p>
             <div class= "top1">
                 <p>Enter the confirmation code we sent to</p>
-                <p>tempory@gmail.com. <a href="#">Resend Code</a></p>
+                <p>louakedwayl@protonmail.com. <a href="#">Resend Code.</a></p>
             </div>
             <input type="text" placeholder="Confirmation Code">
             <button>Next</button>
+            <div class="error">
+                <p class = "error">That code isn't valid. You can request a </p>
+                <p class = "error">new one.</p>
+            </div>
             <div class = "top2">
                 <p>You can also report content you believe is unlawful in </p>
                 <p>your country without logging in.</p>

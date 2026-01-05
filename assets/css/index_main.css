@@ -37,7 +37,7 @@ main img
     width: 350px;
     max-height: 550px;
     padding: 40px;
-    background: white;
+    background: #FBFBFB ;
 }
 
 main .top
@@ -73,7 +73,8 @@ main .bottom
     margin-bottom: 6px;
     border: 1px solid #dbdbdb; 
     border-radius: 3px; 
-    outline: none; 
+    outline: none;
+    background: white;
 }
 
 .index_right button

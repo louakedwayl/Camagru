@@ -28,7 +28,7 @@ main p
     display: flex;
     border: 1px solid #dbdbdb;
     flex-direction: column;
-    background: white;
+    background: #FBFBFB;
     align-items: center;
     width: 350px;
 }
@@ -54,7 +54,7 @@ p.logo
     align-items: center;    
     width: 350px;
     border: 1px solid #dbdbdb;
-    background: white;
+    background: #FBFBFB ;
     padding-top: 25px;
     padding-bottom: 20px;
 }

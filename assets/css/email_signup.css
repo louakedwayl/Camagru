@@ -25,12 +25,13 @@ main
 {
     margin-bottom: 10px;
     font-size: 13px;
+    text-align: center;
 }
 
 .top1 a
 {
     text-decoration: none;
-    color : #1877F2;
+    color : #5063F9;
     font-weight: 500;
     font-size: 13px;
 }
@@ -38,7 +39,8 @@ main
 .top2
 {
     text-align: center;
-    margin-bottom: 15px;
+    margin-top: 10px;
+    margin-bottom: 25px;
     color: #6d6d6d;
     font-size: 12px;
 }
@@ -76,16 +78,13 @@ main
     padding-left:  16px;
     padding-right: 16px;
     margin-top: 12px;
-    margin-bottom: 25px;
     font-weight: 600;
     color: #FBFBFB;
-    /*#1877F2;*/
-    background:  #5B9FF5;
+    background:  #5063F9;
     border: none;
     border-radius: 6px;
     cursor: pointer;
 }
-
 
 .bottom
 {
@@ -105,14 +104,22 @@ main
     font-size: 14px;
 }
 
-.bottom a {
-    color: #1877F2;
-    font-weight: 600;
+.bottom a 
+{
+    color: #5063F9;
+    font-weight: bold;
     text-decoration: none;
 }
 
-footer a
+div.error
 {
-    color: #1877F2;
+    text-align: center;
+    padding-top: 10px;
+}
 
+p.error
+{
+    display: none;
+    color : #ED4956;
+    font-size: 14px;
 }
