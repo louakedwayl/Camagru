@@ -5,7 +5,7 @@
          -> minimun 2 character
          -> max 50 characters
   password : filtrer au moin 6 caractere ,mot en minuscule et emojis
-  username : 3 à 20 caractères
+  username : 3 à 30 caractères  : Lettres, chiffres, underscore et point (style Instagram)
   lettres (a–z, A–Z)
   chiffres (0–9)
   underscore _
@@ -18,6 +18,8 @@
   emojis
   symboles
 */
+
+// coder le username p error
 
 
 const emailInput = document.querySelector('main input[name="email"]');
@@ -34,7 +36,7 @@ const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const passwordRegex = /^(?!.*\p{Emoji}).{6,}$/u;
 const passwordRegexUppercase = /[A-Z]/;
 const fullnameRegex = /^[\p{L} '-]{2,50}$/u;
-
+const usernameRegex = /^[a-zA-Z0-9_.]{3,30}$/;
 
 emailInput.addEventListener("blur", ()=>
 {

@@ -17,6 +17,7 @@ services:
       MYSQL_PASSWORD: vDieYHfb70cjHl8U
     volumes:
       - db_data:/var/lib/mysql
+      - ./config/init.sql:/docker-entrypoint-initdb.d/init.sql  #bind mount
 
 volumes:
   db_data:
