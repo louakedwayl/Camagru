@@ -11,18 +11,10 @@
 const emailInput = document.querySelector('main input[name="email"]');
 const pErrorEmail = document.querySelector(".top p.error.email");
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const passwordRegex = /^(?!.*\p{Emoji}).{6,}$/u;
 
 const passwordInput = document.querySelector('main input[name="password"]');
 const pErrorPassword = document.querySelector(".top p.error.password");
-
-function checkpassword(password)
-{
-
-
-
-
-  return true;
-}
 
 emailInput.addEventListener("blur", ()=>
 {
@@ -51,10 +43,10 @@ emailInput.addEventListener("blur", ()=>
 
 passwordInput.addEventListener("blur", ()=>
 {
-  if (emailInput.value === "")
+  if (passwordInput.value === "")
     return;
 
-  if (!checkpassword(passwordInput.value))
+  if (!passwordRegex.test(passwordInput.value))
   {
     passwordInput.style.borderColor = "red";
     passwordInput.style.marginBottom = "0px";
