@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/password_reset.css">
     <link rel="stylesheet" href="assets/css/footer.css">
+    <script src="assets/js/password_reset.js" defer></script>
     <title>Camagru</title>
 </head>
 <body>
