@@ -1,12 +1,25 @@
 /* -------------------------------------------
   email: check with regex
-  fullname : only letter or space or - or '
+  fullname : only letter or space or - or ' entre 2 et 50 caractères pas demoji
          -> forbidden number special caractere emojis
          -> minimun 2 character
          -> max 50 characters
   password : filtrer au moin 6 caractere ,mot en minuscule et emojis
-  username : check plus tard avec fetch
+  username : 3 à 20 caractères
+  lettres (a–z, A–Z)
+  chiffres (0–9)
+  underscore _
+  check plus tard avec fetch
+
+  Pas :
+  pas de point
+  espaces
+  accents
+  emojis
+  symboles
 */
+
+
 const emailInput = document.querySelector('main input[name="email"]');
 const pErrorEmail = document.querySelector(".top p.error.email");
 const passwordInput = document.querySelector('main input[name="password"]');
@@ -15,7 +28,7 @@ const pErrorPasswordUpercase = document.querySelector(".top p.error.uppercase");
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const passwordRegex = /^(?!.*\p{Emoji}).{6,}$/u;
-const passwordRegexLong = /[A-Z]/;
+const passwordRegexUppercase = /[A-Z]/;
 
 emailInput.addEventListener("blur", ()=>
 {
@@ -59,7 +72,7 @@ passwordInput.addEventListener("blur", ()=>
     pErrorPassword.style.display = "inline";
     return;
   }
-  else if (!passwordRegexLong.test(passwordInput.value))
+  else if (!passwordRegexUppercase.test(passwordInput.value))
   {
     pErrorPassword.style.display = "none";
     passwordInput.style.borderColor = "red";
