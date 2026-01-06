@@ -21,14 +21,20 @@
 
 
 const emailInput = document.querySelector('main input[name="email"]');
-const pErrorEmail = document.querySelector(".top p.error.email");
 const passwordInput = document.querySelector('main input[name="password"]');
+const fullnameInput = document.querySelector('main input[name="fullname"]');
+
+const pErrorEmail = document.querySelector(".top p.error.email");
 const pErrorPassword = document.querySelector(".top p.error.password");
 const pErrorPasswordUpercase = document.querySelector(".top p.error.uppercase");;
+const pErrorFullname = document.querySelector(".top p.error.fullname");
+
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const passwordRegex = /^(?!.*\p{Emoji}).{6,}$/u;
 const passwordRegexUppercase = /[A-Z]/;
+const fullnameRegex = /^[\p{L} '-]{2,50}$/u;
+
 
 emailInput.addEventListener("blur", ()=>
 {
@@ -37,10 +43,8 @@ emailInput.addEventListener("blur", ()=>
     pErrorEmail.style.display = "none";
     emailInput.style.borderColor = "";
     emailInput.style.marginBottom = "10px";
-    return;
   }
-
-  if (!emailRegex.test(emailInput.value))
+  else if (!emailRegex.test(emailInput.value))
   {
     emailInput.style.borderColor = "red";
     emailInput.style.marginBottom = "0px";
@@ -62,15 +66,12 @@ passwordInput.addEventListener("blur", ()=>
     pErrorPassword.style.display = "none";
     passwordInput.style.borderColor = "";
     passwordInput.style.marginBottom = "10px";
-    return;
   }
-
-  if (!passwordRegex.test(passwordInput.value))
+  else if (!passwordRegex.test(passwordInput.value))
   {
     passwordInput.style.borderColor = "red";
     passwordInput.style.marginBottom = "0px";
     pErrorPassword.style.display = "inline";
-    return;
   }
   else if (!passwordRegexUppercase.test(passwordInput.value))
   {
@@ -78,7 +79,6 @@ passwordInput.addEventListener("blur", ()=>
     passwordInput.style.borderColor = "red";
     passwordInput.style.marginBottom = "0px";
     pErrorPasswordUpercase.style.display = "inline";
-    return;
   }
   else
   {
@@ -86,6 +86,27 @@ passwordInput.addEventListener("blur", ()=>
     pErrorPassword.style.display = "none";
     passwordInput.style.borderColor = "";
     passwordInput.style.marginBottom = "10px";
-    return;
   }
+});
+
+fullnameInput.addEventListener("blur", ()=>
+{
+    if (fullnameInput.value === "")
+    {
+      pErrorFullname.style.display = "none";
+      fullnameInput.style.borderColor = "";
+      fullnameInput.style.marginBottom = "10px";
+    }
+    else if (!fullnameRegex.test(fullnameInput.value))
+    {
+      fullnameInput.style.borderColor = "red";
+      fullnameInput.style.marginBottom = "0px";
+      pErrorFullname.style.display = "inline";
+    }
+    else
+    {
+      fullnameInput.style.borderColor = "";
+      fullnameInput.style.marginBottom = "10px";
+      pErrorFullname.style.display = "none";
+    }
 });

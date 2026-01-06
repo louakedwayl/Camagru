@@ -20,12 +20,17 @@
             <form method="POST" action="index.php?action=register">
                 <input type="email" name="email" placeholder="Email" required>
                 <p class="error email">Enter a valid email address.</p>
+                
                 <input type="password" name="password" placeholder="Password" required>
                 <p class="error password">Create a password at least 6 characters long.</p>
                 <p class="error uppercase">Password must contain at least one uppercase letter.</p>
-                <input type="text" name="fullname" placeholder="Fullname" required>
+                
+                <input type="text" name="fullname" placeholder="Full name" required>
+                <p class="error fullname">Enter a valid full name.</p>
+
                 <input type="text" name="username" placeholder="Username" required>
                 <p class="error username">This username isn't available.</p>
+                
                 <button type="submit">Next</button>
             </form>
             <p class="first">People who use our service may have uploaded your contact information to Camagru.<a href="#"> Learn More</a></p>
