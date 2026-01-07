@@ -1,8 +1,8 @@
 <?php
 declare(strict_types=1);
 
-// metre dans .env , bind mount 
-// js sur dernier champs dans register
+// 2  bind mount 
+// 3 metre dans .env ,
 
 $DSN = "mysql:host=database;dbname=camagru_db";
 $USER = "camagru_user";

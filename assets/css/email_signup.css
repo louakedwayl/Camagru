@@ -123,3 +123,11 @@ p.error
     color : #ED4956;
     font-size: 14px;
 }
+
+@media (max-height: 550px)
+{
+    footer
+    {
+        display: none;
+    }
+}

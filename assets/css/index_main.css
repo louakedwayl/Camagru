@@ -129,3 +129,11 @@ span.or
         display: none;
     }
 }
+
+@media (max-height: 580px) 
+{
+    footer
+    {
+        display: none;
+    }
+}

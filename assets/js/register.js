@@ -1,42 +1,53 @@
 /* -------------------------------------------
-  email: check with regex
-  fullname : only letter or space or - or ' entre 2 et 50 caractères pas demoji
-         -> forbidden number special caractere emojis
-         -> minimun 2 character
-         -> max 50 characters
-  password : filtrer au moin 6 caractere ,mot en minuscule et emojis
-  username : 3 à 30 caractères  : Lettres, chiffres, underscore et point (style Instagram)
-  lettres (a–z, A–Z)
-  chiffres (0–9)
-  underscore _
-  check plus tard avec fetch
-
-  Pas :
-  pas de point
-  espaces
-  accents
-  emojis
-  symboles
-*/
-
-// coder le username p error
-
+  RÈGLES DE VALIDATION DU FORMULAIRE :
+  
+  EMAIL :
+  - Format email standard (ex: user@example.com)
+  - Vérifié avec regex
+  
+  FULLNAME (Nom complet) :
+  - Lettres (a-z, A-Z) avec accents autorisés (À-ÿ)
+  - Espaces, tirets (-) et apostrophes (') autorisés
+  - Minimum 2 caractères
+  - Maximum 50 caractères
+  - INTERDIT : chiffres, emojis, caractères spéciaux
+  
+  PASSWORD (Mot de passe) :
+  - Minimum 6 caractères
+  - Au moins 1 lettre majuscule obligatoire
+  - INTERDIT : emojis
+  
+  USERNAME (Nom d'utilisateur - style Instagram) :
+  - Lettres (a-z, A-Z) avec accents autorisés (À-ÿ)
+  - Chiffres (0-9) autorisés
+  - Underscore (_) et point (.) autorisés
+  - Minimum 3 caractères
+  - Maximum 30 caractères
+  - INTERDIT : espaces, emojis, autres symboles
+  
+  La vérification côté serveur sera faite plus tard avec fetch
+------------------------------------------- */
 
 const emailInput = document.querySelector('main input[name="email"]');
 const passwordInput = document.querySelector('main input[name="password"]');
 const fullnameInput = document.querySelector('main input[name="fullname"]');
+const usernameInput = document.querySelector('main input[name="username"]');
 
 const pErrorEmail = document.querySelector(".top p.error.email");
 const pErrorPassword = document.querySelector(".top p.error.password");
 const pErrorPasswordUpercase = document.querySelector(".top p.error.uppercase");;
 const pErrorFullname = document.querySelector(".top p.error.fullname");
-
+const pErrorFullnameSize = document.querySelector(".top p.error.fullname_size");
+const pErrorUsernameSize = document.querySelector(".top p.error.username_size");
+const pErrorUsername = document.querySelector(".top p.error.username");
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const passwordRegex = /^(?!.*\p{Emoji}).{6,}$/u;
 const passwordRegexUppercase = /[A-Z]/;
-const fullnameRegex = /^[\p{L} '-]{2,50}$/u;
-const usernameRegex = /^[a-zA-Z0-9_.]{3,30}$/;
+const fullnameSizeRegex = /^.{2,50}$/u;
+const fullnameRegex = /^[a-zA-ZÀ-ÿ\s'\-]+$/;
+const usernameSizeRegex = /^.{3,30}$/;
+const usernameRegex = /^[a-zA-ZÀ-ÿ0-9_.]+$/;
 
 emailInput.addEventListener("blur", ()=>
 {
@@ -96,19 +107,61 @@ fullnameInput.addEventListener("blur", ()=>
     if (fullnameInput.value === "")
     {
       pErrorFullname.style.display = "none";
+      pErrorFullnameSize.style.display = "none";
       fullnameInput.style.borderColor = "";
       fullnameInput.style.marginBottom = "10px";
     }
+    else if (!fullnameSizeRegex.test(fullnameInput.value))
+    {
+      pErrorFullname.style.display = "none";
+      fullnameInput.style.borderColor = "red";
+      fullnameInput.style.marginBottom = "0px";
+      pErrorFullnameSize.style.display = "inline";
+    }
     else if (!fullnameRegex.test(fullnameInput.value))
     {
+      pErrorFullnameSize.style.display = "none";
       fullnameInput.style.borderColor = "red";
       fullnameInput.style.marginBottom = "0px";
       pErrorFullname.style.display = "inline";
     }
-    else
+    else 
     {
+      pErrorFullname.style.display = "none";
+      pErrorFullnameSize.style.display = "none";
       fullnameInput.style.borderColor = "";
       fullnameInput.style.marginBottom = "10px";
-      pErrorFullname.style.display = "none";
+    }
+});
+
+usernameInput.addEventListener("blur" , () =>
+{
+    if (usernameInput.value === "")
+    {
+      pErrorUsernameSize.style.display = "none";
+      pErrorUsername.style.display = "none";
+      usernameInput.style.borderColor = "";
+      usernameInput.style.marginBottom = "10px";
+    }
+    else if (!usernameSizeRegex.test(usernameInput.value))
+    {
+      pErrorUsername.style.display = "none";
+      usernameInput.style.borderColor = "red";
+      usernameInput.style.marginBottom = "0px";
+      pErrorUsernameSize.style.display = "inline";
+    }
+    else if (!usernameRegex.test(usernameInput.value))
+    {
+      pErrorUsernameSize.style.display = "none";
+      usernameInput.style.borderColor = "";
+      usernameInput.style.marginBottom = "0px";
+      pErrorUsername.style.display = "inline";
+    }
+    else 
+    {
+      pErrorUsername.style.display = "none";
+      pErrorUsernameSize.style.display = "none";
+      usernameInput.style.borderColor = "";
+      usernameInput.style.marginBottom = "10px";
     }
 });
