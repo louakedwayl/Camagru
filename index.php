@@ -16,9 +16,25 @@ mysql> SELECT * FROM users;
 // 2  bind mount 
 // 3 metre dans .env ,
 
-$DSN = "mysql:host=database;dbname=camagru_db";
-$USER = "camagru_user";
-$PASS = "vDieYHfb70cjHl8U";
+
+// Charger les variables d'environnement
+$envFile = __DIR__ . '/.env';
+if (file_exists($envFile)) {
+    $lines = file($envFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    foreach ($lines as $line) {
+        if (strpos(trim($line), '#') === 0) continue; // Ignorer les commentaires
+        list($key, $value) = explode('=', $line, 2);
+        $key = trim($key);
+        $value = trim($value, " \t\n\r\0\x0B\"'"); // Enlever espaces et guillemets
+        $_ENV[$key] = $value;
+    }
+}
+
+// Définir les variables depuis .env
+$DSN = $_ENV['DSN'] ?? '';
+$USER = $_ENV['USER'] ?? '';
+$PASS = $_ENV['PASS'] ?? '';
+
 
 $maxRetries = 3;
 $connected = false;
