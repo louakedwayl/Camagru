@@ -9,8 +9,5 @@ main_input.addEventListener('input', () => {
   else
   {
     main_button.style.background = "#B7C6FF";
-
   }
 });
-
-    background: ;
