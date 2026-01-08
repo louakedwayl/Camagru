@@ -2,8 +2,18 @@
 
 declare(strict_types=1);
 
+require_once __DIR__ . '/../config/Database.php';
+
+
 class UserController
 {
+    private PDO $pdo;
+
+    public function __construct() 
+    {
+        $this->pdo = Database::getConnection();
+    }
+
     public function index()
     {
         require ("views/index.php");
