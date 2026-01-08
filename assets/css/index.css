@@ -1,3 +1,7 @@
+/* * {
+    outline: 1px solid red;
+} */
+
 main
 {
     display: flex;
@@ -36,8 +40,12 @@ main img
     border: 1px solid #dbdbdb;
     width: 350px;
     max-height: 550px;
-    padding: 40px;
+    padding-right: 40px;
+    padding-left: 40px;
+    padding-bottom: 20px;
     background: #FBFBFB ;
+    transform: translateY(-7px);
+
 }
 
 main .top
@@ -54,7 +62,7 @@ main .bottom
     flex-direction: column;
 }
 
-.bottom a {
+.bottom a.violet {
     color: #5063F9;
     font-weight: 600;
     text-decoration: none;
@@ -66,10 +74,34 @@ main .bottom
     margin-bottom: 8px;
 }
 
+.bottom a
+{
+    text-align: center;
+}
+
+a.visitor
+{
+    text-decoration: none;
+    color: #262626;
+    font-size: 14px;
+    margin-bottom: 25px;
+}
+
+a.visitor:hover
+{
+    text-decoration: underline;
+}
+
+a.violet.forgot
+{
+    margin-bottom: 3px;
+}
+
 .index_right input
 {
     width: 100%;
     padding: 9px 0 7px 8px;
+    
     margin-bottom: 6px;
     border: 1px solid #dbdbdb; 
     border-radius: 3px; 
@@ -97,7 +129,9 @@ main .bottom
     display: flex;
     align-items: center;
     text-align: center;
-    margin: 20px 0;
+    margin-top: 10px;
+    margin-bottom: 9px;
+
 }
 
 .left.or

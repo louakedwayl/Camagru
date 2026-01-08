@@ -29,8 +29,9 @@
                     </div>
             </div>
             <div class="bottom">
-                <p><a href="index.php?action=password_reset"> Forgot password?</a></p>
-                <p>Don't have an account?<a href="index.php?action=register"> Sign up</a></p>
+                <a href="#" class= "visitor">Continue without login</a>
+                <a href="index.php?action=password_reset" class="violet forgot"> Forgot password?</a>
+                <p>Don't have an account?<a href="index.php?action=register" class="violet"> Sign up</a></p>
             </div>
         </div>
     </main>
