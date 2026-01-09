@@ -25,8 +25,9 @@
   - Maximum 30 caractères
   - INTERDIT : espaces, emojis, autres symboles
   
-  La vérification côté serveur sera faite plus tard avec fetch
-------------------------------------------- */
+  La vérification côté serveur est faites avec fetch
+
+------------------------------------------------------------------- */
 
 const emailInput = document.querySelector('main input[name="email"]');
 const passwordInput = document.querySelector('main input[name="password"]');
@@ -40,6 +41,7 @@ const pErrorFullname = document.querySelector(".top p.error.fullname");
 const pErrorFullnameSize = document.querySelector(".top p.error.fullname_size");
 const pErrorUsernameSize = document.querySelector(".top p.error.username_size");
 const pErrorUsername = document.querySelector(".top p.error.username");
+const pErrorUsernameInvailable = document.querySelector(".top p.error.username_invailable");
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const passwordRegex = /^(?!.*\p{Emoji}).{6,}$/u;
@@ -134,34 +136,73 @@ fullnameInput.addEventListener("blur", ()=>
     }
 });
 
-usernameInput.addEventListener("blur" , () =>
+usernameInput.addEventListener("blur", async () =>
 {
     if (usernameInput.value === "")
     {
-      pErrorUsernameSize.style.display = "none";
-      pErrorUsername.style.display = "none";
-      usernameInput.style.borderColor = "";
-      usernameInput.style.marginBottom = "10px";
+        pErrorUsernameSize.style.display = "none";
+        pErrorUsername.style.display = "none";
+        pErrorUsernameInvailable.style.display = "none";
+        usernameInput.style.borderColor = "";
+        usernameInput.style.marginBottom = "10px";
+        return;
     }
-    else if (!usernameSizeRegex.test(usernameInput.value))
+    if (!usernameSizeRegex.test(usernameInput.value))
     {
-      pErrorUsername.style.display = "none";
-      usernameInput.style.borderColor = "red";
-      usernameInput.style.marginBottom = "0px";
-      pErrorUsernameSize.style.display = "inline";
+        pErrorUsername.style.display = "none";
+        pErrorUsernameInvailable.style.display = "none";
+        usernameInput.style.borderColor = "red";
+        usernameInput.style.marginBottom = "0px";
+        pErrorUsernameSize.style.display = "inline";
+        return;
     }
-    else if (!usernameRegex.test(usernameInput.value))
+    if (!usernameRegex.test(usernameInput.value))
     {
-      pErrorUsernameSize.style.display = "none";
-      usernameInput.style.borderColor = "";
-      usernameInput.style.marginBottom = "0px";
-      pErrorUsername.style.display = "inline";
+        pErrorUsernameSize.style.display = "none";
+        pErrorUsernameInvailable.style.display = "none";
+        usernameInput.style.borderColor = "red";
+        usernameInput.style.marginBottom = "0px";
+        pErrorUsername.style.display = "inline";
+        return;
     }
-    else 
+    
+    try 
     {
-      pErrorUsername.style.display = "none";
-      pErrorUsernameSize.style.display = "none";
-      usernameInput.style.borderColor = "";
-      usernameInput.style.marginBottom = "10px";
+        const response = await fetch('index.php?action=check_username',
+        {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ username: usernameInput.value })
+        });
+        
+        const data = await response.json();
+        
+        if (data.available) 
+        {
+            pErrorUsername.style.display = "none";
+            pErrorUsernameSize.style.display = "none";
+            pErrorUsernameInvailable.style.display = "none";
+            usernameInput.style.borderColor = "";
+            usernameInput.style.marginBottom = "10px";
+        } 
+        else 
+        {
+            pErrorUsername.style.display = "none";
+            pErrorUsernameSize.style.display = "none";
+            usernameInput.style.borderColor = "red";
+            usernameInput.style.marginBottom = "0px";
+            pErrorUsernameInvailable.style.display = "inline";
+        }
+    } 
+    catch (error) 
+    {
+        console.error('Erreur lors de la vérification:', error);
+        pErrorUsername.style.display = "none";
+        pErrorUsernameSize.style.display = "none";
+        pErrorUsernameInvailable.style.display = "none";
+        usernameInput.style.borderColor = "";
+        usernameInput.style.marginBottom = "10px";
     }
 });

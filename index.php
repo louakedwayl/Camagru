@@ -17,30 +17,29 @@ mysql> SELECT * FROM users;
 // Récupération de l'action
 $action = $_GET['action'] ?? 'home';
 
+require 'controller/UserController.php';
+$controller = new UserController();
+
 // Mini routeur
 switch ($action) 
 {
     case 'email_signup':
-        require 'controller/UserController.php';
-        $controller = new UserController();
         $controller->email_signup();
         break;
 
     case 'register':
-        require 'controller/UserController.php';
-        $controller = new UserController();
         $controller->register();
         break;
 
     case 'password_reset':
-        require 'controller/UserController.php';
-        $controller = new UserController();
         $controller->password_reset();
         break;
 
+    case 'check_username':
+        $controller->checkUsername();
+        break;
+
     default:
-        require 'controller/UserController.php';
-        $controller = new UserController();
         $controller->index();
         break;
 }
