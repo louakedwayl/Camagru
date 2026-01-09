@@ -25,7 +25,8 @@
   - Maximum 30 caractères
   - INTERDIT : espaces, emojis, autres symboles
   
-  La vérification côté serveur est faites avec fetch
+La vérification côté serveur est faite en envoyant 
+l’input de l’utilisateur au backend via le routeur avec fetch.
 
 ------------------------------------------------------------------- */
 

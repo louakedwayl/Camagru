@@ -36,32 +36,40 @@ class UserController
 
     public function checkUsername(): void
     {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST')
+        {
+            http_response_code(405);
+            echo json_encode(['available' => false, 'error' => 'method_not_allowed']);
+            exit;
+        }
+
         header('Content-Type: application/json');
         
         $input = json_decode(file_get_contents('php://input'), true);
         $username = isset($input['username']) ? trim($input['username']) : '';
         
-        // Utiliser le Validator
         require_once __DIR__ . '/../utils/Validator.php';
         $validation = Validator::validateUsername($username);
         
-        if (!$validation['valid']) {
+        if (!$validation['valid']) 
+        {
             echo json_encode(['available' => false, 'error' => $validation['error']]);
             exit;
         }
-        
-        // Vérifier la disponibilité en base
-        try {
+        try 
+        {
             $query = "SELECT COUNT(*) as count FROM users WHERE username = :username";
             $stmt = $this->pdo->prepare($query);
             $stmt->bindParam(':username', $username, PDO::PARAM_STR);
             $stmt->execute();
-            
+   
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
             
             echo json_encode(['available' => $result['count'] === 0]);
             
-        } catch (PDOException $e) {
+        }
+        catch (PDOException $e)
+        {
             echo json_encode(['available' => false, 'error' => 'database_error']);
         }
         
