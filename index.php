@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+require 'controller/UserController.php';
+
 /*
 mysql> SELECT * FROM users;
 
@@ -14,10 +16,35 @@ mysql> SELECT * FROM users;
 */
 
 
-// Récupération de l'action
-$action = $_GET['action'] ?? 'home';
+// recheck les fichier 
+// metre un listener sur input
+// verifier en backend
+// cree le model 
+// inscrire dans la db  en unregistred
+// passer a lecran de code
 
-require 'controller/UserController.php';
+// generer un code 
+// envoyer le code par mail 
+// apres code acces au dashboard
+
+// envoyer le form de lindex 
+// si pas inscript message derror 
+// si inscrit et registred dashboard 
+// si inscrit et pas registred -> page de verif demail
+
+// mettre 10 photos de base dans le compte Wayl
+
+// dashboard faire l'effet de changement dicone black white
+// coder de le front de profile 
+// faire les fetch
+
+// faire le search
+
+// Récupération de l'action
+
+$action = $_GET['action'];
+
+
 $controller = new UserController();
 
 // Mini routeur
@@ -34,6 +61,10 @@ switch ($action)
     case 'password_reset':
         $controller->password_reset();
         break;
+
+    case 'dashboard':
+        $controller->dashboard();
+        break; 
 
     case 'check_username':
         $controller->checkUsername();

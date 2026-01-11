@@ -34,6 +34,12 @@ class UserController
         require ("views/email_signup.php");
     }
 
+    public function dashboard()
+    {
+        require ("views/dashboard.php");
+    }
+
+
     public function checkUsername(): void
     {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST')

@@ -13,6 +13,9 @@
     <script defer src="assets/js/register.js"></script>
 </head>
 <body>
+    <div class="overlay"></div>
+
+
     <main>
         <div class="top">
             <img src="assets/images/logo.png" alt="Camagru Logo">
@@ -45,6 +48,15 @@
         </div> 
     </main>
     <?php require_once "footer.php" ?>
+    <div class = "modale learn-more">
+        <div class = "modale learn-more-title-cross">
+            <span class = "modale learn-more-title-cross">Report a problem</span>
+                <a href="#" class ="modale cross">
+                    <img class="modale cross" src="assets/images/icon/cross.svg" alt="cross icon">
+                </a>
+        </div>
+    </div>
+
 </body>
 </html>
 
