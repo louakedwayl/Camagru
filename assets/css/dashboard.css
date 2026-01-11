@@ -332,7 +332,7 @@ div.hamburger img.icon.report
     transform: translateY(-6px);
 }
 
-div.modale.report
+dialog#modale-report
 {
     display: none;
     flex-direction: column;
@@ -344,11 +344,12 @@ div.modale.report
     width: 550px;
     height: 290px;
     background: #fafafa;
+    border: none;
     border-radius: 20px;
     z-index: 101;
 }
 
-div.modale.report header
+dialog#modale-report header
 {
     position: relative;
     display: flex;

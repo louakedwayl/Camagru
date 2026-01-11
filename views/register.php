@@ -48,18 +48,7 @@
         </div> 
     </main>
     <?php require_once "footer.php" ?>
-    <div class = "modale learn-more">
-        <header>
-                <span class = "learn-more-title-cross">How we handle contact information</span>
-                <a href="#" class ="cross">
-                    <img class="cross" src="assets/images/icon/cross.svg" alt="cross icon">
-                </a>
-        </header> 
-        <section class="learn-more-main">
-
-        </section>
-    </div>
-
+    <?php require_once "modale_learn_more.php" ?>
 </body>
 </html>
 

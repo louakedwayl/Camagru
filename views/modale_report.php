@@ -1,4 +1,4 @@
-<div class = "modale report">
+<dialog id = "modale-report">
     <header>
         <span class = "modale report-title-cross">Report a problem</span>
             <a href="#" class ="modale cross">
@@ -13,4 +13,4 @@
         <div class="report p">
         <p class = "report">Your Camagru username and browser information will be automatically included in your report.</p>
         </div>
-    </div>
+</dialog>
