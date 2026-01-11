@@ -1,5 +1,5 @@
 .overlay {
-  display: block;
+  display: none ;
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.5); /* fond sombre semi-transparent */
@@ -159,7 +159,7 @@ p.error
 
 dialog.modale
 {
-    display: flex;
+    display: none;
     flex-direction: column;
     position:fixed;
     align-items: center;

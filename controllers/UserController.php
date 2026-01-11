@@ -44,7 +44,8 @@ class UserController
     {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST')
         {
-            http_response_code(405);
+            http_response_code(405); // Méthode de requête non autorisée. 
+            header('Content-Type: application/json');
             echo json_encode(['available' => false, 'error' => 'method_not_allowed']);
             exit;
         }
@@ -59,6 +60,7 @@ class UserController
         
         if (!$validation['valid']) 
         {
+            http_response_code(400);
             echo json_encode(['available' => false, 'error' => $validation['error']]);
             exit;
         }
