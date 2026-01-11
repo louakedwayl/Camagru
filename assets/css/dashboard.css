@@ -348,7 +348,7 @@ div.modale.report
     z-index: 101;
 }
 
-div.modale.report-title-cross
+div.modale.report header
 {
     position: relative;
     display: flex;

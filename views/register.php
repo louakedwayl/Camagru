@@ -49,12 +49,15 @@
     </main>
     <?php require_once "footer.php" ?>
     <div class = "modale learn-more">
-        <div class = "modale learn-more-title-cross">
-            <span class = "modale learn-more-title-cross">Report a problem</span>
-                <a href="#" class ="modale cross">
-                    <img class="modale cross" src="assets/images/icon/cross.svg" alt="cross icon">
+        <header>
+                <span class = "learn-more-title-cross">How we handle contact information</span>
+                <a href="#" class ="cross">
+                    <img class="cross" src="assets/images/icon/cross.svg" alt="cross icon">
                 </a>
-        </div>
+        </header> 
+        <section class="learn-more-main">
+
+        </section>
     </div>
 
 </body>

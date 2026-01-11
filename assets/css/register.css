@@ -1,4 +1,5 @@
 .overlay {
+  display: none;
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.5); /* fond sombre semi-transparent */
@@ -158,7 +159,7 @@ p.error
 
 .modale
 {
-    display: flex;
+    display: none;
     flex-direction: column;
     position:fixed;
     align-items: center;
@@ -166,35 +167,32 @@ p.error
     left: 50%;
     transform: translate(-50%, -50%);
     width: 550px;
-    height: 290px;
+    height: 625px;
     background: #fafafa;
     border-radius: 20px;
     z-index: 101;
-
-
 }
 
-.modale.learn-more-title-cross
+.modale header
 {
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     width:550px;
-    height: 43px;
-    border-bottom: 1px solid #ddd; 
+    height: 75px;
+    border-bottom: 1px solid #ddd;
 }
 
-span.modale.learn-more-title-cross
+span.learn-more-title-cross
 {
     position: relative;
-    color: black;
-    font-size: 16px;
-    font-weight: bold;
+    color: #262626;
+    font-size: 19px;
 }
 
 
-img.modale.cross
+img.cross
 {
     position: absolute;
     top:12px;

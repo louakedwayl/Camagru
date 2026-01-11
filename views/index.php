@@ -31,7 +31,7 @@
             <div class="bottom">
                 <a href="#" class= "visitor">Continue without login</a>
                 <a href="index.php?action=password_reset" class="violet forgot"> Forgot password?</a>
-                <p class="bottom-p">Don't have an account?<a href="index.php?action=register" class="violet"> Sign up</a></p>
+                <p>Don't have an account?<a href="index.php?action=register" class="violet"> Sign up</a></p>
             </div>
         </div>
     </main>
