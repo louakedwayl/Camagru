@@ -42,7 +42,7 @@ mysql> SELECT * FROM users;
 
 // Récupération de l'action
 
-$action = $_GET['action'];
+$action = $_GET['action'] ?? '';
 
 
 $controller = new UserController();
