@@ -69,6 +69,14 @@ switch ($action)
     case 'check_username':
         $controller->checkUsername();
         break;
+    
+    case 'user_validation':
+        $controller->user_validation();
+        break;
+
+    case 'create_user':
+        $controller->checkUsername();
+        break;
 
     default:
         $controller->index();
