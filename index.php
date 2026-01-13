@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-require 'controllers/UserController.php';
+require_once 'controllers/UserController.php';
 
 /*
 mysql> SELECT * FROM users;

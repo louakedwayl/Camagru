@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-
 class Database 
 {
     private static ?PDO $pdo = null;
@@ -37,13 +36,16 @@ class Database
         $maxRetries = 3;
         $connected = false;
         
-        for ($i = 0; $i < $maxRetries; $i++) {
+        for ($i = 0; $i < $maxRetries; $i++)
+        {
             try 
             {
                 self::$pdo = new PDO($DSN, $USER, $PASS);
                 $connected = true;
                 break;
-            } catch (PDOException $e) {
+            }
+            catch (PDOException $e)
+            {
                 echo "<pre>";
                 echo "Waiting for DB... retry $i\n";
                 echo "=== Erreur PDO ===\n";
@@ -53,7 +55,8 @@ class Database
             }
         }
 
-        if (!$connected) {
+        if (!$connected)
+        {
             die("DB connection failed after $maxRetries retries.");
         }
 
