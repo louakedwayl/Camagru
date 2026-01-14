@@ -16,21 +16,15 @@ mysql> SELECT * FROM users;
 */
 
 
-// recheck les fichier 
-// metre un listener sur input
-// verifier en backend
-// cree le model 
-// inscrire dans la db  en unregistred
-// passer a lecran de code
-
-// generer un code 
-// envoyer le code par mail 
-// apres code acces au dashboard
+//revoir bien le code  d hier 
 
 // envoyer le form de lindex 
 // si pas inscript message derror 
-// si inscrit et registred dashboard 
 // si inscrit et pas registred -> page de verif demail
+
+// envoyer le code par mail 
+// apres code acces au dashboard
+
 
 // mettre 10 photos de base dans le compte Wayl
 
@@ -70,13 +64,18 @@ switch ($action)
         $controller->checkUsername();
         break;
     
-    case 'user_validation':
-        $controller->user_validation();
+    case 'validate_form':
+        $controller->validateForm();
         break;
 
     case 'create_user':
-        $controller->checkUsername();
+        $controller->createUser();
         break;
+
+    case 'verify_code':
+        $controller->verifyCode();
+        break;
+
 
     default:
         $controller->index();

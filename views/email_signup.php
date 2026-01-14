@@ -18,13 +18,16 @@
             <p class="first">Enter Confirmation Code</p>
             <div class= "top1">
                 <p>Enter the confirmation code we sent to</p>
-                <p>louakedwayl@protonmail.com. <a href="#">Resend Code.</a></p>
+                <p>
+                    <?php echo htmlspecialchars($_SESSION['user_email']); ?>. 
+                    <a href="#">Resend Code.</a>
+                </p>
             </div>
             <input type="text" placeholder="Confirmation Code">
             <button>Next</button>
             <div class="error">
-                <p class = "error">That code isn't valid. You can request a </p>
-                <p class = "error">new one.</p>
+                <p class = "error">That code isn't valid. You can request a new one.</p>
+                <p class="error2">That code has expired (timeout).</p>
             </div>
             <div class = "top2">
                 <p>You can also report content you believe is unlawful in </p>
@@ -37,5 +40,8 @@
         </div>
     </main>
     <?php require_once "footer.php" ?>
+    <div class = "snackbar">
+        <p>Sorry! We're having trouble sending you a confirmation code right now. Please try again later.</p>
+    </div>
 </body>
 </html>

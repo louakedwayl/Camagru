@@ -113,16 +113,33 @@ main
 
 div.error
 {
+    display: flex;
+    flex-direction: column;
     text-align: center;
     padding-top: 10px;
-}
-
-p.error
-{
-    display: none;
     color : #ED4956;
     font-size: 14px;
 }
+
+p.error,
+p.error2
+{
+    display: none;
+}
+
+div.snackbar
+{
+    display: flex;
+    position: fixed;
+    background-color: rgb(59, 3, 3);
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
 
 @media (max-height: 550px)
 {
