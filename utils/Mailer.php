@@ -2,32 +2,52 @@
 
 class Mailer
 {
-    // Configure l'adresse d'expédition ici
     private static $from = "no-reply@camagru.com";
 
     /**
-     * Envoie le mail de confirmation de compte
+     * Envoie le CODE de validation (6 chiffres)
      */
-    public static function sendAccountConfirmation(string $to, string $username, string $activationLink): bool
+    public static function sendValidationCode(string $to, string $username, string $code): bool
     {
-        $subject = "Bienvenue sur Camagru ! Confirmez votre compte";
+        $subject = "Votre code de validation Camagru";
         
-        // On construit le message en HTML
-        // Tu peux styliser cela avec du CSS inline plus tard
+        // CSS Inline pour faire joli dans les boîtes mail
         $message = "
         <html>
         <head>
-            <title>Bienvenue sur Camagru</title>
+            <title>Validation Camagru</title>
+            <style>
+                .container { font-family: Arial, sans-serif; padding: 20px; color: #333; }
+                .code-box { 
+                    background-color: #f4f4f4; 
+                    border: 1px solid #ddd; 
+                    font-size: 24px; 
+                    font-weight: bold; 
+                    letter-spacing: 5px; 
+                    padding: 15px; 
+                    text-align: center; 
+                    width: 200px; 
+                    margin: 20px 0;
+                    border-radius: 5px;
+                }
+                .footer { font-size: 12px; color: #777; margin-top: 30px; }
+            </style>
         </head>
         <body>
-            <h1>Bonjour " . htmlspecialchars($username) . " !</h1>
-            <p>Merci de vous être inscrit sur Camagru.</p>
-            <p>Pour activer votre compte et commencer à partager vos photos, veuillez cliquer sur le lien ci-dessous :</p>
-            <p>
-                <a href='" . htmlspecialchars($activationLink) . "'>Confirmer mon compte</a>
-            </p>
-            <br>
-            <p><small>Si le lien ne fonctionne pas, copiez-collez cette URL dans votre navigateur : " . htmlspecialchars($activationLink) . "</small></p>
+            <div class='container'>
+                <h2>Bienvenue sur Camagru, " . htmlspecialchars($username) . " !</h2>
+                <p>Merci de vous être inscrit.</p>
+                <p>Voici votre code de confirmation à 6 chiffres :</p>
+                
+                <div class='code-box'>" . htmlspecialchars($code) . "</div>
+                
+                <p>Copiez ce code et collez-le dans la page de validation pour activer votre compte.</p>
+                <p>Ce code expirera dans 10 minutes.</p>
+                
+                <div class='footer'>
+                    Ceci est un mail automatique, merci de ne pas répondre.
+                </div>
+            </div>
         </body>
         </html>
         ";
@@ -35,12 +55,8 @@ class Mailer
         return self::send($to, $subject, $message);
     }
 
-    /**
-     * Fonction interne privée qui gère la complexité technique de mail()
-     */
     private static function send(string $to, string $subject, string $message): bool
     {
-        // Headers indispensables pour envoyer du HTML et éviter (un peu) les spams
         $headers = [];
         $headers[] = 'MIME-Version: 1.0';
         $headers[] = 'Content-Type: text/html; charset=utf-8';
@@ -48,10 +64,8 @@ class Mailer
         $headers[] = 'Reply-To: ' . self::$from;
         $headers[] = 'X-Mailer: PHP/' . phpversion();
 
-        // Conversion du tableau de headers en chaîne de caractères
         $headersString = implode("\r\n", $headers);
 
-        // Envoi du mail
         return mail($to, $subject, $message, $headersString);
     }
 }

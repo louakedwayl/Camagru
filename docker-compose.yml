@@ -1,12 +1,16 @@
+version: '3'
+
 services:
   apache:
-    build: .  #lance le dockerfile dans le repertoire courant
+    build: .
     ports:
       - "8080:80"
     volumes:
       - .:/var/www/html
     depends_on:
       - database
+    env_file:     # Indispensable pour tes secrets Gmail
+      - .env
 
   database:
     image: mysql:8.0
@@ -17,8 +21,7 @@ services:
       MYSQL_PASSWORD: vDieYHfb70cjHl8U
     volumes:
       - db_data:/var/lib/mysql
-      - ./config/init.sql:/docker-entrypoint-initdb.d/init.sql  #bind mount
+      - ./config/init.sql:/docker-entrypoint-initdb.d/init.sql
 
 volumes:
   db_data:
-
