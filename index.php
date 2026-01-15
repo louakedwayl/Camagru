@@ -65,17 +65,12 @@ switch ($action)
         break;
     
     case 'validate_form':
-        $controller->validateForm();
-        break;
-
-    case 'create_user':
-        $controller->createUser();
+        $controller->handleRegistration();
         break;
 
     case 'verify_code':
         $controller->verifyCode();
         break;
-
 
     default:
         $controller->index();

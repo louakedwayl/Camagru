@@ -86,7 +86,7 @@ class UserController
         exit;
     }
 
-    public function validateForm(): void
+    public function handleRegistration(): void
     {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST')
         {
@@ -157,6 +157,8 @@ class UserController
                 if (session_status() === PHP_SESSION_NONE)
                     session_start();
                 
+                session_regenerate_id(true);
+
                 $_SESSION['user_email'] = $email;
                 $_SESSION['username'] = $username;
                 $_SESSION['fullname'] = $fullname;
@@ -173,59 +175,6 @@ class UserController
             error_log("Error validating form: " . $e->getMessage());
             http_response_code(500);
             echo json_encode(['valid' => false, 'error' => 'database_error']);
-        }
-        exit;
-    }
-
-
-    public function createUser(): void
-    {
-        session_start();
-
-        if (!isset($_SESSION['pending_user']))
-        {
-            header('Location: ?action=email_signup');
-            exit;
-        }
-
-        $userData = $_SESSION['pending_user'];
-
-        try
-        {
-            $success = $this->userModel->create(
-                $userData['username'],
-                $userData['fullname'],
-                $userData['email'],
-                $userData['password']
-            );
-
-            if ($success)
-            {
-                // Récupérer le code de validation pour l'envoi par email
-                $validationCode = $this->userModel->getValidationCode($userData['email']);
-
-                // TODO: Envoyer l'email avec le code de validation
-                // $this->sendValidationEmail($userData['email'], $validationCode);
-
-                // Stocker l'email dans la session pour la page de validation
-                $_SESSION['user_email'] = $userData['email'];
-                unset($_SESSION['pending_user']);
-
-                // Rediriger vers la page de validation
-                header('Location: ?action=email_validation');
-                exit;
-            }
-            else
-            {
-                http_response_code(500);
-                echo json_encode(['success' => false, 'error' => 'creation_failed']);
-            }
-        }
-        catch (Exception $e)
-        {
-            error_log("Error creating user: " . $e->getMessage());
-            http_response_code(500);
-            echo json_encode(['success' => false, 'error' => 'server_error']);
         }
         exit;
     }

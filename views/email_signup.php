@@ -36,7 +36,7 @@
         </div>
         <div class="bottom">
                 <p>Have an account?</p>
-                <a href="index.php?action=register"> Log in</a>
+                <a href="index.php?action=index"> Log in</a>
         </div>
     </main>
     <?php require_once "footer.php" ?>

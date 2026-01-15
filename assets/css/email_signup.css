@@ -129,15 +129,16 @@ p.error2
 
 div.snackbar
 {
-    display: flex;
+    display: none;
     position: fixed;
-    background-color: rgb(59, 3, 3);
+    background-color: #343a40;
     padding-top: 10px;
     padding-bottom: 10px;
     width: 100%;
     justify-content: center;
     align-items: center;
-    color: white;
+    color: #FAFAFA;
+    font-size: 15px;
 }
 
 
