@@ -19,8 +19,10 @@
         <div class="index_right">
             <div class="top">
             <img src="assets//images/logo.png" alt="Camagru Logo">
-                <input type="text" id ="input_login" placeholder="Email">
-                <input type="text" id ="input_password" placeholder="Password">
+                <form method="POST">
+                    <input type="text" id ="input_login" placeholder="Email" name="login">
+                    <input type="text" id ="input_password" placeholder="Password" name="password">
+                </form>
                 <button type="submit">Log in</button>
                     <div class="or" >
                         <div class="left or" ></div>

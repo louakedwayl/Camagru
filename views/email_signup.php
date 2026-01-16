@@ -10,6 +10,7 @@
     <link rel="apple-touch-icon" sizes="180x180" href="assets/images/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon/favicon-16x16.png">
+    <script src="assets/js/email_signup.js" defer></script>
 </head>
 <body>
     <main>
@@ -23,8 +24,10 @@
                     <a href="#">Resend Code.</a>
                 </p>
             </div>
-            <input type="text" placeholder="Confirmation Code">
-            <button>Next</button>
+            <form method="post" novalidate>
+                <input type="text" placeholder="Confirmation Code" pattern="[0-9]{6}" maxlength="6" inputmode="numeric" name="code">
+                <button type="submit">Next</button>
+            </form>
             <div class="error">
                 <p class = "error">That code isn't valid. You can request a new one.</p>
                 <p class="error2">That code has expired (timeout).</p>

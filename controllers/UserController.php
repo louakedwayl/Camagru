@@ -159,9 +159,10 @@ class UserController
                 echo json_encode(['valid' => false, 'error' => 'username_taken']);
                 exit;
             }
+            $validationCode = str_pad((string)random_int(0, 999999), 6, '0', STR_PAD_LEFT);
 
             // 1. Création de l'utilisateur
-            $newUser = $this->userModel->create($username, $fullname, $email, $password);
+            $newUser = $this->userModel->create($username, $fullname, $email, $password, $validationCode);
             
             if ($newUser)
             {
@@ -172,6 +173,8 @@ class UserController
                 $_SESSION['user_email'] = $email;
                 $_SESSION['username'] = $username;
                 $_SESSION['fullname'] = $fullname;
+                $_SESSION['code'] = $validationCode;
+                
 
                 // 2. Envoi du mail
                 $code = $this->userModel->getValidationCode($email);
@@ -221,6 +224,8 @@ class UserController
 
         header('Content-Type: application/json');
 
+        $input = json_decode(file_get_contents('php://input'), true);
+
         if (!isset($_SESSION['user_email']))
         {
             http_response_code(400);
@@ -264,6 +269,49 @@ class UserController
             http_response_code(500);
             echo json_encode(['success' => false, 'error' => 'server_error']);
         }
+        exit;
+    }
+
+
+
+    public function handleLogin()
+    {
+
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+
+        // 1. On cherche l'user en BDD
+        $user = $this->userModel->findByUsername($username); // Supposons que tu aies cette méthode
+
+        // 2. Vérif du Password
+        if (!$user || !password_verify($password, $user['password'])) {
+            // Erreur "Mauvais identifiants"
+            return;
+        }
+
+        // 3. LA PARTIE CRUCIALE : Gestion du "Compte non validé"
+        if ($user['validated'] == 0) {
+            
+            // C'est ici qu'on gère le changement d'ordi !
+            // On "réhydrate" la session avec l'email de la BDD pour que la page verifyCode fonctionne.
+            if (session_status() === PHP_SESSION_NONE) session_start();
+            
+            $_SESSION['user_email'] = $user['email']; 
+            
+            // Optionnel : On peut renvoyer un nouveau code par mail ici si l'ancien est sûrement expiré
+            // Mais pour l'instant, on le redirige juste.
+
+            // On le force à aller valider
+            header('Location: index.php?action=email_signup'); // Ta page de saisie du code
+            exit;
+        }
+
+        // 4. Cas normal (Utilisateur validé)
+        if (session_status() === PHP_SESSION_NONE) session_start();
+        $_SESSION['user_id'] = $user['id'];
+        $_SESSION['username'] = $user['username'];
+        
+        header('Location: index.php?action=dashboard');
         exit;
     }
 }

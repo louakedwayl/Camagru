@@ -2,6 +2,8 @@
 
 declare(strict_types= 1);
 
+use BcMath\Number;
+
 require_once __DIR__ . '/../config/Database.php';
 
 /*
@@ -33,14 +35,13 @@ class UserModel
         return (bool) $statement->fetchColumn();
     }
 
-    public function create(string $username, string $fullName, string $email, string $password): bool
+    public function create(string $username, string $fullName, string $email, string $password, string $validationCode): bool
     {
         try
         {
             $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
             
             // Code de validation aléatoire (6 chiffres)
-            $validationCode = str_pad((string)random_int(0, 999999), 6, '0', STR_PAD_LEFT);
             
             // Expiration du code : 10 minutes
             $expiresAt = date('Y-m-d H:i:s', strtotime('+10 minutes'));

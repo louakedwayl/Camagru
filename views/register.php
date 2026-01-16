@@ -20,7 +20,7 @@
         <div class="top">
             <img src="assets/images/logo.png" alt="Camagru Logo">
             <p class = "logo">Sign up to see photos from your friends.</p>
-            <form method="POST" action="index.php?action=register">
+            <form method="POST">
                 <input type="email" name="email" placeholder="Email" required>
                 <p class="error email">Enter a valid email address.</p>
                 

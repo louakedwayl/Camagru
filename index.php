@@ -35,6 +35,8 @@ mysql> SELECT * FROM users;
 // faire le search
 
 // Récupération de l'action
+// rajouter des check pour mail deja utilise
+
 
 $action = $_GET['action'] ?? '';
 
