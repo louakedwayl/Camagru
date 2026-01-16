@@ -18,9 +18,7 @@ mysql> SELECT * FROM users;
 
 //revoir bien le code  d hier 
 
-// envoyer le form de lindex 
-// si pas inscript message derror 
-// si inscrit et pas registred -> page de verif demail
+//index login et email input erreur deja pris
 
 
 
