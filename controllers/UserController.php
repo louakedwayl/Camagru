@@ -280,12 +280,10 @@ class UserController
         $username = $_POST['username'];
         $password = $_POST['password'];
 
-        // 1. On cherche l'user en BDD
         $user = $this->userModel->findByUsername($username); // Supposons que tu aies cette méthode
 
-        // 2. Vérif du Password
-        if (!$user || !password_verify($password, $user['password'])) {
-            // Erreur "Mauvais identifiants"
+        if (!$user || !password_verify($password, $user['password']))
+        {
             return;
         }
 

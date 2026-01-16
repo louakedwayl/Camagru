@@ -22,20 +22,9 @@ mysql> SELECT * FROM users;
 // si pas inscript message derror 
 // si inscrit et pas registred -> page de verif demail
 
-// envoyer le code par mail 
-// apres code acces au dashboard
 
 
 // mettre 10 photos de base dans le compte Wayl
-
-// dashboard faire l'effet de changement dicone black white
-// coder de le front de profile 
-// faire les fetch
-
-// faire le search
-
-// Récupération de l'action
-// rajouter des check pour mail deja utilise
 
 
 $action = $_GET['action'] ?? '';

@@ -26,15 +26,6 @@ class UserModel
         $this->pdo = Database::getConnection();
     }
 
-    public function usernameExists(string $username): bool
-    {
-        $query = "SELECT 1 FROM users WHERE username = :username LIMIT 1";
-        $statement = $this->pdo->prepare($query);
-        $statement->bindParam(':username', $username, PDO::PARAM_STR);
-        $statement->execute();
-        return (bool) $statement->fetchColumn();
-    }
-
     public function create(string $username, string $fullName, string $email, string $password, string $validationCode): bool
     {
         try
@@ -70,13 +61,30 @@ class UserModel
 
     public function getValidationCode(string $email): ?string
     {
-        $query = "SELECT validation_code FROM users WHERE email = :email LIMIT 1";
+        $query = "SELECT validation_code FROM users WHERE email = :email";
         $statement = $this->pdo->prepare($query);
         $statement->bindParam(':email', $email, PDO::PARAM_STR);
         $statement->execute();
         
         $result = $statement->fetchColumn();
         return $result ? (string) $result : null;
+    }
+
+    public function usernameExists(string $username) : bool
+    {
+        try
+        {
+            $query = "SELECT 1 FROM users WHERE username = :username";
+            $statement = $this->pdo->prepare($query);
+            $statement->bindParam(":username", $username, PDO::PARAM_STR);
+            $statement->execute();
+            return (bool)$statement->fetchColumn();
+        }
+        catch(PDOException $e)
+        {
+            error_log("Erreur lors de findByUsername : " . $e->getMessage());
+            return false;
+        }
     }
 
     public function validateUser(string $email, string $code): bool
