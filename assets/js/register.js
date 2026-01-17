@@ -246,7 +246,7 @@ form.addEventListener('submit', async (e) =>
         });
         
         const data = await response.json();
-        
+        z
         if (data.valid)
         {
             window.location.replace("index.php?action=email_signup");        

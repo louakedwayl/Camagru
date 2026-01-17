@@ -82,7 +82,42 @@ class UserModel
         }
         catch(PDOException $e)
         {
-            error_log("Erreur lors de findByUsername : " . $e->getMessage());
+            error_log("Erreur lors de usernameExists : " . $e->getMessage());
+            return false;
+        }
+    }
+
+    public function emailExists(string $email) : bool
+    {
+        try
+        {
+            $query = "SELECT 1 FROM users WHERE email = :email";
+            $statement = $this->pdo->prepare($query);
+            $statement->bindParam(":email", $email, PDO::PARAM_STR);
+            $statement->execute();
+            return (bool)$statement->fetchColumn();
+        }
+        catch(PDOException $e)
+        {
+            error_log("Erreur lors de emailExists : " . $e->getMessage());
+            return false;
+        }
+    }
+
+    public function getUserByEmail(string $email) 
+    {
+        try
+        {
+            $query = "SELECT * FROM users WHERE email = :email";
+
+            $statement = $this->pdo->prepare($query);
+            $statement->bindParam(":email", $email, PDO::PARAM_STR);
+            $statement->execute();
+            return $statement->fetch(PDO::FETCH_ASSOC);
+        }
+        catch(PDOException $e)
+        {
+            error_log("Erreur lors de getUserByEmail : " . $e->getMessage());
             return false;
         }
     }

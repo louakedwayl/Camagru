@@ -10,20 +10,21 @@
     <link rel="stylesheet" href="assets/css/footer.css">
     <link rel="stylesheet" href="assets/css/index.css">
     <title>Camagru</title>
+    <script src="assets/js/login.js" defer></script>
 </head>
 <body>
     <main>
         <div class="index_left">
-            <img class = "landing img"src="assets//images/landing-2x.png" alt="Landing page image">
+            <img class = "landing img"src="assets/images/landing-2x.png" alt="Landing page image">
         </div>
         <div class="index_right">
             <div class="top">
-            <img src="assets//images/logo.png" alt="Camagru Logo">
-                <form method="POST">
+            <img src="assets/images/logo.png" alt="Camagru Logo">
+                <form id="login_form" method="POST">
                     <input type="text" id ="input_login" placeholder="Email" name="login">
-                    <input type="text" id ="input_password" placeholder="Password" name="password">
+                    <input type="password" id ="input_password" placeholder="Password" name="password">
+                    <button type="submit">Log in</button>
                 </form>
-                <button type="submit">Log in</button>
                     <div class="or" >
                         <div class="left or" ></div>
                             <span class="or">OR</span>

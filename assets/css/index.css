@@ -158,7 +158,7 @@ span.or
 
 p.error
 {
-
+    display: none;
     color : #ED4956;
     font-size: 14px;
     width: 268px;

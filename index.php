@@ -57,6 +57,10 @@ switch ($action)
         $controller->handleRegistration();
         break;
 
+    case 'login':
+        $controller->handleLogin();
+        break;
+
     case 'verify_code':
         $controller->verifyCode();
         break;

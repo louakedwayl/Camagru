@@ -5,7 +5,7 @@ declare(strict_types=1);
 require_once __DIR__ . '/../config/Database.php';
 require_once __DIR__ . '/../models/UserModel.php';
 require_once __DIR__ . '/../utils/Validator.php';
-require_once __DIR__ . '/../utils/Mailer.php'; // <--- Import du Mailer
+require_once __DIR__ . '/../utils/Mailer.php';
 
 class UserController
 {
@@ -276,40 +276,52 @@ class UserController
 
     public function handleLogin()
     {
-
-        $username = $_POST['username'];
-        $password = $_POST['password'];
-
-        $user = $this->userModel->findByUsername($username); // Supposons que tu aies cette méthode
-
-        if (!$user || !password_verify($password, $user['password']))
+        if (empty($_POST['login']) || empty($_POST['password']))
         {
-            return;
-        }
-
-        // 3. LA PARTIE CRUCIALE : Gestion du "Compte non validé"
-        if ($user['validated'] == 0) {
-            
-            // C'est ici qu'on gère le changement d'ordi !
-            // On "réhydrate" la session avec l'email de la BDD pour que la page verifyCode fonctionne.
-            if (session_status() === PHP_SESSION_NONE) session_start();
-            
-            $_SESSION['user_email'] = $user['email']; 
-            
-            // Optionnel : On peut renvoyer un nouveau code par mail ici si l'ancien est sûrement expiré
-            // Mais pour l'instant, on le redirige juste.
-
-            // On le force à aller valider
-            header('Location: index.php?action=email_signup'); // Ta page de saisie du code
+            echo json_encode(["success" => false, "message" => "Champs manquants"]);
             exit;
         }
 
-        // 4. Cas normal (Utilisateur validé)
+        $login = $_POST['login'];
+        $password = $_POST['password'];
+
+        $user = $this->userModel->getUserByEmail($login);
+
+    echo json_encode([
+        "success" => false, // On force l'erreur pour lire le message
+        "debug_user_found" => $user ? "OUI" : "NON",
+        "debug_password_input" => $password, // Ce que tu as tapé
+        "debug_hash_db" => $user['password'], // Ce qu'il y a en base
+        "debug_verify_test" => password_verify($password, $user['password']) ? "TRUE" : "FALSE"
+    ]);
+    exit; 
+
+        if (!$user || !password_verify($password, $user['password']))
+        {
+            echo json_encode(["success" => false, "message" => "Identifiants incorrects"]);
+            exit;
+        }
+
+        if ($user['validated'] == 0) 
+        {
+            if (session_status() === PHP_SESSION_NONE) session_start();
+            $_SESSION['user_email'] = $user['email']; 
+
+            echo json_encode([
+                "success" => false, 
+                "error_code" => "not_validated", 
+                "redirect" => "index.php?action=email_signup"
+            ]);
+            exit;
+        }
         if (session_status() === PHP_SESSION_NONE) session_start();
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['username'] = $user['username'];
         
-        header('Location: index.php?action=dashboard');
+        echo json_encode([
+            "success" => true,
+            "redirect" => "index.php?action=dashboard"
+        ]);
         exit;
     }
 }
