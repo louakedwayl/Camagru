@@ -1,5 +1,6 @@
 const form = document.querySelector("form#login_form");
 const pError = document.querySelector("p.error");
+const visitorLink = document.querySelector("a.visitor");
 
 form.addEventListener("submit", async (e) =>
 {
@@ -14,13 +15,13 @@ form.addEventListener("submit", async (e) =>
             method: "POST",
             body: formData
         });
+        
         const data = await response.json();
         if (data.success === false)
         {
             pError.style.display = "inline";
+            visitorLink.style.marginBottom = "16px";
         }
-
-
     }
     catch (error)
     {

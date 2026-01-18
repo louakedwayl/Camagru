@@ -68,14 +68,13 @@ class UserController
 
     public function checkUsername(): void
     {
+        header('Content-Type: application/json');
         if ($_SERVER['REQUEST_METHOD'] !== 'POST')
         {
             http_response_code(405); 
-            header('Content-Type: application/json');
             echo json_encode(['available' => false, 'error' => 'method_not_allowed']);
             exit;
         }
-        header('Content-Type: application/json');
         $input = json_decode(file_get_contents('php://input'), true);
         $username = isset($input['username']) ? trim($input['username']) : '';
         
@@ -98,6 +97,43 @@ class UserController
         }
         exit;
     }
+
+
+
+    public function checkEmail(): void
+    {
+        header('Content-Type: application/json');
+
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST')
+        {
+            http_response_code(405); 
+            echo json_encode(['available' => false, 'error' => 'method_not_allowed']);
+            exit;
+        }
+        $input = json_decode(file_get_contents('php://input'), true);
+        $email = isset($input['email']) ? trim($input['email']) : '';
+        
+        $validation = Validator::validateEmail($email);
+        if (!$validation['valid']) 
+        {
+            http_response_code(400);
+            echo json_encode(['available' => false, 'error' => $validation['error']]);
+            exit;
+        }
+        try
+        {
+            $exist = $this->userModel->emailExists($email);
+            echo json_encode(['available' => !$exist]);
+        }
+        catch (PDOException $e)
+        {
+            http_response_code(500);
+            echo json_encode(['available' => false, 'error' => 'database_error']);
+        }
+        exit;
+    }
+
+
 
     public function handleRegistration(): void
     {
@@ -153,44 +189,48 @@ class UserController
 
         try
         {
+            if ($this->userModel->emailExists($email))
+            {
+                http_response_code(409); // 409 = Conflict
+                echo json_encode(['valid' => false, 'error' => 'email_taken']); // Ajoute ce cas dans ton JS !
+                exit;
+            }
             if ($this->userModel->usernameExists($username))
             {
                 http_response_code(409);
                 echo json_encode(['valid' => false, 'error' => 'username_taken']);
                 exit;
             }
+            
             $validationCode = str_pad((string)random_int(0, 999999), 6, '0', STR_PAD_LEFT);
 
             // 1. Création de l'utilisateur
-            $newUser = $this->userModel->create($username, $fullname, $email, $password, $validationCode);
-            
-            if ($newUser)
+            $userExist = $this->userModel->create($username, $fullname, $email, $password, $validationCode);
+            if ($userExist)
             {
+                $newUser = $this->userModel->getUserByEmail($email);
                 // Gestion de la session
                 if (session_status() === PHP_SESSION_NONE) session_start();
                 session_regenerate_id(true); // Sécurité anti-vol de session
 
+                $_SESSION['user_id'] = $newUser['id'];
                 $_SESSION['user_email'] = $email;
                 $_SESSION['username'] = $username;
                 $_SESSION['fullname'] = $fullname;
                 $_SESSION['code'] = $validationCode;
                 
-
-                // 2. Envoi du mail
-                $code = $this->userModel->getValidationCode($email);
+                // Appel statique au Mailer
+                $mailSent = Mailer::sendValidationCode($email, $username, $validationCode);
                 
-                if ($code) {
-                    // Appel statique au Mailer
-                    $mailSent = Mailer::sendValidationCode($email, $username, $code);
-                    
-                    if (!$mailSent) {
-                        // On log l'erreur pour le debug (Docker logs)
-                        error_log("MAIL ERROR: Impossible d'envoyer le code à $email");
-                    } else {
-                         error_log("MAIL SUCCESS: Code envoyé à $email");
-                    }
+                if (!$mailSent)
+                {
+                    // On log l'erreur pour le debug (Docker logs)
+                    error_log("MAIL ERROR: Impossible d'envoyer le code à $email");
+                } 
+                else 
+                {
+                        error_log("MAIL SUCCESS: Code envoyé à $email");
                 }
-
                 echo json_encode(['valid' => true]);
             }
             else 
@@ -276,9 +316,16 @@ class UserController
 
     public function handleLogin()
     {
-        if (empty($_POST['login']) || empty($_POST['password']))
+        header('Content-Type: application/json');
+        if (empty($_POST['login']) || empty($_POST['password'] ))
         {
-            echo json_encode(["success" => false, "message" => "Champs manquants"]);
+            echo json_encode(["success" => false, "message" => "Missing fields"]);
+            exit;
+        }
+        $emailValidation = Validator::validateEmail($_POST['login']);
+        if (!$emailValidation['valid'])
+        {
+            echo json_encode(["success" => false, "message" => "Invalid email format"]);
             exit;
         }
 
@@ -286,16 +333,6 @@ class UserController
         $password = $_POST['password'];
 
         $user = $this->userModel->getUserByEmail($login);
-
-    echo json_encode([
-        "success" => false, // On force l'erreur pour lire le message
-        "debug_user_found" => $user ? "OUI" : "NON",
-        "debug_password_input" => $password, // Ce que tu as tapé
-        "debug_hash_db" => $user['password'], // Ce qu'il y a en base
-        "debug_verify_test" => password_verify($password, $user['password']) ? "TRUE" : "FALSE"
-    ]);
-    exit; 
-
         if (!$user || !password_verify($password, $user['password']))
         {
             echo json_encode(["success" => false, "message" => "Identifiants incorrects"]);
@@ -305,18 +342,24 @@ class UserController
         if ($user['validated'] == 0) 
         {
             if (session_status() === PHP_SESSION_NONE) session_start();
+            $_SESSION['user_id'] = $user['id'];
             $_SESSION['user_email'] = $user['email']; 
+            $_SESSION['username'] = $user['username'];
+            $_SESSION['fullname'] = $user['fullname'];
+            $_SESSION['code'] = $user['validation_code'];
 
             echo json_encode([
-                "success" => false, 
-                "error_code" => "not_validated", 
+                "success" => true, 
                 "redirect" => "index.php?action=email_signup"
             ]);
             exit;
         }
         if (session_status() === PHP_SESSION_NONE) session_start();
         $_SESSION['user_id'] = $user['id'];
+        $_SESSION['user_email'] = $user['email']; 
         $_SESSION['username'] = $user['username'];
+        $_SESSION['fullname'] = $user['fullname'];
+        $_SESSION['code'] = $user['validation_code'];
         
         echo json_encode([
             "success" => true,

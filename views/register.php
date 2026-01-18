@@ -14,8 +14,6 @@
 </head>
 <body>
     <div class="overlay"></div>
-
-
     <main>
         <div class="top">
             <img src="assets/images/logo.png" alt="Camagru Logo">
@@ -23,7 +21,8 @@
             <form method="POST">
                 <input type="email" name="email" placeholder="Email" required>
                 <p class="error email">Enter a valid email address.</p>
-                
+                <p class="error email_invailable">An account with this email already exists.</p>
+
                 <input type="password" name="password" placeholder="Password" required>
                 <p class="error password">Create a password at least 6 characters long.</p>
                 <p class="error uppercase">Password must contain at least one uppercase letter.</p>

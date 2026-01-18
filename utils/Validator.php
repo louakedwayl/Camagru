@@ -19,7 +19,8 @@ class Validator
         if (!preg_match('/[A-Z]/', $password)) {
             return ['valid' => false, 'error' => 'password_no_uppercase'];
         }
-        if (preg_match('/\p{Emoji}/u', $password)) {
+        if (preg_match('/\p{Extended_Pictographic}/u', $password))
+        {
             return ['valid' => false, 'error' => 'password_emoji'];
         }
         return ['valid' => true];

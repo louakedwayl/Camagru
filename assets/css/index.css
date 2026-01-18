@@ -15,8 +15,8 @@ main
 
 main img
 {
-    max-width: 100%;      /* l'image ne dépasse jamais de .left */
-    max-height: 100%;     /* l'image ne dépasse jamais en hauteur */
+    min-width: 100%;      /* l'image ne dépasse jamais de .left */
+    min-height: 100%;     /* l'image ne dépasse jamais en hauteur */
     object-fit: contain;  /* garde les proportions */
 }
 
@@ -163,6 +163,7 @@ p.error
     font-size: 14px;
     width: 268px;
     text-align: center;
+    margin-bottom: 17px ;
 }
 
 

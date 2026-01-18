@@ -37,6 +37,8 @@ const usernameInput = document.querySelector('main input[name="username"]');
 const form = document.querySelector('main form');
 
 const pErrorEmail = document.querySelector(".top p.error.email");
+const pErrorEmailInvailable = document.querySelector(".top p.error.email_invailable");
+
 const pErrorPassword = document.querySelector(".top p.error.password");
 const pErrorPasswordUpercase = document.querySelector(".top p.error.uppercase");;
 const pErrorFullname = document.querySelector(".top p.error.fullname");
@@ -46,18 +48,19 @@ const pErrorUsername = document.querySelector(".top p.error.username");
 const pErrorUsernameInvailable = document.querySelector(".top p.error.username_invailable");
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const passwordRegex = /^(?!.*\p{Emoji}).{6,}$/u;
+const passwordRegex = /^(?!.*\p{Extended_Pictographic}).{6,}$/u;;
 const passwordRegexUppercase = /[A-Z]/;
 const fullnameSizeRegex = /^.{2,50}$/u;
 const fullnameRegex = /^[a-zA-ZÀ-ÿ\s'\-]+$/;
 const usernameSizeRegex = /^.{3,30}$/;
 const usernameRegex = /^[a-zA-ZÀ-ÿ0-9_.]+$/;
 
-function validateEmail() 
+async function validateEmail() 
 {
     if (emailInput.value === "")
     {
         pErrorEmail.style.display = "none";
+        pErrorEmailInvailable.style.display = "none";
         emailInput.style.borderColor = "";
         emailInput.style.marginBottom = "10px";
         return false;
@@ -72,6 +75,39 @@ function validateEmail()
     pErrorEmail.style.display = "none";
     emailInput.style.borderColor = "";
     emailInput.style.marginBottom = "10px";
+
+    try 
+    {
+        response = await fetch("index.php?action=check_email", 
+            {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email: emailInput.value })
+            }
+        )
+        const data = await response.json();
+        
+        if (data.available)
+        {
+            pErrorEmail.style.display = "none";
+            emailInput.style.borderColor = "";
+            emailInput.style.marginBottom = "10px";
+            pErrorEmailInvailable.style.display = "none";
+            return true;
+        }
+        else
+        {
+            emailInput.style.borderColor = "red";
+            emailInput.style.marginBottom = "0px";
+            pErrorEmailInvailable.style.display = "inline";
+        }
+    }
+    catch(e)
+    {
+        console.error('Erreur lors de la vérification email:', e);
+        return false;
+    }
+
     return true;
 }
 
@@ -147,7 +183,7 @@ async function validateUsername()
         pErrorUsername.style.display = "none";
         pErrorUsernameInvailable.style.display = "none";
         usernameInput.style.borderColor = "";
-        usernameInput.style.marginBottom = "10px";
+        usernameInput.style.marginBottom = "0px";
         return false;
     }
     if (!usernameSizeRegex.test(usernameInput.value))
@@ -186,7 +222,7 @@ async function validateUsername()
             pErrorUsernameSize.style.display = "none";
             pErrorUsernameInvailable.style.display = "none";
             usernameInput.style.borderColor = "";
-            usernameInput.style.marginBottom = "10px";
+            usernameInput.style.marginBottom = "0px";
             return true;
         }
         else
@@ -240,13 +276,14 @@ form.addEventListener('submit', async (e) =>
         formData.append('fullname', fullnameInput.value);
         formData.append('username', usernameInput.value);
         
-        const response = await fetch('?action=validate_form', {
+        const response = await fetch('?action=registration',
+        {
             method: 'POST',
             body: formData
         });
         
         const data = await response.json();
-        z
+        
         if (data.valid)
         {
             window.location.replace("index.php?action=email_signup");        

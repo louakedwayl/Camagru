@@ -15,18 +15,13 @@ mysql> SELECT * FROM users;
 1 row in set (0.00 sec)
 */
 
-
-//revoir bien le code  d hier 
+//tester bien le formulaire dincscirptin
 
 //index login et email input erreur deja pris
 
-
-
 // mettre 10 photos de base dans le compte Wayl
 
-
 $action = $_GET['action'] ?? '';
-
 
 $controller = new UserController();
 
@@ -53,7 +48,11 @@ switch ($action)
         $controller->checkUsername();
         break;
     
-    case 'validate_form':
+    case 'check_email':
+        $controller->checkEmail();
+        break;
+
+    case 'registration':
         $controller->handleRegistration();
         break;
 
