@@ -342,10 +342,9 @@ class UserController
         if ($user['validated'] == 0) 
         {
             if (session_status() === PHP_SESSION_NONE) session_start();
-            $_SESSION['user_id'] = $user['id'];
             $_SESSION['user_email'] = $user['email']; 
             $_SESSION['username'] = $user['username'];
-            $_SESSION['fullname'] = $user['fullname'];
+            $_SESSION['fullname'] = $user['full_name'];
             $_SESSION['code'] = $user['validation_code'];
 
             echo json_encode([

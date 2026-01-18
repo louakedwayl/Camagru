@@ -22,11 +22,14 @@ form.addEventListener("submit", async (e) =>
             pError.style.display = "inline";
             visitorLink.style.marginBottom = "16px";
         }
+        else if (data.success === true)
+        {
+            window.location.href = data.redirect;
+        }
     }
     catch (error)
     {
         console.error('Error:', error);
         alert('An error occurred. Please try again.');
     }
-    
 });
