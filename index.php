@@ -18,22 +18,7 @@ $controller = new UserController();
 // Mini routeur
 switch ($action) 
 {
-    case 'email_signup':
-        $controller->email_signup();
-        break;
-
-    case 'register':
-        $controller->register();
-        break;
-
-    case 'password_reset':
-        $controller->password_reset();
-        break;
-
-    case 'dashboard':
-        $controller->dashboard();
-        break; 
-
+        // API
     case 'check_username':
         $controller->checkUsername();
         break;
@@ -61,6 +46,23 @@ switch ($action)
     case 'verify_code':
         $controller->verifyCode();
         break;
+
+    // Views
+    case 'email_signup':
+        $controller->email_signup();
+        break;
+
+    case 'register':
+        $controller->register();
+        break;
+
+    case 'password_reset':
+        $controller->password_reset();
+        break;
+
+    case 'dashboard':
+        $controller->dashboard();
+        break; 
 
     default:
         $controller->index();

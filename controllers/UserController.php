@@ -325,35 +325,41 @@ class UserController
         }
     }
 
-    // 🔑 CONNEXION (Login)
- public function handleLogin()
+
+    /**
+     * Handles user authentication.
+     * * This method verifies login credentials (email/username and password),
+     * secures the session against session fixation attacks, and manages
+     * redirection based on the account's validation status.
+     * * @return void Outputs a JSON response and terminates execution via exit.
+     * * @response bool   success  Indicates if the authentication was successful.
+     * @response string message  Error message in case of failure.
+     * @response string redirect Destination URL on success.
+     */
+    public function handleLogin()
     {
         header('Content-Type: application/json');
         
-        // Validation des champs
-        if (empty($_POST['login']) || empty($_POST['password'])) {
-            echo json_encode(["success" => false, "message" => "Missing fields"]); exit;
+        if (empty($_POST['login']) || empty($_POST['password']))
+        {
+            echo json_encode(["success" => false, "message" => "Missing fields"]);
+            exit;
         }
 
         $login = $_POST['login'];
         $password = $_POST['password'];
 
-        // Vérification en BDD
         $user = $this->userModel->getUserByLogin($login);
-        if (!$user || !password_verify($password, $user['password'])) {
-            echo json_encode(["success" => false, "message" => "Identifiants incorrects"]); exit;
+        if (!$user || !password_verify($password, $user['password']))
+        {
+            echo json_encode(["success" => false, "message" => "Identifiants incorrects"]);
+            exit;
         }
 
-        // --- DÉBUT DE LA SESSION SÉCURISÉE ---
-        // 1. On s'assure que la session est démarrée
-        if (session_status() === PHP_SESSION_NONE) session_start();
-        
-        // 2. On change l'ID pour empêcher le vol de session (Fixation)
+        if (session_status() === PHP_SESSION_NONE)
+            session_start();
         session_regenerate_id(true); 
 
-        // --- GESTION DES CAS ---
-
-        // Cas 1 : Compte NON validé -> Redirection vers la page du code
         if ($user['validated'] == 0) 
         {
             $_SESSION['user_email'] = $user['email'];
@@ -364,15 +370,10 @@ class UserController
             echo json_encode(["success" => true, "redirect" => "index.php?action=email_signup"]);
             exit;
         }
-
-        // Cas 2 : Compte validé -> Redirection vers Dashboard
-        // (Pas besoin de refaire session_start ici, elle est déjà active grâce à la ligne 15)
-        
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['email'] = $user['email'];
         $_SESSION['username'] = $user['username'];
         $_SESSION['full_name'] = $user['full_name'];
-        
         echo json_encode(["success" => true, "redirect" => "index.php?action=dashboard"]);
         exit;
     }
