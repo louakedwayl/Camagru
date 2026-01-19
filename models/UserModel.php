@@ -113,19 +113,25 @@ class UserModel
         }
     }
 
-    public function getUserByEmail(string $email) 
+    public function getUserByLogin(string $login) 
     {
         try
         {
-            $query = "SELECT * FROM users WHERE email = :email";
+            // CORRECTION : On utilise deux placeholders distincts (:p_email et :p_username)
+            $query = "SELECT * FROM users WHERE email = :p_email OR username = :p_username";
 
             $statement = $this->pdo->prepare($query);
-            $statement->bindParam(":email", $email, PDO::PARAM_STR);
+            
+            // On lie la variable $login aux DEUX placeholders
+            $statement->bindParam(":p_email", $login, PDO::PARAM_STR);
+            $statement->bindParam(":p_username", $login, PDO::PARAM_STR);
+            
             $statement->execute();
             return $statement->fetch(PDO::FETCH_ASSOC);
         }
         catch(PDOException $e)
         {
+            // N'oublie pas d'enlever le die() maintenant que c'est corrigé !
             return false;
         }
     }

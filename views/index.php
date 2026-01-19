@@ -21,7 +21,7 @@
             <div class="top">
             <img src="assets/images/logo.png" alt="Camagru Logo">
                 <form id="login_form" method="POST">
-                    <input type="text" id ="input_login" placeholder="Email" name="login">
+                    <input type="text" id ="input_login" placeholder="Username or email" name="login">
                     <input type="password" id ="input_password" placeholder="Password" name="password">
                     <button type="submit">Log in</button>
                 </form>

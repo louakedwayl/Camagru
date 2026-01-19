@@ -249,7 +249,7 @@ class UserController
             $status = $this->userModel->validateUser($_SESSION['user_email'], $code);
 
             if ($status === 'success') {
-                $user = $this->userModel->getUserByEmail($_SESSION['user_email']);
+                $user = $this->userModel->getUserByLogin($_SESSION['user_email']);
                 
                 session_regenerate_id(true);
 
@@ -292,9 +292,10 @@ class UserController
             $status = $this->userModel->validateUser($email, $code);
 
             if ($status === 'success') {
-                $user = $this->userModel->getUserByEmail($email);
+                $user = $this->userModel->getUserByLogin($email);
                 
-               session_regenerate_id(true); 
+
+                session_regenerate_id(true); 
                 // CONNEXION DIRECTE
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['username'] = $user['username'];
@@ -338,7 +339,7 @@ class UserController
         $password = $_POST['password'];
 
         // Vérification en BDD
-        $user = $this->userModel->getUserByEmail($login);
+        $user = $this->userModel->getUserByLogin($login);
         if (!$user || !password_verify($password, $user['password'])) {
             echo json_encode(["success" => false, "message" => "Identifiants incorrects"]); exit;
         }
