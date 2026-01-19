@@ -325,7 +325,6 @@ class UserController
         }
     }
 
-
     /**
      * Handles user authentication.
      * * This method verifies login credentials (email/username and password),
