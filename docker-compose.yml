@@ -7,7 +7,7 @@ services:
       - .:/var/www/html
     depends_on:
       - database
-    env_file:     # Indispensable pour tes secrets Gmail
+    env_file:
       - .env
 
   database:

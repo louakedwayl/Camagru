@@ -30,25 +30,27 @@ l’input de l’utilisateur au backend via le routeur avec fetch.
 
 ------------------------------------------------------------------- */
 
+
 const emailInput = document.querySelector('main input[name="email"]');
 const passwordInput = document.querySelector('main input[name="password"]');
 const fullnameInput = document.querySelector('main input[name="fullname"]');
 const usernameInput = document.querySelector('main input[name="username"]');
 const form = document.querySelector('main form');
 
+// Sélecteurs d'erreurs
 const pErrorEmail = document.querySelector(".top p.error.email");
 const pErrorEmailInvailable = document.querySelector(".top p.error.email_invailable");
-
 const pErrorPassword = document.querySelector(".top p.error.password");
-const pErrorPasswordUpercase = document.querySelector(".top p.error.uppercase");;
+const pErrorPasswordUpercase = document.querySelector(".top p.error.uppercase");
 const pErrorFullname = document.querySelector(".top p.error.fullname");
 const pErrorFullnameSize = document.querySelector(".top p.error.fullname_size");
 const pErrorUsernameSize = document.querySelector(".top p.error.username_size");
 const pErrorUsername = document.querySelector(".top p.error.username");
 const pErrorUsernameInvailable = document.querySelector(".top p.error.username_invailable");
 
+// Regex
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const passwordRegex = /^(?!.*\p{Extended_Pictographic}).{6,}$/u;;
+const passwordRegex = /^(?!.*\p{Extended_Pictographic}).{6,}$/u; 
 const passwordRegexUppercase = /[A-Z]/;
 const fullnameSizeRegex = /^.{2,50}$/u;
 const fullnameRegex = /^[a-zA-ZÀ-ÿ\s'\-]+$/;
@@ -72,26 +74,28 @@ async function validateEmail()
         pErrorEmail.style.display = "inline";
         return false;
     }
+    
+    // Reset visuel avant le fetch
     pErrorEmail.style.display = "none";
     emailInput.style.borderColor = "";
     emailInput.style.marginBottom = "10px";
 
     try 
     {
-        response = await fetch("index.php?action=check_email", 
+        // CORRECTION 1 : On utilise FormData pour que $_POST['email'] fonctionne en PHP
+        const formData = new FormData();
+        formData.append('email', emailInput.value);
+
+        const response = await fetch("index.php?action=check_email", 
             {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email: emailInput.value })
+                body: formData // On envoie FormData, plus de JSON
             }
-        )
+        );
         const data = await response.json();
         
         if (data.available)
         {
-            pErrorEmail.style.display = "none";
-            emailInput.style.borderColor = "";
-            emailInput.style.marginBottom = "10px";
             pErrorEmailInvailable.style.display = "none";
             return true;
         }
@@ -100,36 +104,32 @@ async function validateEmail()
             emailInput.style.borderColor = "red";
             emailInput.style.marginBottom = "0px";
             pErrorEmailInvailable.style.display = "inline";
+            return false; // Important de retourner false si indisponible
         }
     }
     catch(e)
     {
-        console.error('Erreur lors de la vérification email:', e);
         return false;
     }
-
-    return true;
 }
 
 function validatePassword()
 {
-    if (passwordInput.value === "")
-    {
+    // ... (Cette fonction était correcte, je la garde telle quelle) ...
+    if (passwordInput.value === "") {
         pErrorPasswordUpercase.style.display = "none";
         pErrorPassword.style.display = "none";
         passwordInput.style.borderColor = "";
         passwordInput.style.marginBottom = "10px";
         return false;
     }
-    if (!passwordRegex.test(passwordInput.value))
-    {
+    if (!passwordRegex.test(passwordInput.value)) {
         passwordInput.style.borderColor = "red";
         passwordInput.style.marginBottom = "0px";
         pErrorPassword.style.display = "inline";
         return false;
     }
-    if (!passwordRegexUppercase.test(passwordInput.value))
-    {
+    if (!passwordRegexUppercase.test(passwordInput.value)) {
         pErrorPassword.style.display = "none";
         passwordInput.style.borderColor = "red";
         passwordInput.style.marginBottom = "0px";
@@ -144,24 +144,22 @@ function validatePassword()
 }
 
 function validateFullname() {
-    if (fullnameInput.value === "")
-    {
+    // ... (Cette fonction était correcte aussi) ...
+    if (fullnameInput.value === "") {
         pErrorFullname.style.display = "none";
         pErrorFullnameSize.style.display = "none";
         fullnameInput.style.borderColor = "";
         fullnameInput.style.marginBottom = "10px";
         return false;
     }
-    if (!fullnameSizeRegex.test(fullnameInput.value))
-    {
+    if (!fullnameSizeRegex.test(fullnameInput.value)) {
         pErrorFullname.style.display = "none";
         fullnameInput.style.borderColor = "red";
         fullnameInput.style.marginBottom = "0px";
         pErrorFullnameSize.style.display = "inline";
         return false;
     }
-    if (!fullnameRegex.test(fullnameInput.value))
-    {
+    if (!fullnameRegex.test(fullnameInput.value)) {
         pErrorFullnameSize.style.display = "none";
         fullnameInput.style.borderColor = "red";
         fullnameInput.style.marginBottom = "0px";
@@ -207,11 +205,14 @@ async function validateUsername()
     
     try
     {
+        // CORRECTION 2 : On crée le FormData localement (avant ça plantait car inexistant)
+        const formData = new FormData();
+        formData.append('username', usernameInput.value);
+
         const response = await fetch('index.php?action=check_username',
           {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ username: usernameInput.value })
+            body: formData // On utilise le formData créé juste au-dessus
         });
         
         const data = await response.json();
@@ -237,37 +238,34 @@ async function validateUsername()
     }
     catch (error)
     {
-        console.error('Erreur lors de la vérification:', error);
         return false;
     }
 }
 
+// Event Listeners "Blur" (quand on quitte le champ)
 emailInput.addEventListener("blur", validateEmail);
 passwordInput.addEventListener("blur", validatePassword);
 fullnameInput.addEventListener("blur", validateFullname);
 usernameInput.addEventListener("blur", validateUsername);
 
+// SOUMISSION DU FORMULAIRE
 form.addEventListener('submit', async (e) =>
 {
     e.preventDefault();
     
-    // Appeler toutes les fonctions de validation
-    const isEmailValid = validateEmail();
-    const isPasswordValid = validatePassword();
-    const isFullnameValid = validateFullname();
-    const isUsernameValid = await validateUsername();
+    // CORRECTION 3 : On ajoute 'await' devant validateEmail et validateUsername
+    // Sinon le code continue sans attendre la réponse du serveur !
+    const isEmailValid = await validateEmail(); 
+    const isPasswordValid = validatePassword(); // Synchrone, pas besoin d'await
+    const isFullnameValid = validateFullname(); // Synchrone
+    const isUsernameValid = await validateUsername(); // Async, besoin d'await
     
     if (!isEmailValid || !isPasswordValid || !isFullnameValid || !isUsernameValid)
     {
-        console.error("Formulaire invalide :");
-        if (!isEmailValid) console.error("- Email invalide");
-        if (!isPasswordValid) console.error("- Mot de passe invalide");
-        if (!isFullnameValid) console.error("- Nom complet invalide");
-        if (!isUsernameValid) console.error("- Username invalide");
         return;
     }
 
-    // Si tout est OK, envoyer au backend
+    // Si tout est OK, on envoie la requête finale
     try
     {
         const formData = new FormData();
@@ -276,7 +274,8 @@ form.addEventListener('submit', async (e) =>
         formData.append('fullname', fullnameInput.value);
         formData.append('username', usernameInput.value);
         
-        const response = await fetch('?action=registration',
+        // Vérifie que ton routeur PHP pointe bien 'handle_registration' vers handleRegistration()
+        const response = await fetch('index.php?action=registration', 
         {
             method: 'POST',
             body: formData
@@ -286,16 +285,11 @@ form.addEventListener('submit', async (e) =>
         
         if (data.valid)
         {
-            window.location.replace("index.php?action=email_signup");        
+            window.location.replace("index.php?action=email_signup");
         } 
-        else 
-        {
-            console.log("Formulaire invalide côté serveur");
-        }
+
     } 
     catch (error)
     {
-        console.error('Error:', error);
-        alert('An error occurred. Please try again.');
     }
 });

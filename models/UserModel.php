@@ -2,20 +2,9 @@
 
 declare(strict_types= 1);
 
-use BcMath\Number;
 
 require_once __DIR__ . '/../config/Database.php';
 
-/*
-mysql> SELECT * FROM users;
-
-+----+----------+--------------+----------------------------+----------+-----------+-------------+-----------------+----------------------------+------------+-----------------------+---------------------+---------------------+
-| id | username | full_name    | email                      | password | validated | avatar_path | validation_code | validation_code_expires_at | reset_code | reset_code_expires_at | created_at          | updated_at          |
-+----+----------+--------------+----------------------------+----------+-----------+-------------+-----------------+----------------------------+------------+-----------------------+---------------------+---------------------+
-|  1 | Wayl     | Wayl Louaked | louakedwayl@protonmail.com | password |         1 | NULL        | NULL            | NULL                       | NULL       | NULL                  | 2026-01-07 19:27:09 | 2026-01-07 19:27:09 |
-+----+----------+--------------+----------------------------+----------+-----------+-------------+-----------------+----------------------------+------------+-----------------------+---------------------+---------------------+
-1 row in set (0.00 sec)
-*/
 
 class UserModel
 {
@@ -26,6 +15,29 @@ class UserModel
         $this->pdo = Database::getConnection();
     }
 
+    public function updateValidationCode(string $email, string $newCode): bool
+    {
+        try 
+        {
+            // On écrase le code et on redonne 10 minutes de validité
+            $query = "UPDATE users 
+                    SET validation_code = :code, 
+                        validation_code_expires_at = DATE_ADD(NOW(), INTERVAL 10 MINUTE),
+                        updated_at = NOW()
+                    WHERE email = :email";
+            
+            $stmt = $this->pdo->prepare($query);
+            return $stmt->execute([
+                ':code' => $newCode,
+                ':email' => $email
+            ]);
+        } 
+        catch (PDOException $e) 
+        {
+            return false;
+        }
+    }
+ 
     public function create(string $username, string $fullName, string $email, string $password, string $validationCode): bool
     {
         try
@@ -54,7 +66,6 @@ class UserModel
         }
         catch(PDOException $e)
         {
-            error_log("Erreur création utilisateur : " . $e->getMessage());
             return false;
         }
     }
@@ -82,7 +93,6 @@ class UserModel
         }
         catch(PDOException $e)
         {
-            error_log("Erreur lors de usernameExists : " . $e->getMessage());
             return false;
         }
     }
@@ -99,7 +109,6 @@ class UserModel
         }
         catch(PDOException $e)
         {
-            error_log("Erreur lors de emailExists : " . $e->getMessage());
             return false;
         }
     }
@@ -117,35 +126,57 @@ class UserModel
         }
         catch(PDOException $e)
         {
-            error_log("Erreur lors de getUserByEmail : " . $e->getMessage());
             return false;
         }
     }
 
-    public function validateUser(string $email, string $code): bool
+/**
+     * Retourne : "success", "invalid" ou "expired"
+     */
+    public function validateUser(string $email, string $code): string
     {
         try
         {
-            $query = "UPDATE users 
-                      SET validated = 1, 
-                          validation_code = NULL, 
-                          validation_code_expires_at = NULL,
-                          updated_at = NOW()
-                      WHERE email = :email 
-                      AND validation_code = :code 
-                      AND validation_code_expires_at > NOW()";
+            // ÉTAPE 1 : On va chercher les infos (L'Enquête)
+            // On a besoin du code ET de la date d'expiration stockés en base
+            $query = "SELECT id, validation_code, validation_code_expires_at FROM users WHERE email = :email";
+            $stmt = $this->pdo->prepare($query);
+            $stmt->execute([':email' => $email]);
             
-            $statement = $this->pdo->prepare($query);
-            $statement->bindParam(':email', $email, PDO::PARAM_STR);
-            $statement->bindParam(':code', $code, PDO::PARAM_STR);
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if (!$user)
+                return "invalid";
+
+            // ÉTAPE 2 : On vérifie si c'est le BON code
+            if ($user['validation_code'] !== $code) {
+                return "invalid"; // Code incorrect
+            }
+
+            // ÉTAPE 3 : On vérifie l'heure (Le Chrono)
+            $expiration = new DateTime($user['validation_code_expires_at']);
+            $now = new DateTime();
+
+            if ($now > $expiration) {
+                return "expired"; // C'est le bon code, mais trop tard !
+            }
+
+            // ÉTAPE 4 : Tout est bon, on valide (L'Action)
+            $updateQuery = "UPDATE users 
+                            SET validated = 1, 
+                                validation_code = NULL, 
+                                validation_code_expires_at = NULL,
+                                updated_at = NOW()
+                            WHERE id = :id";
             
-            $statement->execute();
-            return $statement->rowCount() > 0;
+            $updateStmt = $this->pdo->prepare($updateQuery);
+            $updateStmt->execute([':id' => $user['id']]);
+
+            return "success";
         }
         catch(PDOException $e)
         {
-            error_log("Erreur validation utilisateur : " . $e->getMessage());
-            return false;
+            return "error"; // Erreur technique
         }
     }
 }

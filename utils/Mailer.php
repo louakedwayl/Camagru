@@ -9,15 +9,25 @@ class Mailer
      */
     public static function sendValidationCode(string $to, string $username, string $code): bool
     {
-        $subject = "Votre code de validation Camagru";
-        
-        // CSS Inline pour faire joli dans les boîtes mail
+        $subject = "Camagru Verification Code"; // Titre en Anglais
+
+        // 👇 ATTENTION : Assure-toi que ce port est le bon (8080 ou 8000 ?)
+        $baseUrl = 'http://localhost:8080/index.php'; 
+
+        $queryParams = http_build_query([
+            'action' => 'verify_url',
+            'email'  => $to,
+            'code'   => $code
+        ]);
+
+        $verificationLink = $baseUrl . '?' . $queryParams;
+
         $message = "
         <html>
         <head>
-            <title>Validation Camagru</title>
+            <title>Camagru Verification</title>
             <style>
-                .container { font-family: Arial, sans-serif; padding: 20px; color: #333; }
+                .container { font-family: Arial, sans-serif; padding: 20px; color: #333; max-width: 600px; margin: 0 auto; }
                 .code-box { 
                     background-color: #f4f4f4; 
                     border: 1px solid #ddd; 
@@ -27,25 +37,42 @@ class Mailer
                     padding: 15px; 
                     text-align: center; 
                     width: 200px; 
-                    margin: 20px 0;
+                    margin: 20px auto;
                     border-radius: 5px;
                 }
-                .footer { font-size: 12px; color: #777; margin-top: 30px; }
+                .btn-link {
+                    display: block;
+                    width: 200px;
+                    margin: 20px auto;
+                    padding: 15px;
+                    background-color: #007BFF;
+                    color: #ffffff !important;
+                    text-decoration: none;
+                    text-align: center;
+                    border-radius: 5px;
+                    font-weight: bold;
+                }
+                .footer { font-size: 12px; color: #777; margin-top: 30px; text-align: center; }
             </style>
         </head>
         <body>
             <div class='container'>
-                <h2>Bienvenue sur Camagru, " . htmlspecialchars($username) . " !</h2>
-                <p>Merci de vous être inscrit.</p>
-                <p>Voici votre code de confirmation à 6 chiffres :</p>
+                <h2>Welcome to Camagru, " . htmlspecialchars($username) . "!</h2>
+                <p>Thanks for signing up. To activate your account, you have two options:</p>
                 
+                <h3>Option 1: Click the button</h3>
+                <a href='" . htmlspecialchars($verificationLink) . "' class='btn-link'>Verify My Account</a>
+
+                <h3>Option 2: Enter this code manually</h3>
                 <div class='code-box'>" . htmlspecialchars($code) . "</div>
                 
-                <p>Copiez ce code et collez-le dans la page de validation pour activer votre compte.</p>
-                <p>Ce code expirera dans 10 minutes.</p>
+                <p>This link and code will expire in 10 minutes.</p>
                 
                 <div class='footer'>
-                    Ceci est un mail automatique, merci de ne pas répondre.
+                    If the button doesn't work, copy this link:<br>
+                    <a href='" . htmlspecialchars($verificationLink) . "'>" . htmlspecialchars($verificationLink) . "</a>
+                    <br><br>
+                    This is an automated email, please do not reply.
                 </div>
             </div>
         </body>

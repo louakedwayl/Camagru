@@ -33,12 +33,10 @@ RUN echo 'sendmail_path = /usr/bin/msmtp -t' > /usr/local/etc/php/conf.d/sendmai
 
 # -------------------------------------
 
-# 5. Copie de ton site web
 # On le fait à la fin pour profiter du cache Docker
 COPY . /var/www/html/
 
 # 6. Port
 EXPOSE 80
 
-# 7. Démarrage via notre script (qui configure le mail puis lance Apache)
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]

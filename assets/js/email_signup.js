@@ -1,13 +1,94 @@
 const form = document.querySelector("main form");
 const input = document.querySelector("main form input");
+const resendLink = document.getElementById("resend-link");
+const snackbarPErrorSuccess = document.querySelector("#snackbar-success");
+const snackbarPErrorFailure = document.querySelector("#snackbar-failure");
+
 const snackbar = document.querySelector(".snackbar");
 const errorContainer = document.querySelector("div.error");
 const pErrorInvalid = document.querySelector("p.error");
 const pErrorTimeout = document.querySelector("p.error2");
 
+
 const regex = /^\d{6}$/;
 
+let snackbarTimeout = null; 
 
+document.addEventListener('click', (e) => {
+        if (input.value.trim() === "") 
+            {
+            pErrorInvalid.style.display = "none";
+        }
+});
+
+function showSnackbar(type) {
+
+    if (snackbarTimeout) {
+        clearTimeout(snackbarTimeout);
+    }
+
+    snackbar.style.display = "flex";
+
+    if (type === 'success') 
+    {
+        snackbarPErrorSuccess.style.display = "block";
+        snackbarPErrorFailure.style.display = "none";
+    } 
+    else
+    {
+        snackbarPErrorSuccess.style.display = "none";
+        snackbarPErrorFailure.style.display = "block";
+    }
+
+    snackbarTimeout = setTimeout(() => {
+        snackbar.style.display = "none";
+        snackbarTimeout = null;
+    }, 4000);
+}
+
+
+if (resendLink) 
+{
+    resendLink.addEventListener("click", async (e) => 
+    {
+        e.preventDefault();
+
+        resendLink.style.pointerEvents = "none"; 
+        try 
+        {
+            const response = await fetch('index.php?action=resend_code', 
+            {
+                method: 'POST'
+            });
+            
+            const data = await response.json();
+
+            if (data.success)
+            {
+                showSnackbar('success');
+                
+                setTimeout(() => 
+                {
+                    resendLink.style.pointerEvents = "auto";
+                }, 5000);
+            }
+            else
+            {  
+                showSnackbar('error');
+                setTimeout(() => 
+                {
+                    resendLink.style.pointerEvents = "auto";
+                }, 5000); 
+            }
+
+        } 
+        catch (error) 
+        {
+            showSnackbar('error');
+            resendLink.style.pointerEvents = "auto";
+        }
+    });
+}
 
 input.addEventListener('input', () => 
 {
@@ -15,8 +96,6 @@ input.addEventListener('input', () =>
     pErrorTimeout.style.display = "none";
     snackbar.style.display = "none";
 });
-
-
 
 form.addEventListener("submit", async (e) => 
 {
@@ -47,7 +126,7 @@ form.addEventListener("submit", async (e) =>
         } 
         else
         {
-            if (data.error === 'expired_code')
+            if (data.error === 'expired')
             {
                 pErrorTimeout.style.display = "inline";
             }
@@ -60,6 +139,6 @@ form.addEventListener("submit", async (e) =>
     }
     catch (error) 
     {
-        console.error("Erreur technique :", error);
+        showSnackbar('error');
     }
 });

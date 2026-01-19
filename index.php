@@ -4,26 +4,16 @@ declare(strict_types=1);
 
 require_once 'controllers/UserController.php';
 
-/*
-mysql> SELECT * FROM users;
-
-+----+----------+--------------+----------------------------+----------+-----------+-------------+-----------------+----------------------------+------------+-----------------------+---------------------+---------------------+
-| id | username | full_name    | email                      | password | validated | avatar_path | validation_code | validation_code_expires_at | reset_code | reset_code_expires_at | created_at          | updated_at          |
-+----+----------+--------------+----------------------------+----------+-----------+-------------+-----------------+----------------------------+------------+-----------------------+---------------------+---------------------+
-|  1 | Wayl     | Wayl Louaked | louakedwayl@protonmail.com | password |         1 | NULL        | NULL            | NULL                       | NULL       | NULL                  | 2026-01-07 19:27:09 | 2026-01-07 19:27:09 |
-+----+----------+--------------+----------------------------+----------+-----------+-------------+-----------------+----------------------------+------------+-----------------------+---------------------+---------------------+
-1 row in set (0.00 sec)
-*/
-
 //tester bien le formulaire dincscirptin
-
-//index login et email input erreur deja pris
 
 // mettre 10 photos de base dans le compte Wayl
 
 $action = $_GET['action'] ?? '';
 
 $controller = new UserController();
+
+
+// a2enmod rewrite
 
 // Mini routeur
 switch ($action) 
@@ -60,6 +50,14 @@ switch ($action)
         $controller->handleLogin();
         break;
 
+    case 'resend_code':
+        $controller->resendCode();
+        break;
+
+    case 'verify_url':
+        $controller->verifyUrl();
+        break;
+    
     case 'verify_code':
         $controller->verifyCode();
         break;

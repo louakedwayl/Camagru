@@ -17,11 +17,11 @@
         <div class="top">
             <img src="assets/images/icon/letter.svg" alt="Letter Icon">
             <p class="first">Enter Confirmation Code</p>
-            <div class= "top1">
+            <div class="top1">
                 <p>Enter the confirmation code we sent to</p>
                 <p>
                     <?php echo htmlspecialchars($_SESSION['user_email']); ?>. 
-                    <a href="#">Resend Code.</a>
+                    <a id="resend-link" href="#">Resend Code.</a>
                 </p>
             </div>
             <form method="post" novalidate>
@@ -44,7 +44,8 @@
     </main>
     <?php require_once "footer.php" ?>
     <div class = "snackbar">
-        <p>Sorry! We're having trouble sending you a confirmation code right now. Please try again later.</p>
+        <p id="snackbar-success">A new verification code has been sent to your email.</p>
+        <p id="snackbar-failure">Sorry! We're having trouble sending you a confirmation code right now. Please try again later.</p>
     </div>
 </body>
 </html>
