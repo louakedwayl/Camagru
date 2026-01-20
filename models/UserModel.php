@@ -186,14 +186,19 @@ class UserModel
     }
 
 /**
-     * Retourne : "success", "invalid" ou "expired"
+     * Validates a user account by verifying the security code.
+     * * This method checks if the user exists, compares the provided code, 
+     * verifies if the code has expired, and activates the account if 
+     * all conditions are met. Returns a status string indicating the result.
+     *
+     * @param string $email The user's email address.
+     * @param string $code  The 6-digit validation code to verify.
+     * @return string Status result: "success", "invalid", "expired", or "error".
      */
     public function validateUser(string $email, string $code): string
     {
         try
         {
-            // ÉTAPE 1 : On va chercher les infos (L'Enquête)
-            // On a besoin du code ET de la date d'expiration stockés en base
             $query = "SELECT id, validation_code, validation_code_expires_at FROM users WHERE email = :email";
             $stmt = $this->pdo->prepare($query);
             $stmt->execute([':email' => $email]);
@@ -203,20 +208,15 @@ class UserModel
             if (!$user)
                 return "invalid";
 
-            // ÉTAPE 2 : On vérifie si c'est le BON code
-            if ($user['validation_code'] !== $code) {
-                return "invalid"; // Code incorrect
-            }
+            if ($user['validation_code'] !== $code)
+                return "invalid";
 
-            // ÉTAPE 3 : On vérifie l'heure (Le Chrono)
             $expiration = new DateTime($user['validation_code_expires_at']);
             $now = new DateTime();
-
-            if ($now > $expiration) {
-                return "expired"; // C'est le bon code, mais trop tard !
+            if ($now > $expiration)
+             {
+               return "expired";
             }
-
-            // ÉTAPE 4 : Tout est bon, on valide (L'Action)
             $updateQuery = "UPDATE users 
                             SET validated = 1, 
                                 validation_code = NULL, 
@@ -226,12 +226,11 @@ class UserModel
             
             $updateStmt = $this->pdo->prepare($updateQuery);
             $updateStmt->execute([':id' => $user['id']]);
-
             return "success";
         }
         catch(PDOException $e)
         {
-            return "error"; // Erreur technique
+            return "error";
         }
     }
 }

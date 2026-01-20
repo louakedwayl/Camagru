@@ -84,7 +84,7 @@ class UserController
             header('Location: index.php');
             exit;
         }
-        
+
         require ("views/email_signup.php");
         exit;
     }
@@ -212,104 +212,143 @@ class UserController
         exit;
     }
 
-    // 🔄 RENVOYER LE CODE (AJAX)
+    /**
+     * Resends a validation code to the user's email.
+     * * This API endpoint generates a new 6-digit code, updates the database, 
+     * and sends it via email. It enforces a 60-second cooldown between 
+     * requests using sessions to prevent abuse.
+     * * @return void
+     * * @method POST
+     * @response 200 {bool} success  True if the code was sent.
+     * @response 400 {string} error  Missing or expired session.
+     * @response 405 {string} error  Method not allowed (must be POST).
+     * @response 429 {string} error  Too many requests (cooldown active).
+     * @response 500 {string} error  Database or Mail server failure.
+     */
     public function resendCode(): void
     {
         header('Content-Type: application/json');
-        if (session_status() === PHP_SESSION_NONE) session_start();
-
-        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') 
+        {
             http_response_code(405);
             echo json_encode(['success' => false, 'error' => 'Method not allowed']);
             exit;
         }
+        
+        if (session_status() === PHP_SESSION_NONE) session_start();
 
-        // Vérif : L'utilisateur doit être en attente (user_email)
-        if (!isset($_SESSION['user_email'])) {
+        if (!isset($_SESSION['user_email'])) 
+        {
             http_response_code(400);
             echo json_encode(['success' => false, 'error' => 'Session expired']);
             exit;
         }
 
-        // Vérif : Timer (60 secondes)
-        if (isset($_SESSION['last_resend_time']) && (time() - $_SESSION['last_resend_time'] < 60)) {
+        if (isset($_SESSION['last_resend_time']) && (time() - $_SESSION['last_resend_time'] < 60)) 
+        {
             http_response_code(429);
             echo json_encode(['success' => false, 'error' => 'Please wait before retrying.']);
             exit;
         }
 
-        try {
+        try 
+        {
             $email = $_SESSION['user_email'];
             $username = $_SESSION['username'] ?? 'User'; 
 
-            // Génération nouveau code
             $newCode = str_pad((string)random_int(0, 999999), 6, '0', STR_PAD_LEFT);
 
-            // Update DB (Code + Expiration)
             $updated = $this->userModel->updateValidationCode($email, $newCode);
             if (!$updated) throw new Exception("DB Error");
 
-            // Envoi Mail
             $mailSent = Mailer::sendValidationCode($email, $username, $newCode);
             
-            if ($mailSent) {
+            if ($mailSent) 
+            {
                 $_SESSION['last_resend_time'] = time();
                 $_SESSION['code'] = $newCode;
                 echo json_encode(['success' => true]);
-            } else {
+            } 
+            else
+            {
                 http_response_code(500);
                 echo json_encode(['success' => false, 'error' => 'Mail server error']);
             }
-        } catch (Exception $e) {
+        }
+        catch (Exception $e)
+        {
             http_response_code(500);
             echo json_encode(['success' => false, 'error' => 'Server error']);
         }
         exit;
     }
 
-    // 📝 INSCRIPTION (Formulaire)
+/**
+     * Processes the user registration request.
+     * * This API endpoint validates input data, checks for existing 
+     * credentials (email/username), creates a new user with a hashed 
+     * password, initializes a secure session, and triggers the 
+     * validation email.
+     * * @return void
+     * * @method POST
+     * @response 200 {bool}   valid   True if registration is successful.
+     * @response 400 {string} error   Missing fields or invalid email format.
+     * @response 405 {string} error   Method not allowed (GET instead of POST).
+     * @response 409 {string} error   Email or username already exists.
+     * @response 500 {string} error   Database failure or user creation error.
+     */
     public function handleRegistration(): void
     {
-        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        header('Content-Type: application/json');
+ 
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST')
+        {
             http_response_code(405);
             echo json_encode(['valid' => false, 'error' => 'method_not_allowed']);
             exit;
         }
-
-        header('Content-Type: application/json');
 
         $email = isset($_POST['email']) ? trim($_POST['email']) : '';
         $password = isset($_POST['password']) ? $_POST['password'] : '';
         $fullname = isset($_POST['fullname']) ? trim($_POST['fullname']) : '';
         $username = isset($_POST['username']) ? trim($_POST['username']) : '';
 
-        // Validations simplifiées
-        if (empty($email) || empty($password) || empty($fullname) || empty($username)) {
-            echo json_encode(['valid' => false, 'error' => 'missing_fields']); exit;
+        if (empty($email) || empty($password) || empty($fullname) || empty($username))
+        {
+            echo json_encode(['valid' => false, 'error' => 'missing_fields']);
+            exit;
         }
-        if (!Validator::validateEmail($email)['valid']) {
-             echo json_encode(['valid' => false, 'error' => 'Invalid email']); exit; 
+        if (!Validator::validateEmail($email)['valid']) 
+        {
+            echo json_encode(['valid' => false, 'error' => 'Invalid email']);
+            exit;
         }
 
-        try {
-            if ($this->userModel->emailExists($email)) {
+        try
+        {
+            if ($this->userModel->emailExists($email))
+            {
                 http_response_code(409);
-                echo json_encode(['valid' => false, 'error' => 'email_taken']); exit;
+                echo json_encode(['valid' => false, 'error' => 'email_taken']);
+                exit;
             }
-            if ($this->userModel->usernameExists($username)) {
+            if ($this->userModel->usernameExists($username))
+            {
                 http_response_code(409);
-                echo json_encode(['valid' => false, 'error' => 'username_taken']); exit;
+                echo json_encode(['valid' => false, 'error' => 'username_taken']);
+                exit;
             }
             
             $validationCode = str_pad((string)random_int(0, 999999), 6, '0', STR_PAD_LEFT);
 
             $userExist = $this->userModel->create($username, $fullname, $email, $password, $validationCode);
             
-            if ($userExist) {
+            if ($userExist)
+            {
                 if (session_status() === PHP_SESSION_NONE) session_start();
                 session_regenerate_id(true);
 
-                // Session "EN ATTENTE"
                 $_SESSION['user_email'] = $email;
                 $_SESSION['username'] = $username;
                 $_SESSION['full_name'] = $fullname;
@@ -318,67 +357,108 @@ class UserController
 
                 Mailer::sendValidationCode($email, $username, $validationCode);
                 echo json_encode(['valid' => true]);
-            } else {
+            }
+            else 
+            {
                 http_response_code(500);
                 echo json_encode(['valid' => false, 'error' => 'creation_failed']);
             }
-        } catch (PDOException $e) {
+        } 
+        catch (PDOException $e) 
+        {
             http_response_code(500);
             echo json_encode(['valid' => false, 'error' => 'database_error']);
         }
         exit;
     }
 
-    // ✅ VALIDATION PAR CODE (Formulaire JS - POST - JSON)
+/**
+     * Verifies the 6-digit security code and activates the user session.
+     * * This API endpoint validates the submitted code format, checks it 
+     * against the database (including expiration), and performs the 
+     * login transition by upgrading the session from 'pending' to 'authenticated'.
+     * * @return void
+     * * @method POST
+     * @response 200 {bool} success True if code is valid and user is logged in.
+     * @response 200 {bool} success False with error 'expired', 'invalid', or 'no_pending_validation'.
+     * @response 405 {string} error Method not allowed.
+     */
     public function verifyCode(): void
     {
         header('Content-Type: application/json');
-        if (session_status() === PHP_SESSION_NONE) session_start();
         
-        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            echo json_encode(['success' => false, 'error' => 'method_not_allowed']); exit;
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') 
+        {
+            echo json_encode(['success' => false, 'error' => 'method_not_allowed']); 
+            exit;
         }
 
-        if (!isset($_SESSION['user_email'])) {
-            echo json_encode(['success' => false, 'error' => 'no_pending_validation']); exit;
+        if (session_status() === PHP_SESSION_NONE) session_start();
+
+
+        if (!isset($_SESSION['user_email']))
+        {
+            echo json_encode(['success' => false, 'error' => 'no_pending_validation']);
+            exit;
         }
 
         $code = isset($_POST['code']) ? trim($_POST['code']) : '';
-        if (empty($code) || !preg_match('/^\d{6}$/', $code)) {
-            echo json_encode(['success' => false, 'error' => 'invalid_code_format']); exit;
+        if (empty($code) || !preg_match('/^\d{6}$/', $code))
+        {
+            echo json_encode(['success' => false, 'error' => 'invalid_code_format']);
+            exit;
         }
 
-        try {
+        try
+        {
             $status = $this->userModel->validateUser($_SESSION['user_email'], $code);
 
-            if ($status === 'success') {
+            if ($status === 'success')
+            {
                 $user = $this->userModel->getUserByLogin($_SESSION['user_email']);
                 
                 session_regenerate_id(true);
 
-                // TRANSITION : On nettoie l'attente et on connecte
                 unset($_SESSION['user_email']); 
                 unset($_SESSION['code']);
                 
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['username'] = $user['username'];
                 $_SESSION['full_name'] = $user['full_name'];
-                $_SESSION['email'] = $user['email']; // Clé 'email' pour le dashboard
+                $_SESSION['email'] = $user['email'];
                 
                 echo json_encode(['success' => true]);
             } 
-            else if ($status === 'expired') {
+            else if ($status === 'expired')
+            {
                 echo json_encode(['success' => false, 'error' => 'expired']);
-            } else {
+            }
+            else
+            {
                 echo json_encode(['success' => false, 'error' => 'invalid']);
             }
-        } catch (Exception $e) {
+        }
+        catch (Exception $e)
+        {
             echo json_encode(['success' => false, 'error' => 'server_error']);
         }
         exit;
     }
 
-    // 🔗 VALIDATION PAR LIEN EMAIL (Navigateur - GET - REDIRECTION)
+/**
+     * Verifies the user via a URL magic link.
+     * * This method handles the automatic validation and login process when 
+     * a user clicks a link in their email. It validates the email/code 
+     * pair, upgrades the session, and redirects the user to the dashboard 
+     * or back to the signup page if the link is expired.
+     * * @return void
+     * * @method GET
+     * @query string email The user's email address from the URL.
+     * @query string code  The unique validation token from the URL.
+     * @response 302 Redirects to dashboard on success.
+     * @response 302 Redirects to email_signup on expiration.
+     * @response 302 Redirects to index with error on failure.
+     */
     public function verifyUrl(): void
     {
         if (session_status() === PHP_SESSION_NONE) session_start();
@@ -386,43 +466,47 @@ class UserController
         $email = $_GET['email'] ?? '';
         $code  = $_GET['code'] ?? '';
 
-        if (empty($email) || empty($code)) {
+        if (empty($email) || empty($code))
+        {
             header('Location: index.php?error=invalid_link'); 
             exit;
         }
 
-        try {
+        try
+        {
             $status = $this->userModel->validateUser($email, $code);
 
-            if ($status === 'success') {
+            if ($status === 'success')
+            {
                 $user = $this->userModel->getUserByLogin($email);
                 
 
                 session_regenerate_id(true); 
-                // CONNEXION DIRECTE
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['username'] = $user['username'];
                 $_SESSION['full_name'] = $user['full_name'];
                 $_SESSION['email'] = $user['email'];
                 
-                // Nettoyage si besoin
                 unset($_SESSION['user_email']);
                 unset($_SESSION['code']);
                 
                 header('Location: index.php?action=dashboard');
                 exit;
             } 
-            else if ($status === 'expired') {
-                // On met 'user_email' pour permettre le "Resend Code"
+            else if ($status === 'expired')
+            {
                 $_SESSION['user_email'] = $email;
                 header('Location: index.php?action=email_signup&error=expired');
                 exit;
             } 
-            else {
+            else
+            {
                 header('Location: index.php?error=invalid_token');
                 exit;
             }
-        } catch (Exception $e) {
+        }
+        catch (Exception $e)
+        {
             header('Location: index.php?error=server');
             exit;
         }
