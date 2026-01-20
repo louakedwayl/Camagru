@@ -20,89 +20,192 @@ class UserController
 
     // --- VUES (Pages HTML) ---
 
-    public function index() { require ("views/index.php"); }
-    public function register() { require ("views/register.php"); }
-    public function password_reset() { require ("views/password_reset.php"); }
+    public function index() 
+    {
+        if ($_SERVER['REQUEST_METHOD'] !== 'GET')
+        {
+            http_response_code(405);
+            echo "Method Not Allowed";
+            exit;
+        }
+         require ("views/index.php"); 
+    }
 
+    public function register()
+    {
+        if ($_SERVER['REQUEST_METHOD'] !== 'GET')
+        {
+            http_response_code(405);
+            echo "Method Not Allowed";
+            exit;
+        }
+         require ("views/register.php"); 
+    }
+
+    public function password_reset()
+    {
+        if ($_SERVER['REQUEST_METHOD'] !== 'GET')
+        {
+            http_response_code(405);
+            echo "Method Not Allowed";
+            exit;
+        }
+         require ("views/password_reset.php"); 
+    }
+
+
+/**
+     * Displays the email verification page.
+     * * This view is the second step of registration. It requires a temporary 
+     * session containing 'user_email'. Access is restricted to GET requests 
+     * only; any other method returns a 405 error.
+     * * @access public
+     * @return void
+     * * @method GET
+     * @session user_email Required to identify the user being validated.
+     * @response 200 Loads the email_signup view.
+     * @response 302 Redirects to index.php if no email is found in session.
+     * @response 405 Returns "Method Not Allowed" for non-GET requests.
+     */
     public function email_signup()
     {
-        if (session_status() === PHP_SESSION_NONE) session_start();
-        
-        // On affiche cette page SEULEMENT si l'utilisateur est en attente de validation
-        if (!isset($_SESSION['user_email'])) {
+        if ($_SERVER['REQUEST_METHOD'] !== 'GET')
+        {
+            http_response_code(405);
+            echo "Method Not Allowed";
+            exit;
+        }
+
+        if (session_status() === PHP_SESSION_NONE)
+            session_start();
+
+        if (!isset($_SESSION['user_email']))
+        {
             header('Location: index.php');
             exit;
         }
+        
         require ("views/email_signup.php");
         exit;
     }
 
+/**
+     * Displays the user dashboard.
+     * * This view is protected and requires a valid user session.
+     * It strictly allows GET requests and redirects unauthenticated 
+     * users to the home page.
+     * * @access public
+     * @return void
+     * * @method GET
+     * @session user_id Required to access this view.
+     * @response 200 Loads the dashboard view.
+     * @response 302 Redirects to index.php if user_id session is missing.
+     * @response 405 Returns "Method Not Allowed" if request is not GET.
+     */
     public function dashboard()
     {
+        if ($_SERVER['REQUEST_METHOD'] !== 'GET')
+        {
+            http_response_code(405);
+            echo "Method Not Allowed";
+            exit;
+        }
+
         if (session_status() === PHP_SESSION_NONE) session_start();
-        
-        // On affiche cette page SEULEMENT si l'utilisateur est connecté (ID présent)
-        if (!isset($_SESSION['user_id'])) {
+         
+        if (!isset($_SESSION['user_id']))
+        {
             header('Location: index.php');
             exit;
         }
         require ("views/dashboard.php");
     }
 
-    // --- API & LOGIQUE ---
+    // --- API ---
 
+/**
+     * Checks username availability.
+     * * This method verifies the username format, checks if it already exists 
+     * in the database, and returns a JSON response. The process is always 
+     * terminated by an exit call to ensure a clean JSON output.
+     * * @return void
+     * * @response 200 {bool}   available True if the username is free, false if taken.
+     * @response 400 {string} error     Returned if the username format is invalid.
+     * @response 405 {string} error     Returned if the request method is not POST.
+     * @response 500 {string} error     Returned in case of a database exception.
+     */
     public function checkUsername(): void
     {
         header('Content-Type: application/json');
-        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST')
+        {
             http_response_code(405); 
             echo json_encode(['available' => false, 'error' => 'method_not_allowed']);
             exit;
         }
-
-        // CORRECTION ICI : On utilise $_POST pour être cohérent avec le reste
         $username = isset($_POST['username']) ? trim($_POST['username']) : '';
-        
         $validation = Validator::validateUsername($username);
-        if (!$validation['valid']) {
-            http_response_code(400); // Bad Request
+        if (!$validation['valid'])
+        {
+            http_response_code(400);
             echo json_encode(['available' => false, 'error' => $validation['error']]);
             exit;
         }
-
-        try {
+        try
+        {
             $exist = $this->userModel->usernameExists($username);
             echo json_encode(['available' => !$exist]);
-        } catch (PDOException $e) {
+        }
+        catch (PDOException $e)
+        {
             http_response_code(500);
             echo json_encode(['available' => false, 'error' => 'database_error']);
         }
         exit;
     }
 
+/**
+     * Checks email availability.
+     *
+     * This method validates the email format, checks for its existence in the 
+     * database, and outputs a JSON response. It terminates script execution 
+     * using `exit` to ensure no additional data is appended to the response.
+     *
+     * @access public
+     * @return void
+     * * @method POST
+     * * @response 200 {bool}   available True if the email is free to use, false otherwise.
+     * @response 400 {string} error     Returned if the email format is invalid.
+     * @response 405 {string} error     Returned if the request method is not POST.
+     * @response 500 {string} error     Returned in case of a server or database failure.
+     */
     public function checkEmail(): void
     {
         header('Content-Type: application/json');
-        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST')
+        {
             http_response_code(405); 
             echo json_encode(['available' => false, 'error' => 'method_not_allowed']);
             exit;
         }
 
-        // CORRECTION ICI : On utilise $_POST
         $email = isset($_POST['email']) ? trim($_POST['email']) : '';
         
         $validation = Validator::validateEmail($email);
-        if (!$validation['valid']) {
+        if (!$validation['valid'])
+        {
             http_response_code(400);
             echo json_encode(['available' => false, 'error' => $validation['error']]);
             exit;
         }
         
-        try {
+        try
+        {
             $exist = $this->userModel->emailExists($email);
             echo json_encode(['available' => !$exist]);
-        } catch (PDOException $e) {
+        } 
+        catch (PDOException $e)
+        {
             http_response_code(500);
             echo json_encode(['available' => false, 'error' => 'database_error']);
         }
