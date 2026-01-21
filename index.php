@@ -64,6 +64,10 @@ switch ($action)
         $controller->dashboard();
         break; 
 
+    case 'test':
+        include 'sandbox/test_mail.php';
+        break; 
+
     default:
         $controller->index();
         break;

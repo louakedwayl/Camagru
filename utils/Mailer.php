@@ -2,16 +2,15 @@
 
 class Mailer
 {
-    private static $from = "no-reply@camagru.com";
+    private static $from = "contact.camagru@gmail.com";
 
     /**
-     * Envoie le CODE de validation (6 chiffres)
+     * Sends the validation CODE (6 digits)
      */
     public static function sendValidationCode(string $to, string $username, string $code): bool
     {
-        $subject = "Camagru Verification Code"; // Titre en Anglais
+        $subject = "Camagru : " . $code . " is your Camagru code ";
 
-        // 👇 ATTENTION : Assure-toi que ce port est le bon (8080 ou 8000 ?)
         $baseUrl = 'http://localhost:8080/index.php'; 
 
         $queryParams = http_build_query([
@@ -22,59 +21,82 @@ class Mailer
 
         $verificationLink = $baseUrl . '?' . $queryParams;
 
+        // Visual constants
+        $softGrey = "#737373"; 
+        $footerGreyText = "#8e8e8e";
+        $linkBlue = "#0056b3"; 
+        $bgColor = "#ffffff";
+        $footerBgColor = "#fafafa";
+        $font = "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif";
+
         $message = "
-        <html>
+        <!DOCTYPE html>
+        <html lang='en'>
         <head>
-            <title>Camagru Verification</title>
+            <meta charset='UTF-8'>
             <style>
-                .container { font-family: Arial, sans-serif; padding: 20px; color: #333; max-width: 600px; margin: 0 auto; }
-                .code-box { 
-                    background-color: #f4f4f4; 
-                    border: 1px solid #ddd; 
-                    font-size: 24px; 
-                    font-weight: bold; 
-                    letter-spacing: 5px; 
-                    padding: 15px; 
-                    text-align: center; 
-                    width: 200px; 
-                    margin: 20px auto;
-                    border-radius: 5px;
-                }
-                .btn-link {
-                    display: block;
-                    width: 200px;
-                    margin: 20px auto;
-                    padding: 15px;
-                    background-color: #007BFF;
-                    color: #ffffff !important;
-                    text-decoration: none;
-                    text-align: center;
-                    border-radius: 5px;
-                    font-weight: bold;
-                }
-                .footer { font-size: 12px; color: #777; margin-top: 30px; text-align: center; }
+                * { font-family: $font !important; }
             </style>
         </head>
-        <body>
-            <div class='container'>
-                <h2>Welcome to Camagru, " . htmlspecialchars($username) . "!</h2>
-                <p>Thanks for signing up. To activate your account, you have two options:</p>
-                
-                <h3>Option 1: Click the button</h3>
-                <a href='" . htmlspecialchars($verificationLink) . "' class='btn-link'>Verify My Account</a>
+        <body style='margin: 0; padding: 0; background-color: #f9f9f9; font-family: $font;'>
+            
+            <table border='0' cellpadding='0' cellspacing='0' width='100%' style='background-color: #f9f9f9; padding: 20px 0;'>
+                <tr>
+                    <td align='center'>
+                        <table border='0' cellpadding='0' cellspacing='0' width='100%' style='max-width: 600px; background-color: $bgColor; border: 1px solid #dbdbdb; border-radius: 3px;'>
+                            
+                            <tr>
+                                <td style='padding: 25px 25px 10px 25px;'>
+                                    <table border='0' cellpadding='0' cellspacing='0'>
+                                        <tr>
+                                            <td style='vertical-align: middle;'>
+                                                <img src='https://raw.githubusercontent.com/louakedwayl/Camagru/refs/heads/main/assets/images/icon/Camagru_icon_black.png' 
+                                                    width='45' height='45' style='display: block; object-fit: contain;'>
+                                            </td>
+                                            <td style='vertical-align: middle; padding-left: 10px;'>
+                                                <img src='https://raw.githubusercontent.com/louakedwayl/Camagru/refs/heads/main/assets/images/logo.png' 
+                                                    width='150' style='display: block; margin-top: 9px;'>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
 
-                <h3>Option 2: Enter this code manually</h3>
-                <div class='code-box'>" . htmlspecialchars($code) . "</div>
-                
-                <p>This link and code will expire in 10 minutes.</p>
-                
-                <div class='footer'>
-                    If the button doesn't work, copy this link:<br>
-                    <a href='" . htmlspecialchars($verificationLink) . "'>" . htmlspecialchars($verificationLink) . "</a>
-                    <br><br>
-                    This is an automated email, please do not reply.
-                </div>
-            </div>
+                            <tr>
+                                <td style='padding: 20px 30px; line-height: 1.6;'>
+                                    <p style='font-size: 17px; margin-bottom: 15px; font-weight: 500; color: $softGrey;'>Hi " . htmlspecialchars($username) . ",</p>
+                                    
+                                    <p style='font-size: 16px; color: $softGrey; margin-bottom: 25px;'>
+                                        Someone tried to sign up for a Camagru account with the email address " . htmlspecialchars($to) . ". 
+                                        If it was you, please enter this confirmation code in the app to verify your email address:
+                                    </p>
+
+                                    <div style='font-size: 44px; font-weight: 400; color: $softGrey; margin-top: 25px; margin-bottom: 18px; text-align: center; letter-spacing: 5px;'>
+                                        " . htmlspecialchars($code) . "
+                                    </div>
+
+                                    <div style='text-align: center; margin-bottom: 35px;'>
+                                        <a href='" . htmlspecialchars($verificationLink) . "' 
+                                           style='color: $linkBlue; text-decoration: none; font-size: 15px; font-weight: 600;'>
+                                            Click here to confirm your email address
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td style='padding: 20px 30px; background-color: $footerBgColor; border-top: 1px solid #efefef; border-radius: 0 0 3px 3px;'>
+                                    <p style='font-size: 12px; color: $footerGreyText; margin-bottom: 8px;'>If you didn't request this code, you can safely ignore this email.</p>
+                                    <p style='font-size: 12px; color: $footerGreyText; margin: 0;'>© 2025 Wayl Louaked. Licensed under 
+                                        <a href='https://opensource.org/licenses/MIT' target='_blank' style='color: $linkBlue; text-decoration: none;'>MIT License</a>.
+                                    </p>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+
         </body>
         </html>
         ";
