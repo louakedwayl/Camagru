@@ -9,7 +9,7 @@ class Mailer
      */
     public static function sendValidationCode(string $to, string $username, string $code): bool
     {
-        $subject = "Camagru : " . $code . " is your Camagru code ";
+        $subject = $code . " is your Camagru code ";
 
         $baseUrl = 'http://localhost:8080/index.php'; 
 
