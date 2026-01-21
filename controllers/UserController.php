@@ -478,10 +478,9 @@ class UserController
 
             if ($status === 'success')
             {
-                $user = $this->userModel->getUserByLogin($email);
-                
-
                 session_regenerate_id(true); 
+
+                $user = $this->userModel->getUserByLogin($email);
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['username'] = $user['username'];
                 $_SESSION['full_name'] = $user['full_name'];
@@ -496,12 +495,12 @@ class UserController
             else if ($status === 'expired')
             {
                 $_SESSION['user_email'] = $email;
-                header('Location: index.php?action=email_signup&error=expired');
+                header('Location: index.php?action=email_signup&error=timeout');
                 exit;
             } 
             else
             {
-                header('Location: index.php?error=invalid_token');
+                header('Location: index.php?action=email_signup&error=invalid');
                 exit;
             }
         }

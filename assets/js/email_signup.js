@@ -11,15 +11,23 @@ const pErrorTimeout = document.querySelector("p.error2");
 
 
 const regex = /^\d{6}$/;
+const URL_error = new URLSearchParams(window.location.search).get('error');
 
 let snackbarTimeout = null; 
 
-document.addEventListener('click', (e) => {
-        if (input.value.trim() === "") 
-            {
-            pErrorInvalid.style.display = "none";
-        }
-});
+if (URL_error)
+{
+    if (URL_error === "timeout")
+    {
+        pErrorTimeout.style.display = "inline";
+    }
+    else if (URL_error === "invalid")
+    {
+        pErrorInvalid.style.display = "inline";
+    }
+}    
+
+
 
 function showSnackbar(type) {
 
@@ -133,7 +141,6 @@ form.addEventListener("submit", async (e) =>
             else 
             {
                 pErrorInvalid.style.display = "inline";
-                pErrorInvalid.innerText = "That code isn't valid. You can request a new one.";
             }
         }
     }
