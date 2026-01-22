@@ -25,8 +25,10 @@
         <p class="padlock1">Trouble logging in?</p>
         <p class="padlock2">Enter your email, or username and we'll</p>
         <p class="padlock3">send you a link to get back into your account.</p>
-        <input type="text" placeholder ="Email or Username">
-        <button class = "login-link">Send login link</button>
+        <form method="POST">
+            <input type="text" placeholder ="Email or Username" name="login">
+            <button type="submit" class = "login-link">Send login link</button>
+        </form>
         <a href="#" class = "reset-password">Can't reset your password?</a>
         <div class="or" >
             <div class="left or" ></div>
@@ -39,5 +41,9 @@
          </div>
     </main>
     <?php require_once "footer.php" ?>
+    <div class = "snackbar">
+        <p id="snackbar-success">A new verification code has been sent to your email.</p>
+        <p id="snackbar-failure">Sorry! We're having trouble sending you a confirmation code right now. Please try again later.</p>
+    </div>
 </body>
 </html>

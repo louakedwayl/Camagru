@@ -64,8 +64,13 @@ switch ($action)
         $controller->dashboard();
         break; 
 
+
+    case 'send_reset_password' :
+        $controller->sendResetPassword();
+        break; 
+
     case 'test':
-        include 'sandbox/test_mail.php';
+        include 'views/password_reset_confirm.php';
         break; 
 
     default:

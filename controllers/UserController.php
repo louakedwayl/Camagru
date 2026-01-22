@@ -18,6 +18,77 @@ class UserController
         $this->userModel = new UserModel;
     }
 
+
+public function password_reset_confirm() 
+{
+    $email = $_GET['email'] ?? '';
+    $code = $_GET['code'] ?? '';
+
+    if ($this->userModel->verifyResetCode($email, $code)) {
+        // C'est bon ! On affiche la page pour saisir le nouveau MDP
+        require "views/password_reset_confirm.php";
+    } else {
+        // Lien mort ou expiré -> Retour avec erreur
+        header('Location: index.php?action=password_reset&error=expired');
+    }
+}
+
+
+    public function sendResetPassword(): void
+    {
+        header('Content-Type: application/json');
+        
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            http_response_code(405);
+            echo json_encode(['success' => false, 'error' => 'Method not allowed']);
+            exit;
+        }
+
+        $login = isset($_POST['login']) ? trim($_POST['login']) : '';
+
+        if (empty($login)) {
+            echo json_encode(['success' => false, 'message' => 'Please enter your email or username']);
+            exit;
+        }
+
+        try {
+            // 1. Vérifier si l'utilisateur existe
+            $user = $this->userModel->getUserByLogin($login);
+            
+            if ($user) {
+                // 2. Générer le code de 6 chiffres
+                $resetCode = str_pad((string)random_int(0, 999999), 6, '0', STR_PAD_LEFT);
+                
+                // 3. Sauvegarder en DB
+                $this->userModel->setResetCode($login, $resetCode);
+                
+                // 4. Envoyer le mail (avec le lien contenant email + code)
+                // On utilise la classe Mailer que tu as déjà
+                $mailSent = Mailer::sendResetLink($user['email'], $user['username'], $resetCode);
+                
+                if ($mailSent) {
+                    echo json_encode(['success' => true]);
+                    exit;
+                }
+            }
+            
+            // Pour la sécurité, on peut renvoyer "success" même si l'user n'existe pas 
+            // pour éviter le "user enumeration", mais ici on va rester simple :
+            echo json_encode(['success' => false, 'message' => 'User not found']);
+            
+        } catch (Exception $e) {
+            http_response_code(500);
+            echo json_encode(['success' => false, 'message' => 'Server error']);
+        }
+        exit;
+    }
+
+
+
+
+
+
+
     // --- VUES (Pages HTML) ---
 
     public function index() 
@@ -54,6 +125,9 @@ class UserController
     }
 
 
+
+
+    
 /**
      * Displays the email verification page.
      * * This view is the second step of registration. It requires a temporary 

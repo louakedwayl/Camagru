@@ -15,6 +15,48 @@ class UserModel
         $this->pdo = Database::getConnection();
     }
 
+
+    /**
+     * Initialise le processus de reset en générant un code et une expiration.
+     */
+    public function setResetCode(string $login, string $code): bool
+    {
+        try {
+            $query = "UPDATE users 
+                    SET reset_code = :code, 
+                        reset_code_expires_at = DATE_ADD(NOW(), INTERVAL 10 MINUTE),
+                        updated_at = NOW()
+                    WHERE email = :login OR username = :login";
+            
+            $stmt = $this->pdo->prepare($query);
+            return $stmt->execute([
+                ':code' => $code,
+                ':login' => $login
+            ]);
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+
+    /**
+     * Vérifie si le code de reset est valide et non expiré.
+     */
+    public function verifyResetCode(string $email, string $code): bool
+    {
+        try {
+            $query = "SELECT 1 FROM users 
+                    WHERE email = :email 
+                    AND reset_code = :code 
+                    AND reset_code_expires_at > NOW()";
+            
+            $stmt = $this->pdo->prepare($query);
+            $stmt->execute([':email' => $email, ':code' => $code]);
+            return (bool)$stmt->fetchColumn();
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+
 /**
      * Updates the validation code for a specific user.
      * * This method generates a new security code, resets its expiration 

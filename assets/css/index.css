@@ -42,7 +42,7 @@ main img
     max-height: 550px;
     padding-right: 40px;
     padding-left: 40px;
-    padding-bottom: 20px;
+    padding-bottom: 27px;
     background: #FBFBFB ;
     transform: translateY(-7px);
 
@@ -157,6 +157,16 @@ span.or
 }
 
 p.error
+{
+    display: none;
+    color : #ED4956;
+    font-size: 14px;
+    width: 268px;
+    text-align: center;
+    margin-bottom: 17px ;
+}
+
+p.errorMatch
 {
     display: none;
     color : #ED4956;
