@@ -108,12 +108,15 @@ input.addEventListener('input', () =>
 form.addEventListener("submit", async (e) => 
 {
     e.preventDefault();
+    const submitBtn = form.querySelector('button[type="submit"]');
+    submitBtn.disabled = true;
 
     const codeValue = input.value.trim();
     
     if (!regex.test(codeValue)) 
     {
         pErrorInvalid.style.display = "inline";
+        submitBtn.disabled = false;
         return;
     }
 
@@ -134,6 +137,7 @@ form.addEventListener("submit", async (e) =>
         } 
         else
         {
+            submitBtn.disabled = false;
             if (data.error === 'expired')
             {
                 pErrorTimeout.style.display = "inline";
@@ -146,6 +150,7 @@ form.addEventListener("submit", async (e) =>
     }
     catch (error) 
     {
+        submitBtn.disabled = false;
         showSnackbar('error');
     }
 });
