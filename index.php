@@ -60,6 +60,11 @@ switch ($action)
         $controller->password_reset();
         break;
 
+    case 'password_reset_confirm':
+        $controller->password_reset_confirm();
+        break;
+
+
     case 'dashboard':
         $controller->dashboard();
         break; 
