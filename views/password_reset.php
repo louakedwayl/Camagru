@@ -42,8 +42,8 @@
     </main>
     <?php require_once "footer.php" ?>
     <div class = "snackbar">
-        <p id="snackbar-success">A new verification code has been sent to your email.</p>
-        <p id="snackbar-failure">Sorry! We're having trouble sending you a confirmation code right now. Please try again later.</p>
+        <p id="snackbar-success">A reset link has been sent to your email..</p>
+        <p id="snackbar-failure">Sorry! We're having trouble sending you a reset link right now. Please try again later.</p>
     </div>
 </body>
 </html>
