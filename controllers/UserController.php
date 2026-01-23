@@ -51,32 +51,34 @@ public function password_reset_confirm()
             exit;
         }
 
-        try {
-            // 1. Vérifier si l'utilisateur existe
+        try 
+        {
             $user = $this->userModel->getUserByLogin($login);
-            
-            if ($user) {
-                // 2. Générer le code de 6 chiffres
+            if ($user) 
+            {
                 $resetCode = str_pad((string)random_int(0, 999999), 6, '0', STR_PAD_LEFT);
                 
-                // 3. Sauvegarder en DB
-                $this->userModel->setResetCode($login, $resetCode);
-                
-                // 4. Envoyer le mail (avec le lien contenant email + code)
-                // On utilise la classe Mailer que tu as déjà
-                $mailSent = Mailer::sendResetLink($user['email'], $user['username'], $resetCode);
-                
-                if ($mailSent) {
-                    echo json_encode(['success' => true]);
+                if ($this->userModel->setResetCode($login, $resetCode))
+                {
+
+                    $mailSent = Mailer::sendResetLink($user['email'], $user['username'], $resetCode);
+                    
+                    if ($mailSent) 
+                    {
+                        echo json_encode(['success' => true]);
+                        exit;
+                    }
+                }
+                else 
+                {
+                    echo json_encode(['success' => false, 'error' => 'limit_reached']);
                     exit;
                 }
             }
-            
-            // Pour la sécurité, on peut renvoyer "success" même si l'user n'existe pas 
-            // pour éviter le "user enumeration", mais ici on va rester simple :
-            echo json_encode(['success' => false, 'message' => 'User not found']);
-            
-        } catch (Exception $e) {
+            echo json_encode(['success' => false, 'message' => 'User not found or process failed']);
+        }
+        catch (Exception $e)
+        {
             http_response_code(500);
             echo json_encode(['success' => false, 'message' => 'Server error']);
         }

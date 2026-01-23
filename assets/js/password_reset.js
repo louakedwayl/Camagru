@@ -72,7 +72,6 @@ form.addEventListener('submit', async (e) =>
     try 
     {
         main_button.disabled = true;
-        main_button.style.opacity = "0.7";
 
         const response = await fetch("index.php?action=send_reset_password",
         {

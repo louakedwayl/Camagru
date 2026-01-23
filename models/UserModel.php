@@ -19,9 +19,29 @@ class UserModel
     /**
      * Initialise le processus de reset en générant un code et une expiration.
      */
+/**
+     * Initialise le processus de reset en générant un code.
+     * Bloque l'action si une demande a été faite il y a moins de 10 minutes.
+     */
     public function setResetCode(string $login, string $code): bool
     {
         try {
+            // ÉTAPE 1 : Vérifier si une demande récente existe (moins de 10 min)
+            // On vérifie si updated_at est plus récent que 10 minutes
+            $checkQuery = "SELECT id FROM users 
+                           WHERE (email = :login OR username = :login)
+                           AND updated_at > DATE_SUB(NOW(), INTERVAL 10 MINUTE)
+                           AND reset_code IS NOT NULL";
+            
+            $checkStmt = $this->pdo->prepare($checkQuery);
+            $checkStmt->execute([':login' => $login]);
+            
+            if ($checkStmt->fetch()) {
+                // Trop tôt ! On refuse l'update
+                return false; 
+            }
+
+            // ÉTAPE 2 : Si c'est bon, on met à jour
             $query = "UPDATE users 
                     SET reset_code = :code, 
                         reset_code_expires_at = DATE_ADD(NOW(), INTERVAL 10 MINUTE),
@@ -33,7 +53,9 @@ class UserModel
                 ':code' => $code,
                 ':login' => $login
             ]);
-        } catch (PDOException $e) {
+        }
+        catch (PDOException $e)
+        {
             return false;
         }
     }
