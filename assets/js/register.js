@@ -36,6 +36,7 @@ const passwordInput = document.querySelector('main input[name="password"]');
 const fullnameInput = document.querySelector('main input[name="fullname"]');
 const usernameInput = document.querySelector('main input[name="username"]');
 const form = document.querySelector('main form');
+const submitBtn = form.querySelector('button[type="submit"]');
 
 // Sélecteurs d'erreurs
 const pErrorEmail = document.querySelector(".top p.error.email");
@@ -253,6 +254,8 @@ form.addEventListener('submit', async (e) =>
 {
     e.preventDefault();
     
+    submitBtn.disabled = true;
+
     // CORRECTION 3 : On ajoute 'await' devant validateEmail et validateUsername
     // Sinon le code continue sans attendre la réponse du serveur !
     const isEmailValid = await validateEmail(); 
@@ -262,6 +265,7 @@ form.addEventListener('submit', async (e) =>
     
     if (!isEmailValid || !isPasswordValid || !isFullnameValid || !isUsernameValid)
     {
+        submitBtn.disabled = false;
         return;
     }
 
@@ -287,9 +291,13 @@ form.addEventListener('submit', async (e) =>
         {
             window.location.replace("index.php?action=email_signup");
         } 
-
+        else 
+        {
+            submitBtn.disabled = false;
+        }
     } 
     catch (error)
     {
+        submitBtn.disabled = false;
     }
 });
