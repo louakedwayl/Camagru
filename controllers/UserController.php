@@ -19,79 +19,93 @@ class UserController
     }
 
 
-public function password_reset_confirm() 
-{
-    $email = $_GET['email'] ?? '';
-    $code = $_GET['code'] ?? '';
+    public function password_reset_confirm() 
+    {
+        $email = $_GET['email'] ?? '';
+        $code = $_GET['code'] ?? '';
 
-    if ($this->userModel->verifyResetCode($email, $code)) {
-        // C'est bon ! On affiche la page pour saisir le nouveau MDP
-        require "views/password_reset_confirm.php";
-    } else {
-        // Lien mort ou expiré -> Retour avec erreur
-        header('Location: index.php?action=password_reset&error=expired');
+        if ($this->userModel->verifyResetCode($email, $code)) {
+            // C'est bon ! On affiche la page pour saisir le nouveau MDP
+            require "views/password_reset_confirm.php";
+        } else {
+            // Lien mort ou expiré -> Retour avec erreur
+            header('Location: index.php?action=password_reset&error=expired');
+        }
     }
-}
 
-
+    /**
+     * Handles the password reset request process.
+     * * This method validates the POST request, verifies the user's existence,
+     * generates a secure 6-digit reset code, and dispatches it via email.
+     * * Output JSON responses:
+     * - success: true                 -> Email sent successfully.
+     * - success: false, reason: 'throttle' -> A valid code already exists (rate limited).
+     * - success: false, reason: 'error'    -> Invalid request, user not found, or mail failure.
+     * * @return void Sends a JSON response and terminates script execution.
+     * @throws Exception If random_int() fails to find an appropriate source of entropy.
+     */
     public function sendResetPassword(): void
     {
+        if (ob_get_length()) ob_clean();
         header('Content-Type: application/json');
         
-        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            http_response_code(405);
-            echo json_encode(['success' => false, 'error' => 'Method not allowed']);
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST')
+        {
+            echo json_encode(['success' => false, 'reason' => 'error']);
             exit;
         }
 
         $login = isset($_POST['login']) ? trim($_POST['login']) : '';
 
-        if (empty($login)) {
-            echo json_encode(['success' => false, 'message' => 'Please enter your email or username']);
+        if (empty($login))
+        {
+            echo json_encode(['success' => false, 'reason' => 'error']);
             exit;
         }
 
         try 
         {
             $user = $this->userModel->getUserByLogin($login);
-            if ($user) 
+            
+            if (!$user)
             {
-                $resetCode = str_pad((string)random_int(0, 999999), 6, '0', STR_PAD_LEFT);
-                
-                if ($this->userModel->setResetCode($login, $resetCode))
-                {
-
-                    $mailSent = Mailer::sendResetLink($user['email'], $user['username'], $resetCode);
-                    
-                    if ($mailSent) 
-                    {
-                        echo json_encode(['success' => true]);
-                        exit;
-                    }
-                }
-                else 
-                {
-                    echo json_encode(['success' => false, 'error' => 'limit_reached']);
-                    exit;
-                }
+                echo json_encode(['success' => false, 'reason' => 'error']);
+                exit;
             }
-            echo json_encode(['success' => false, 'message' => 'User not found or process failed']);
+
+            $resetCode = str_pad((string)random_int(0, 999999), 6, '0', STR_PAD_LEFT);
+            
+            $result = $this->userModel->setResetCode($login, $resetCode);
+
+            if ($result === true)
+            {
+                $mailSent = Mailer::sendResetLink($user['email'], $user['username'], $resetCode);
+                
+                if ($mailSent) {
+                    echo json_encode(['success' => true]);
+                } else {
+                    echo json_encode(['success' => false, 'reason' => 'error']);
+                }
+            } 
+            else if 
+            ($result === 'limit_reached') 
+            {
+                echo json_encode(['success' => false, 'reason' => 'throttle']);
+            } 
+            else 
+            {
+                echo json_encode(['success' => false, 'reason' => 'error']);
+            }
         }
-        catch (Exception $e)
+        catch (Exception $e) 
         {
-            http_response_code(500);
-            echo json_encode(['success' => false, 'message' => 'Server error']);
+            echo json_encode(['success' => false, 'reason' => 'error']);
         }
         exit;
     }
 
 
-
-
-
-
-
-    // --- VUES (Pages HTML) ---
+    // --- VUES  ---
 
     public function index() 
     {
@@ -188,7 +202,7 @@ public function password_reset_confirm()
         }
 
         if (session_status() === PHP_SESSION_NONE) session_start();
-         
+
         if (!isset($_SESSION['user_id']))
         {
             header('Location: index.php');

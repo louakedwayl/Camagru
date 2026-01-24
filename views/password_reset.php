@@ -14,7 +14,7 @@
 </head>
 <body>
     <header>
-        <img src="assets//images/logo.png" alt="Camagru Logo">
+        <img src="assets/images/logo.png" alt="Camagru Logo">
         <div class="header-button">
             <a href="index.php?action=index" class="button">Log In</a>
             <a href="index.php?action=register" class="text">Sign Up</a>
@@ -44,6 +44,7 @@
     <div class = "snackbar">
         <p id="snackbar-success">A reset link has been sent to your email..</p>
         <p id="snackbar-failure">Sorry! You can only request one link every 10 minutes.<br>Please try again later.</p>
+        <p id="snackbar-error">Sorry! We're having trouble sending you a reset link right now. Please try again later.</p>
     </div>
 </body>
 </html>

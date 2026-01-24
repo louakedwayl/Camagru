@@ -17,46 +17,72 @@ class UserModel
 
 
     /**
-     * Initialise le processus de reset en générant un code et une expiration.
+     * Updates the user's password reset code and sets an expiration timestamp.
+     * * This method performs a three-step validation:
+     * 1. Checks if the user exists via email or username.
+     * 2. Implements a rate-limiting (throttle) check to ensure a code isn't 
+     * regenerated if an active one still exists.
+     * 3. Persists the new 6-digit code with a 10-minute validity window.
+     * * @param string $login The user's email address or username.
+     * @param string $code  The generated 6-digit reset code.
+     * * @return bool|string Returns true on success, false on failure/user not found, 
+     * or 'limit_reached' if a valid code is already active.
+     * @throws PDOException If a database error occurs during execution.
      */
-/**
-     * Initialise le processus de reset en générant un code.
-     * Bloque l'action si une demande a été faite il y a moins de 10 minutes.
-     */
-public function setResetCode(string $login, string $code): bool
-{
-    try {
-        // ÉTAPE 1 : On vérifie si un code a été généré il y a MOINS de 10 min
-        // On utilise reset_code_expires_at (qui est à NOW + 10min)
-        // Si (Expires_at - 10min) est dans le futur, c'est qu'on a fait une demande trop récente.
-        $checkQuery = "SELECT id FROM users 
-                       WHERE (email = :login OR username = :login)
-                       AND reset_code_expires_at > NOW()"; // Si t'as déjà un code valide, on bloque
-        
-        $checkStmt = $this->pdo->prepare($checkQuery);
-        $checkStmt->execute([':login' => $login]);
-        
-        if ($checkStmt->fetch()) {
-            return false; // Spam détecté : l'ancien code n'a pas encore expiré
-        }
+    public function setResetCode(string $login, string $code)
+    {
+        try 
+        {
+            $userQuery = "SELECT id FROM users WHERE email = :login_email OR username = :login_username";
+            $userStmt = $this->pdo->prepare($userQuery);
+            $userStmt->execute([
+                ':login_email' => $login,
+                ':login_username' => $login
+            ]);
+            $user = $userStmt->fetch(PDO::FETCH_ASSOC);
+            
+            if (!$user) 
+            {
+                return false;
+            }
+            
+            $checkQuery = "SELECT id FROM users 
+                        WHERE id = :user_id 
+                        AND reset_code_expires_at > NOW()";
+            
+            $checkStmt = $this->pdo->prepare($checkQuery);
+            $checkStmt->execute([':user_id' => $user['id']]);
+            
+            if ($checkStmt->fetch()) 
+            {
+                return 'limit_reached';
+            }
+            
+            $query = "UPDATE users 
+                    SET reset_code = :reset_code, 
+                        reset_code_expires_at = DATE_ADD(NOW(), INTERVAL 10 MINUTE)
+                    WHERE id = :user_id";
+            
+            $stmt = $this->pdo->prepare($query);
+            $success = $stmt->execute([
+                ':reset_code' => $code,
+                ':user_id' => $user['id']
+            ]);
+            
+            return ($success && $stmt->rowCount() > 0);
 
-        // ÉTAPE 2 : On met à jour
-        // On définit l'expiration à +10 minutes
-        $query = "UPDATE users 
-                  SET reset_code = :code, 
-                      reset_code_expires_at = DATE_ADD(NOW(), INTERVAL 10 MINUTE)
-                  WHERE email = :login OR username = :login";
-        
-        $stmt = $this->pdo->prepare($query);
-        return $stmt->execute([
-            ':code' => $code,
-            ':login' => $login
-        ]);
-    }
-    catch (PDOException $e) {
-        return false;
-    }
+        }
+        catch (PDOException $e)
+        {
+            return false;
+        }
 }
+
+
+
+
+
+
 
     /**
      * Vérifie si le code de reset est valide et non expiré.

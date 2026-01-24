@@ -5,7 +5,7 @@ const form = document.querySelector('form');
 const snackbar = document.querySelector('.snackbar');
 const snackSuccess = document.getElementById('snackbar-success');
 const snackFailure = document.getElementById('snackbar-failure');
-
+const snackError = document.getElementById('snackbar-error');
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const usernameRegex = /^[a-zA-Z0-9._]{3,30}$/;
@@ -35,70 +35,53 @@ main_input.addEventListener('input', () =>
     }
 });
 
-function showSnackbar(isSuccess) 
-{
-    if (isSuccess)
-    {
-        snackSuccess.style.display = 'block';
-        snackFailure.style.display = 'none';
-    }
-    else
-    {
-        snackSuccess.style.display = 'none';
-        snackFailure.style.display = 'block';
-    }
+function showSnackbar(type) {
+    snackSuccess.style.display = 'none';
+    snackFailure.style.display = 'none';
+    snackError.style.display = 'none';
+
+    if (type === 'success') snackSuccess.style.display = 'block';
+    else if (type === 'failure') snackFailure.style.display = 'block';
+    else if (type === 'error') snackError.style.display = 'block';
 
     snackbar.classList.add('show');
-    setTimeout(() => 
-    {
+    setTimeout(() => {
         snackbar.classList.remove('show');
     }, 4000);
 }
 
-form.addEventListener('submit', async (e) =>
-{
+form.addEventListener('submit', async (e) => {
     e.preventDefault();
-
     const value = main_input.value.trim();
 
-    if (!isValidInput(value))
-    {
-        showSnackbar(false);
+    if (!isValidInput(value)) {
+        showSnackbar('error');
         return;
     }
 
     const formData = new FormData(form);
 
-    try 
-    {
+    try {
         main_button.disabled = true;
-
-        const response = await fetch("index.php?action=send_reset_password",
-        {
+        const response = await fetch("index.php?action=send_reset_password", {
             method: "POST",
             body: formData
         });
 
-        if (!response.ok) throw new Error('Server error');
-        
         const data = await response.json();
 
-        if (data.success)
-        {
-            showSnackbar(true);
+        if (data.success) {
+            showSnackbar('success');
             main_input.value = "";
             main_button.style.background = "#B7C6FF";
-            main_button.disabled = true;
-        }
-        else
-        {
-            showSnackbar(false);
+        } else {
+
+            const type = data.reason === 'throttle' ? 'failure' : 'error';
+            showSnackbar(type);
             main_button.disabled = false;
         }
-    }
-    catch (error) 
-    {
-        showSnackbar(false);
+    } catch (error) {
+        showSnackbar('error');
         main_button.disabled = false;
     }
 });
