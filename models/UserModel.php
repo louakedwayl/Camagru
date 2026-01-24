@@ -15,6 +15,61 @@ class UserModel
         $this->pdo = Database::getConnection();
     }
 
+    public function getUserByResetCode(string $email, string $code)
+    {
+        $sql = "SELECT id, username FROM users 
+                WHERE email = :email 
+                AND reset_code = :token 
+                AND reset_code_expires_at > NOW() 
+                LIMIT 1";
+        
+        try
+        {
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute([
+                ':email' => $email,
+                ':token' => $code
+            ]);
+
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } 
+        catch (PDOException $e) 
+        {
+            return false;
+        }
+    }
+
+
+    public function updateUserPassword(string $email, string $hash): bool
+    {
+        try {
+            $sql = "UPDATE users SET password = :password, updated_at = NOW() WHERE email = :email";
+            $stmt = $this->pdo->prepare($sql);
+            return $stmt->execute([
+                ':password' => $hash,
+                ':email' => $email
+            ]);
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+
+
+    public function clearResetCode(string $email): bool
+    {
+        try {
+            $sql = "UPDATE users 
+                    SET reset_code = NULL, 
+                        reset_code_expires_at = NULL 
+                    WHERE email = :email";
+            $stmt = $this->pdo->prepare($sql);
+            return $stmt->execute([':email' => $email]);
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+
+
 
     /**
      * Updates the user's password reset code and sets an expiration timestamp.
@@ -76,13 +131,7 @@ class UserModel
         {
             return false;
         }
-}
-
-
-
-
-
-
+    }
 
     /**
      * Vérifie si le code de reset est valide et non expiré.

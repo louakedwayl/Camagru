@@ -36,6 +36,7 @@
                     <div class= "right or" ></div>
         </div>
             <a href="index.php?action=register" class="create-account">Create new account</a>
+            <p class="error-timeout">This link has expired (timeout).</p>
          <div class="bottom">
             <a href="index.php?action=index" class = "login-back">Back to login</a>
          </div>

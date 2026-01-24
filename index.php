@@ -47,6 +47,10 @@ switch ($action)
         $controller->verifyCode();
         break;
 
+    case 'update_password':
+        $controller->updatePassword();
+        break;
+
     // Views
     case 'email_signup':
         $controller->email_signup();

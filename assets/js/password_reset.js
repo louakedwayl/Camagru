@@ -7,18 +7,37 @@ const snackSuccess = document.getElementById('snackbar-success');
 const snackFailure = document.getElementById('snackbar-failure');
 const snackError = document.getElementById('snackbar-error');
 
+const pErrorTimeout = document.querySelector(".error-timeout");
+
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const usernameRegex = /^[a-zA-Z0-9._]{3,30}$/;
 
 main_button.disabled = true;
+
+const URL_error = new URLSearchParams(window.location.search).get('error');
+
+if (URL_error)
+{
+    if (URL_error === "expired")
+    {
+        pErrorTimeout.style.display = "inline";
+    }
+}
 
 function isValidInput(value)
 {
     return emailRegex.test(value) || usernameRegex.test(value);
 }
 
+main_input.addEventListener('click', () => 
+{
+    pErrorTimeout.style.display = "none";
+});
+
+
 main_input.addEventListener('input', () => 
 {
+    pErrorTimeout.style.display = "none";
     const value = main_input.value.trim();
     
     if (isValidInput(value)) 

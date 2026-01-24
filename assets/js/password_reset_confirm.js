@@ -1,19 +1,20 @@
+const form = document.querySelector('form');
 const pass1 = document.getElementById('pass1');
 const pass2 = document.getElementById('pass2');
 const btn = document.getElementById('submit-btn');
-const inputPass1 = document.getElementById('pass1');
 
 
 const errSize = document.querySelector('.error.password');
 const errUpper = document.querySelector('.error.uppercase');
 const errMatch = document.querySelector('.errorMatch');
+const errTimeout = document.querySelector('.errorTimeout');
+
 
 function validatePass1() {
-    // Reset visuel
     errSize.style.display = "none";
     errUpper.style.display = "none";
     pass1.style.borderColor = "";
-    inputPass1.style.marginBottom = "12px";
+    Pass1.style.marginBottom = "12px";
 
 
     if (pass1.value === "") return;
@@ -21,13 +22,13 @@ function validatePass1() {
     if (pass1.value.length < 6) {
         errSize.style.display = "block";
         pass1.style.borderColor = "red";
-        inputPass1.style.marginBottom = "0px";
+        Pass1.style.marginBottom = "0px";
     } 
     else if (!/[A-Z]/.test(pass1.value)) 
     {
         errUpper.style.display = "block";
         pass1.style.borderColor = "red";
-        inputPass1.style.marginBottom = "0px";
+        Pass1.style.marginBottom = "0px";
     }
 }
 
@@ -67,3 +68,41 @@ pass1.addEventListener("blur", () => {
 pass2.addEventListener("blur", validatePass2);
 pass1.addEventListener("input", checkButton);
 pass2.addEventListener("input", checkButton);
+
+
+form.addEventListener('submit', async (e) => 
+{
+    e.preventDefault();
+
+    if (!btn.classList.contains('active'))
+        return;
+
+    const formData = new FormData(form);
+
+    try 
+    {
+        btn.disabled = true;
+        
+        const response = await fetch("index.php?action=update_password", 
+        {
+            method: "POST",
+            body: formData
+        });
+
+        const data = await response.json();
+
+        if (data.success) 
+        {
+            window.location.href = "index.php?action=dashboard";
+        }
+        else
+        {
+            btn.disabled = false;
+            errTimeout.style.display = "block";
+        }
+    } 
+    catch (error)
+    {
+        btn.disabled = false;
+    }
+});

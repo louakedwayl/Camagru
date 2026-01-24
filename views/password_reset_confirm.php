@@ -25,6 +25,8 @@
         <p class="description-reset">Your password must be at least 6 characters and should include a Uppercase character.</p>
             
         <form method="POST">
+            <input type="hidden" name="email" value="<?= htmlspecialchars($email) ?>">
+            <input type="hidden" name="code" value="<?= htmlspecialchars($code) ?>">
             <input id="pass1" name="new_password" type="password" placeholder="New password" required>
             <p class="error password">Create a password at least 6 characters long.</p>
             <p class="error uppercase">Password must contain at least one uppercase letter.</p>
@@ -32,6 +34,7 @@
             <button id="submit-btn" class="login-link">Reset Password</button>
         </form>
             <p class="errorMatch">Password doesn't match.</p>
+            <p class="errorTimeout">This link has expired (timeout).</p>
     </main>
     <?php require_once "footer.php" ?>
 </body>

@@ -19,16 +19,53 @@ class UserController
     }
 
 
+        public function updatePassword() 
+        {
+
+        $email = $_POST['email'] ?? '';
+        $code = $_POST['code'] ?? '';
+        $newPass = $_POST['new_password'] ?? '';
+
+
+        $user = $this->userModel->getUserByResetCode($email, $code);
+
+        if ($user) {
+            $hashedPassword = password_hash($newPass, PASSWORD_BCRYPT);
+
+            $updateSuccess = $this->userModel->updateUserPassword($email, $hashedPassword);
+
+            if ($updateSuccess) {
+                $this->userModel->clearResetCode($email);
+
+                $_SESSION['user_id'] = $user['id'];
+                $_SESSION['username'] = $user['username'];
+
+                echo json_encode(['success' => true]);
+            } 
+            else 
+            {
+                echo json_encode(['success' => false, 'reason' => 'Database error']);
+            }
+        } 
+        else
+        {
+            echo json_encode(['success' => false, 'reason' => 'Invalid or expired link']);
+        }
+    }
+
+
+
     public function password_reset_confirm() 
     {
         $email = $_GET['email'] ?? '';
         $code = $_GET['code'] ?? '';
 
-        if ($this->userModel->verifyResetCode($email, $code)) {
-            // C'est bon ! On affiche la page pour saisir le nouveau MDP
+        if ($this->userModel->verifyResetCode($email, $code))
+        {
             require "views/password_reset_confirm.php";
-        } else {
-            // Lien mort ou expiré -> Retour avec erreur
+        }
+        else
+        {
             header('Location: index.php?action=password_reset&error=expired');
         }
     }
