@@ -69,8 +69,8 @@ switch ($action)
         break;
 
 
-    case 'dashboard':
-        $controller->dashboard();
+    case 'home':
+        $controller->home();
         break; 
 
 

@@ -217,7 +217,7 @@ class UserController
     }
 
 /**
-     * Displays the user dashboard.
+     * Displays the user home.
      * * This view is protected and requires a valid user session.
      * It strictly allows GET requests and redirects unauthenticated 
      * users to the home page.
@@ -225,11 +225,11 @@ class UserController
      * @return void
      * * @method GET
      * @session user_id Required to access this view.
-     * @response 200 Loads the dashboard view.
+     * @response 200 Loads the home view.
      * @response 302 Redirects to index.php if user_id session is missing.
      * @response 405 Returns "Method Not Allowed" if request is not GET.
      */
-    public function dashboard()
+    public function home()
     {
         if ($_SERVER['REQUEST_METHOD'] !== 'GET')
         {
@@ -245,7 +245,7 @@ class UserController
             header('Location: index.php');
             exit;
         }
-        require ("views/dashboard.php");
+        require ("views/home.php");
     }
 
     // --- API ---
@@ -576,13 +576,13 @@ class UserController
      * Verifies the user via a URL magic link.
      * * This method handles the automatic validation and login process when 
      * a user clicks a link in their email. It validates the email/code 
-     * pair, upgrades the session, and redirects the user to the dashboard 
+     * pair, upgrades the session, and redirects the user to the home 
      * or back to the signup page if the link is expired.
      * * @return void
      * * @method GET
      * @query string email The user's email address from the URL.
      * @query string code  The unique validation token from the URL.
-     * @response 302 Redirects to dashboard on success.
+     * @response 302 Redirects to home on success.
      * @response 302 Redirects to email_signup on expiration.
      * @response 302 Redirects to index with error on failure.
      */
@@ -616,7 +616,7 @@ class UserController
                 unset($_SESSION['user_email']);
                 unset($_SESSION['code']);
                 
-                header('Location: index.php?action=dashboard');
+                header('Location: index.php?action=home');
                 exit;
             } 
             else if ($status === 'expired')
@@ -686,7 +686,7 @@ class UserController
         $_SESSION['email'] = $user['email'];
         $_SESSION['username'] = $user['username'];
         $_SESSION['full_name'] = $user['full_name'];
-        echo json_encode(["success" => true, "redirect" => "index.php?action=dashboard"]);
+        echo json_encode(["success" => true, "redirect" => "index.php?action=home"]);
         exit;
     }
 }

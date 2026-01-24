@@ -133,7 +133,7 @@ form.addEventListener("submit", async (e) =>
 
         if (data.success) 
         {
-            window.location.href = 'index.php?action=dashboard';
+            window.location.href = 'index.php?action=home';
         } 
         else
         {
