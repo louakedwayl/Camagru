@@ -1,0 +1,267 @@
+.overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 100;
+}
+
+/* =========================
+   NAV STRUCTURE
+========================= */
+nav {
+    display: flex;
+    flex-direction: column;
+    width: 338px;
+    grid-column: 1 / 3;
+    grid-row: 1 / 12;
+    border-right: 1px solid #dbdbdb;
+}
+
+/* =========================
+   LOGO & ICONS
+========================= */
+nav img.logo {
+    width: 200px;
+    height: 150px;
+    object-fit: contain;
+}
+
+nav img.icon.home {
+    width: 26px;
+    height: 26px;
+    transform: translateY(-4px);
+}
+
+nav img.icon.search,
+nav img.icon.explore,
+nav img.icon.notifications {
+    width: 25px;
+    height: 25px;
+    transform: translateY(-1px);
+}
+
+nav img.icon.create {
+    width: 30px;
+    height: 30px;
+    transform: translate(-1px, -3px);
+}
+
+nav img.icon.profile {
+    width: 35px;
+    height: 35px;
+    transform: translate(-2px, -3px);
+}
+
+img.home.icon.black {
+    display: none;
+    margin: 40px 0 40px 40px;
+    width: 45px;
+    height: 45px;
+    transform: translate(-9px, -3px);
+}
+
+/* =========================
+   TEXT / SPANS
+========================= */
+span.icon.home {
+    transform: translateY(-3px);
+}
+
+span.icon.create {
+    transform: translate(-5px, -1px);
+}
+
+span.icon.nav {
+    margin-left: 15px;
+}
+
+span.icon.profile {
+    transform: translateX(-8px);
+}
+
+/* =========================
+   LIST & LINKS
+========================= */
+nav ul {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    list-style: none;
+    width: 100%;
+    transform: translateY(2px);
+}
+
+nav li {
+    display: inline-flex;
+    width: 100%;
+    font-weight: 500;
+}
+
+nav a {
+    display: flex;
+    text-decoration: none;
+    color: black;
+    font-size: 16px;
+    align-items: center;
+    width: 100%;
+    pointer-events: none;
+}
+
+/* =========================
+   LINK AREAS
+========================= */
+.link-area {
+    display: flex;
+    align-items: center;
+    pointer-events: auto;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-left: 30px;
+}
+
+.link-area.home { padding: 14px 201px 5px 10px; }
+.link-area.search { padding: 12px 194px 8px 10px; }
+.link-area.explore { padding: 12px 192px 10px 10px; }
+.link-area.notifications { padding: 14px 159px 10px 10px; }
+.link-area.create { padding: 14px 194px 8px 10px; }
+.link-area.profile { padding: 12px 191px 8px 10px; }
+
+.link-area:hover,
+.link-area-hamburger:hover {
+    background-color: #ececec;
+}
+
+/* =========================
+   CORNER / MORE MENU
+========================= */
+.corner {
+    display: flex;
+    width: 338px;
+    grid-column: 1 / 3;
+    grid-row: 12 / 13;
+    border-right: 1px solid #dbdbdb;
+    gap: 5px;
+    align-items: center;
+    padding: 10px 0;
+    z-index: 10;
+}
+
+img.icon.more {
+    width: 30px;
+    height: 30px;
+}
+
+a.icon.more {
+    display: inline-flex;
+    gap: 15px;
+    margin-left: 33px;
+    padding: 10px 200px 10px 10px;
+    border-radius: 8px;
+    text-decoration: none;
+}
+
+span.icon.more {
+    transform: translateY(8px);
+    color: black;
+}
+
+a.icon.more:hover {
+    background-color: #ececec;
+}
+
+/* =========================
+   HAMBURGER MENU
+========================= */
+div.hamburger {
+    display: none;
+    position: absolute;
+    bottom: 87px;
+    left: 38px;
+    width: 235px;
+    height: 120px;
+    border-radius: 13px;
+    background: #fafafa;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+div.hamburger ul {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    list-style: none;
+}
+
+div.hamburger li {
+    padding: 4px 0 2px;
+}
+
+div.hamburger a {
+    text-decoration: none;
+    color: black;
+}
+
+div.hamburger img.icon.report {
+    width: 28px;
+    height: 28px;
+}
+
+.link-area-hamburger.report {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin-left: 5px;
+    width: 224px;
+    padding: 15px 0 17px 7px;
+    border-radius: 13px;
+}
+
+.link-area-hamburger.logout {
+    display: flex;
+    align-items: center;
+    margin-left: 5px;
+    width: 224px;
+    padding: 15px 0 17px 53px;
+    border-radius: 10px;
+}
+
+
+/* =========================
+   RESPONSIVE NAV
+========================= */
+@media (max-width: 1920px) {
+    nav, .corner { width: 245px; }
+    .link-area.home { padding-right: 111px; }
+    .link-area.search { padding-right: 105px; }
+    .link-area.explore { padding-right: 102px; }
+    .link-area.notifications { padding-right: 68px; }
+    .link-area.create { padding-right: 102px; }
+    .link-area.profile { padding-right: 100px; }
+    a.icon.more { padding-right: 110px; }
+}
+
+@media (max-width: 1439px) {
+    .logo { display: none; }
+    img.home.icon.black { display: block; }
+    nav, .corner { width: 107px; }
+    span.icon { display: none; }
+
+    .link-area.home,
+    .link-area.search,
+    .link-area.explore,
+    .link-area.notifications,
+    .link-area.create,
+    .link-area.profile {
+        padding-right: 10px;
+    }
+
+    a.icon.more { padding-right: 11px; }
+}
+
+@media (max-width: 620px) {
+    nav,
+    .corner {
+        display: none;
+    }
+}

@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="assets/css/modale_report.css">
 <dialog id = "modale-report">
     <header>
         <span class = "modale report-title-cross">Report a problem</span>
