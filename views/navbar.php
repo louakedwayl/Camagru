@@ -10,7 +10,7 @@
         <li>
             <a href="index.php?action=home">
                 <span class="link-area home">
-                    <img class="icon home" src="assets/images/icon/home.svg" alt="home icon">
+                    <img class="icon home house" src="assets/images/icon/home.svg" alt="home icon">
                     <span class="icon home nav">Home</span>
                 </span>
             </a>
