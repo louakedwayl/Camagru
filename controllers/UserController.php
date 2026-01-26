@@ -216,19 +216,7 @@ class UserController
         exit;
     }
 
-/**
-     * Displays the user home.
-     * * This view is protected and requires a valid user session.
-     * It strictly allows GET requests and redirects unauthenticated 
-     * users to the home page.
-     * * @access public
-     * @return void
-     * * @method GET
-     * @session user_id Required to access this view.
-     * @response 200 Loads the home view.
-     * @response 302 Redirects to index.php if user_id session is missing.
-     * @response 405 Returns "Method Not Allowed" if request is not GET.
-     */
+
     public function home()
     {
         if ($_SERVER['REQUEST_METHOD'] !== 'GET')
@@ -245,6 +233,13 @@ class UserController
             header('Location: index.php');
             exit;
         }
+
+        require_once __DIR__ . '/../models/PostModel.php';
+        $postModel = new PostModel();
+        
+        $posts = $postModel->getAllPosts();
+        // -----------------
+
         require ("views/home.php");
     }
 

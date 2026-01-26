@@ -56,4 +56,5 @@
             </a>
         </li>
     </ul>
+    <?php require_once "corner.php" ?>
 </nav>
