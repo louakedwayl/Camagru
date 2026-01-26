@@ -4,14 +4,17 @@ declare(strict_types=1);
 
 require_once 'controllers/UserController.php';
 
-//tester bien le formulaire dincscirptin
+if (session_status() === PHP_SESSION_NONE) session_start();
 
-// mettre 10 photos de base dans le compte Wayl
+if (!isset($_SESSION['admin_setup_done'])) 
+{
+    require_once 'config/setup.php';
+    $_SESSION['admin_setup_done'] = true;
+}
 
 $action = $_GET['action'] ?? '';
 
 $controller = new UserController();
-
 
 // a2enmod rewrite
 
