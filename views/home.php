@@ -15,9 +15,9 @@
 </head>
 <body>
     <div class="overlay"></div>
-    <div class="nav-wrapper">
+
         <?php require_once __DIR__ . '/navbar.php'; ?>
-    </div>
+
         <main>
         <div class="user-menu">
             <img src="assets/images/default-avatar.jpeg" alt="Avatar" class="avatar-img">

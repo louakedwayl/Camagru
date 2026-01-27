@@ -13,9 +13,6 @@ try
     $adminPass  = getenv('ADMIN_USER_PASS') ?: 'password123';
     $adminEmail = getenv('ADMIN_USER_EMAIL') ?: 'louakedwayl@protonmail.com';
 
-    echo "--- Setup Camagru (Admin Configuration) ---\n";
-
-    // 1. Gérer l'Admin
     if (!$userModel->usernameExists($adminUser))
     {
         $created = $userModel->create($adminUser, 'Wayl Louaked', $adminEmail, $adminPass, '000000');
@@ -23,14 +20,9 @@ try
         {
             $pdo->prepare("UPDATE users SET validated = 1, validation_code = NULL WHERE username = ?")
                 ->execute([$adminUser]);
-            echo "[OK] Administrateur '$adminUser' créé.\n";
         }
     } 
-    else {
-        echo "[INFO] L'utilisateur admin '$adminUser' existe déjà.\n";
-    }
 
-    // 2. Gérer les Posts de démo
     $stmt = $pdo->prepare("SELECT id FROM users WHERE username = ?");
     $stmt->execute([$adminUser]);
     $userId = $stmt->fetchColumn();
@@ -40,11 +32,8 @@ try
     $postCount = $stmt->fetchColumn();
 
     if ($postCount == 0) {
-        echo "--- Génération des posts de démo ---\n";
         
-        // On boucle sur tes 11 fichiers demo1, demo2...
         for ($i = 1; $i <= 11; $i++) {
-            // On vérifie l'extension (on teste jpg puis png)
             $ext = 'jpg';
             $sourcePath = __DIR__ . "/../assets/images/placeholders/demo$i.$ext";
             
@@ -64,15 +53,11 @@ try
                         ':path' => 'public/uploads/posts/' . $newFileName,
                         ':cap'  => "Photo de démo n°$i"
                     ]);
-                    echo "Post $i inséré.\n";
                 }
-            } else {
-                echo "[!] Fichier demo$i introuvable (jpg ou png).\n";
-            }
+            } 
+
         }
-        echo "[OK] Posts créés avec succès.\n";
     }
 }
 catch (Exception $e) {
-    echo "[ERREUR] " . $e->getMessage() . "\n";
 }
