@@ -12,6 +12,9 @@ main
     padding: 30px 20px 50px;
 }
 
+
+/* USER MENU */
+
 .user-menu {
     position :fixed;
     right: 0px;
@@ -49,18 +52,22 @@ main
     line-height: 22px;
 }
 
+/* USER MENU */
+
+
 .gallery-grid {
     display: flex;
     flex-direction: column;
     gap: 50px;
-    max-width: 600px; /* Ajoutez une largeur max */
+    width: 600px; /* Ajoutez une largeur max */
     margin: 0 auto; /* Centrer */
     padding-top: 30px;
 }
 
 .post-item {
     position: relative;
-    aspect-ratio: 1 / 1; /* Force un carré parfait */
+    width: 600px; /* Force une largeur fixe */
+    height: 600px; 
     overflow: hidden;
     border-radius: 4px;
     background-color: #efefef;
