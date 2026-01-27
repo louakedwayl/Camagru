@@ -21,7 +21,6 @@ class Mailer
 
         $verificationLink = $baseUrl . '?' . $queryParams;
 
-        // Visual constants
         $softGrey = "#737373"; 
         $footerGreyText = "#8e8e8e";
         $linkBlue = "#0056b3"; 
@@ -170,7 +169,7 @@ public static function sendResetLink(string $to, string $username, string $code)
                                 <p style='font-size: 16px; color: $softGrey; margin-bottom: 25px;'>
                                     We're sorry you're having trouble logging into Camagru. 
                                     We got a message that you forgot your password. If this was you, 
-                                    you can get back into your account by clicking the link below:
+                                    you can get back into your account by clicking the link below :
                                 </p>
 
                                 <div style='text-align: center; margin-top: 30px; margin-bottom: 35px;'>
