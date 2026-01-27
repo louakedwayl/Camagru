@@ -25,7 +25,7 @@
                 </p>
             </div>
             <form method="post" novalidate>
-                <input type="text" placeholder="Confirmation Code" pattern="[0-9]{6}" maxlength="6" inputmode="numeric" name="code">
+                <input type="text" placeholder="Confirmation Code  " pattern="[0-9]{6}" maxlength="6" inputmode="numeric" name="code">
                 <button type="submit">Next</button>
             </form>
             <div class="error">

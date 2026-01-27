@@ -68,6 +68,7 @@ main
     border: 1px solid #dbdbdb; 
     border-radius: 3px; 
     outline: none; 
+    text-align: center;
 }
 
 .top button
