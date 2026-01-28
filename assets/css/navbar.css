@@ -273,7 +273,9 @@ div.hamburger img.icon.report {
 
 }
 
-@media (max-width: 620px) {
+
+@media (max-width: 900px) 
+{
     nav,
     .corner {
         display: none;

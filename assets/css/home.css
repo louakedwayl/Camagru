@@ -7,9 +7,8 @@ body {
 
 main 
 {
-    margin-left: 338px; /* Compenser la navbar fixe */
-    min-height: 100vh;
-    padding: 30px 20px 50px;
+    display: flex;
+    justify-content: center;
 }
 
 
@@ -60,13 +59,12 @@ main
     flex-direction: column;
     gap: 50px;
     width: 600px; /* Ajoutez une largeur max */
-    margin: 0 auto; /* Centrer */
     padding-top: 30px;
 }
 
 .post-item {
     position: relative;
-    width: 600px; /* Force une largeur fixe */
+    width: 550px;
     height: 600px; 
     overflow: hidden;
     border-radius: 4px;
@@ -82,4 +80,10 @@ main
 }
 
 
- 
+@media (max-width: 1050px) 
+{
+    .user-menu 
+    {
+        display: none;
+    }
+}
