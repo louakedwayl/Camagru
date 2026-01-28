@@ -15,32 +15,22 @@
 </head>
 <body>
     <div class="overlay"></div>
-
-        <?php require_once __DIR__ . '/navbar.php'; ?>
-
-        <main>
+    <?php require_once __DIR__ . '/navbar.php'; ?>
+    <main>
         <div class="user-menu">
             <img src="assets/images/default-avatar.jpeg" alt="Avatar" class="avatar-img">
-            <div class="UserName">
-                <span class="username"><?php echo htmlspecialchars($_SESSION['username']); ?></span>
-                <span class="fullname"><?php echo htmlspecialchars($_SESSION['full_name']); ?></span>
-            </div>
-        </div>
-    <div class="gallery-grid">
-        <?php if (!empty($posts)): ?>
-            <?php foreach ($posts as $post): ?>
-                <div class="post-item">
-                    <img src="<?php echo htmlspecialchars($post['image_path']); ?>" alt="Post">
-                    <div class="post-overlay">
-                        <span>@<?php echo htmlspecialchars($post['username']); ?></span>
-                    </div>
+                <div class="UserName">
+                    <span class="username"><?php echo htmlspecialchars($_SESSION['username']); ?></span>
+                    <span class="fullname"><?php echo htmlspecialchars($_SESSION['full_name']); ?></span>
                 </div>
+        </div>
+        <div class="gallery-grid">
+            <?php foreach ($posts as $post): ?>
+            <div class="post-item">
+                <img src="<?php echo htmlspecialchars($post['image_path']); ?>" alt="Post">
+            </div>
             <?php endforeach; ?>
-        <?php else: ?>
-            <p class="empty-msg">No posts yet.</p>
-        <?php endif; ?>
-    </div>
-
+        </div>
     </main>
     <?php require_once "modale_report.php" ?>
     <?php require_once "footer.php" ?>

@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 require_once 'controllers/UserController.php';
+require_once 'controllers/PostController.php';
 
 if (session_status() === PHP_SESSION_NONE) session_start();
 
@@ -14,7 +15,8 @@ if (!isset($_SESSION['admin_setup_done']))
 
 $action = $_GET['action'] ?? '';
 
-$controller = new UserController();
+$user_controller = new UserController();
+$post_controller = new PostController();
 
 // a2enmod rewrite
 
@@ -23,62 +25,62 @@ switch ($action)
 {
         // API
     case 'check_username':
-        $controller->checkUsername();
+        $user_controller->checkUsername();
         break;
     
     case 'check_email':
-        $controller->checkEmail();
+        $user_controller->checkEmail();
         break;
 
     case 'registration':
-        $controller->handleRegistration();
+        $user_controller->handleRegistration();
         break;
 
     case 'login':
-        $controller->handleLogin();
+        $user_controller->handleLogin();
         break;
 
     case 'resend_code':
-        $controller->resendCode();
+        $user_controller->resendCode();
         break;
 
     case 'verify_url':
-        $controller->verifyUrl();
+        $user_controller->verifyUrl();
         break;
     
     case 'verify_code':
-        $controller->verifyCode();
+        $user_controller->verifyCode();
         break;
 
     case 'update_password':
-        $controller->updatePassword();
+        $user_controller->updatePassword();
         break;
 
     // Views
     case 'email_signup':
-        $controller->email_signup();
+        $user_controller->email_signup();
         break;
 
     case 'register':
-        $controller->register();
+        $user_controller->register();
         break;
 
     case 'password_reset':
-        $controller->password_reset();
+        $user_controller->password_reset();
         break;
 
     case 'password_reset_confirm':
-        $controller->password_reset_confirm();
+        $user_controller->password_reset_confirm();
         break;
 
 
     case 'home':
-        $controller->home();
+        $post_controller->home();
         break; 
 
 
     case 'send_reset_password' :
-        $controller->sendResetPassword();
+        $user_controller->sendResetPassword();
         break; 
 
     case 'test':
@@ -86,6 +88,6 @@ switch ($action)
         break; 
 
     default:
-        $controller->index();
+        $user_controller->index();
         break;
 }

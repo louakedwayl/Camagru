@@ -216,33 +216,6 @@ class UserController
         exit;
     }
 
-
-    public function home()
-    {
-        if ($_SERVER['REQUEST_METHOD'] !== 'GET')
-        {
-            http_response_code(405);
-            echo "Method Not Allowed";
-            exit;
-        }
-
-        if (session_status() === PHP_SESSION_NONE) session_start();
-
-        if (!isset($_SESSION['user_id']))
-        {
-            header('Location: index.php');
-            exit;
-        }
-
-        require_once __DIR__ . '/../models/PostModel.php';
-        $postModel = new PostModel();
-        
-        $posts = $postModel->getAllPosts();
-        // -----------------
-
-        require ("views/home.php");
-    }
-
     // --- API ---
 
 /**
