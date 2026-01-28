@@ -24,11 +24,15 @@
                     <span class="fullname"><?php echo htmlspecialchars($_SESSION['full_name']); ?></span>
                 </div>
         </div>
-        <div class="gallery-grid">
+            <div class="gallery-grid">
             <?php foreach ($posts as $post): ?>
-            <div class="post-item">
-                <img src="<?php echo htmlspecialchars($post['image_path']); ?>" alt="Post">
-            </div>
+                <div class="gallery-top">
+                    <img src="<?php echo htmlspecialchars($post['image_path']); ?>" alt="Post">
+                </div>
+                <div class="post-item">
+                    <img src="<?php echo htmlspecialchars($post['image_path']); ?>" alt="Post">
+                </div>
+                <div class="gallery-top"></div>
             <?php endforeach; ?>
         </div>
     </main>
