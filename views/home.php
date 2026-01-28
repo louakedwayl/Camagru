@@ -27,7 +27,31 @@
             <div class="gallery-grid">
             <?php foreach ($posts as $post): ?>
                 <div class="gallery-top">
-                    <img src="<?php echo htmlspecialchars($post['image_path']); ?>" alt="Post">
+                    <img src="<?php echo htmlspecialchars($post['user_avatar'] ?? 'assets/images/default-avatar.jpeg'); ?>" 
+                        alt="Avatar" 
+                        class="post-user-avatar">
+                    <div class="post-user-info">
+                        <span class="post-username"><?php echo htmlspecialchars($post['username']); ?></span>
+                        <time class="post-date">
+                            <?php 
+                                $date = new DateTime($post['created_at']);
+                                $now = new DateTime();
+                                $diff = $now->diff($date);
+                                
+                                if ($diff->d == 0) {
+                                    if ($diff->h == 0) {
+                                        echo $diff->i > 0 ? $diff->i . ' min' : "À l'instant";
+                                    } else {
+                                        echo $diff->h . ' h';
+                                    }
+                                } elseif ($diff->d < 7) {
+                                    echo $diff->d . ' j';
+                                } else {
+                                    echo $date->format('d/m/Y');
+                                }
+                            ?>
+                        </time>
+                    </div>
                 </div>
                 <div class="post-item">
                     <img src="<?php echo htmlspecialchars($post['image_path']); ?>" alt="Post">
