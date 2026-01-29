@@ -64,6 +64,9 @@ main
     height: 75px;
 }
 
+
+
+
 .post-user-info
 {
     display: flex;
@@ -114,6 +117,10 @@ img.three-dots
     display: flex;
     flex-direction: column;
     width: 600px; /* Ajoutez une largeur max */
+}
+
+.gallery-grid .gallery-top:first-child {
+    margin-top: 20px; /* Ajustez la valeur selon vos besoins */
 }
 
 
