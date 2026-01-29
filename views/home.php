@@ -40,7 +40,7 @@
                                 
                                 if ($diff->d == 0) {
                                     if ($diff->h == 0) {
-                                        echo $diff->i > 0 ? $diff->i . ' min' : "À l'instant";
+                                        echo $diff->i > 0 ? $diff->i . ' min' : "Now";
                                     } else {
                                         echo $diff->h . ' h';
                                     }
@@ -52,16 +52,22 @@
                             ?>
                         </time>
                     </div>
+                    <img class = "three-dots" src="assets/images/icon/three-dots.svg" alt="Three dots icon">
                 </div>
                 <div class="post-item">
                     <img src="<?php echo htmlspecialchars($post['image_path']); ?>" alt="Post">
                 </div>
-                <div class="gallery-top"></div>
+                <div class="gallery-bottom">
+                    <div class ="post-actions">
+                        <img class="icon-like" src="assets/images/icon/heart.svg">
+                        <img class="icon-comment" src="assets/images/icon/comment.svg">
+                    </div>
+                    <span class="post-caption"><?php echo htmlspecialchars($post['caption']); ?></span>
+                </div>
             <?php endforeach; ?>
         </div>
     </main>
     <?php require_once "modale_report.php" ?>
-    <?php require_once "footer.php" ?>
 </body>
 </html>
 

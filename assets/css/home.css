@@ -53,21 +53,69 @@ main
 
 /* USER MENU */
 
+/* TOP */
+
+.gallery-top 
+{
+    display: flex;
+    width: 550px;
+    align-items: center;
+    height: 75px;
+}
+
+.post-user-info
+{
+    display: flex;
+    margin-top: 3px;
+}
+
+.post-username
+{
+    font-weight: 600;
+}
+
+
+.post-username::after {
+    content: "•";
+    margin: 0 4px;
+    color: #8e8e8e;
+}
+
+
+.post-date {
+    color: #8e8e8e;
+    font-size: 14px;
+}
+
+
+.post-user-avatar
+{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 20px;
+    border: 1px solid #dbdbdb;
+    margin-left: 10px;
+
+}
+
+img.three-dots
+{
+    margin-left: auto;
+    margin-right: 10px;
+    margin-top: 3px;
+}
+
+
+/* TOP */
 
 .gallery-grid {
     display: flex;
     flex-direction: column;
-    gap: 50px;
     width: 600px; /* Ajoutez une largeur max */
-    padding-top: 50px;
-    background-color: red;
 }
 
-.gallery-top 
-{
-    background-color: green;
-    z-index: 1000;
-}
+
 
 .post-item {
     position: relative;
@@ -85,6 +133,47 @@ main
     object-fit: cover; /* Remplit le carré sans déformer l'image */
     transition: transform 0.3s ease;
 }
+
+/* BOTTOM */
+
+.gallery-bottom 
+{
+    display: flex;
+    flex-direction: column;
+    width: 550px;
+    margin-top: 12px;
+    margin-bottom: 40px;
+}
+
+.post-actions
+{
+    display: flex;
+    gap: 15px;
+    margin-bottom: 12px;
+    margin-left: 10px;
+}
+
+
+img.icon-like
+{
+    width: 30px;
+    height: 30px;
+}
+
+img.icon-comment
+{
+    margin-top: 1px;
+    width: 27px;
+    height: 27px;
+}
+
+
+.post-caption
+{
+    margin-left: 10px;
+}
+
+/* BOTTOM */
 
 
 @media (max-width: 1050px) 
