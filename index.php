@@ -83,10 +83,17 @@ switch ($action)
         $post_controller->home();
         break; 
 
+    case 'create':
+        $post_controller->create();
+        break;
+
     case 'profile':
         $user_controller->profile();
         break;
 
+    case 'explore':
+        $post_controller->explore();
+        break;
 
     case 'send_reset_password' :
         $user_controller->sendResetPassword();
