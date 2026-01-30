@@ -14,7 +14,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" >
+                    <a href="index.php?action=logout" >
                         <span class = "link-area-hamburger logout">Log out</span>
                     </a>
                 </li>
