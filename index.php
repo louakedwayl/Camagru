@@ -56,6 +56,11 @@ switch ($action)
         $user_controller->updatePassword();
         break;
 
+    case 'logout':
+        $user_controller->logout();
+        break;
+
+
     // Views
     case 'email_signup':
         $user_controller->email_signup();
@@ -77,6 +82,10 @@ switch ($action)
     case 'home':
         $post_controller->home();
         break; 
+
+    case 'profile':
+        $user_controller->profile();
+        break;
 
 
     case 'send_reset_password' :

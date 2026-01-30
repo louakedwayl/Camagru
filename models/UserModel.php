@@ -15,6 +15,22 @@ class UserModel
         $this->pdo = Database::getConnection();
     }
 
+    /**
+     * Récupère les informations d'un utilisateur par son ID.
+     */
+    public function getUserById(int $id)
+    {
+        try {
+            $query = "SELECT id, username, full_name, email, created_at FROM users WHERE id = :id";
+            $stmt = $this->pdo->prepare($query);
+            $stmt->execute([':id' => $id]);
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+
+
     public function getUserByResetCode(string $email, string $code)
     {
         $sql = "SELECT id, username FROM users 

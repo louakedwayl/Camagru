@@ -234,6 +234,13 @@ span.post-caption-username
     color: #686868;
 }
 
+.more-link::before
+{
+    content: "...";
+    color: black;
+}
+
+
 /* BOTTOM */
 
 

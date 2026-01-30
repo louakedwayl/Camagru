@@ -52,7 +52,7 @@ class PostModel
      * @param int $userId
      * @return array
      */
-    public function getUserPosts(int $userId): array
+    public function getPostsByUserId(int $userId): array
     {
         try {
             $sql = "
@@ -75,8 +75,8 @@ class PostModel
             $stmt->execute([':user_id' => $userId]);
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
             
-        } catch (PDOException $e) {
-            error_log("Error in getUserPosts: " . $e->getMessage());
+        } 
+        catch (PDOException $e) {
             return [];
         }
     }

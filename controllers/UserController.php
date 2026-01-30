@@ -11,11 +11,37 @@ class UserController
 {
     private PDO $pdo;
     private UserModel $userModel;
+    private PostModel $postModel;
+
 
     public function __construct() 
     {
         $this->pdo = Database::getConnection();
         $this->userModel = new UserModel;
+        $this->postModel = new PostModel;
+
+    }
+
+
+
+    public function profile() 
+    {
+        if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+
+
+        if (!isset($_SESSION['user_id']))
+        {
+            header('Location: index.php?action=login');
+            exit();
+        }
+
+    $userId = $_SESSION['user_id'];
+    $user = $this->userModel->getUserById($userId);
+    $userPosts = $this->postModel->getPostsByUserId($userId);
+
+        require 'views/profile.php';
     }
 
 

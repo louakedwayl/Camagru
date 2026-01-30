@@ -48,7 +48,7 @@
             </a>
         </li>
         <li>
-            <a href="index.php?action=account">
+            <a href="index.php?action=profile">
                 <span class="link-area profile">
                     <img class="icon profile" src="assets/images/default-avatar.jpeg" alt="profile icon">
                     <span class="icon profile nav">Profile</span>
