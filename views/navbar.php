@@ -50,7 +50,7 @@
         <li>
             <a href="index.php?action=account">
                 <span class="link-area profile">
-                    <img class="icon profile" src="assets/images/icon/profile.svg" alt="profile icon">
+                    <img class="icon profile" src="assets/images/default-avatar.jpeg" alt="profile icon">
                     <span class="icon profile nav">Profile</span>
                 </span>
             </a>

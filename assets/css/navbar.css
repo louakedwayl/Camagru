@@ -52,6 +52,9 @@ nav img.icon.profile {
     width: 35px;
     height: 35px;
     transform: translate(-2px, -3px);
+    border-radius: 50%;
+    border: 1px solid #dbdbdb;
+
 }
 
 img.home.icon.black {
