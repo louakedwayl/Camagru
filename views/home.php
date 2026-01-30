@@ -42,10 +42,10 @@
                                     if ($diff->h == 0) {
                                         echo $diff->i > 0 ? $diff->i . 'min' : "Now";
                                     } else {
-                                        echo $diff->h . ' h';
+                                        echo $diff->h . 'h';
                                     }
                                 } elseif ($diff->d < 7) {
-                                    echo $diff->d . ' j';
+                                    echo $diff->d . 'j';
                                 } else {
                                     echo $date->format('d/m/Y');
                                 }
