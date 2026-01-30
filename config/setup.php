@@ -6,8 +6,8 @@ require_once __DIR__ . '/../models/UserModel.php';
 
 
 const CAPTIONS = [
-    1 => "Where tradition meets the heat of the moment. Captured the raw energy of the kitchen tonight—sharp blades, rising smoke, and unmatched focus. This is where the real magic happens.",
-    2 => "Witnessing centuries of tradition in every swing. Pelota is more than just a sport; it's a masterclass in precision and power. Seeing the players move with such grace and speed against the massive concrete fronton is a reminder of how deep these roots go. Truly an unforgettable experience.",
+    1 => "Where tradition meets the heat of the moment. Captured the raw energy of the kitchen tonight-sharp blades, rising smoke, and unmatched focus. This is where the real magic happens.",
+    2 => "Witnessing centuries of tradition in every swing. Pelota is more than just a sport: it's a masterclass in precision and power. Seeing the players move with such grace and speed against the massive concrete fronton is a reminder of how deep these roots go. Truly an unforgettable experience.",
     3 => "The art of the wood-fired pizza perfected. There is no substitute for the smoky aroma of a traditional brick oven and dough that has been handled with care. From the roaring fire to the fresh ingredients on the table, this is dinner exactly as it was meant to be.",
     4 => "Chasing high scores and neon dreams in a corner of the city that time forgot. There is something timeless about the hum of a pinball machine and the dim glow of a dive bar. It is the perfect escape from the digital world, one silver ball at a time.",
     5 => "High in the Andes, where the earth meets the sky and the locals are as curious as the travelers. Watching these graceful creatures graze against a backdrop of snow-capped mountains is an experience that words can hardly describe. This is the heart of the mountains, untouched and perfectly at peace.",

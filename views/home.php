@@ -40,7 +40,7 @@
                                 
                                 if ($diff->d == 0) {
                                     if ($diff->h == 0) {
-                                        echo $diff->i > 0 ? $diff->i . ' min' : "Now";
+                                        echo $diff->i > 0 ? $diff->i . 'min' : "Now";
                                     } else {
                                         echo $diff->h . ' h';
                                     }
@@ -62,7 +62,12 @@
                         <img class="icon-like" src="assets/images/icon/heart.svg">
                         <img class="icon-comment" src="assets/images/icon/comment.svg">
                     </div>
-                    <span class="post-caption"><?php echo htmlspecialchars($post['caption']); ?></span>
+                <div class="caption-container">
+                    <span class="post-caption-username"><?php echo htmlspecialchars($post['username']); ?></span> <span class="post-caption" data-full-text="<?php echo htmlspecialchars($post['caption']); ?>"><?php 
+                        $caption = htmlspecialchars($post['caption']);
+                        echo strlen($caption) > 100 ? substr($caption, 0, 100) : $caption;
+                        ?></span><?php if (strlen($post['caption']) > 100): ?> <a href="#" class="more-link">more</a><?php endif; ?>
+                </div>
                 </div>
             <?php endforeach; ?>
         </div>

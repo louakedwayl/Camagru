@@ -108,6 +108,17 @@ img.three-dots
     margin-left: auto;
     margin-right: 10px;
     margin-top: 3px;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+
+img.three-dots:hover {
+    transform: scale(1.25);
+    opacity: 0.85;
+}
+
+img.three-dots:active {
+    transform: scale(1.1);
 }
 
 
@@ -166,20 +177,61 @@ img.icon-like
 {
     width: 30px;
     height: 30px;
+    transition: transform 0.2s ease, opacity 0.2s ease;
 }
+
+img.icon-like:hover {
+    transform: scale(1.1);
+}
+
+img.icon-like:active {
+    transform: scale(0.9);
+}
+
+
 
 img.icon-comment
 {
     margin-top: 1px;
     width: 27px;
     height: 27px;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+
+img.icon-comment:hover {
+    transform: scale(1.1);
+}
+
+img.icon-comment:active {
+    transform: scale(0.9);
+}
+
+div.caption-container
+{
+    margin-left: 10px;
+    margin-right: 10px;
+
+}
+
+span.post-caption-username
+{
+    font-weight: bold;
+    font-size: 16px;
 }
 
 
 .post-caption
 {
-    margin-left: 10px;
-    margin-right: 10px;
+    font-size: 15px;
+
+}
+
+.more-link
+{
+    text-decoration: none;
+    font-size: 15px;
+    color: #686868;
 }
 
 /* BOTTOM */
