@@ -27,4 +27,15 @@ http://localhost:8080/
 ```
 
 ## 📝 License
-© 2025 Wayl Louaked. This project is licensed under the MIT License.
+© This project is licensed under the MIT License.
+
+---
+
+## 👤 Auteur
+
+**Louaked Wayl**
+
+- GitHub: [@louakedwayl](https://github.com/louakedwayl)
+- LinkedIn: [@louakedwayl](https://www.linkedin.com/in/louakedwayl)
+- Root-Me: [@louakedwayl](https://www.root-me.org/louakedwayl)
+---
