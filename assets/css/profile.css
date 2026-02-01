@@ -188,7 +188,7 @@ div.gallery-item
     min-width: 200px;
 }
 
-div.galery
+div.gallery
 {
     display: flex;
     flex-wrap: wrap;

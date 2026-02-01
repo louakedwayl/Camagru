@@ -44,7 +44,7 @@
                 <a href="#" id="create-link">Share you first photo</a>
             </div>
         <?php } else { ?>
-            <div class = "galery">
+            <div class = "gallery">
                 <?php foreach ($userPosts as $post){ ?>
                     <div class="gallery-item">
                         <img src="<?= htmlspecialchars($post['image_path']) ?>" alt="Post image" class="gallery-img">
