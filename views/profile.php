@@ -21,6 +21,8 @@
                 <img src="assets/images/default-avatar.jpeg" class="profile-avatar" id="current-avatar">
                 <div class="avatar-overlay">
                 </div>
+                <img src="assets/images/icon/camera_white.svg" class="camera-icon">
+
                 </label>
                 <input type="file" id="avatar-input" name="avatar" accept="image/*" style="display: none;">
                 </form>
@@ -30,8 +32,12 @@
                 </div>
         </header>
         <div class="user-actions">
-                <a href="#" class="btn-profile">Edit Profile</a>
-                <a href="#" class="btn-icon" title="Public View">Public View</a>
+            <button class="btn-edit-profile">Edit Profile</button>
+            <button class="btn-public-view" title="Public View">Public View</button>
+        </div>
+        <div class="separator-line"></div>
+        <div class = "galery">
+                
         </div>
         <div class="overlay"></div>
     </main>
