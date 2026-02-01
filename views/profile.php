@@ -21,7 +21,7 @@
                 <img src="assets/images/default-avatar.jpeg" class="profile-avatar" id="current-avatar">
                 <div class="avatar-overlay">
                 </div>
-                <img src="assets/images/icon/camera_white.svg" class="camera-icon">
+                <img src="assets/images/icon/camera_white.svg" class="camera-white-icon">
 
                 </label>
                 <input type="file" id="avatar-input" name="avatar" accept="image/*" style="display: none;">
@@ -36,10 +36,17 @@
             <button class="btn-public-view" title="Public View">Public View</button>
         </div>
         <div class="separator-line"></div>
-        <div class = "galery">
-                
-        </div>
-        <div class="overlay"></div>
+        <?php if (empty($userPosts)) { ?>
+            <div id = "gallery-empty-state">
+                <img src="assets/images/icon/camera.svg" class="camera-icon">
+                <span id="share-photo">Share Photos</span>
+                <span id="text-share-photo">When you share photos, they will appear on your profile.</span>
+                <a href="#" id="create-link">Share you first photo</a>
+            </div>
+        <?php } else { ?>
+            <div class = "galery">
+            </div>
+        <?php }?>
     </main>
     <?php require_once "modale_report.php" ?>
 </body>
