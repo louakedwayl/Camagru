@@ -45,6 +45,11 @@
             </div>
         <?php } else { ?>
             <div class = "galery">
+                <?php foreach ($userPosts as $post){ ?>
+                    <div class="gallery-item">
+                        <img src="<?= htmlspecialchars($post['image_path']) ?>" alt="Post image" class="gallery-img">
+                    </div>
+                <?php } ?>
             </div>
         <?php }?>
     </main>

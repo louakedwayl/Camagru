@@ -22,6 +22,7 @@ main
 .btn-public-view {
     border: none;
     cursor: pointer;
+    white-space: nowrap; /* Prevents the text from wrapping to the next line */
     font-weight: 600;
     font-size: 15px;
     transition: all 0.2s ease;
@@ -171,6 +172,32 @@ a#create-link
     color : #5B69E9;
     font-size: 18px;
 }
+
+
+img.gallery-img
+{
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    display: block;
+}
+
+div.gallery-item
+{
+    width: calc((100% / 5) - 12px);
+    min-width: 200px;
+}
+
+div.galery
+{
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1800px;
+    margin: 0 auto;
+    padding: 0 20px;
+    justify-content: center;
+}
+
 
 
 @media (max-width: 1920px) 
