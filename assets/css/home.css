@@ -19,8 +19,8 @@ main
     right: 0px;
     display: flex;
     align-items: center;
-    padding-top: 20px;
-    padding-right: 20px;
+    padding-top: 50px;
+    padding-right: 40px;
     margin-right: 20px;
     gap: 20px;
 }
@@ -63,9 +63,6 @@ main
     align-items: center;
     height: 75px;
 }
-
-
-
 
 .post-user-info
 {
@@ -130,8 +127,9 @@ img.three-dots:active {
     width: 600px; /* Ajoutez une largeur max */
 }
 
-.gallery-grid .gallery-top:first-child {
-    margin-top: 20px; /* Ajustez la valeur selon vos besoins */
+.gallery-grid .gallery-top:first-child 
+{
+    margin-top: 40px; /* Ajustez la valeur selon vos besoins */
 }
 
 
