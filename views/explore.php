@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Camagru</title>
-    <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/footer.css">
     <link rel="stylesheet" href="assets/css/explore.css">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/images/favicon/apple-touch-icon.png">
@@ -16,7 +15,19 @@
 <body>
     <div class="overlay"></div>
     <?php require_once __DIR__ . '/navbar.php'; ?>
-    <main></main>
+    <main>
+            <div class="explore-grid">
+            <?php foreach ($posts as $post) {?>
+                <div class="explore-item" data-post-id="<?= $post['id'] ?>">
+                    <img src="<?= htmlspecialchars($post['image_path']) ?>" 
+                         alt="Post by <?= htmlspecialchars($post['username']) ?>" 
+                         class="explore-img">
+                </div>
+                <?php }?>
+                </div>
+
+    </main>
+    <?php require_once "footer.php" ?>
     <?php require_once "modale_report.php" ?>
 </body>
 </html>

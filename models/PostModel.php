@@ -111,7 +111,6 @@ class PostModel
             return $result ?: null;
             
         } catch (PDOException $e) {
-            error_log("Error in getPostById: " . $e->getMessage());
             return null;
         }
     }
@@ -134,7 +133,6 @@ class PostModel
                 ':caption' => $caption
             ]);
         } catch (PDOException $e) {
-            error_log("Error in createPost: " . $e->getMessage());
             return false;
         }
     }
@@ -155,7 +153,6 @@ class PostModel
                 ':user_id' => $userId
             ]);
         } catch (PDOException $e) {
-            error_log("Error in deletePost: " . $e->getMessage());
             return false;
         }
     }
@@ -177,7 +174,6 @@ class PostModel
             ]);
             return $stmt->fetchColumn() > 0;
         } catch (PDOException $e) {
-            error_log("Error in hasUserLiked: " . $e->getMessage());
             return false;
         }
     }
@@ -198,7 +194,6 @@ class PostModel
                 ':post_id' => $postId
             ]);
         } catch (PDOException $e) {
-            error_log("Error in addLike: " . $e->getMessage());
             return false;
         }
     }
@@ -219,7 +214,6 @@ class PostModel
                 ':post_id' => $postId
             ]);
         } catch (PDOException $e) {
-            error_log("Error in removeLike: " . $e->getMessage());
             return false;
         }
     }
@@ -251,7 +245,6 @@ class PostModel
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
             
         } catch (PDOException $e) {
-            error_log("Error in getComments: " . $e->getMessage());
             return [];
         }
     }
@@ -274,7 +267,6 @@ class PostModel
                 ':content' => trim($content)
             ]);
         } catch (PDOException $e) {
-            error_log("Error in addComment: " . $e->getMessage());
             return false;
         }
     }
@@ -290,7 +282,6 @@ class PostModel
             $stmt = $this->db->query($sql);
             return (int)$stmt->fetchColumn();
         } catch (PDOException $e) {
-            error_log("Error in getTotalPosts: " . $e->getMessage());
             return 0;
         }
     }
