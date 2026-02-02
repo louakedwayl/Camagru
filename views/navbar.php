@@ -1,4 +1,6 @@
 <link rel="stylesheet" href="assets/css/navbar.css">
+<script defer src="assets/js/navbar.js"></script>
+
 
 <nav>
     <!-- LOGO -->
@@ -16,7 +18,7 @@
             </a>
         </li>
         <li>
-            <a href="index.php?action=gallery">
+            <a href="#" id="search-link">
                 <span class="link-area search">
                     <img class="icon search" src="assets/images/icon/search.svg" alt="search icon">
                     <span class="icon search nav">Search</span>
@@ -58,3 +60,4 @@
     </ul>
     <?php require_once "corner.php" ?>
 </nav>
+<?php require_once "search_bar.php" ?>
