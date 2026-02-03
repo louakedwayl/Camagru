@@ -27,6 +27,13 @@ main {
 
 }
 
+
+.explore-item {
+    border-right: 1px solid #FBFBFB;
+    border-bottom: 1px solid #FBFBFB;
+
+}
+
 .explore-img {
     width: 100%;
     aspect-ratio: 3 / 4;

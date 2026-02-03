@@ -180,6 +180,9 @@ img.gallery-img
     aspect-ratio: 3 / 4;
     object-fit: cover;
     display: block;
+    border-bottom: 1px solid #FBFBFB;
+    border-right: 1px solid #FBFBFB;
+
 }
 
 div.gallery-item
