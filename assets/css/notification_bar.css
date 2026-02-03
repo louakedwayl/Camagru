@@ -1,0 +1,29 @@
+#notification-bar {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 460px;
+    height: 100vh;
+    border-right: 1px solid #dbdbdb;
+    background: #FBFBFB;
+    flex-direction: column;
+    z-index: 100;
+}
+
+h2
+{
+    margin-top: 40px;
+    margin-left: 40px;
+
+}
+
+.notification-cross
+{
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+}

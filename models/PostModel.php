@@ -36,7 +36,7 @@ class PostModel
                 LEFT JOIN likes l ON p.id = l.post_id
                 LEFT JOIN comments c ON p.id = c.post_id
                 GROUP BY p.id, p.image_path, p.caption, p.created_at, p.user_id, u.username, u.avatar_path
-                ORDER BY p.created_at DESC
+                ORDER BY p.id ASC
             ";
             
             $stmt = $this->db->query($sql);

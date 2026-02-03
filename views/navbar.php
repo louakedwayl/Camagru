@@ -34,7 +34,7 @@
             </a>
         </li>
         <li>
-            <a href="index.php?action=notifications">
+            <a href="#" id="notification-link">
                 <span class="link-area notifications">
                     <img class="icon notifications" src="assets/images/icon/heart.svg" alt="notifications icon">
                     <span class="icon notifications nav">Notifications</span>
@@ -61,3 +61,5 @@
     <?php require_once "corner.php" ?>
 </nav>
 <?php require_once "search_bar.php" ?>
+<?php require_once "notification_bar.php" ?>
+
