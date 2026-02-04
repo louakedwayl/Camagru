@@ -8,12 +8,15 @@
 body
 {
 
-    height: 100vh;
+    min-height: 100vh;
     background-color:#FBFBFB ;
 }
 
 main
 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     margin-left: 338px;
     padding-top: 115px;
 }
@@ -36,7 +39,6 @@ main
     padding-bottom: 13px;
     margin-top: 35px;
     margin-bottom: 5px;
-
     border-radius: 8px;
 }
 
@@ -201,7 +203,12 @@ div.gallery
     justify-content: center;
 }
 
+footer
+{
+    margin-top: 50px;
+    margin-bottom: 30px;
 
+}
 
 @media (max-width: 1920px) 
 {
@@ -225,5 +232,24 @@ div.gallery
     main
     {
         margin-left: 0px;
+    }
+}
+
+footer a
+{
+    color: #5063F9;
+    text-decoration: none;
+}
+
+footer p
+{
+    font-size: 14px;
+}
+
+@media (max-width: 850px) 
+{
+    footer
+    {
+        display: none;
     }
 }

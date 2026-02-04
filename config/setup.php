@@ -108,20 +108,18 @@ try
 
     if ($totalPosts == 0) {
 
-        // Ordre de base avec légère variation possible
+        // Ordre de base
         $baseOrder = [
             ['user' => 'Xavier', 'file' => 'xavier_niel4.png', 'caption' => XAVIER_CAPTIONS[4]],
             ['user' => 'Wayl', 'file' => 'demo1.png', 'caption' => CAPTIONS[1]],
             ['user' => 'Wayl', 'file' => 'demo3.png', 'caption' => CAPTIONS[3]],
             ['user' => 'Ecole42', 'file' => 'ecole42_4.png', 'caption' => ECOLE42_CAPTIONS[4]],
-            ['user' => 'Xavier', 'file' => 'xavier_niel1.png', 'caption' => XAVIER_CAPTIONS[1]],
             ['user' => 'Wayl', 'file' => 'demo10.png', 'caption' => CAPTIONS[10]],
             ['user' => 'Wayl', 'file' => 'demo12.png', 'caption' => CAPTIONS[12]],
             ['user' => 'Ecole42', 'file' => 'ecole42_5.png', 'caption' => ECOLE42_CAPTIONS[5]],
             ['user' => 'Wayl', 'file' => 'demo9.png', 'caption' => CAPTIONS[9]],
             ['user' => 'Wayl', 'file' => 'demo8.png', 'caption' => CAPTIONS[8]],
             ['user' => 'Ecole42', 'file' => 'ecole42_3.png', 'caption' => ECOLE42_CAPTIONS[3]],
-            ['user' => 'Xavier', 'file' => 'xavier_niel3.png', 'caption' => XAVIER_CAPTIONS[3]],
         ];
 
         // Le reste des posts à mélanger
