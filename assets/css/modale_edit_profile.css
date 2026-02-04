@@ -1,4 +1,4 @@
-/* Modale Edit Profile */
+/* Modale Edit Profile - Style Instagram */
 .modal-edit-profile {
     display: none;
     position: fixed;
@@ -13,93 +13,261 @@
 
 .modal-edit-content {
     background-color: #fff;
-    margin: 80px auto;
+    margin: 40px auto;
     padding: 0;
     border-radius: 12px;
     width: 90%;
     max-width: 500px;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
     animation: slideDown 0.3s ease;
+    max-height: 90vh;
+    overflow-y: auto;
 }
 
 .modal-edit-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 24px;
+    padding: 16px 24px;
     border-bottom: 1px solid #dbdbdb;
+    position: sticky;
+    top: 0;
+    background-color: #fff;
+    z-index: 10;
 }
 
 .modal-edit-header h2 {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 600;
     margin: 0;
+    color: #262626;
 }
 
 .modal-edit-close {
-    font-size: 32px;
-    font-weight: 300;
-    color: #8e8e8e;
+    width: 20px;
+    height: 20px;
     cursor: pointer;
-    line-height: 1;
-    transition: color 0.2s ease;
+    transition: opacity 0.2s ease;
+    object-fit: contain;
 }
 
 .modal-edit-close:hover {
-    color: #262626;
+    opacity: 0.6;
 }
 
-#edit-profile-form {
+/* Section photo de profil */
+.profile-photo-section {
+    display: flex;
+    align-items: center;
+    gap: 24px;
     padding: 24px;
+    border-bottom: 1px solid #efefef;
 }
 
-.form-group {
-    margin-bottom: 20px;
+.edit-profile-avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    object-fit: cover;
 }
 
-.form-group label {
-    display: block;
+.profile-photo-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.profile-username-small {
     font-size: 14px;
     font-weight: 600;
-    margin-bottom: 8px;
     color: #262626;
 }
 
-.form-group input {
-    width: 100%;
-    padding: 12px 14px;
-    border: 1px solid #dbdbdb;
-    border-radius: 6px;
+.change-photo-btn {
+    color: #5063F9;
     font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.change-photo-btn:hover {
+    color: #3d4fd4;
+}
+
+/* Formulaire */
+#edit-profile-form {
+    padding: 0;
+}
+
+/* Ajustement de la structure du form-group-edit */
+.form-group-edit {
+    display: flex;
+    align-items: flex-start;
+    padding: 16px 24px;
+    border-bottom: 1px solid #efefef;
+    gap: 32px;
+    justify-content: space-between;
+}
+
+.form-group-edit label:not(.switch) {
+    font-size: 14px;
+    font-weight: 600;
+    color: #262626;
+    min-width: 120px;
+    text-align: left;
+}
+
+/* Container pour input + erreurs */
+.input-error-container {
+    display: flex;
+    flex-direction: column;
+    width: 268px;
+    max-width: 268px;
+}
+
+/* Inputs avec le style register */
+.form-group-edit input[type="text"],
+.form-group-edit input[type="email"],
+.form-group-edit input[type="password"] {
+    width: 268px;
+    padding: 9px 0 7px 8px;
+    border: 1px solid #dbdbdb; 
+    border-radius: 3px; 
+    outline: none;
+    background-color: #FBFBFB;
+    font-size: 14px;
+    color: #262626;
     transition: border-color 0.2s ease;
 }
 
-.form-group input:focus {
+.form-group-edit input:focus {
     outline: none;
-    border-color: #5B69E9;
+    border-color: #a8a8a8;
+    background-color: #fff;
 }
 
+.form-group-edit input::placeholder {
+    color: #8e8e8e;
+}
+
+/* Messages d'erreur - Style identique à register */
+p.error-edit {
+    display: none;
+    margin-top: 5px;
+    margin-bottom: 0px;
+    margin-left: 9px;
+    color: #ED4956;
+    font-size: 13px;
+    width: 268px;
+}
+
+/* Quand une erreur est visible */
+p.error-edit.show {
+    display: block;
+}
+
+/* Input en erreur */
+.form-group-edit input.input-error {
+    border-color: #ED4956;
+}
+
+/* Groupe de notification */
+.notification-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+}
+
+.notification-label-group {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
+}
+
+.notification-label-group label {
+    min-width: auto;
+}
+
+.notification-description {
+    font-size: 12px;
+    color: #8e8e8e;
+    font-weight: 400;
+}
+
+/* Toggle Switch (style Instagram) */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 33px;
+    flex-shrink: 0;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.3s;
+    border-radius: 24px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 25px;
+    width: 25px;
+    left: 5px;
+    bottom: 4px;
+    background-color: white;
+    transition: 0.3s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #5063F9;
+}
+
+input:checked + .slider:before {
+    transform: translateX(24px);
+}
+
+/* Bouton Submit */
 .btn-save-profile {
-    width: 100%;
-    padding: 14px;
-    background-color: #5B69E9;
+    margin: 24px;
+    width: calc(100% - 48px);
+    padding: 8px;
+    background-color: #5063F9;
     color: white;
     border: none;
     border-radius: 8px;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.2s ease;
 }
 
 .btn-save-profile:hover {
-    background-color: #4a57d1;
+    background-color: #3d4fd4;
 }
 
 .btn-save-profile:active {
-    opacity: 0.8;
+    opacity: 0.7;
 }
 
+/* Animations */
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
@@ -113,5 +281,31 @@
     to { 
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .modal-edit-content {
+        width: 95%;
+        margin: 20px auto;
+    }
+    
+    .profile-photo-section {
+        padding: 16px;
+    }
+    
+    .form-group-edit {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    
+    .form-group-edit label {
+        min-width: auto;
+    }
+    
+    .form-group-edit input {
+        width: 100%;
     }
 }

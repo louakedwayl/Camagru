@@ -10,7 +10,8 @@ let flag = 0;
 
 morelink.addEventListener("click", (e) => 
 {
-  e.stopPropagation(); // empeche la propagation jusqu'a document
+    e.preventDefault(); 
+  e.stopPropagation(); 
   if (flag == 0)
   {
     moreButton.setAttribute("src", "assets/images/icon/more_black.svg")
@@ -36,14 +37,28 @@ document.addEventListener("click", () =>
   }
 });
 
-reportButtonHamburger.addEventListener("click", ()=>
+reportButtonHamburger.addEventListener("click", (e)=>
 {
+  e.preventDefault(); 
   overlay.style.display = "block";
   modale.style.display = "flex";
+  document.body.style.overflow = "hidden";
 });
 
-crossModale.addEventListener( "click" , () =>
+crossModale.addEventListener( "click" , (e) =>
 {
+  e.preventDefault(); 
   overlay.style.display = "none";
   modale.style.display = "none";
+  document.body.style.overflow = "";
+});
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' || e.key === 'Esc') {
+        if (modale && modale.style.display === 'flex') {
+            overlay.style.display = "none";
+            modale.style.display = "none";
+            document.body.style.overflow = "";
+        }
+    }
 });

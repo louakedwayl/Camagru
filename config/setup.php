@@ -4,7 +4,6 @@
 require_once __DIR__ . '/Database.php';
 require_once __DIR__ . '/../models/UserModel.php';
 
-
 const CAPTIONS = [
     1 => "A frozen stage for raw connection. Blades strike, time slows, and balance becomes instinct. Two bodies in sync, carving stories into the ice. There's something primal about this dance on frozen water, where trust isn't spoken but felt through every movement. The cold air bites, but the warmth of partnership cuts through it. In these moments, you realize it's not about perfection—it's about presence, about finding rhythm in the chaos, about two souls learning to move as one. The ice remembers every mark we leave, a temporary testimony to something timeless.",
     
@@ -78,7 +77,7 @@ try
             'email' => getenv('DEMO1_USER_EMAIL')
         ],
         'Ecole42' => [
-            'fullname' => '42 Paris',
+            'fullname' => 'Ecole 42',
             'pass' => getenv('DEMO2_USER_PASS'),
             'email' => getenv('DEMO2_USER_EMAIL')
         ]
@@ -165,5 +164,4 @@ try
         }
     }
 }
-catch (Exception $e) {
-}
+catch (Exception $e) {}
