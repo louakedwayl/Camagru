@@ -667,6 +667,12 @@ class UserController
      */
     public function handleLogin()
     {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST')
+        {
+            header('Location: /login');
+            exit;
+        }
+
         header('Content-Type: application/json');
         
         if (empty($_POST['login']) || empty($_POST['password']))
