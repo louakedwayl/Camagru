@@ -5,13 +5,23 @@ dialog#modale-report {
     align-items: center;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -100%);
+    transform: translate(-50%, -90%);
     width: 550px;
     height: 290px;
     background: #fafafa;
     border: none;
     border-radius: 20px;
     z-index: 101;
+    animation: slideDownReport 0.3s ease;
+}
+
+dialog#modale-report[open] {
+    display: flex;
+}
+
+dialog#modale-report::backdrop {
+    background-color: rgba(0, 0, 0, 0.65);
+    animation: fadeInBackdrop 0.2s ease;
 }
 
 dialog#modale-report header {
@@ -88,4 +98,20 @@ p.report {
     margin-top: 2px;
     font-size: 12px;
     color: #666666;
+}
+
+@keyframes slideDownReport {
+    from { 
+        opacity: 0;
+        transform: translate(-50%, calc(-90% - 20px));
+    }
+    to { 
+        opacity: 1;
+        transform: translate(-50%, -90%);
+    }
+}
+
+@keyframes fadeInBackdrop {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }

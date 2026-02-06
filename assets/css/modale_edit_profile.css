@@ -1,29 +1,42 @@
-/* Modale Edit Profile - Style Instagram */
+/* Modale Edit Profile - Style Instagram avec dialog */
 .modal-edit-profile {
     display: none;
     position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.65);
+    padding: 0;
+    border: none;
+    margin: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -45%);
+    width: 90%;
+    max-width: 500px;
+    max-height: 90vh;
+    overflow: visible;
+    background: transparent;
     animation: fadeIn 0.2s ease;
+}
+
+.modal-edit-profile[open] {
+    display: block;
+}
+
+.modal-edit-profile::backdrop {
+    background-color: rgba(0, 0, 0, 0.65);
+    animation: fadeInBackdrop 0.2s ease;
 }
 
 .modal-edit-content {
     background-color: #fff;
-    margin: 40px auto;
     padding: 0;
     border-radius: 12px;
-    width: 90%;
-    max-width: 500px;
+    width: 100%;
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
     animation: slideDown 0.3s ease;
     max-height: 90vh;
     overflow-y: auto;
 }
 
+/* Reste du CSS identique... */
 .modal-edit-header {
     display: flex;
     justify-content: space-between;
@@ -282,6 +295,11 @@ input:checked + .slider:before {
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+@keyframes fadeInBackdrop {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 /* Responsive */

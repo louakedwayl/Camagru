@@ -1,15 +1,3 @@
-/* -------------------------------------------
-  VALIDATION DU FORMULAIRE D'ÉDITION DE PROFIL
-  
-  Mêmes règles que le formulaire de register :
-  - EMAIL : format standard
-  - FULLNAME : 2-50 caractères, lettres/espaces/tirets/apostrophes
-  - PASSWORD : 6+ caractères, 1 majuscule (optionnel ici)
-  - USERNAME : 3-30 caractères, lettres/chiffres/underscore/point
-  - PASSWORD_CONFIRM : doit correspondre au nouveau mot de passe
-------------------------------------------------------------------- */
-
-// Sélecteurs des inputs
 const editFullnameInput = document.querySelector('#edit-fullname');
 const editUsernameInput = document.querySelector('#edit-username');
 const editEmailInput = document.querySelector('#edit-email');
@@ -18,7 +6,6 @@ const editPasswordConfirmInput = document.querySelector('#edit-password-confirm'
 const editForm = document.querySelector('#edit-profile-form');
 const submitBtn = document.querySelector('.btn-save-profile');
 
-// Sélecteurs d'erreurs
 const pErrorFullnameSize = document.querySelector(".error-edit.fullname_size");
 const pErrorFullname = document.querySelector(".error-edit.fullname");
 const pErrorUsernameSize = document.querySelector(".error-edit.username_size");
@@ -30,7 +17,6 @@ const pErrorPassword = document.querySelector(".error-edit.password");
 const pErrorPasswordUppercase = document.querySelector(".error-edit.uppercase");
 const pErrorPasswordMatch = document.querySelector(".error-edit.password_match");
 
-// Regex (identiques au register)
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const passwordRegex = /^(?!.*\p{Extended_Pictographic}).{6,}$/u; 
 const passwordRegexUppercase = /[A-Z]/;
@@ -39,11 +25,13 @@ const fullnameRegex = /^[a-zA-ZÀ-ÿ\s'\-]+$/;
 const usernameSizeRegex = /^.{3,30}$/;
 const usernameRegex = /^[a-zA-ZÀ-ÿ0-9_.]+$/;
 
-// Valeurs initiales (pour vérifier si changement)
 const initialUsername = editUsernameInput.value;
 const initialEmail = editEmailInput.value;
 
-// Fonction utilitaire pour reset les erreurs
+const modal = document.getElementById('modal-edit-profile');
+const btnOpenEdit = document.querySelector('.btn-edit-profile');
+const btnCloseEdit = document.querySelector('.modal-edit-close');
+
 function resetError(input, ...errorElements) {
     input.classList.remove('input-error');
     errorElements.forEach(error => {
@@ -51,13 +39,11 @@ function resetError(input, ...errorElements) {
     });
 }
 
-// Fonction utilitaire pour afficher une erreur
 function showError(input, errorElement) {
     input.classList.add('input-error');
     if (errorElement) errorElement.style.display = "block";
 }
 
-// Validation du fullname
 function validateFullname() {
     if (editFullnameInput.value === "") {
         resetError(editFullnameInput, pErrorFullname, pErrorFullnameSize);
@@ -80,7 +66,6 @@ function validateFullname() {
     return true;
 }
 
-// Validation du username
 async function validateUsername() {
     if (editUsernameInput.value === "") {
         resetError(editUsernameInput, pErrorUsernameSize, pErrorUsername, pErrorUsernameUnavailable);
@@ -99,13 +84,11 @@ async function validateUsername() {
         return false;
     }
     
-    // Si le username n'a pas changé, pas besoin de vérifier la disponibilité
     if (editUsernameInput.value === initialUsername) {
         resetError(editUsernameInput, pErrorUsernameSize, pErrorUsername, pErrorUsernameUnavailable);
         return true;
     }
     
-    // Vérification de disponibilité côté serveur
     try {
         const formData = new FormData();
         formData.append('username', editUsernameInput.value);
@@ -130,7 +113,6 @@ async function validateUsername() {
     }
 }
 
-// Validation de l'email
 async function validateEmail() {
     if (editEmailInput.value === "") {
         resetError(editEmailInput, pErrorEmail, pErrorEmailUnavailable);
@@ -143,13 +125,11 @@ async function validateEmail() {
         return false;
     }
     
-    // Si l'email n'a pas changé, pas besoin de vérifier la disponibilité
     if (editEmailInput.value === initialEmail) {
         resetError(editEmailInput, pErrorEmail, pErrorEmailUnavailable);
         return true;
     }
     
-    // Vérification de disponibilité côté serveur
     try {
         const formData = new FormData();
         formData.append('email', editEmailInput.value);
@@ -174,9 +154,7 @@ async function validateEmail() {
     }
 }
 
-// Validation du password (optionnel - seulement si rempli)
 function validatePassword() {
-    // Si vide, c'est OK (on ne change pas le mot de passe)
     if (editPasswordInput.value === "") {
         resetError(editPasswordInput, pErrorPassword, pErrorPasswordUppercase);
         return true;
@@ -198,15 +176,12 @@ function validatePassword() {
     return true;
 }
 
-// Validation de la confirmation du password
 function validatePasswordConfirm() {
-    // Si le nouveau password est vide, pas besoin de confirmer
     if (editPasswordInput.value === "") {
         resetError(editPasswordConfirmInput, pErrorPasswordMatch);
         return true;
     }
     
-    // Si le password de confirmation ne correspond pas
     if (editPasswordConfirmInput.value !== editPasswordInput.value) {
         showError(editPasswordConfirmInput, pErrorPasswordMatch);
         return false;
@@ -216,23 +191,19 @@ function validatePasswordConfirm() {
     return true;
 }
 
-// Event Listeners "Blur" (validation à la sortie du champ)
 editFullnameInput.addEventListener("blur", validateFullname);
 editUsernameInput.addEventListener("blur", validateUsername);
 editEmailInput.addEventListener("blur", validateEmail);
 editPasswordInput.addEventListener("blur", validatePassword);
 editPasswordConfirmInput.addEventListener("blur", validatePasswordConfirm);
 
-// Validation aussi quand on tape dans le password confirm
 editPasswordConfirmInput.addEventListener("input", validatePasswordConfirm);
 
-// SOUMISSION DU FORMULAIRE
 editForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     
     submitBtn.disabled = true;
     
-    // Validation de tous les champs
     const isFullnameValid = validateFullname();
     const isUsernameValid = await validateUsername();
     const isEmailValid = await validateEmail();
@@ -244,7 +215,6 @@ editForm.addEventListener('submit', async (e) => {
         return;
     }
     
-    // Envoi des données au serveur
     try {
         const formData = new FormData();
         formData.append('fullname', editFullnameInput.value);
@@ -261,14 +231,10 @@ editForm.addEventListener('submit', async (e) => {
         const data = await response.json();
         
         if (data.success) {
-            // Fermer la modale
-            document.getElementById('modal-edit-profile').style.display = 'none';
+            modal.close();
             document.body.style.overflow = '';
-            
-            // Recharger la page ou afficher un message de succès
             window.location.reload();
         } else {
-            // Afficher les erreurs retournées par le serveur
             submitBtn.disabled = false;
             alert(data.message || 'An error occurred. Please try again.');
         }
@@ -276,4 +242,20 @@ editForm.addEventListener('submit', async (e) => {
         submitBtn.disabled = false;
         alert('An error occurred. Please try again.');
     }
+});
+
+btnOpenEdit.addEventListener('click', (e) => {
+    e.preventDefault();
+    modal.showModal();
+    document.body.style.overflow = 'hidden';
+});
+
+btnCloseEdit.addEventListener('click', (e) => {
+    e.preventDefault();
+    modal.close();
+    document.body.style.overflow = '';
+});
+
+modal.addEventListener('cancel', (e) => {
+    document.body.style.overflow = '';
 });

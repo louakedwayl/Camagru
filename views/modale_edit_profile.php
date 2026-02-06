@@ -1,4 +1,4 @@
-<div id="modal-edit-profile" class="modal-edit-profile">
+<dialog id="modal-edit-profile" class="modal-edit-profile">
     <div class="modal-edit-content">
         <div class="modal-edit-header">
             <h2>Edit Profile</h2>
@@ -90,4 +90,4 @@
             <button type="submit" class="btn-save-profile">Submit</button>
         </form>
     </div>
-</div>
+</dialog>
