@@ -15,6 +15,7 @@ if (!isset($_SESSION['admin_setup_done']))
 
 $action = $_GET['action'] ?? '';
 
+
 $user_controller = new UserController();
 $post_controller = new PostController();
 
@@ -60,6 +61,9 @@ switch ($action)
         $user_controller->logout();
         break;
 
+    case 'upload_avatar':
+        $user_controller->uploadAvatar();
+        break;
 
     // Views
     case 'email_signup':

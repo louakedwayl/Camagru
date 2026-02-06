@@ -14,19 +14,21 @@
     <script defer src="assets/js/edit_profile.js"></script>
 </head>
 <body>
-    <div class="overlay"></div>
     <?php require_once __DIR__ . '/navbar.php'; ?>
     <main>
         <header>
                 <form id="avatar-form" enctype="multipart/form-data">
                 <label for="avatar-input" class="avatar-label">
-                <img src="assets/images/default-avatar.jpeg" class="profile-avatar" id="current-avatar">
-                <div class="avatar-overlay">
+                <img src="<?= htmlspecialchars($user['avatar_path'] ?? 'assets/images/default-avatar.jpeg') ?>" 
+                    class="profile-avatar" 
+                    id="current-avatar">
+                     <div class="avatar-overlay">
                 </div>
                 <img src="assets/images/icon/camera_white.svg" class="camera-white-icon">
 
                 </label>
                 <input type="file" id="avatar-input" name="avatar" accept="image/*" style="display: none;">
+
                 </form>
                 <div class="user-info">
                     <span class="fullname"><?php echo $user['full_name']?></span>

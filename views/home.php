@@ -14,7 +14,6 @@
     <script defer src="assets/js/hamburger.js"></script>
 </head>
 <body>
-    <div class="overlay"></div>
     <?php require_once __DIR__ . '/navbar.php'; ?>
     <main>
         <div class="user-menu">

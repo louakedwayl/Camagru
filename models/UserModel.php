@@ -15,13 +15,51 @@ class UserModel
         $this->pdo = Database::getConnection();
     }
 
+
+    /**
+     * Récupère le chemin de l'avatar actuel (utilise avatar_path de ta DB)
+     */
+    public function getUserAvatar(int $userId): ?string
+    {
+        try {
+            $query = "SELECT avatar_path FROM users WHERE id = :id";
+            $stmt = $this->pdo->prepare($query);
+            $stmt->execute([':id' => $userId]);
+            $result = $stmt->fetchColumn();
+            return $result ?: null;
+        } catch (PDOException $e) {
+            return null;
+        }
+    }
+
+    /**
+     * Met à jour le chemin de l'avatar (utilise avatar_path de ta DB)
+     */
+    public function updateAvatar(int $userId, string $path): bool
+    {
+        try {
+            $query = "UPDATE users SET avatar_path = :path, updated_at = NOW() WHERE id = :id";
+            $stmt = $this->pdo->prepare($query);
+            return $stmt->execute([
+                ':path' => $path,
+                ':id'   => $userId
+            ]);
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+
+
+
+
     /**
      * Récupère les informations d'un utilisateur par son ID.
      */
     public function getUserById(int $id)
     {
         try {
-            $query = "SELECT id, username, full_name, email, created_at FROM users WHERE id = :id";
+            $query = "SELECT id, username, full_name, email, avatar_path, created_at FROM users WHERE id = :id";
+            //                                                 ^^^^^^^^^^^^ AJOUTE ÇA
             $stmt = $this->pdo->prepare($query);
             $stmt->execute([':id' => $id]);
             return $stmt->fetch(PDO::FETCH_ASSOC);
