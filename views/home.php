@@ -71,7 +71,16 @@
             <?php endforeach; ?>
         </div>
     </main>
+    <dialog id="modal-post-options" class="modal-post-options">
+        <div class="modal-options-content">
+            <button class="option-btn option-report">Report</button>
+            <button class="option-btn option-action">Go to post</button>
+            <button class="option-btn option-action">Go to profile</button>
+            <button class="option-btn option-cancel">Cancel</button>
+        </div>
+    </dialog>
     <?php require_once "modale_report.php" ?>
+
 </body>
 </html>
 
