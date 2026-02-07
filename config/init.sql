@@ -9,6 +9,7 @@ CREATE TABLE users
     password VARCHAR(255) NOT NULL,
     validated BOOLEAN NOT NULL DEFAULT FALSE,
     avatar_path VARCHAR(255) DEFAULT NULL,
+    notifications BOOLEAN DEFAULT TRUE,
     validation_code VARCHAR(6) DEFAULT NULL,
     validation_code_expires_at TIMESTAMP DEFAULT NULL,
     reset_code VARCHAR(6) DEFAULT NULL,

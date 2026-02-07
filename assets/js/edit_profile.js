@@ -25,8 +25,8 @@ const fullnameRegex = /^[a-zA-ZÀ-ÿ\s'\-]+$/;
 const usernameSizeRegex = /^.{3,30}$/;
 const usernameRegex = /^[a-zA-ZÀ-ÿ0-9_.]+$/;
 
-const initialUsername = editUsernameInput.value;
-const initialEmail = editEmailInput.value;
+let initialUsername = editUsernameInput.value;
+let initialEmail = editEmailInput.value;
 
 const modal = document.getElementById('modal-edit-profile');
 const btnOpenEdit = document.querySelector('.btn-edit-profile');
@@ -246,6 +246,11 @@ editForm.addEventListener('submit', async (e) => {
 
 btnOpenEdit.addEventListener('click', (e) => {
     e.preventDefault();
+    
+    // Capture les valeurs actuelles à chaque ouverture
+    initialUsername = editUsernameInput.value;
+    initialEmail = editEmailInput.value;
+    
     modal.showModal();
     document.body.style.overflow = 'hidden';
 });
@@ -257,5 +262,28 @@ btnCloseEdit.addEventListener('click', (e) => {
 });
 
 modal.addEventListener('cancel', (e) => {
+    document.body.style.overflow = '';
+});
+
+
+function resetAllErrors() {
+    const allInputs = [editFullnameInput, editUsernameInput, editEmailInput, editPasswordInput, editPasswordConfirmInput];
+    const allErrors = [
+        pErrorFullnameSize, pErrorFullname, 
+        pErrorUsernameSize, pErrorUsername, pErrorUsernameUnavailable,
+        pErrorEmail, pErrorEmailUnavailable,
+        pErrorPassword, pErrorPasswordUppercase, pErrorPasswordMatch
+    ];
+    
+    allInputs.forEach(input => input.classList.remove('input-error'));
+    allErrors.forEach(error => {
+        if (error) error.style.display = 'none';
+    });
+}
+
+modal.addEventListener('close', () => {
+    editForm.reset();
+    resetAllErrors();
+    submitBtn.disabled = false;
     document.body.style.overflow = '';
 });

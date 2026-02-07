@@ -32,8 +32,8 @@
             </form>
             
             <div class="user-info">
-                <span class="fullname"><?= htmlspecialchars($user['full_name']) ?></span>
                 <span class="username"><?= htmlspecialchars($user['username']) ?></span>
+                <span class="fullname"><?= htmlspecialchars($user['full_name']) ?></span>
             </div>
         </header>
         

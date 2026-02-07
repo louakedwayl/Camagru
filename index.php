@@ -65,6 +65,10 @@ switch ($action)
         $user_controller->uploadAvatar();
         break;
 
+    case 'update_profile':
+        $user_controller->updateProfile();
+        break;
+
     // Views
     case 'email_signup':
         $user_controller->email_signup();

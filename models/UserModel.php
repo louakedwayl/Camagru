@@ -16,6 +16,53 @@ class UserModel
     }
 
 
+public function updateProfile(int $userId, array $data): bool
+{
+    $fields = [];
+    $params = ['id' => $userId];
+    
+    if (isset($data['fullname'])) {
+        $fields[] = 'full_name = :fullname';
+        $params['fullname'] = $data['fullname'];
+    }
+    
+    if (isset($data['username'])) {
+        $fields[] = 'username = :username';
+        $params['username'] = $data['username'];
+    }
+    
+    if (isset($data['email'])) {
+        $fields[] = 'email = :email';
+        $params['email'] = $data['email'];
+    }
+    
+    if (isset($data['password'])) {
+        $fields[] = 'password = :password';
+        $params['password'] = $data['password'];
+    }
+    
+    if (isset($data['notifications'])) {
+        $fields[] = 'notifications = :notifications';
+        $params['notifications'] = $data['notifications'];
+    }
+    
+    if (empty($fields)) {
+        return false;
+    }
+    
+    $sql = "UPDATE users SET " . implode(', ', $fields) . " WHERE id = :id";
+    
+    try {
+        $stmt = $this->pdo->prepare($sql);
+        return $stmt->execute($params);
+    } catch (PDOException $e) {
+        error_log("Update profile error: " . $e->getMessage());
+        return false;
+    }
+}
+
+
+
     /**
      * Récupère le chemin de l'avatar actuel (utilise avatar_path de ta DB)
      */

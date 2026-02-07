@@ -23,6 +23,132 @@ class UserController
 
     }
 
+/**
+ * Updates user profile information.
+ * 
+ * This method validates and updates user data including fullname, username, 
+ * email, password (optional), and notification preferences. It performs 
+ * availability checks for username and email if they've changed.
+ * 
+ * @return void Outputs JSON response and terminates execution.
+ * 
+ * @method POST
+ * @response 200 {bool} success True if profile updated successfully.
+ * @response 400 {string} message Validation error or missing fields.
+ * @response 401 {string} message User not authenticated.
+ * @response 405 {string} message Method not allowed.
+ * @response 409 {string} message Username or email already taken.
+ * @response 500 {string} message Database error.
+ */
+public function updateProfile(): void
+{
+    header('Content-Type: application/json');
+    
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        http_response_code(405);
+        echo json_encode(['success' => false, 'message' => 'Method not allowed']);
+        exit;
+    }
+
+    if (session_status() === PHP_SESSION_NONE) session_start();
+
+    if (!isset($_SESSION['user_id'])) {
+        http_response_code(401);
+        echo json_encode(['success' => false, 'message' => 'Not authenticated']);
+        exit;
+    }
+
+    $userId = (int)$_SESSION['user_id'];
+    $fullname = isset($_POST['fullname']) ? trim($_POST['fullname']) : '';
+    $username = isset($_POST['username']) ? trim($_POST['username']) : '';
+    $email = isset($_POST['email']) ? trim($_POST['email']) : '';
+    $password = isset($_POST['password']) ? $_POST['password'] : '';
+    $notifications = isset($_POST['notifications']) ? (int)$_POST['notifications'] : 0;
+
+    // Validation des champs requis
+    if (empty($fullname) || empty($username) || empty($email)) {
+        http_response_code(400);
+        echo json_encode(['success' => false, 'message' => 'Missing required fields']);
+        exit;
+    }
+
+    // Validation du format email
+    if (!Validator::validateEmail($email)['valid']) {
+        http_response_code(400);
+        echo json_encode(['success' => false, 'message' => 'Invalid email format']);
+        exit;
+    }
+
+    // Validation du format username
+    $usernameValidation = Validator::validateUsername($username);
+    if (!$usernameValidation['valid']) {
+        http_response_code(400);
+        echo json_encode(['success' => false, 'message' => 'Invalid username format']);
+        exit;
+    }
+
+    try {
+        $currentUser = $this->userModel->getUserById($userId);
+        
+        // Vérifier si le username a changé et s'il est déjà pris
+        if ($username !== $currentUser['username']) {
+            if ($this->userModel->usernameExists($username)) {
+                http_response_code(409);
+                echo json_encode(['success' => false, 'message' => 'Username already taken']);
+                exit;
+            }
+        }
+
+        // Vérifier si l'email a changé et s'il est déjà pris
+        if ($email !== $currentUser['email']) {
+            if ($this->userModel->emailExists($email)) {
+                http_response_code(409);
+                echo json_encode(['success' => false, 'message' => 'Email already taken']);
+                exit;
+            }
+        }
+
+        // Préparer les données à update
+        $updateData = [
+            'fullname' => $fullname,
+            'username' => $username,
+            'email' => $email,
+            'notifications' => $notifications
+        ];
+
+        // Si un nouveau password est fourni, le valider et l'ajouter
+        if (!empty($password)) {
+            $passwordValidation = Validator::validatePassword($password);
+            if (!$passwordValidation['valid']) {
+                http_response_code(400);
+                echo json_encode(['success' => false, 'message' => 'Invalid password format']);
+                exit;
+            }
+            $updateData['password'] = password_hash($password, PASSWORD_BCRYPT);
+        }
+
+        // Update le profil
+        $updated = $this->userModel->updateProfile($userId, $updateData);
+        
+        if ($updated) {
+            // Mettre à jour la session avec les nouvelles valeurs
+            $_SESSION['username'] = $username;
+            $_SESSION['full_name'] = $fullname;
+            $_SESSION['email'] = $email;
+            
+            echo json_encode(['success' => true]);
+        } else {
+            http_response_code(500);
+            echo json_encode(['success' => false, 'message' => 'Update failed']);
+        }
+    } catch (Exception $e) {
+        http_response_code(500);
+        echo json_encode(['success' => false, 'message' => 'Database error']);
+    }
+    exit;
+}
+
+
 
 
 /**
@@ -306,9 +432,6 @@ class UserController
         }
          require ("views/password_reset.php"); 
     }
-
-
-
 
     
 /**

@@ -98,11 +98,18 @@ div.user-actions
 }
 
 
-span.fullname
+span.username
 {
     font-weight: bold;
     font-size: 22px;
 }
+
+
+span.fullname
+{
+    margin-left: 3px;
+}
+
 
 /* Avatar container */
 .avatar-label {
