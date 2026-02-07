@@ -28,7 +28,7 @@
 
             <!-- Full Name -->
             <div class="form-group-edit">
-                <label for="edit-fullname">Name</label>
+                <label for="edit-fullname">Full name</label>
                 <div class="input-error-container">
                     <input type="text" id="edit-fullname" name="fullname" 
                            value="<?php echo htmlspecialchars($user['full_name']); ?>" required>
