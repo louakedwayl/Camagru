@@ -98,6 +98,35 @@ try
         $userIds[$username] = $stmt->fetchColumn();
     }
 
+
+    // === ATTRIBUTION DES AVATARS ===
+
+    // Xavier Niel
+    $xavierAvatarSource = __DIR__ . "/../assets/images/placeholders/xavier_avatar.png";
+    if (file_exists($xavierAvatarSource)) {
+        $xavierAvatarDest = 'assets/images/avatars/avatar_' . $userIds['Xavier'] . '_' . time() . '.png';
+        $xavierAvatarPath = __DIR__ . '/../' . $xavierAvatarDest;
+        
+        if (copy($xavierAvatarSource, $xavierAvatarPath)) {
+            $userModel->updateAvatar($userIds['Xavier'], $xavierAvatarDest);
+        }
+    }
+
+    // Ecole 42
+    $ecole42AvatarSource = __DIR__ . "/../assets/images/placeholders/ecole42_avatar.png";
+    if (file_exists($ecole42AvatarSource)) {
+        $ecole42AvatarDest = 'assets/images/avatars/avatar_' . $userIds['Ecole42'] . '_' . time() . '.png';
+        $ecole42AvatarPath = __DIR__ . '/../' . $ecole42AvatarDest;
+        
+        if (copy($ecole42AvatarSource, $ecole42AvatarPath)) {
+            $userModel->updateAvatar($userIds['Ecole42'], $ecole42AvatarDest);
+        }
+    }
+
+
+
+
+
     // === CRÉATION DES POSTS DANS L'ORDRE VOULU ===
 
     // Vérifier si des posts existent déjà pour ces users

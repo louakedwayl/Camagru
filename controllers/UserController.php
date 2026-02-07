@@ -88,9 +88,8 @@ class UserController
                             unlink($fullOldPath);
                         }
                     }
-                    
-                    echo json_encode(['success' => true, 'avatar' => $avatarPathForDb]);
-                } else {
+    echo json_encode(['success' => true, 'avatar_path' => $avatarPathForDb]);
+                    } else {
                     throw new Exception("Update failed");
                 }
             } catch (Exception $e) {

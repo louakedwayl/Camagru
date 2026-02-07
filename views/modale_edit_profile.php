@@ -8,16 +8,23 @@
         <form id="edit-profile-form">
             <!-- Photo de profil -->
             <div class="profile-photo-section">
-                <img src="<?php echo htmlspecialchars($user['avatar'] ?? 'assets/images/default-avatar.jpeg'); ?>" 
-                     alt="Profile" 
-                     class="edit-profile-avatar" 
-                     id="edit-avatar-preview">
-                <div class="profile-photo-info">
-                    <span class="profile-username-small"><?php echo htmlspecialchars($user['username']); ?></span>
-                    <label for="change-photo-input" class="change-photo-btn">Change profile photo</label>
-                    <input type="file" id="change-photo-input" accept="image/*" style="display: none;">
-                </div>
+            <label for="change-photo-input" class="edit-avatar-container">
+                <img src="<?= htmlspecialchars($user['avatar_path'] ?? 'assets/images/default-avatar.jpeg') ?>" 
+                    alt="Profile" 
+                    class="edit-profile-avatar" 
+                    id="edit-avatar-preview">
+                <div class="avatar-overlay"></div>
+                <?php if (empty($user['avatar_path'])) { ?>
+                    <img src="assets/images/icon/camera_white.svg" class="camera-white-icon">
+                <?php } ?>
+            </label>
+            
+            <div class="profile-photo-info">
+                <span class="profile-username-small"><?= htmlspecialchars($user['username']) ?></span>
+                <label for="change-photo-input" class="change-photo-btn">Change profile photo</label>
+                <input type="file" id="change-photo-input" accept="image/*" style="display: none;">
             </div>
+        </div>
 
             <!-- Full Name -->
             <div class="form-group-edit">
