@@ -48,6 +48,7 @@ h2
     outline: none;
     color: #0E1316;
     margin-top: 40px;
+    margin-bottom: 13px;
 }
 
 .icon.search-gray {
@@ -70,4 +71,82 @@ h2
     height: 21px;
     cursor: pointer;
     opacity: 0.6;
+}
+
+
+
+#search-results {
+    position: relative;
+    flex: 1;
+    overflow-y: auto;
+}
+
+
+/* Item de résultat */
+.search-result-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding-top: 17px;
+    padding-left: 30px;
+    padding-right: 15px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.search-result-item:hover {
+    background-color: #fafafa;
+}
+
+/* Avatar */
+.search-result-avatar {
+    width: 44px !important;
+    height: 44px !important;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    border: 1px solid #dbdbdb;
+}
+
+/* Info container */
+.search-result-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
+    min-width: 0;
+    padding-top: 5px;
+}
+
+
+/* Message quand vide */
+.search-empty {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #8e8e8e;
+    font-size: 14px;
+}
+
+
+/* Username */
+.search-result-username {
+    font-size: 14px;
+    font-weight: 600;
+    color: #000000;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Full name (gris en dessous) */
+.search-result-fullname {
+    font-size: 14px;
+    font-weight: 400;
+    color: #737373;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }

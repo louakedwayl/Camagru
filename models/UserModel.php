@@ -37,8 +37,8 @@ public function searchByUsername(string $query): array
             'id' => $user['id'],
             'username' => $user['username'],
             'fullname' => $user['full_name'],
-            'avatar' => $user['avatar_path'] ?? 'assets/images/default-avatar.png'
-        ];
+            'avatar' => $user['avatar_path'] ?? 'assets/images/default-avatar.jpeg' // ← Change ici
+            ];
     }, $users);
 }
 

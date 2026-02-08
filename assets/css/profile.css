@@ -10,6 +10,8 @@ body
 
     min-height: 100vh;
     background-color:#FBFBFB ;
+      display: flex; /* Ajoute */
+  flex-direction: column; 
 }
 
 main
@@ -19,6 +21,7 @@ main
     align-items: center;
     margin-left: 338px;
     padding-top: 115px;
+      flex: 1; 
 }
 
 .btn-edit-profile,
@@ -72,6 +75,9 @@ img.profile-avatar
     border-radius: 50%;
     width: 150px;
     height: 150px;
+    object-fit: cover; /* Ajoute cette ligne */
+    border: 1px solid #dbdbdb; /* Ajoute cette ligne */
+
 }
 
 header
@@ -149,7 +155,7 @@ div#gallery-empty-state
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 60px;
+    padding-top: 180px;
     gap: 20px;
 }
 
@@ -212,7 +218,7 @@ div.gallery
 
 footer
 {
-    margin-top: 50px;
+  margin-top: auto; /* Change de 50px en auto */
     margin-bottom: 30px;
 
 }

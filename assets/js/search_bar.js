@@ -51,11 +51,12 @@ document.addEventListener('DOMContentLoaded', function() {
     
 function fetchSearchResults(query) {
     fetch(`?action=search_users&q=${encodeURIComponent(query)}`)
-        .then(response => response.text()) // Change .json() en .text()
+        .then(response => response.text())
         .then(data => {
-            console.log('Réponse brute:', data); // Affiche la réponse brute
+            console.log('Réponse brute:', data);
             try {
                 const jsonData = JSON.parse(data);
+                console.log('JSON parsé:', jsonData); // AJOUTE ÇA
                 displayResults(jsonData);
             } catch(e) {
                 console.error('Erreur parsing JSON:', e);

@@ -162,83 +162,109 @@ public function updateProfile(): void
 
 
 
-
-/**
-     * Gère l'upload de l'avatar en déléguant la DB au modèle.
-     */
-    public function uploadAvatar(): void
-    {
-        header('Content-Type: application/json');
-        
-        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            http_response_code(405);
-            echo json_encode(['success' => false, 'message' => 'Method not allowed']);
-            exit;
-        }
-
-        if (session_status() === PHP_SESSION_NONE) session_start();
-
-        if (!isset($_SESSION['user_id'])) {
-            echo json_encode(['success' => false, 'message' => 'Not authenticated']);
-            exit;
-        }
-        
-        if (!isset($_FILES['avatar']) || $_FILES['avatar']['error'] !== UPLOAD_ERR_OK) {
-            echo json_encode(['success' => false, 'message' => 'No file uploaded']);
-            exit;
-        }
-        
-        $file = $_FILES['avatar'];
-        $userId = (int)$_SESSION['user_id'];
-        
-        // Validation type et taille
-        $allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
-        if (!in_array($file['type'], $allowedTypes)) {
-            echo json_encode(['success' => false, 'message' => 'Invalid file type.']);
-            exit;
-        }
-        
-        if ($file['size'] > 5 * 1024 * 1024) {
-            echo json_encode(['success' => false, 'message' => 'File too large (Max 5MB).']);
-            exit;
-        }
-        
-        $extension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
-        $filename = 'avatar_' . $userId . '_' . time() . '.' . $extension;
-        $uploadDir = __DIR__ . '/../assets/images/avatars/';
-        $uploadPath = $uploadDir . $filename;
-        
-        if (!is_dir($uploadDir)) {
-            mkdir($uploadDir, 0755, true);
-        }
-        
-        if (move_uploaded_file($file['tmp_name'], $uploadPath)) {
-            $avatarPathForDb = 'assets/images/avatars/' . $filename;
-            
-            try {
-                $oldAvatar = $this->userModel->getUserAvatar($userId);
-                
-                if ($this->userModel->updateAvatar($userId, $avatarPathForDb)) {
-                    
-                    if ($oldAvatar && $oldAvatar !== 'assets/images/default-avatar.jpeg') {
-                        $fullOldPath = __DIR__ . '/../' . $oldAvatar;
-                        if (file_exists($fullOldPath)) {
-                            unlink($fullOldPath);
-                        }
-                    }
-    echo json_encode(['success' => true, 'avatar_path' => $avatarPathForDb]);
-                    } else {
-                    throw new Exception("Update failed");
-                }
-            } catch (Exception $e) {
-                if (file_exists($uploadPath)) unlink($uploadPath);
-                echo json_encode(['success' => false, 'message' => 'Database error']);
-            }
-        } else {
-            echo json_encode(['success' => false, 'message' => 'Failed to save file']);
-        }
+public function uploadAvatar(): void
+{
+    header('Content-Type: application/json');
+    
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        http_response_code(405);
+        echo json_encode(['success' => false, 'message' => 'Method not allowed']);
         exit;
     }
+
+    if (session_status() === PHP_SESSION_NONE) session_start();
+
+    if (!isset($_SESSION['user_id'])) {
+        echo json_encode(['success' => false, 'message' => 'Not authenticated']);
+        exit;
+    }
+    
+    if (!isset($_FILES['avatar']) || $_FILES['avatar']['error'] !== UPLOAD_ERR_OK) {
+        echo json_encode(['success' => false, 'message' => 'No file uploaded']);
+        exit;
+    }
+    
+    $file = $_FILES['avatar'];
+    $userId = (int)$_SESSION['user_id'];
+    
+    // Validation type et taille
+    $allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
+    if (!in_array($file['type'], $allowedTypes)) {
+        echo json_encode(['success' => false, 'message' => 'Invalid file type.']);
+        exit;
+    }
+    
+    if ($file['size'] > 5 * 1024 * 1024) {
+        echo json_encode(['success' => false, 'message' => 'File too large (Max 5MB).']);
+        exit;
+    }
+    
+    $extension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+    $filename = 'avatar_' . $userId . '_' . time() . '.' . $extension;
+    $uploadDir = __DIR__ . '/../assets/images/avatars/';
+    $uploadPath = $uploadDir . $filename;
+    
+    if (!is_dir($uploadDir)) {
+        mkdir($uploadDir, 0755, true);
+    }
+    
+    if (move_uploaded_file($file['tmp_name'], $uploadPath)) {
+        
+        // Crop automatique en carré
+        list($width, $height) = getimagesize($uploadPath);
+        $size = min($width, $height);
+        
+        // Crée l'image source selon le type
+        if ($file['type'] === 'image/jpeg') {
+            $source = imagecreatefromjpeg($uploadPath);
+        } elseif ($file['type'] === 'image/png') {
+            $source = imagecreatefrompng($uploadPath);
+        } elseif ($file['type'] === 'image/webp') {
+            $source = imagecreatefromwebp($uploadPath);
+        }
+        
+        // Crop au centre en carré
+        $thumb = imagecreatetruecolor($size, $size);
+        imagecopyresampled(
+            $thumb, $source,
+            0, 0,
+            ($width - $size) / 2, ($height - $size) / 2,
+            $size, $size,
+            $size, $size
+        );
+        
+        // Sauvegarde en JPEG qualité 90
+        imagejpeg($thumb, $uploadPath, 90);
+        imagedestroy($source);
+        imagedestroy($thumb);
+        
+        // Continue avec le reste
+        $avatarPathForDb = 'assets/images/avatars/' . $filename;
+        
+        try {
+            $oldAvatar = $this->userModel->getUserAvatar($userId);
+            
+            if ($this->userModel->updateAvatar($userId, $avatarPathForDb)) {
+                
+                if ($oldAvatar && $oldAvatar !== 'assets/images/default-avatar.jpeg') {
+                    $fullOldPath = __DIR__ . '/../' . $oldAvatar;
+                    if (file_exists($fullOldPath)) {
+                        unlink($fullOldPath);
+                    }
+                }
+                echo json_encode(['success' => true, 'avatar_path' => $avatarPathForDb]);
+            } else {
+                throw new Exception("Update failed");
+            }
+        } catch (Exception $e) {
+            if (file_exists($uploadPath)) unlink($uploadPath);
+            echo json_encode(['success' => false, 'message' => 'Database error']);
+        }
+    } else {
+        echo json_encode(['success' => false, 'message' => 'Failed to save file']);
+    }
+    exit;
+}
 
 
     public function logout(): void
