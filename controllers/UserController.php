@@ -23,6 +23,27 @@ class UserController
 
     }
 
+
+public function searchUsers(): void
+{
+    header('Content-Type: application/json');
+    
+    $query = $_GET['q'] ?? '';
+    
+    if (empty($query)) {
+        echo json_encode([]);
+        return;
+    }
+    
+    $users = $this->userModel->searchByUsername($query);
+    echo json_encode($users);
+}
+
+
+
+
+
+
 /**
  * Updates user profile information.
  * 

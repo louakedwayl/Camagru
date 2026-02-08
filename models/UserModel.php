@@ -15,6 +15,35 @@ class UserModel
         $this->pdo = Database::getConnection();
     }
 
+public function searchByUsername(string $query): array
+{
+    $stmt = $this->pdo->prepare("
+        SELECT id, username, full_name, avatar_path 
+        FROM users 
+        WHERE username LIKE :query1 
+        OR full_name LIKE :query2
+        LIMIT 10
+    ");
+    
+    $searchQuery = '%' . $query . '%';
+    $stmt->bindParam(':query1', $searchQuery);
+    $stmt->bindParam(':query2', $searchQuery);
+    $stmt->execute();
+    
+    $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+    return array_map(function($user) {
+        return [
+            'id' => $user['id'],
+            'username' => $user['username'],
+            'fullname' => $user['full_name'],
+            'avatar' => $user['avatar_path'] ?? 'assets/images/default-avatar.png'
+        ];
+    }, $users);
+}
+
+
+
 
 public function updateProfile(int $userId, array $data): bool
 {
