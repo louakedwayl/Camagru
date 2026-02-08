@@ -73,6 +73,10 @@ switch ($action)
         $user_controller->searchUsers();
         break;
 
+    case 'user_profile':
+        $user_controller->userProfile();
+        break;
+
 
     // Views
     case 'email_signup':

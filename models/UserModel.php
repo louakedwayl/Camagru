@@ -145,6 +145,26 @@ public function updateProfile(int $userId, array $data): bool
     }
 
 
+
+
+/**
+ * Récupère les informations d'un utilisateur par son username.
+ */
+public function getUserByUsername(string $username)
+{
+    try {
+        $query = "SELECT id, username, full_name, email, avatar_path, created_at FROM users WHERE username = :username";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute([':username' => $username]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        return false;
+    }
+}
+
+
+
+
     public function getUserByResetCode(string $email, string $code)
     {
         $sql = "SELECT id, username FROM users 

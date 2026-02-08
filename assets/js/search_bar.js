@@ -79,8 +79,7 @@ function fetchSearchResults(query) {
         let html = '';
         users.forEach(user => {
             html += `
-                <div class="search-result-item" onclick="window.location.href='?action=profile&username=${user.username}'">
-                    <img class="search-result-avatar" src="${user.avatar}" alt="${user.username}">
+                    <div class="search-result-item" onclick="window.location.href='?action=user_profile&username=${user.username}'">                    <img class="search-result-avatar" src="${user.avatar}" alt="${user.username}">
                     <div class="search-result-info">
                         <div class="search-result-username">${user.username}</div>
                         <div class="search-result-fullname">${user.fullname}</div>

@@ -24,6 +24,39 @@ class UserController
     }
 
 
+public function userProfile() 
+{
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+
+    if (!isset($_SESSION['user_id'])) {
+        header('Location: index.php?action=login');
+        exit();
+    }
+
+    $username = $_GET['username'] ?? '';
+    
+    if (empty($username)) {
+        header('Location: index.php?action=home');
+        exit();
+    }
+    
+    $user = $this->userModel->getUserByUsername($username);
+    
+    if (!$user) {
+        header('Location: index.php?action=home');
+        exit();
+    }
+    
+    $userId = $user['id'];
+    $userPosts = $this->postModel->getPostsByUserId($userId);
+
+    require 'views/user_profile.php';
+}
+
+
+
 public function searchUsers(): void
 {
     header('Content-Type: application/json');
@@ -38,10 +71,6 @@ public function searchUsers(): void
     $users = $this->userModel->searchByUsername($query);
     echo json_encode($users);
 }
-
-
-
-
 
 
 /**

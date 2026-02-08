@@ -7,6 +7,7 @@ const avatarInput = document.getElementById('avatar-input');
 const currentAvatar = document.getElementById('current-avatar');
 const changePhotoInput = document.getElementById('change-photo-input');
 const editAvatarPreview = document.getElementById('edit-avatar-preview');
+const btnPublicView = document.querySelector('.btn-public-view');
 
 profileIcon.style.border = "2px solid #262626";
 
@@ -154,3 +155,11 @@ avatarInput.addEventListener('change', async (e) => {
         avatarInput.value = '';
     }
 });
+
+
+if (btnPublicView) {
+    btnPublicView.addEventListener('click', function() {
+        const username = document.querySelector('.username').textContent;
+        window.location.href = `?action=user_profile&username=${username}`;
+    });
+}
