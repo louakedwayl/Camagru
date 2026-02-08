@@ -10,6 +10,9 @@ const editAvatarPreview = document.getElementById('edit-avatar-preview');
 
 profileIcon.style.border = "2px solid #262626";
 
+
+// OPENING / CLOSING MODAL
+
 if (btnEditProfile) {
     btnEditProfile.addEventListener('click', (e) => {
         e.preventDefault();
@@ -35,7 +38,7 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-// Upload direct depuis la modale
+// Direct upload from the modal
 if (changePhotoInput) {
     changePhotoInput.addEventListener('change', async (e) => {
         const file = e.target.files[0];

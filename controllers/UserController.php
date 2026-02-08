@@ -65,21 +65,18 @@ public function updateProfile(): void
     $password = isset($_POST['password']) ? $_POST['password'] : '';
     $notifications = isset($_POST['notifications']) ? (int)$_POST['notifications'] : 0;
 
-    // Validation des champs requis
     if (empty($fullname) || empty($username) || empty($email)) {
         http_response_code(400);
         echo json_encode(['success' => false, 'message' => 'Missing required fields']);
         exit;
     }
 
-    // Validation du format email
     if (!Validator::validateEmail($email)['valid']) {
         http_response_code(400);
         echo json_encode(['success' => false, 'message' => 'Invalid email format']);
         exit;
     }
 
-    // Validation du format username
     $usernameValidation = Validator::validateUsername($username);
     if (!$usernameValidation['valid']) {
         http_response_code(400);
@@ -90,7 +87,6 @@ public function updateProfile(): void
     try {
         $currentUser = $this->userModel->getUserById($userId);
         
-        // Vérifier si le username a changé et s'il est déjà pris
         if ($username !== $currentUser['username']) {
             if ($this->userModel->usernameExists($username)) {
                 http_response_code(409);
@@ -99,7 +95,6 @@ public function updateProfile(): void
             }
         }
 
-        // Vérifier si l'email a changé et s'il est déjà pris
         if ($email !== $currentUser['email']) {
             if ($this->userModel->emailExists($email)) {
                 http_response_code(409);
@@ -108,7 +103,6 @@ public function updateProfile(): void
             }
         }
 
-        // Préparer les données à update
         $updateData = [
             'fullname' => $fullname,
             'username' => $username,
@@ -116,7 +110,6 @@ public function updateProfile(): void
             'notifications' => $notifications
         ];
 
-        // Si un nouveau password est fourni, le valider et l'ajouter
         if (!empty($password)) {
             $passwordValidation = Validator::validatePassword($password);
             if (!$passwordValidation['valid']) {
@@ -127,11 +120,9 @@ public function updateProfile(): void
             $updateData['password'] = password_hash($password, PASSWORD_BCRYPT);
         }
 
-        // Update le profil
         $updated = $this->userModel->updateProfile($userId, $updateData);
         
         if ($updated) {
-            // Mettre à jour la session avec les nouvelles valeurs
             $_SESSION['username'] = $username;
             $_SESSION['full_name'] = $fullname;
             $_SESSION['email'] = $email;

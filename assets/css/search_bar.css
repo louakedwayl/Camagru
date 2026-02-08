@@ -31,15 +31,16 @@ h2
 
 .search-input-container {
     display: flex;
+    position: relative;
     justify-content: center;
 }
 
 #search-input {
     width: 400px;
-    padding-top: 10px; /* padding-right pour la croix */
+    padding-top: 13px;
     padding-right: 40px ;
     padding-bottom: 10px;
-    padding-left: 16px;
+    padding-left: 40px;
     border: none;
     border-radius: 30px;
     font-size: 16px;
@@ -47,4 +48,26 @@ h2
     outline: none;
     color: #0E1316;
     margin-top: 40px;
+}
+
+.icon.search-gray {
+    position: absolute;
+    left: 44px;
+    top: 60px;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+.search-cross-surronded {
+    position: absolute;
+    right: 44px;
+    top: 60px;
+    transform: translateY(-50%);
+    width: 21px;
+    height: 21px;
+    cursor: pointer;
+    opacity: 0.6;
 }
