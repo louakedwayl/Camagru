@@ -3,8 +3,6 @@ const moreButton = document.querySelector("img.icon.more");
 const menuHamburger = document.querySelector("div.hamburger");
 const reportButtonHamburger = document.querySelector("a.report.hamburger");
 const modale = document.querySelector("dialog#modale-report");
-const crossModale = document.querySelector("a.modale.cross");
-
 let flag = 0;
 
 morelink.addEventListener("click", (e) => 
@@ -40,23 +38,4 @@ reportButtonHamburger.addEventListener("click", (e) =>
     e.preventDefault();
     modale.showModal();
     document.body.style.overflow = "hidden";
-});
-
-crossModale.addEventListener("click", (e) =>
-{
-    e.preventDefault();
-    modale.close();
-    document.body.style.overflow = "";
-});
-
-modale.addEventListener('cancel', (e) => {
-    document.body.style.overflow = "";
-});
-
-modale.addEventListener('click', (e) => {
-    if (e.target === modale) {
-        console.log("Clic sur backdrop !");
-        modale.close();
-        document.body.style.overflow = "";
-    }
 });

@@ -12,10 +12,10 @@
     <script defer src="assets/js/hamburger.js"></script>
     <script defer src="assets/js/profile.js"></script>
     <script defer src="assets/js/edit_profile.js"></script>
+    <script defer src="assets/js/report.js"></script>
 </head>
 <body>
     <?php require_once __DIR__ . '/navbar.php'; ?>
-    
     <main>
         <header>
             <form id="avatar-form" enctype="multipart/form-data">

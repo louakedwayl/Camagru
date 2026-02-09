@@ -15,6 +15,7 @@ moreLinks.forEach(link => {
 });
 
 // Modale post options
+let currentPostUsername = null;
 const threeDotsButtons = document.querySelectorAll('.three-dots');
 const modalPostOptions = document.getElementById('modal-post-options');
 const optionCancel = document.querySelector('.option-cancel');
@@ -25,6 +26,8 @@ const optionGoToProfile = document.querySelectorAll('.option-action')[1];
 threeDotsButtons.forEach(btn => {
     btn.addEventListener('click', (e) => {
         e.preventDefault();
+        const galleryTop = btn.closest('.gallery-top');
+        currentPostUsername = galleryTop.querySelector('.post-username').textContent;
         modalPostOptions.showModal();
     });
 });
@@ -35,7 +38,9 @@ optionCancel.addEventListener('click', () => {
 
 optionReport.addEventListener('click', () => {
     modalPostOptions.close();
-    // Ouvre ta modale de report ici si besoin
+    const reportModal = document.getElementById('modale-report');
+    reportModal.showModal();
+    document.body.style.overflow = "hidden";
 });
 
 optionGoToPost.addEventListener('click', () => {
@@ -45,5 +50,5 @@ optionGoToPost.addEventListener('click', () => {
 
 optionGoToProfile.addEventListener('click', () => {
     modalPostOptions.close();
-    // Redirection vers le profil
+    window.location.href = 'index.php?action=user_profile&username=' + currentPostUsername;
 });

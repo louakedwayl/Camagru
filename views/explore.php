@@ -11,6 +11,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon/favicon-16x16.png">
     <script defer src="assets/js/hamburger.js"></script>
     <script defer src="assets/js/explore.js"></script>
+    <script defer src="assets/js/report.js"></script>
 </head>
 <body>
     <div class="overlay"></div>

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 require_once 'controllers/UserController.php';
 require_once 'controllers/PostController.php';
+require_once 'controllers/ReportController.php';
 
 if (session_status() === PHP_SESSION_NONE) session_start();
 
@@ -18,6 +19,8 @@ $action = $_GET['action'] ?? '';
 
 $user_controller = new UserController();
 $post_controller = new PostController();
+$report_controller = new ReportController();
+
 
 // a2enmod rewrite
 
@@ -75,6 +78,10 @@ switch ($action)
 
     case 'user_profile':
         $user_controller->userProfile();
+        break;
+
+    case 'submit_report':
+        $report_controller->submitReport();
         break;
 
 
