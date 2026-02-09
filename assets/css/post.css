@@ -1,0 +1,261 @@
+/* ===== POST PAGE ===== */
+
+.post-page {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 20px;
+    grid-column: 1 / -1;
+    grid-row: 1 / -1;
+    padding-top: 70px;
+}
+
+.post-container {
+    display: flex;
+    width: 85%;
+    max-width: 1200px;
+    background: #fff;
+    border: 1px solid #dbdbdb;
+    border-radius: 4px;
+    overflow: hidden;
+    height: 80vh;
+}
+
+/* === IMAGE SIDE === */
+
+.post-image-side {
+    width: 55%;
+    flex-shrink: 0;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.post-image-side img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* === DETAILS SIDE === */
+
+.post-details-side {
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+}
+
+/* HEADER */
+
+.post-header {
+    display: flex;
+    align-items: center;
+    padding: 14px 16px;
+    border-bottom: 1px solid #efefef;
+    gap: 12px;
+}
+
+.post-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.post-header .post-username {
+    font-size: 14px;
+    font-weight: 600;
+    color: #262626;
+    text-decoration: none;
+}
+
+.post-header .post-username:hover {
+    text-decoration: underline;
+}
+
+/* COMMENTS SECTION */
+
+.post-comments-section {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.comment-item {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+}
+
+.comment-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.comment-content {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.comment-username {
+    font-size: 13px;
+    font-weight: 600;
+    color: #262626;
+    text-decoration: none;
+}
+
+.comment-username:hover {
+    text-decoration: underline;
+}
+
+.comment-text {
+    font-size: 14px;
+    color: #262626;
+    line-height: 1.4;
+    word-break: break-word;
+}
+
+.comment-time {
+    font-size: 12px;
+    color: #8e8e8e;
+}
+
+/* Scrollbar */
+
+.post-comments-section::-webkit-scrollbar {
+    width: 0;
+}
+
+/* ACTIONS BAR */
+
+.post-actions-bar {
+    border-top: 1px solid #efefef;
+    padding: 8px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.post-actions-icons {
+    display: flex;
+    gap: 16px;
+    padding: 6px 0;
+}
+
+.post-actions-icons img {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.post-actions-icons img:hover {
+    opacity: 0.6;
+}
+
+.icon-like.liked {
+    filter: invert(29%) sepia(96%) saturate(7471%) hue-rotate(346deg) brightness(97%) contrast(92%);
+}
+
+.likes-count {
+    font-size: 14px;
+    font-weight: 600;
+    color: #262626;
+}
+
+.post-time {
+    font-size: 10px;
+    color: #8e8e8e;
+    text-transform: uppercase;
+    letter-spacing: 0.2px;
+}
+
+/* ADD COMMENT */
+
+.post-add-comment {
+    display: flex;
+    align-items: center;
+    border-top: 1px solid #efefef;
+    padding: 6px 16px;
+    gap: 8px;
+}
+
+.comment-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    font-family: inherit;
+    resize: none;
+    height: 36px;
+    padding: 8px 0;
+    color: #262626;
+}
+
+.comment-input::placeholder {
+    color: #8e8e8e;
+}
+
+.comment-submit {
+    background: none;
+    border: none;
+    color: #B7C6FF;
+    font-size: 14px;
+    cursor: default;
+    padding: 0;
+    transition: color 0.2s;
+}
+
+.comment-submit:not(:disabled) {
+    color: #5063F9;
+    cursor: pointer;
+}
+
+.comment-submit:not(:disabled):hover {
+    color: #3d4fd4;
+}
+
+/* === RESPONSIVE === */
+
+@media (max-width: 768px) {
+    .post-container {
+        flex-direction: column;
+        width: 100%;
+        height: auto;
+    }
+
+    .post-image-side {
+        min-width: 100%;
+    }
+
+    .post-details-side {
+        min-width: 100%;
+    }
+
+    .post-comments-section {
+        max-height: 300px;
+    }
+}
+
+/* Navbar offset */
+@media (min-width: 1051px) {
+    .post-page {
+        margin-left: 250px;
+    }
+}
+
+@media (max-width: 1050px) and (min-width: 769px) {
+    .post-page {
+        margin-left: 80px;
+    }
+}

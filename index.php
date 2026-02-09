@@ -84,6 +84,9 @@ switch ($action)
         $report_controller->submitReport();
         break;
 
+    case 'post':
+        $post_controller->showPost();
+        break;
 
     // Views
     case 'email_signup':

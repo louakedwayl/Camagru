@@ -16,6 +16,7 @@ moreLinks.forEach(link => {
 
 // Modale post options
 let currentPostUsername = null;
+let currentPostId = null;
 const threeDotsButtons = document.querySelectorAll('.three-dots');
 const modalPostOptions = document.getElementById('modal-post-options');
 const optionCancel = document.querySelector('.option-cancel');
@@ -23,11 +24,13 @@ const optionReport = document.querySelector('.option-report');
 const optionGoToPost = document.querySelectorAll('.option-action')[0];
 const optionGoToProfile = document.querySelectorAll('.option-action')[1];
 
+
 threeDotsButtons.forEach(btn => {
     btn.addEventListener('click', (e) => {
         e.preventDefault();
         const galleryTop = btn.closest('.gallery-top');
         currentPostUsername = galleryTop.querySelector('.post-username').textContent;
+        currentPostId = btn.getAttribute('data-post-id');
         modalPostOptions.showModal();
     });
 });
@@ -45,7 +48,7 @@ optionReport.addEventListener('click', () => {
 
 optionGoToPost.addEventListener('click', () => {
     modalPostOptions.close();
-    // Redirection vers le post
+    window.location.href = 'index.php?action=post&id=' + currentPostId;
 });
 
 optionGoToProfile.addEventListener('click', () => {

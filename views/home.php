@@ -53,8 +53,7 @@
                             ?>
                         </time>
                     </div>
-                    <img class = "three-dots" src="assets/images/icon/three-dots.svg" alt="Three dots icon">
-                </div>
+                <img class="three-dots" src="assets/images/icon/three-dots.svg" alt="Three dots icon" data-post-id="<?php echo $post['id']; ?>">                </div>
                 <div class="post-item">
                     <img src="<?php echo htmlspecialchars($post['image_path']); ?>" alt="Post">
                 </div>
