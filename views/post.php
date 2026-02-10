@@ -18,16 +18,23 @@
     <?php require_once __DIR__ . '/navbar.php'; ?>
     <main class="post-page">
         <div class="post-container">
+            <!-- HEADER MOBILE -->
+            <div class="post-header post-header-mobile">
+                <img src="<?= htmlspecialchars($post['user_avatar'] ?? 'assets/images/default-avatar.jpeg') ?>" alt="Avatar" class="post-avatar">
+                <a href="index.php?action=user_profile&username=<?= htmlspecialchars($post['username']) ?>" class="post-username"><?= htmlspecialchars($post['username']) ?></a>
+                <img class="three-dots" src="assets/images/icon/three-dots.svg" alt="Three dots icon" data-post-id="<?php echo $post['id']; ?>">
+            </div>
             <!-- IMAGE -->
             <div class="post-image-side">
                 <img src="<?= htmlspecialchars($post['image_path']) ?>" alt="Post">
             </div>
             <!-- DETAILS -->
             <div class="post-details-side">
-                <!-- HEADER -->
-                <div class="post-header">
+                <!-- HEADER DESKTOP -->
+                <div class="post-header post-header-desktop">
                     <img src="<?= htmlspecialchars($post['user_avatar'] ?? 'assets/images/default-avatar.jpeg') ?>" alt="Avatar" class="post-avatar">
                     <a href="index.php?action=user_profile&username=<?= htmlspecialchars($post['username']) ?>" class="post-username"><?= htmlspecialchars($post['username']) ?></a>
+                    <img class="three-dots" src="assets/images/icon/three-dots.svg" alt="Three dots icon" data-post-id="<?php echo $post['id']; ?>">
                 </div>
                 <!-- CAPTION + COMMENTS -->
                 <div class="post-comments-section">
@@ -92,6 +99,13 @@
             </div>
         </div>
     </main>
+    <dialog id="modal-post-options" class="modal-post-options">
+        <div class="modal-options-content">
+            <button class="option-btn option-report">Report</button>
+            <button class="option-btn option-action" id="go-to-profile">Go to profile</button>
+            <button class="option-btn option-cancel">Cancel</button>
+        </div>
+    </dialog>
     <?php require_once "modale_report.php" ?>
 </body>
 </html>

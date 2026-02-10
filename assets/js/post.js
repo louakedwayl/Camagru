@@ -109,3 +109,52 @@ if (iconLike) {
         }
     });
 }
+
+
+// === MODALE 3 DOTS ===
+const modal = document.getElementById('modal-post-options');
+const threeDots = document.querySelectorAll('.three-dots');
+
+if (modal) {
+    threeDots.forEach(dot => {
+        dot.addEventListener('click', () => {
+            modal.showModal();
+            document.body.style.overflow = "hidden";
+        });
+    });
+
+    // Cancel
+    modal.querySelector('.option-cancel').addEventListener('click', () => {
+        modal.close();
+        document.body.style.overflow = "";
+    });
+
+    // Go to profile
+    modal.querySelector('#go-to-profile').addEventListener('click', () => {
+        const username = document.querySelector('.post-header-desktop .post-username').textContent;
+        window.location.href = `index.php?action=user_profile&username=${username}`;
+    });
+
+    // Report -> ouvre la modale report
+    modal.querySelector('.option-report').addEventListener('click', () => {
+        modal.close();
+        const reportModal = document.getElementById('modale-report');
+        if (reportModal) {
+            reportModal.showModal();
+            document.body.style.overflow = "hidden";
+        }
+    });
+
+    // Fermer en cliquant sur le backdrop
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.close();
+            document.body.style.overflow = "";
+        }
+    });
+
+    // Fermer avec ESC
+    modal.addEventListener('cancel', () => {
+        document.body.style.overflow = "";
+    });
+}
