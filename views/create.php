@@ -38,6 +38,11 @@
                     <img id="uploaded-preview" src="" alt="Preview" style="display: none;">
                     <!-- Canvas for sticker overlay preview -->
                     <canvas id="sticker-canvas"></canvas>
+                    <!-- Sticker resize controls -->
+                    <div class="sticker-controls" id="sticker-controls" style="display: none;">
+                        <button class="sticker-btn" id="sticker-plus">+</button>
+                        <button class="sticker-btn" id="sticker-minus">−</button>
+                    </div>
                     <!-- No source placeholder -->
                     <div class="preview-placeholder" id="preview-placeholder">
                         <img src="assets/images/icon/camera.svg" class="placeholder-icon">
@@ -90,22 +95,23 @@
         <!-- ===== PREVIOUS PHOTOS ===== -->
         <?php if (!empty($userPosts)): ?>
         <div class="previous-section">
-            <h3 class="previous-title">Your photos</h3>
             <div class="previous-grid" id="previous-grid">
                 <?php foreach ($userPosts as $post): ?>
                 <div class="previous-item" data-post-id="<?= $post['id'] ?>">
                     <img src="<?= htmlspecialchars($post['image_path']) ?>" alt="Previous photo" class="previous-img">
                     <div class="previous-overlay">
-                        <button class="btn-delete-post" data-post-id="<?= $post['id'] ?>">
-                            <img src="assets/images/icon/cross.svg" alt="Delete" class="delete-icon">
-                        </button>
+                        <span class="gallery-stat">
+                            <img src="assets/images/icon/heart_white.svg" class="gallery-stat-icon"> <?= $post['likes_count'] ?? 0 ?>
+                        </span>
+                        <span class="gallery-stat">
+                            <img src="assets/images/icon/comment_white.svg" class="gallery-stat-icon"> <?= $post['comments_count'] ?? 0 ?>
+                        </span>
                     </div>
                 </div>
                 <?php endforeach; ?>
             </div>
         </div>
         <?php endif; ?>
-
     </main>
 
     <?php require_once "modale_report.php" ?>

@@ -99,13 +99,16 @@
             </div>
         </div>
     </main>
-    <dialog id="modal-post-options" class="modal-post-options">
-        <div class="modal-options-content">
-            <button class="option-btn option-report">Report</button>
-            <button class="option-btn option-action" id="go-to-profile">Go to profile</button>
-            <button class="option-btn option-cancel">Cancel</button>
-        </div>
-    </dialog>
+<dialog id="modal-post-options" class="modal-post-options">
+    <div class="modal-options-content">
+        <button class="option-btn option-report">Report</button>
+        <?php if ($post['user_id'] == $_SESSION['user_id']): ?>
+        <button class="option-btn" id="delete-post">Delete</button>
+        <?php endif; ?>
+        <button class="option-btn option-action" id="go-to-profile">Go to profile</button>
+        <button class="option-btn option-cancel">Cancel</button>
+    </div>
+</dialog>
     <?php require_once "modale_report.php" ?>
 </body>
 </html>

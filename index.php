@@ -88,6 +88,17 @@ switch ($action)
         $post_controller->showPost();
         break;
 
+    case 'get_stickers':
+        $post_controller->getStickers();
+        break;
+    case 'capture':
+        $post_controller->capture();
+        break;
+    case 'delete_post':
+        $post_controller->deletePostAction();
+        break;
+
+
     // Views
     case 'email_signup':
         $user_controller->email_signup();

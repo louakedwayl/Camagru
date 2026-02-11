@@ -10,6 +10,7 @@ sed -i "s/EMAILPASS_PLACEHOLDER/$EMAILPASS/g" /etc/msmtprc
 echo "Configuration des dossiers d'upload..."
 mkdir -p /var/www/html/public/uploads/posts
 mkdir -p /var/www/html/public/uploads/avatars
+mkdir -p /var/www/html/assets/images/stickers
 # On donne la propriété à l'utilisateur d'Apache (www-data)
 chown -R www-data:www-data /var/www/html/public/uploads
 # Permissions (755 est suffisant et plus sécurisé que 777)

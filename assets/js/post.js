@@ -34,7 +34,6 @@ if (commentInput && commentSubmit) {
             const data = await response.json();
 
             if (data.success) {
-                // Ajouter le commentaire au DOM
                 const commentsSection = document.querySelector('.post-comments-section');
                 const newComment = document.createElement('div');
                 newComment.classList.add('comment-item');
@@ -49,7 +48,6 @@ if (commentInput && commentSubmit) {
                 commentsSection.appendChild(newComment);
                 commentsSection.scrollTop = commentsSection.scrollHeight;
 
-                // Reset input
                 commentInput.value = '';
                 commentSubmit.disabled = true;
             } else {
@@ -135,7 +133,7 @@ if (modal) {
         window.location.href = `index.php?action=user_profile&username=${username}`;
     });
 
-    // Report -> ouvre la modale report
+    // Report
     modal.querySelector('.option-report').addEventListener('click', () => {
         modal.close();
         const reportModal = document.getElementById('modale-report');
@@ -144,6 +142,36 @@ if (modal) {
             document.body.style.overflow = "hidden";
         }
     });
+
+    // Delete post
+    const deleteBtn = modal.querySelector('#delete-post');
+    if (deleteBtn) {
+        deleteBtn.addEventListener('click', async () => {
+            if (!confirm('Are you sure you want to delete this post?')) return;
+
+            const postId = document.querySelector('.three-dots').dataset.postId;
+
+            try {
+                const formData = new FormData();
+                formData.append('post_id', postId);
+
+                const response = await fetch('index.php?action=delete_post', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    window.location.href = 'index.php?action=home';
+                } else {
+                    alert(result.error || 'Error deleting post');
+                }
+            } catch (err) {
+                console.error('Delete error:', err);
+            }
+        });
+    }
 
     // Fermer en cliquant sur le backdrop
     modal.addEventListener('click', (e) => {
