@@ -36,6 +36,38 @@ class PostController
     exit;
 }
 
+
+
+public function homeVisitor(): void
+{
+    $posts = $this->postModel->getAllPosts() ?? [];
+    require __DIR__ . '/../views/visitor_home.php';
+}
+
+public function exploreVisitor(): void
+{
+    $posts = $this->postModel->getAllPosts();
+    require __DIR__ . '/../views/explore_visitor.php';
+}
+
+public function showPostVisitor(): void
+{
+    $postId = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+    if ($postId <= 0) {
+        header('Location: index.php?action=explore_visitor');
+        exit;
+    }
+    $post = $this->postModel->getPostById($postId);
+    if (!$post) {
+        header('Location: index.php?action=explore_visitor');
+        exit;
+    }
+    $comments = $this->postModel->getComments($postId);
+    $hasLiked = false;
+    require __DIR__ . '/../views/post_visitor.php';
+}
+
+
 public function capture(): void
 {
     if (session_status() === PHP_SESSION_NONE) session_start();

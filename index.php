@@ -141,6 +141,16 @@ switch ($action)
         include 'views/password_reset_confirm.php';
         break; 
 
+    case 'visitor_home':
+        $post_controller->homeVisitor();
+        break;
+    case 'visitor_explore':
+        $post_controller->exploreVisitor();
+        break;
+    case 'post_visitor':
+        $post_controller->showPostVisitor();
+        break;
+
     default:
         $user_controller->index();
         break;

@@ -32,7 +32,7 @@
                     </div>
             </div>
             <div class="bottom">
-                <a href="#" class= "visitor">Continue without login</a>
+                <a href="index.php?action=visitor_home" class="visitor">Continue without login</a>
                 <p class="error">Sorry, your password was incorrect. Please double-check your password.</p>
                 <a href="index.php?action=password_reset" class="violet forgot"> Forgot password?</a>
                 <p>Don't have an account?<a href="index.php?action=register" class="violet"> Sign up</a></p>
