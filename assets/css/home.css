@@ -231,3 +231,29 @@ span.post-caption-username
         display: none;
     }
 }
+
+@media (max-width: 620px) {
+    .gallery-grid {
+        width: 100%;
+        padding: 0 10px;
+    }
+
+    .gallery-top {
+        width: 100%;
+    }
+
+    .post-item {
+        width: 100%;
+        height: auto;
+    }
+
+    .post-item img {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 9 / 11;
+    }
+
+    .gallery-bottom {
+        width: 100%;
+    }
+}

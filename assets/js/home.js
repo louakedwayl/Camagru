@@ -1,5 +1,6 @@
 const iconHome = document.querySelector("img.house");
 iconHome.src = "assets/images/icon/home_black.svg";
+const imgComments = document.querySelectorAll("img.icon-comment");
 
 const moreLinks = document.querySelectorAll('.more-link');
 moreLinks.forEach(link => {
@@ -54,4 +55,12 @@ optionGoToPost.addEventListener('click', () => {
 optionGoToProfile.addEventListener('click', () => {
     modalPostOptions.close();
     window.location.href = 'index.php?action=user_profile&username=' + currentPostUsername;
+});
+
+
+imgComments.forEach(icon => {
+    icon.addEventListener("click", () => {
+        const postId = icon.getAttribute('data-post-id');
+        window.location.href = 'index.php?action=post&id=' + postId;
+    });
 });

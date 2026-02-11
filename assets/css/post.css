@@ -162,11 +162,15 @@
     width: 24px;
     height: 24px;
     cursor: pointer;
-    transition: opacity 0.2s;
+    transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
 .post-actions-icons img:hover {
-    opacity: 0.6;
+    transform: scale(1.1);
+}
+
+.post-actions-icons img:active {
+    transform: scale(0.9);
 }
 
 .icon-like.liked {

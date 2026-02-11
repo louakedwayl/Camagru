@@ -60,7 +60,7 @@
                 <div class="gallery-bottom">
                     <div class ="post-actions">
                         <img class="icon-like" src="assets/images/icon/heart.svg">
-                        <img class="icon-comment" src="assets/images/icon/comment.svg">
+                        <img class="icon-comment" src="assets/images/icon/comment.svg" data-post-id="<?php echo $post['id']; ?>">
                     </div>
                 <div class="caption-container">
                     <span class="post-caption-username"><?php echo htmlspecialchars($post['username']); ?></span> <span class="post-caption" data-full-text="<?php echo htmlspecialchars($post['caption']); ?>"><?php 

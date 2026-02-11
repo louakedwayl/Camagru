@@ -54,9 +54,17 @@
         <?php } else { ?>
             <div class="gallery">
                 <?php foreach ($userPosts as $post) { ?>
-                    <div class="gallery-item">
-                        <img src="<?= htmlspecialchars($post['image_path']) ?>" alt="Post image" class="gallery-img">
+                <div class="gallery-item" data-post-id="<?= $post['id'] ?>">
+                    <img src="<?= htmlspecialchars($post['image_path']) ?>" alt="Post image" class="gallery-img">
+                    <div class="gallery-overlay">
+                        <span class="gallery-stat">
+                            <img src="assets/images/icon/heart_white.svg" class="gallery-stat-icon"> <?= $post['likes_count'] ?? 0 ?>
+                        </span>
+                        <span class="gallery-stat">
+                            <img src="assets/images/icon/comment_white.svg" class="gallery-stat-icon"> <?= $post['comments_count'] ?? 0 ?>
+                        </span>
                     </div>
+                </div>
                 <?php } ?>
             </div>
         <?php } ?>

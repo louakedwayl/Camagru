@@ -163,3 +163,12 @@ if (btnPublicView) {
         window.location.href = `?action=user_profile&username=${username}`;
     });
 }
+
+const galleryItems = document.querySelectorAll('.gallery-item');
+
+galleryItems.forEach(item => {
+    item.addEventListener('click', () => {
+        const postId = item.getAttribute('data-post-id');
+        window.location.href = 'index.php?action=post&id=' + postId;
+    });
+});
