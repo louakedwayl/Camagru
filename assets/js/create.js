@@ -71,11 +71,7 @@ function drawStickers() {
     placedStickers.forEach(s => {
         ctx.drawImage(s.img, s.x, s.y, s.width, s.height);
 
-        if (s === activeSticker) {
-            ctx.strokeStyle = '#5063F9';
-            ctx.lineWidth = 2;
-            ctx.strokeRect(s.x, s.y, s.width, s.height);
-        }
+
     });
 
     // Show/hide HTML controls
@@ -404,6 +400,19 @@ document.querySelectorAll('.previous-item').forEach(item => {
         window.location.href = 'index.php?action=post&id=' + postId;
     });
 });
+
+document.getElementById('sticker-delete').addEventListener('click', () => {
+    if (activeSticker) {
+        // Deselect in grid
+        const gridItem = document.querySelector(`.sticker-item[data-sticker="${activeSticker.name}"]`);
+        if (gridItem) gridItem.classList.remove('selected');
+        // Remove from canvas
+        placedStickers = placedStickers.filter(s => s !== activeSticker);
+        activeSticker = null;
+        drawStickers();
+    }
+});
+
 
 // ===== INIT =====
 loadStickers();

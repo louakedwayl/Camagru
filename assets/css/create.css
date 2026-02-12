@@ -437,6 +437,15 @@ body {
     filter: brightness(0) invert(1);
 }
 
+.sticker-btn-delete {
+    background: rgba(220, 50, 50, 0.7);
+}
+
+.sticker-btn-delete:hover {
+    background: rgba(220, 50, 50, 0.9);
+}
+
+
 /* ===== RESPONSIVE ===== */
 
 /* Navbar offset */
