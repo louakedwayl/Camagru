@@ -186,3 +186,13 @@ if (modal) {
         document.body.style.overflow = "";
     });
 }
+
+// Click on avatar or username -> go to profile
+document.querySelectorAll('.post-avatar, .post-username, .comment-avatar, .comment-username').forEach(el => {
+    el.style.cursor = 'pointer';
+    el.addEventListener('click', (e) => {
+        e.preventDefault();
+        const username = el.closest('.post-header, .comment-item').querySelector('.post-username, .comment-username').textContent;
+        window.location.href = 'index.php?action=user_profile&username=' + username;
+    });
+});
