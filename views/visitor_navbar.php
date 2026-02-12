@@ -1,5 +1,6 @@
 <script defer src="assets/js/navbar.js"></script>
 <link rel="stylesheet" href="assets/css/navbar.css">
+<link rel="stylesheet" href="assets/css/visitor_navbar.css">
 <nav>
     <!-- LOGO -->
     <img class="logo" src="assets/images/logo.png" alt="Camagru Logo">

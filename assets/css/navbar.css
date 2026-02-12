@@ -36,12 +36,20 @@ nav img.icon.home {
 }
 
 nav img.icon.search,
-nav img.icon.explore,
 nav img.icon.notifications {
     width: 25px;
     height: 25px;
     transform: translateY(-1px);
 }
+
+nav img.icon.explore
+{
+    width: 29px;
+    height: 29px;
+    transform: translate(-1px, -1px);
+}
+
+
 
 nav img.icon.create {
     width: 30px;
