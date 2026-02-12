@@ -47,24 +47,24 @@ public function homeVisitor(): void
 public function exploreVisitor(): void
 {
     $posts = $this->postModel->getAllPosts();
-    require __DIR__ . '/../views/explore_visitor.php';
+    require __DIR__ . '/../views/visitor_explore.php';
 }
 
 public function showPostVisitor(): void
 {
     $postId = isset($_GET['id']) ? (int)$_GET['id'] : 0;
     if ($postId <= 0) {
-        header('Location: index.php?action=explore_visitor');
+        header('Location: index.php?action=visitor_explore');
         exit;
     }
     $post = $this->postModel->getPostById($postId);
     if (!$post) {
-        header('Location: index.php?action=explore_visitor');
+        header('Location: index.php?action=visitor_explore');
         exit;
     }
     $comments = $this->postModel->getComments($postId);
     $hasLiked = false;
-    require __DIR__ . '/../views/post_visitor.php';
+    require __DIR__ . '/../views/visitor_post.php';
 }
 
 

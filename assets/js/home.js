@@ -64,3 +64,12 @@ imgComments.forEach(icon => {
         window.location.href = 'index.php?action=post&id=' + postId;
     });
 });
+
+// Click on avatar or username -> go to profile
+document.querySelectorAll('.post-user-avatar, .post-username').forEach(el => {
+    el.style.cursor = 'pointer';
+    el.addEventListener('click', () => {
+        const username = el.closest('.gallery-top').querySelector('.post-username').textContent;
+        window.location.href = 'index.php?action=user_profile&username=' + username;
+    });
+});

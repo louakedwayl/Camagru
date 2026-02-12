@@ -9,6 +9,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon/favicon-16x16.png">
     <script defer src="assets/js/hamburger.js"></script>
+    <script defer src="assets/js/user_profile.js"></script>
 </head>
 <body>
     <?php require_once __DIR__ . '/navbar.php'; ?>
@@ -34,17 +35,24 @@
                 <span id="text-share-photo">When <?= htmlspecialchars($user['username']) ?> shares photos, they will appear here.</span>
             </div>
         <?php } else { ?>
-            <div class="gallery">
-                <?php foreach ($userPosts as $post) { ?>
-                    <div class="gallery-item">
-                        <img src="<?= htmlspecialchars($post['image_path']) ?>" alt="Post image" class="gallery-img">
-                    </div>
-                <?php } ?>
-            </div>
-        <?php } ?>
-
-        <?php require_once "footer.php"; ?>
-    </main>
-    <?php require_once "modale_report.php"; ?>
+<div class="gallery">
+    <?php foreach ($userPosts as $post) { ?>
+<div class="gallery-item" data-post-id="<?= $post['id'] ?>">
+<img src="<?= htmlspecialchars($post['image_path']) ?>" alt="Post image" class="gallery-img">
+<div class="gallery-overlay">
+<span class="gallery-stat">
+<img src="assets/images/icon/heart_white.svg" class="gallery-stat-icon"> <?= $post['likes_count'] ?? 0 ?>
+</span>
+<span class="gallery-stat">
+<img src="assets/images/icon/comment_white.svg" class="gallery-stat-icon"> <?= $post['comments_count'] ?? 0 ?>
+</span>
+</div>
+</div>
+<?php } ?>
+</div>
+<?php } ?>
+<?php require_once "footer.php"; ?>
+</main>
+<?php require_once "modale_report.php"; ?>
 </body>
 </html>

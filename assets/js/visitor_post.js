@@ -1,38 +1,28 @@
-// === HOME VISITOR JS ===
+// === VISITOR POST JS ===
 
 // Like -> redirect to login
 document.querySelectorAll('.icon-like').forEach(icon => {
+    icon.style.cursor = 'pointer';
     icon.addEventListener('click', () => {
         window.location.href = 'index.php';
     });
 });
 
-// Comment -> redirect to login
-document.querySelectorAll('.icon-comment').forEach(icon => {
+// Comment icon -> redirect to login
+document.querySelectorAll('.icon-comment-focus').forEach(icon => {
+    icon.style.cursor = 'pointer';
     icon.addEventListener('click', () => {
         window.location.href = 'index.php';
-    });
-});
-
-// "more" link for captions
-document.querySelectorAll('.more-link').forEach(link => {
-    link.addEventListener('click', (e) => {
-        e.preventDefault();
-        const captionSpan = link.previousElementSibling;
-        captionSpan.textContent = captionSpan.dataset.fullText;
-        link.style.display = 'none';
     });
 });
 
 // === MODALE 3 DOTS ===
 const modal = document.getElementById('modal-post-options');
 const threeDots = document.querySelectorAll('.three-dots');
-let currentPostId = null;
 
 if (modal) {
     threeDots.forEach(dot => {
         dot.addEventListener('click', () => {
-            currentPostId = dot.dataset.postId;
             modal.showModal();
             document.body.style.overflow = "hidden";
         });
@@ -44,12 +34,14 @@ if (modal) {
         document.body.style.overflow = "";
     });
 
-    // Go to post
-    modal.querySelector('#go-to-post').addEventListener('click', () => {
-        if (currentPostId) {
-            window.location.href = 'index.php?action=visitor_post&id=' + currentPostId;
-        }
-    });
+    // Go to profile
+    const goToProfile = modal.querySelector('#go-to-profile');
+    if (goToProfile) {
+        goToProfile.addEventListener('click', () => {
+            const username = document.querySelector('.post-username').textContent;
+            window.location.href = 'index.php?action=visitor_profile&username=' + username;
+        });
+    }
 
     // Report
     modal.querySelector('.option-report').addEventListener('click', () => {
@@ -73,12 +65,3 @@ if (modal) {
         document.body.style.overflow = "";
     });
 }
-
-// Click on avatar or username -> go to visitor profile
-document.querySelectorAll('.post-user-avatar, .post-username').forEach(el => {
-    el.style.cursor = 'pointer';
-    el.addEventListener('click', () => {
-        const username = el.closest('.gallery-top').querySelector('.post-username').textContent;
-        window.location.href = 'index.php?action=visitor_profile&username=' + username;
-    });
-});

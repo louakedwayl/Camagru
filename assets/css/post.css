@@ -78,9 +78,6 @@
     text-decoration: none;
 }
 
-.post-header .post-username:hover {
-    text-decoration: underline;
-}
 
 /* COMMENTS SECTION */
 
@@ -120,9 +117,7 @@
     text-decoration: none;
 }
 
-.comment-username:hover {
-    text-decoration: underline;
-}
+
 
 .comment-text {
     font-size: 14px;
@@ -234,6 +229,15 @@
 .comment-submit:not(:disabled):hover {
     color: #3d4fd4;
 }
+
+.login-prompt-comment {
+    color: #5063F9;
+    text-decoration: none;
+    font-size: 14px;
+    padding: 12px 16px;
+    display: block;
+}
+
 
 
 /* === RESPONSIVE === */

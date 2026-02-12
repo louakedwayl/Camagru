@@ -72,6 +72,28 @@ public function searchUsers(): void
     echo json_encode($users);
 }
 
+public function visitorProfile(): void
+{
+    $username = $_GET['username'] ?? '';
+    
+    if (empty($username)) {
+        header('Location: index.php?action=visitor_home');
+        exit();
+    }
+    
+    $user = $this->userModel->getUserByUsername($username);
+    
+    if (!$user) {
+        header('Location: index.php?action=visitor_home');
+        exit();
+    }
+    
+    $userId = $user['id'];
+    $userPosts = $this->postModel->getPostsByUserId($userId);
+
+    require 'views/visitor_profile.php';
+}
+
 
 /**
  * Updates user profile information.

@@ -17,6 +17,30 @@ if (!isset($_SESSION['admin_setup_done']))
 $action = $_GET['action'] ?? '';
 
 
+// TO DO LIST //
+
+/*
+    faire kon puisse clicker sur les image de profile partout en visitoor et pas (seulemntn dans home ia besoin)
+    Terminer 
+
+    faire les likes et les comments 
+
+    faire les notif et le mail
+
+    enlever le carret violet dans create
+
+    Norm 
+
+    relire tt le code 
+
+    Push
+
+*/
+
+
+
+
+
 $user_controller = new UserController();
 $post_controller = new PostController();
 $report_controller = new ReportController();
@@ -147,10 +171,12 @@ switch ($action)
     case 'visitor_explore':
         $post_controller->exploreVisitor();
         break;
-    case 'post_visitor':
+    case 'visitor_post':
         $post_controller->showPostVisitor();
         break;
-
+    case 'visitor_profile':
+        $user_controller->visitorProfile();
+        break;
     default:
         $user_controller->index();
         break;
