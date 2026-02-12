@@ -51,10 +51,10 @@
                     <img src="<?php echo htmlspecialchars($post['image_path']); ?>" alt="Post">
                 </div>
                 <div class="gallery-bottom">
-                    <div class="post-actions">
-                        <img class="icon-like" src="assets/images/icon/heart.svg">
-                        <img class="icon-comment" src="assets/images/icon/comment.svg" data-post-id="<?php echo $post['id']; ?>">
-                    </div>
+                <div class="post-actions">
+                    <img class="icon-like disabled" src="assets/images/icon/heart.svg">
+                    <img class="icon-comment disabled" src="assets/images/icon/comment.svg">
+                </div>
                     <div class="caption-container">
                         <span class="post-caption-username"><?php echo htmlspecialchars($post['username']); ?></span> <span class="post-caption" data-full-text="<?php echo htmlspecialchars($post['caption']); ?>"><?php 
                             $caption = htmlspecialchars($post['caption']);

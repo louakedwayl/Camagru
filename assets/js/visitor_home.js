@@ -1,18 +1,5 @@
 // === HOME VISITOR JS ===
 
-// Like -> redirect to login
-document.querySelectorAll('.icon-like').forEach(icon => {
-    icon.addEventListener('click', () => {
-        window.location.href = 'index.php';
-    });
-});
-
-// Comment -> redirect to login
-document.querySelectorAll('.icon-comment').forEach(icon => {
-    icon.addEventListener('click', () => {
-        window.location.href = 'index.php';
-    });
-});
 
 // "more" link for captions
 document.querySelectorAll('.more-link').forEach(link => {

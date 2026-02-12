@@ -238,6 +238,10 @@
     display: block;
 }
 
+.icon-like.disabled,
+.icon-comment-focus.disabled {
+    pointer-events: none;
+}
 
 
 /* === RESPONSIVE === */

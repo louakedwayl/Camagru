@@ -257,3 +257,8 @@ span.post-caption-username
         width: 100%;
     }
 }
+
+.icon-like.disabled,
+.icon-comment.disabled {
+    pointer-events: none;
+}
