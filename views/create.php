@@ -40,8 +40,8 @@
                     <canvas id="sticker-canvas"></canvas>
                     <!-- Sticker resize controls -->
                     <div class="sticker-controls" id="sticker-controls" style="display: none;">
-                        <button class="sticker-btn" id="sticker-plus">+</button>
                         <button class="sticker-btn" id="sticker-minus">−</button>
+                        <button class="sticker-btn" id="sticker-plus">+</button>
                         <button class="sticker-btn sticker-btn-delete" id="sticker-delete">×</button>
                     </div>
                     <!-- No source placeholder -->

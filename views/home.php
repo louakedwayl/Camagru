@@ -58,10 +58,15 @@
                     <img src="<?php echo htmlspecialchars($post['image_path']); ?>" alt="Post">
                 </div>
                 <div class="gallery-bottom">
-                    <div class ="post-actions">
-                        <img class="icon-like" src="assets/images/icon/heart.svg">
+                    <div class="post-actions">
+                        <img class="icon-like <?php echo $post['has_liked'] ? 'liked' : ''; ?>" 
+                            src="assets/images/icon/heart<?php echo $post['has_liked'] ? '_red' : ''; ?>.svg" 
+                            data-post-id="<?php echo $post['id']; ?>">
+                        <span class="likes-count" data-post-id="<?php echo $post['id']; ?>"><?php echo $post['likes_count'] > 0 ? $post['likes_count'] : ''; ?></span>
                         <img class="icon-comment" src="assets/images/icon/comment.svg" data-post-id="<?php echo $post['id']; ?>">
+                        <span class="comments-count"><?php echo $post['comments_count'] > 0 ? $post['comments_count'] : ''; ?></span>
                     </div>
+
                 <div class="caption-container">
                     <span class="post-caption-username"><?php echo htmlspecialchars($post['username']); ?></span> <span class="post-caption" data-full-text="<?php echo htmlspecialchars($post['caption']); ?>"><?php 
                         $caption = htmlspecialchars($post['caption']);
@@ -84,4 +89,3 @@
 
 </body>
 </html>
-

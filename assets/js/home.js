@@ -73,3 +73,36 @@ document.querySelectorAll('.post-user-avatar, .post-username').forEach(el => {
         window.location.href = 'index.php?action=user_profile&username=' + username;
     });
 });
+
+// Toggle like
+document.querySelectorAll('.icon-like').forEach(icon => {
+    icon.addEventListener('click', async () => {
+        const postId = icon.getAttribute('data-post-id');
+        
+        try {
+            const res = await fetch('index.php?action=toggle_like', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: 'post_id=' + postId
+            });
+            const data = await res.json();
+            
+            if (data.success) {
+                // Toggle icon
+                if (data.liked) {
+                    icon.src = 'assets/images/icon/heart_red.svg';
+                    icon.classList.add('liked');
+                } else {
+                    icon.src = 'assets/images/icon/heart.svg';
+                    icon.classList.remove('liked');
+                }
+                
+                // Update count
+                const countEl = document.querySelector(`.likes-count[data-post-id="${postId}"]`);
+                countEl.textContent = data.likes_count > 0 ? data.likes_count : '';
+            }
+        } catch (err) {
+            console.error('Like error:', err);
+        }
+    });
+});

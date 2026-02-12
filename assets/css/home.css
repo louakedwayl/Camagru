@@ -1,21 +1,16 @@
 body {
-    display: block !important; /* Force block au lieu de grid */
+    display: block !important;
     grid-template-columns: unset !important;
     grid-template-rows: unset !important;
 }
-
-
 main 
 {
     display: flex;
     justify-content: center;
 }
-
-
 /* USER MENU */
-
 .user-menu {
-    position :fixed;
+    position: fixed;
     right: 0px;
     display: flex;
     align-items: center;
@@ -24,19 +19,16 @@ main
     margin-right: 20px;
     gap: 20px;
 }
-
 .username {
     font-weight: 700;
     color: #262626;
     font-size: 18px;
 }
-
 .fullname {
     font-weight: 400;
     color: #8e8e8e;
     font-size: 17px;
 }
-
 .avatar-img {
     width: 80px;
     height: 80px;
@@ -44,18 +36,14 @@ main
     object-fit: cover;
     border: 1px solid #dbdbdb;
 }
-
 .UserName
 {
     display: flex;
     flex-direction: column;
     line-height: 22px;
 }
-
 /* USER MENU */
-
 /* TOP */
-
 .gallery-top 
 {
     display: flex;
@@ -63,32 +51,24 @@ main
     align-items: center;
     height: 75px;
 }
-
 .post-user-info
 {
     display: flex;
     margin-top: 3px;
 }
-
 .post-username
 {
     font-weight: 600;
 }
-
-
 .post-username::after {
     content: "•";
     margin: 0 4px;
     color: #8e8e8e;
 }
-
-
 .post-date {
     color: #8e8e8e;
     font-size: 14px;
 }
-
-
 .post-user-avatar
 {
     width: 50px;
@@ -97,25 +77,17 @@ main
     margin-right: 20px;
     border: 1px solid #dbdbdb;
     margin-left: 10px;
-
 }
-
-
 /* TOP */
-
 .gallery-grid {
     display: flex;
     flex-direction: column;
-    width: 600px; /* Ajoutez une largeur max */
+    width: 600px;
 }
-
 .gallery-grid .gallery-top:first-child 
 {
-    margin-top: 40px; /* Ajustez la valeur selon vos besoins */
+    margin-top: 40px;
 }
-
-
-
 .post-item {
     position: relative;
     width: 550px;
@@ -125,16 +97,13 @@ main
     background-color: #efefef;
     cursor: pointer;
 }
-
 .post-item img {
     width: 550px;
     height: 600px; 
-    object-fit: cover; /* Remplit le carré sans déformer l'image */
+    object-fit: cover;
     transition: transform 0.3s ease;
 }
-
 /* BOTTOM */
-
 .gallery-bottom 
 {
     display: flex;
@@ -143,87 +112,75 @@ main
     margin-top: 12px;
     margin-bottom: 40px;
 }
-
-.post-actions
-{
+.post-actions {
     display: flex;
-    gap: 15px;
-    margin-bottom: 12px;
-    margin-left: 10px;
+    align-items: center;
+    gap: 4px;
 }
-
-
 img.icon-like
 {
     width: 30px;
     height: 30px;
+    cursor: pointer;
     transition: transform 0.2s ease, opacity 0.2s ease;
 }
-
 img.icon-like:hover {
     transform: scale(1.1);
 }
-
 img.icon-like:active {
     transform: scale(0.9);
 }
-
-
-
+.likes-count {
+    font-size: 14px;
+    font-weight: 600;
+    margin-right: 12px;
+    min-width: 10px;
+}
 img.icon-comment
 {
     margin-top: 1px;
     width: 27px;
     height: 27px;
+    cursor: pointer;
     transition: transform 0.2s ease, opacity 0.2s ease;
 }
-
-
 img.icon-comment:hover {
     transform: scale(1.1);
 }
-
 img.icon-comment:active {
     transform: scale(0.9);
 }
-
+.comments-count {
+    font-size: 14px;
+    font-weight: 600;
+}
 div.caption-container
 {
     margin-left: 10px;
     margin-right: 10px;
-
+    margin-top: 4px;
 }
-
 span.post-caption-username
 {
     font-weight: bold;
     font-size: 16px;
 }
-
-
 .post-caption
 {
     font-size: 15px;
-
 }
-
 .more-link
 {
     text-decoration: none;
     font-size: 15px;
     color: #686868;
 }
-
 .more-link::before
 {
     content: "...";
     color: black;
 }
-
-
 /* BOTTOM */
-
-
 @media (max-width: 1050px) 
 {
     .user-menu 
@@ -231,33 +188,27 @@ span.post-caption-username
         display: none;
     }
 }
-
 @media (max-width: 620px) {
     .gallery-grid {
         width: 100%;
         padding: 0 10px;
     }
-
     .gallery-top {
         width: 100%;
     }
-
     .post-item {
         width: 100%;
         height: auto;
     }
-
     .post-item img {
         width: 100%;
         height: auto;
         aspect-ratio: 9 / 11;
     }
-
     .gallery-bottom {
         width: 100%;
     }
 }
-
 .icon-like.disabled,
 .icon-comment.disabled {
     pointer-events: none;

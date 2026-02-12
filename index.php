@@ -122,6 +122,9 @@ switch ($action)
         $post_controller->deletePostAction();
         break;
 
+    case 'toggle_like':
+        $post_controller->toggleLike();  // ✅
+        break;
 
     // Views
     case 'email_signup':

@@ -14,6 +14,43 @@ class PostController
         $this->postModel = new PostModel();
     }
 
+public function toggleLike(): void
+{
+    if (session_status() === PHP_SESSION_NONE) session_start();
+    
+    header('Content-Type: application/json');
+    
+    if (!isset($_SESSION['user_id'])) {
+        echo json_encode(['success' => false, 'error' => 'Not logged in']);
+        exit;
+    }
+
+    $postId = (int)($_POST['post_id'] ?? 0);
+    
+    if ($postId <= 0) {
+        echo json_encode(['success' => false, 'error' => 'Invalid post ID']);
+        exit;
+    }
+
+    $userId = (int)$_SESSION['user_id'];
+    $hasLiked = $this->postModel->hasUserLiked($userId, $postId);
+
+    if ($hasLiked) {
+        $this->postModel->removeLike($userId, $postId);
+    } else {
+        $this->postModel->addLike($userId, $postId);
+    }
+
+    $post = $this->postModel->getPostById($postId);
+
+    echo json_encode([
+        'success' => true,
+        'liked' => !$hasLiked,
+        'likes_count' => (int)$post['likes_count']
+    ]);
+    exit;
+}
+
 
 
     public function getStickers(): void
@@ -187,7 +224,7 @@ public function deletePostAction(): void
         }
 
         $postModel = new PostModel();
-        $posts = $postModel->getAllPosts() ?? [];
+        $posts = $postModel->getAllPosts((int)$_SESSION['user_id']);
 
         require __DIR__ . '/../views/home.php';
     }
