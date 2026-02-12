@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Camagru</title>
+<link rel="stylesheet" href="assets/css/footer.css">
+<link rel="stylesheet" href="assets/css/explore.css">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/images/favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon/favicon-16x16.png">
+<script defer src="assets/js/hamburger.js"></script>
+<script defer src="assets/js/visitor_explore.js"></script>
+<script defer src="assets/js/report.js"></script>
+</head>
+<body>
+<div class="overlay"></div>
+<?php require_once __DIR__ . '/visitor_navbar.php'; ?>
+<main>
+<div class="explore-grid">
+<?php foreach ($posts as $post) {?>
+<div class="explore-item" data-post-id="<?= $post['id'] ?>">
+<img src="<?= htmlspecialchars($post['image_path']) ?>" 
+alt="Post by <?= htmlspecialchars($post['username']) ?>" 
+class="explore-img">
+<div class="explore-overlay">
+<span class="explore-stat">
+<img src="assets/images/icon/heart_white.svg" class="explore-stat-icon"> <?= $post['likes_count'] ?>
+</span>
+<span class="explore-stat">
+<img src="assets/images/icon/comment_white.svg" class="explore-stat-icon"> <?= $post['comments_count'] ?>
+</span>
+</div>
+</div>
+<?php }?>
+</div>
+</main>
+<?php require_once "footer.php" ?>
+<?php require_once "modale_report.php" ?>
+</body>
+</html>
