@@ -80,8 +80,10 @@
                 <!-- ACTIONS -->
                 <div class="post-actions-bar">
                     <div class="post-actions-icons">
-                        <img class="icon-like <?= $hasLiked ? 'liked' : '' ?>" src="assets/images/icon/heart.svg" data-post-id="<?= $post['id'] ?>">
-                        <img class="icon-comment-focus" src="assets/images/icon/comment.svg">
+<img class="icon-like <?= $hasLiked ? 'liked' : '' ?>" 
+     src="assets/images/icon/heart<?= $hasLiked ? '_red' : '' ?>.svg" 
+     data-post-id="<?= $post['id'] ?>">
+                    <img class="icon-comment-focus" src="assets/images/icon/comment.svg">
                     </div>
                     <span class="likes-count"><?= $post['likes_count'] ?> like<?= $post['likes_count'] > 1 ? 's' : '' ?></span>
                     <time class="post-time">

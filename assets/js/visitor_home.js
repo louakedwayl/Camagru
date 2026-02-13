@@ -71,3 +71,14 @@ document.querySelectorAll('.post-user-avatar, .post-username').forEach(el => {
         window.location.href = 'index.php?action=visitor_profile&username=' + username;
     });
 });
+
+const goToProfile = document.getElementById('go-to-profile');
+if (goToProfile) {
+    goToProfile.addEventListener('click', () => {
+        const dot = document.querySelector(`.three-dots[data-post-id="${currentPostId}"]`);
+        const username = dot.closest('.gallery-top').querySelector('.post-username').textContent;
+        modal.close();
+        document.body.style.overflow = "";
+        window.location.href = 'index.php?action=visitor_profile&username=' + username;
+    });
+}

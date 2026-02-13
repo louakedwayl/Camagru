@@ -280,5 +280,37 @@ public function deletePostAction(): void
     }
 
 
+public function addCommentAction(): void
+{
+    if (session_status() === PHP_SESSION_NONE) session_start();
+    
+    header('Content-Type: application/json');
+    
+    if (!isset($_SESSION['user_id'])) {
+        echo json_encode(['success' => false, 'message' => 'Not logged in']);
+        exit;
+    }
+
+    $input = json_decode(file_get_contents('php://input'), true);
+    $postId = (int)($input['post_id'] ?? 0);
+    $content = trim($input['content'] ?? '');
+
+    if ($postId <= 0 || $content === '') {
+        echo json_encode(['success' => false, 'message' => 'Invalid data']);
+        exit;
+    }
+
+    $userId = (int)$_SESSION['user_id'];
+    $success = $this->postModel->addComment($userId, $postId, $content);
+
+    echo json_encode([
+        'success' => $success,
+        'username' => $_SESSION['username'],
+        'avatar' => $_SESSION['avatar_path'] ?? 'assets/images/default-avatar.jpeg'
+    ]);
+    exit;
+}
+
+
 
 }

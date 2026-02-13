@@ -83,27 +83,29 @@ const iconLike = document.querySelector('.icon-like');
 if (iconLike) {
     iconLike.addEventListener('click', async () => {
         const postId = iconLike.getAttribute('data-post-id');
-        const isLiked = iconLike.classList.contains('liked');
-        const action = isLiked ? 'unlike' : 'like';
 
         try {
-            const response = await fetch(`index.php?action=${action}`, {
+            const response = await fetch('index.php?action=toggle_like', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ post_id: postId })
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: 'post_id=' + postId
             });
 
             const data = await response.json();
 
             if (data.success) {
-                iconLike.classList.toggle('liked');
+                if (data.liked) {
+                    iconLike.src = 'assets/images/icon/heart_red.svg';
+                    iconLike.classList.add('liked');
+                } else {
+                    iconLike.src = 'assets/images/icon/heart.svg';
+                    iconLike.classList.remove('liked');
+                }
+
                 const likesCount = document.querySelector('.likes-count');
-                likesCount.textContent = data.likes_count + ' like' + (data.likes_count > 1 ? 's' : '');
+                likesCount.textContent = data.likes_count > 0 ? data.likes_count + ' like' + (data.likes_count > 1 ? 's' : '') : '0 likes';
             }
         } catch (error) {
-            console.error('Error:', error);
         }
     });
 }

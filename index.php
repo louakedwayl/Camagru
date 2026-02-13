@@ -126,6 +126,10 @@ switch ($action)
         $post_controller->toggleLike();  // ✅
         break;
 
+    case 'add_comment':
+        $post_controller->addCommentAction();
+        break;
+
     // Views
     case 'email_signup':
         $user_controller->email_signup();

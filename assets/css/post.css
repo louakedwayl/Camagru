@@ -168,9 +168,7 @@
     transform: scale(0.9);
 }
 
-.icon-like.liked {
-    filter: invert(29%) sepia(96%) saturate(7471%) hue-rotate(346deg) brightness(97%) contrast(92%);
-}
+
 
 .likes-count {
     font-size: 14px;
