@@ -16,43 +16,41 @@
     <main>
         <header>
             <div class="avatar-label">
-                <img src="<?= htmlspecialchars($user['avatar_path'] ?? 'assets/images/default-avatar.jpeg') ?>" 
-                     class="profile-avatar" 
-                     alt="<?= htmlspecialchars($user['username']) ?>">
+                <img src="<?= htmlspecialchars($user['avatar_path'] ?? 'assets/images/default-avatar.jpeg') ?>"
+                    class="profile-avatar"
+                    alt="<?= htmlspecialchars($user['username']) ?>">
             </div>
             <div class="user-info">
                 <span class="username"><?= htmlspecialchars($user['username']) ?></span>
                 <span class="fullname"><?= htmlspecialchars($user['full_name']) ?></span>
             </div>
         </header>
-
         <div class="separator-line"></div>
-
         <?php if (empty($userPosts)) { ?>
-            <div id="gallery-empty-state">
-                <img src="assets/images/icon/camera.svg" class="camera-icon">
-                <span id="share-photo">No Posts Yet</span>
-                <span id="text-share-photo">When <?= htmlspecialchars($user['username']) ?> shares photos, they will appear here.</span>
-            </div>
+        <div id="gallery-empty-state">
+            <img src="assets/images/icon/camera.svg" class="camera-icon">
+            <span id="share-photo">No Posts Yet</span>
+            <span id="text-share-photo">When <?= htmlspecialchars($user['username']) ?> shares photos, they will appear here.</span>
+        </div>
         <?php } else { ?>
-<div class="gallery">
-    <?php foreach ($userPosts as $post) { ?>
-<div class="gallery-item" data-post-id="<?= $post['id'] ?>">
-<img src="<?= htmlspecialchars($post['image_path']) ?>" alt="Post image" class="gallery-img">
-<div class="gallery-overlay">
-<span class="gallery-stat">
-<img src="assets/images/icon/heart_white.svg" class="gallery-stat-icon"> <?= $post['likes_count'] ?? 0 ?>
-</span>
-<span class="gallery-stat">
-<img src="assets/images/icon/comment_white.svg" class="gallery-stat-icon"> <?= $post['comments_count'] ?? 0 ?>
-</span>
-</div>
-</div>
-<?php } ?>
-</div>
-<?php } ?>
-<?php require_once "footer.php"; ?>
-</main>
-<?php require_once "modale_report.php"; ?>
+        <div class="gallery">
+            <?php foreach ($userPosts as $post) { ?>
+            <div class="gallery-item" data-post-id="<?= $post['id'] ?>">
+                <img src="<?= htmlspecialchars($post['image_path']) ?>" alt="Post image" class="gallery-img">
+                <div class="gallery-overlay">
+                    <span class="gallery-stat">
+                        <img src="assets/images/icon/heart_white.svg" class="gallery-stat-icon"> <?= $post['likes_count'] ?? 0 ?>
+                    </span>
+                    <span class="gallery-stat">
+                        <img src="assets/images/icon/comment_white.svg" class="gallery-stat-icon"> <?= $post['comments_count'] ?? 0 ?>
+                    </span>
+                </div>
+            </div>
+            <?php } ?>
+        </div>
+        <?php } ?>
+        <?php require_once "footer.php"; ?>
+    </main>
+    <?php require_once "modale_report.php"; ?>
 </body>
 </html>

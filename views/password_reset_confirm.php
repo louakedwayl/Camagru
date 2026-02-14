@@ -23,7 +23,6 @@
     <main>
         <h1 class="title-reset">Create A Strong Password</h1>
         <p class="description-reset">Your password must be at least 6 characters and should include a Uppercase character.</p>
-            
         <form method="POST">
             <input type="hidden" name="email" value="<?= htmlspecialchars($email) ?>">
             <input type="hidden" name="code" value="<?= htmlspecialchars($code) ?>">
@@ -33,8 +32,8 @@
             <input id="pass2" name="confirm_password" type="password" placeholder="New password, again" required>
             <button id="submit-btn" class="login-link">Reset Password</button>
         </form>
-            <p class="errorMatch">Password doesn't match.</p>
-            <p class="errorTimeout">This link has expired (timeout).</p>
+        <p class="errorMatch">Password doesn't match.</p>
+        <p class="errorTimeout">This link has expired (timeout).</p>
     </main>
     <?php require_once "footer.php" ?>
 </body>

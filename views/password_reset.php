@@ -26,23 +26,23 @@
         <p class="padlock2">Enter your email, or username and we'll</p>
         <p class="padlock3">send you a link to get back into your account.</p>
         <form method="POST">
-            <input type="text" placeholder ="Email or Username" name="login">
-            <button type="submit" class = "login-link">Send login link</button>
+            <input type="text" placeholder="Email or Username" name="login">
+            <button type="submit" class="login-link">Send login link</button>
         </form>
-        <a href="#" class = "reset-password">Can't reset your password?</a>
-        <div class="or" >
-            <div class="left or" ></div>
-                <span class="or">OR</span>
-                    <div class= "right or" ></div>
+        <a href="#" class="reset-password">Can't reset your password?</a>
+        <div class="or">
+            <div class="left or"></div>
+            <span class="or">OR</span>
+            <div class="right or"></div>
         </div>
-            <a href="index.php?action=register" class="create-account">Create new account</a>
-            <p class="error-timeout">This link has expired (timeout).</p>
-         <div class="bottom">
-            <a href="index.php?action=index" class = "login-back">Back to login</a>
-         </div>
+        <a href="index.php?action=register" class="create-account">Create new account</a>
+        <p class="error-timeout">This link has expired (timeout).</p>
+        <div class="bottom">
+            <a href="index.php?action=index" class="login-back">Back to login</a>
+        </div>
     </main>
     <?php require_once "footer.php" ?>
-    <div class = "snackbar">
+    <div class="snackbar">
         <p id="snackbar-success">A reset link has been sent to your email..</p>
         <p id="snackbar-failure">Sorry! You can only request one link every 10 minutes.<br>Please try again later.</p>
         <p id="snackbar-error">Sorry! We're having trouble sending you a reset link right now. Please try again later.</p>

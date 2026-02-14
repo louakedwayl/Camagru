@@ -15,26 +15,26 @@
 <body>
     <main>
         <div class="index_left">
-            <img class = "landing img"src="assets/images/landing-2x.png" alt="Landing page image">
+            <img class="landing img" src="assets/images/landing-2x.png" alt="Landing page image">
         </div>
         <div class="index_right">
             <div class="top">
-            <img src="assets/images/logo.png" alt="Camagru Logo">
+                <img src="assets/images/logo.png" alt="Camagru Logo">
                 <form id="login_form" method="POST">
-                    <input type="text" id ="input_login" placeholder="Username or email" name="login">
-                    <input type="password" id ="input_password" placeholder="Password" name="password">
+                    <input type="text" id="input_login" placeholder="Username or email" name="login">
+                    <input type="password" id="input_password" placeholder="Password" name="password">
                     <button type="submit">Log in</button>
                 </form>
-                    <div class="or" >
-                        <div class="left or" ></div>
-                            <span class="or">OR</span>
-                                <div class= "right or" ></div>
-                    </div>
+                <div class="or">
+                    <div class="left or"></div>
+                    <span class="or">OR</span>
+                    <div class="right or"></div>
+                </div>
             </div>
             <div class="bottom">
                 <a href="index.php?action=visitor_home" class="visitor">Continue without login</a>
                 <p class="error">Sorry, your password was incorrect. Please double-check your password.</p>
-                <a href="index.php?action=password_reset" class="violet forgot"> Forgot password?</a>
+                <a href="index.php?action=password_reset" class="violet forgot">Forgot password?</a>
                 <p>Don't have an account?<a href="index.php?action=register" class="violet"> Sign up</a></p>
             </div>
         </div>

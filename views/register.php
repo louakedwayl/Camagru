@@ -17,25 +17,21 @@
     <main>
         <div class="top">
             <img src="assets/images/logo.png" alt="Camagru Logo">
-            <p class = "logo">Sign up to see photos from your friends.</p>
+            <p class="logo">Sign up to see photos from your friends.</p>
             <form method="POST">
                 <input type="email" name="email" placeholder="Email" required>
                 <p class="error email">Enter a valid email address.</p>
                 <p class="error email_invailable">An account with this email already exists.</p>
-
                 <input type="password" name="password" placeholder="Password" required>
                 <p class="error password">Create a password at least 6 characters long.</p>
                 <p class="error uppercase">Password must contain at least one uppercase letter.</p>
-                
                 <input type="text" name="fullname" placeholder="Full name" required>
                 <p class="error fullname_size">Full name must be 2-50 characters.</p>
                 <p class="error fullname">Full name must contain only letters, spaces, hyphens, and apostrophes.</p>
-
                 <input type="text" name="username" placeholder="Username" required>
                 <p class="error username_size">Username must be 3-30 characters.</p>
                 <p class="error username">Username must contain only letters, numbers, underscores, and periods.</p>
                 <p class="error username_invailable">A user with that username already exists.</p>
-
                 <button type="submit">Next</button>
             </form>
             <p class="first">People who use our service may have uploaded your contact information to Camagru.<a href="#"> Learn More</a></p>
@@ -44,10 +40,9 @@
         <div class="bottom">
             <p>Have an account?</p>
             <p><a href="index.php?action=index">Log in</a></p>
-        </div> 
+        </div>
     </main>
     <?php require_once "footer.php" ?>
     <?php require_once "modale_learn_more.php" ?>
 </body>
 </html>
-

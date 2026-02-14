@@ -17,24 +17,23 @@
     <div class="overlay"></div>
     <?php require_once __DIR__ . '/navbar.php'; ?>
     <main>
-            <div class="explore-grid">
-            <?php foreach ($posts as $post) {?>
-                <div class="explore-item" data-post-id="<?= $post['id'] ?>">
-                    <img src="<?= htmlspecialchars($post['image_path']) ?>" 
-                        alt="Post by <?= htmlspecialchars($post['username']) ?>" 
-                        class="explore-img">
-                    <div class="explore-overlay">
-                        <span class="explore-stat">
-                            <img src="assets/images/icon/heart_white.svg" class="explore-stat-icon"> <?= $post['likes_count'] ?>
-                        </span>
-                        <span class="explore-stat">
-                            <img src="assets/images/icon/comment_white.svg" class="explore-stat-icon"> <?= $post['comments_count'] ?>
-                        </span>
-                    </div>
+        <div class="explore-grid">
+            <?php foreach ($posts as $post) { ?>
+            <div class="explore-item" data-post-id="<?= $post['id'] ?>">
+                <img src="<?= htmlspecialchars($post['image_path']) ?>"
+                    alt="Post by <?= htmlspecialchars($post['username']) ?>"
+                    class="explore-img">
+                <div class="explore-overlay">
+                    <span class="explore-stat">
+                        <img src="assets/images/icon/heart_white.svg" class="explore-stat-icon"> <?= $post['likes_count'] ?>
+                    </span>
+                    <span class="explore-stat">
+                        <img src="assets/images/icon/comment_white.svg" class="explore-stat-icon"> <?= $post['comments_count'] ?>
+                    </span>
                 </div>
-                <?php }?>
-                </div>
-
+            </div>
+            <?php } ?>
+        </div>
     </main>
     <?php require_once "footer.php" ?>
     <?php require_once "modale_report.php" ?>

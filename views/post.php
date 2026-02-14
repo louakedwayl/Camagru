@@ -38,7 +38,6 @@
                 </div>
                 <!-- CAPTION + COMMENTS -->
                 <div class="post-comments-section">
-                    <!-- Caption comme premier "commentaire" -->
                     <?php if ($post['caption']): ?>
                     <div class="comment-item">
                         <img src="<?= htmlspecialchars($post['user_avatar'] ?? 'assets/images/default-avatar.jpeg') ?>" alt="Avatar" class="comment-avatar">
@@ -48,7 +47,6 @@
                         </div>
                     </div>
                     <?php endif; ?>
-                    <!-- Commentaires -->
                     <?php foreach ($comments as $comment): ?>
                     <div class="comment-item">
                         <img src="<?= htmlspecialchars($comment['avatar_path'] ?? 'assets/images/default-avatar.jpeg') ?>" alt="Avatar" class="comment-avatar">
@@ -80,10 +78,10 @@
                 <!-- ACTIONS -->
                 <div class="post-actions-bar">
                     <div class="post-actions-icons">
-<img class="icon-like <?= $hasLiked ? 'liked' : '' ?>" 
-     src="assets/images/icon/heart<?= $hasLiked ? '_red' : '' ?>.svg" 
-     data-post-id="<?= $post['id'] ?>">
-                    <img class="icon-comment-focus" src="assets/images/icon/comment.svg">
+                        <img class="icon-like <?= $hasLiked ? 'liked' : '' ?>"
+                            src="assets/images/icon/heart<?= $hasLiked ? '_red' : '' ?>.svg"
+                            data-post-id="<?= $post['id'] ?>">
+                        <img class="icon-comment-focus" src="assets/images/icon/comment.svg">
                     </div>
                     <span class="likes-count"><?= $post['likes_count'] ?> like<?= $post['likes_count'] > 1 ? 's' : '' ?></span>
                     <time class="post-time">
@@ -101,16 +99,16 @@
             </div>
         </div>
     </main>
-<dialog id="modal-post-options" class="modal-post-options">
-    <div class="modal-options-content">
-        <button class="option-btn option-report">Report</button>
-        <?php if ($post['user_id'] == $_SESSION['user_id']): ?>
-        <button class="option-btn" id="delete-post">Delete</button>
-        <?php endif; ?>
-        <button class="option-btn option-action" id="go-to-profile">Go to profile</button>
-        <button class="option-btn option-cancel">Cancel</button>
-    </div>
-</dialog>
+    <dialog id="modal-post-options" class="modal-post-options">
+        <div class="modal-options-content">
+            <button class="option-btn option-report">Report</button>
+            <?php if ($post['user_id'] == $_SESSION['user_id']): ?>
+            <button class="option-btn" id="delete-post">Delete</button>
+            <?php endif; ?>
+            <button class="option-btn option-action" id="go-to-profile">Go to profile</button>
+            <button class="option-btn option-cancel">Cancel</button>
+        </div>
+    </dialog>
     <?php require_once "modale_report.php" ?>
 </body>
 </html>

@@ -6,7 +6,7 @@
     <title>Camagru</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/footer.css">
-    <link rel="stylesheet" href="assets/css/email_signup.css"> 
+    <link rel="stylesheet" href="assets/css/email_signup.css">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/images/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon/favicon-16x16.png">
@@ -20,30 +20,30 @@
             <div class="top1">
                 <p>Enter the confirmation code we sent to</p>
                 <p>
-                    <?php echo htmlspecialchars($_SESSION['user_email']); ?>. 
+                    <?php echo htmlspecialchars($_SESSION['user_email']); ?>.
                     <a id="resend-link" href="#">Resend Code.</a>
                 </p>
             </div>
             <form method="post" novalidate>
-                <input type="text" placeholder="Confirmation Code  " pattern="[0-9]{6}" maxlength="6" inputmode="numeric" name="code">
+                <input type="text" placeholder="Confirmation Code" pattern="[0-9]{6}" maxlength="6" inputmode="numeric" name="code">
                 <button type="submit">Next</button>
             </form>
             <div class="error">
-                <p class = "error">That code isn't valid. You can request a new one.</p>
+                <p class="error">That code isn't valid. You can request a new one.</p>
                 <p class="error2">That code has expired (timeout).</p>
             </div>
-            <div class = "top2">
-                <p>You can also report content you believe is unlawful in </p>
+            <div class="top2">
+                <p>You can also report content you believe is unlawful in</p>
                 <p>your country without logging in.</p>
             </div>
         </div>
         <div class="bottom">
-                <p>Have an account?</p>
-                <a href="index.php?action=index"> Log in</a>
+            <p>Have an account?</p>
+            <a href="index.php?action=index">Log in</a>
         </div>
     </main>
     <?php require_once "footer.php" ?>
-    <div class = "snackbar">
+    <div class="snackbar">
         <p id="snackbar-success">A new verification code has been sent to your email.</p>
         <p id="snackbar-failure">Sorry! You can only request one confirmation code every 10 minutes. Please try again later.</p>
     </div>
