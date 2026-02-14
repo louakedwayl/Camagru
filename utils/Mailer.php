@@ -201,6 +201,98 @@ public static function sendResetLink(string $to, string $username, string $code)
     return self::send($to, $subject, $message);
 }
 
+   public static function sendNotificationEmail(string $to, string $ownerUsername, string $actorUsername, string $type, string $postId, ?string $commentContent = null): bool
+    {
+        if ($type === 'like') {
+            $subject = "Camagru: " . $actorUsername . " liked your photo";
+            $actionText = "<strong>" . htmlspecialchars($actorUsername) . "</strong> liked your photo.";
+        } else {
+            $subject = "Camagru: " . $actorUsername . " commented on your photo";
+            $preview = $commentContent ? ': "' . htmlspecialchars(mb_substr($commentContent, 0, 80)) . '"' : '';
+            $actionText = "<strong>" . htmlspecialchars($actorUsername) . "</strong> commented on your photo" . $preview . ".";
+        }
+
+        $postLink = 'http://localhost:8080/index.php?action=post&id=' . urlencode($postId);
+
+        $softGrey = "#737373";
+        $footerGreyText = "#8e8e8e";
+        $linkBlue = "#0056b3";
+        $bgColor = "#ffffff";
+        $footerBgColor = "#fafafa";
+        $font = "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif";
+
+        $message = "
+        <!DOCTYPE html>
+        <html lang='en'>
+        <head>
+            <meta charset='UTF-8'>
+            <style>
+                * { font-family: $font !important; }
+            </style>
+        </head>
+        <body style='margin: 0; padding: 0; background-color: #f9f9f9; font-family: $font;'>
+            
+            <table border='0' cellpadding='0' cellspacing='0' width='100%' style='background-color: #f9f9f9; padding: 20px 0;'>
+                <tr>
+                    <td align='center'>
+                        <table border='0' cellpadding='0' cellspacing='0' width='100%' style='max-width: 600px; background-color: $bgColor; border: 1px solid #dbdbdb; border-radius: 3px;'>
+                            
+                            <tr>
+                                <td style='padding: 25px 25px 10px 25px;'>
+                                    <table border='0' cellpadding='0' cellspacing='0'>
+                                        <tr>
+                                            <td style='vertical-align: middle;'>
+                                                <img src='https://raw.githubusercontent.com/louakedwayl/Camagru/refs/heads/main/assets/images/icon/Camagru_icon_black.png' 
+                                                    width='45' height='45' style='display: block; object-fit: contain;'>
+                                            </td>
+                                            <td style='vertical-align: middle; padding-left: 10px;'>
+                                                <img src='https://raw.githubusercontent.com/louakedwayl/Camagru/refs/heads/main/assets/images/logo.png' 
+                                                    width='150' style='display: block; margin-top: 9px;'>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td style='padding: 20px 30px; line-height: 1.6;'>
+                                    <p style='font-size: 17px; margin-bottom: 15px; font-weight: 500; color: $softGrey;'>Hi " . htmlspecialchars($ownerUsername) . ",</p>
+                                    
+                                    <p style='font-size: 16px; color: $softGrey; margin-bottom: 25px;'>
+                                        $actionText
+                                    </p>
+
+                                    <div style='text-align: center; margin-top: 20px; margin-bottom: 35px;'>
+                                        <a href='" . htmlspecialchars($postLink) . "' 
+                                           style='display: inline-block; background-color: #0095f6; color: #ffffff; 
+                                                  text-decoration: none; font-size: 14px; font-weight: 600; 
+                                                  padding: 10px 24px; border-radius: 8px;'>
+                                            See the post
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td style='padding: 20px 30px; background-color: $footerBgColor; border-top: 1px solid #efefef; border-radius: 0 0 3px 3px;'>
+                                    <p style='font-size: 12px; color: $footerGreyText; margin-bottom: 8px;'>You can disable email notifications in your profile settings.</p>
+                                    <p style='font-size: 12px; color: $footerGreyText; margin: 0;'>© 2025 Wayl Louaked. Licensed under 
+                                        <a href='https://opensource.org/licenses/MIT' target='_blank' style='color: $linkBlue; text-decoration: none;'>MIT License</a>.
+                                    </p>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+
+        </body>
+        </html>
+        ";
+
+        return self::send($to, $subject, $message);
+    }
+
 
     private static function send(string $to, string $subject, string $message): bool
     {

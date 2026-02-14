@@ -3,15 +3,19 @@
 declare(strict_types=1);
 
 require_once __DIR__ . '/../models/PostModel.php';
+require_once __DIR__ . '/../models/NotificationModel.php';
+require_once __DIR__ . '/../utils/Mailer.php';
 
 class PostController
 {
 
     private PostModel $postModel;
+    private NotificationModel $notificationModel;
 
     public function __construct()
     {
         $this->postModel = new PostModel();
+        $this->notificationModel = new NotificationModel();
     }
 
 public function toggleLike(): void
@@ -37,8 +41,11 @@ public function toggleLike(): void
 
     if ($hasLiked) {
         $this->postModel->removeLike($userId, $postId);
+        $this->notificationModel->removeLikeNotification($userId, $postId);
     } else {
         $this->postModel->addLike($userId, $postId);
+        $this->notificationModel->createNotification($userId, $postId, 'like');
+        $this->sendNotifEmail($userId, $postId, 'like');
     }
 
     $post = $this->postModel->getPostById($postId);
@@ -303,6 +310,11 @@ public function addCommentAction(): void
     $userId = (int)$_SESSION['user_id'];
     $success = $this->postModel->addComment($userId, $postId, $content);
 
+    if ($success) {
+        $this->notificationModel->createNotification($userId, $postId, 'comment');
+        $this->sendNotifEmail($userId, $postId, 'comment', $content);
+    }
+
     echo json_encode([
         'success' => $success,
         'username' => $_SESSION['username'],
@@ -312,5 +324,28 @@ public function addCommentAction(): void
 }
 
 
+    /**
+     * Send notification email if post owner has notifications enabled
+     */
+    private function sendNotifEmail(int $actorId, int $postId, string $type, ?string $commentContent = null): void
+    {
+        $ownerInfo = $this->notificationModel->getPostOwnerInfo($postId);
+
+        // Don't send email to yourself or if notifications are disabled
+        if (!$ownerInfo || $ownerInfo['id'] === $actorId || !$ownerInfo['notifications']) {
+            return;
+        }
+
+        $actorUsername = $_SESSION['username'] ?? 'Someone';
+
+        Mailer::sendNotificationEmail(
+            $ownerInfo['email'],
+            $ownerInfo['username'],
+            $actorUsername,
+            $type,
+            (string)$postId,
+            $commentContent
+        );
+    }
 
 }

@@ -56,3 +56,17 @@ CREATE TABLE reports
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL
 );
+
+CREATE TABLE IF NOT EXISTS notifications 
+(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT NOT NULL,          -- the user who RECEIVES the notification
+    actor_id INT NOT NULL,         -- the user who performed the action
+    post_id INT NOT NULL,          -- the related post
+    type ENUM('like', 'comment') NOT NULL,
+    is_read BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (actor_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (post_id) REFERENCES posts(id) ON DELETE CASCADE
+);

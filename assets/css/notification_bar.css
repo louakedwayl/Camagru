@@ -1,3 +1,6 @@
+/* ============================================
+   NOTIFICATION BAR - Same layout as Search Bar
+   ============================================ */
 #notification-bar {
     display: none;
     position: fixed;
@@ -11,19 +14,116 @@
     z-index: 100;
 }
 
-h2
-{
-    margin-top: 40px;
-    margin-left: 40px;
-
+/* Header */
+.notification-header {
+    display: flex;
+    align-items: center;
+    padding: 0;
 }
 
-.notification-cross
-{
+.notification-header h2 {
+    margin-top: 40px;
+    margin-left: 40px;
+}
+
+.notification-cross {
     position: absolute;
     top: 15px;
     right: 15px;
     width: 16px;
     height: 16px;
     object-fit: contain;
+    cursor: pointer;
+}
+
+/* Notification list */
+.notification-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 8px 0;
+    margin-top: 20px;
+}
+
+/* Single notification item */
+.notification-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 16px;
+    cursor: pointer;
+    transition: background-color 0.15s;
+    gap: 12px;
+    text-decoration: none;
+}
+
+.notification-item:hover {
+    background-color: #f0f0f0;
+}
+
+/* Avatar */
+.notification-avatar {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid #dbdbdb;
+}
+
+/* Text content */
+.notification-text {
+    flex: 1;
+    font-size: 14px;
+    color: #262626;
+    line-height: 1.4;
+    min-width: 0;
+}
+
+.notification-text .notif-username {
+    font-weight: 600;
+    color: #262626;
+}
+
+.notification-text .notif-action {
+    color: #262626;
+}
+
+.notification-text .notif-comment-preview {
+    color: #8e8e8e;
+}
+
+.notification-text .notif-time {
+    color: #8e8e8e;
+    font-size: 13px;
+    margin-left: 4px;
+}
+
+/* Post thumbnail (right side) */
+.notification-post-thumb {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    border-radius: 4px;
+    object-fit: cover;
+}
+
+/* Empty state */
+.notification-empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    color: #8e8e8e;
+    font-size: 14px;
+}
+
+/* Unread badge on heart icon in navbar */
+.notif-badge {
+    position: absolute;
+    top: 9px;
+    left: 27px;
+    background-color: #ff3040;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid #fff;
 }
