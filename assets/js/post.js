@@ -1,7 +1,22 @@
 // === POST PAGE JS ===
 
+function escapeHTML(str) {
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+}
+
 const commentInput = document.querySelector('.comment-input');
+
+
+
 const commentSubmit = document.querySelector('.comment-submit');
+
+
+
+
+
+
 
 // Activer/désactiver le bouton Post selon le contenu
 if (commentInput && commentSubmit) {
@@ -41,7 +56,7 @@ if (commentInput && commentSubmit) {
                     <img src="${data.avatar || 'assets/images/default-avatar.jpeg'}" alt="Avatar" class="comment-avatar">
                     <div class="comment-content">
                         <a href="index.php?action=user_profile&username=${data.username}" class="comment-username">${data.username}</a>
-                        <span class="comment-text">${content}</span>
+                        <span class="comment-text">${escapeHTML(content)}</span>
                         <time class="comment-time">Now</time>
                     </div>
                 `;

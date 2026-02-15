@@ -300,7 +300,7 @@ public function addCommentAction(): void
 
     $input = json_decode(file_get_contents('php://input'), true);
     $postId = (int)($input['post_id'] ?? 0);
-    $content = trim($input['content'] ?? '');
+    $content = trim(strip_tags($input['content'] ?? ''));
 
     if ($postId <= 0 || $content === '') {
         echo json_encode(['success' => false, 'message' => 'Invalid data']);
