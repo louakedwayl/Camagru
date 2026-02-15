@@ -29,7 +29,6 @@ class ReportModel
         } 
         catch (PDOException $e) 
         {
-            error_log("Report creation error: " . $e->getMessage());
             return false;
         }
     }

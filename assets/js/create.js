@@ -42,7 +42,6 @@ async function startWebcam() {
         placeholder.style.display = 'none';
         resizeCanvas();
     } catch (err) {
-        console.log('Webcam not available');
         placeholder.style.display = 'flex';
     }
 }

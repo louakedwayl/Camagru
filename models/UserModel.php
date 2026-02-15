@@ -85,7 +85,6 @@ public function updateProfile(int $userId, array $data): bool
         $stmt = $this->pdo->prepare($sql);
         return $stmt->execute($params);
     } catch (PDOException $e) {
-        error_log("Update profile error: " . $e->getMessage());
         return false;
     }
 }
