@@ -206,14 +206,13 @@ async function validateUsername()
     
     try
     {
-        // CORRECTION 2 : On crée le FormData localement (avant ça plantait car inexistant)
         const formData = new FormData();
         formData.append('username', usernameInput.value);
 
         const response = await fetch('index.php?action=check_username',
           {
             method: 'POST',
-            body: formData // On utilise le formData créé juste au-dessus
+            body: formData 
         });
         
         const data = await response.json();
@@ -243,25 +242,22 @@ async function validateUsername()
     }
 }
 
-// Event Listeners "Blur" (quand on quitte le champ)
 emailInput.addEventListener("blur", validateEmail);
 passwordInput.addEventListener("blur", validatePassword);
 fullnameInput.addEventListener("blur", validateFullname);
 usernameInput.addEventListener("blur", validateUsername);
 
-// SOUMISSION DU FORMULAIRE
 form.addEventListener('submit', async (e) =>
 {
     e.preventDefault();
     
     submitBtn.disabled = true;
 
-    // CORRECTION 3 : On ajoute 'await' devant validateEmail et validateUsername
-    // Sinon le code continue sans attendre la réponse du serveur !
+
     const isEmailValid = await validateEmail(); 
-    const isPasswordValid = validatePassword(); // Synchrone, pas besoin d'await
-    const isFullnameValid = validateFullname(); // Synchrone
-    const isUsernameValid = await validateUsername(); // Async, besoin d'await
+    const isPasswordValid = validatePassword(); 
+    const isFullnameValid = validateFullname();
+    const isUsernameValid = await validateUsername(); 
     
     if (!isEmailValid || !isPasswordValid || !isFullnameValid || !isUsernameValid)
     {
@@ -269,7 +265,6 @@ form.addEventListener('submit', async (e) =>
         return;
     }
 
-    // Si tout est OK, on envoie la requête finale
     try
     {
         const formData = new FormData();
@@ -278,7 +273,6 @@ form.addEventListener('submit', async (e) =>
         formData.append('fullname', fullnameInput.value);
         formData.append('username', usernameInput.value);
         
-        // Vérifie que ton routeur PHP pointe bien 'handle_registration' vers handleRegistration()
         const response = await fetch('index.php?action=registration', 
         {
             method: 'POST',
