@@ -74,7 +74,7 @@ main
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    margin-right: 20px;
+    margin-right: 15px;
     border: 1px solid #dbdbdb;
     margin-left: 10px;
 }
@@ -109,19 +109,21 @@ main
     display: flex;
     flex-direction: column;
     width: 550px;
-    margin-top: 12px;
-    margin-bottom: 40px;
+    margin-top: 10px;
+    margin-bottom: 20px;
 }
 .post-actions {
     display: flex;
     align-items: center;
     gap: 4px;
+    margin-bottom: 4px;
 }
 img.icon-like
 {
-    width: 30px;
-    height: 30px;
+    width: 28px;
+    height: 28px;
     cursor: pointer;
+    margin-left: 12px;
     transition: transform 0.2s ease, opacity 0.2s ease;
 }
 img.icon-like:hover {
@@ -133,14 +135,13 @@ img.icon-like:active {
 .likes-count {
     font-size: 14px;
     font-weight: 600;
-    margin-right: 12px;
+    margin-right: 2px;
     min-width: 10px;
 }
 img.icon-comment
 {
-    margin-top: 1px;
-    width: 27px;
-    height: 27px;
+    width: 26px;
+    height: 26px;
     cursor: pointer;
     transition: transform 0.2s ease, opacity 0.2s ease;
 }
@@ -156,7 +157,7 @@ img.icon-comment:active {
 }
 div.caption-container
 {
-    margin-left: 10px;
+    margin-left: 8px;
     margin-right: 10px;
     margin-top: 4px;
 }
