@@ -123,7 +123,7 @@ img.icon-like
     width: 28px;
     height: 28px;
     cursor: pointer;
-    margin-left: 12px;
+    margin-left: 14px;
     transition: transform 0.2s ease, opacity 0.2s ease;
 }
 img.icon-like:hover {
@@ -213,4 +213,8 @@ span.post-caption-username
 .icon-like.disabled,
 .icon-comment.disabled {
     pointer-events: none;
+}
+
+.visitor img.icon-like {
+    margin-right: 8px;
 }

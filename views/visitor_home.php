@@ -14,7 +14,7 @@
     <script defer src="assets/js/hamburger.js"></script>
     <script defer src="assets/js/report.js"></script>
 </head>
-<body>
+<body class="visitor">
     <?php require_once __DIR__ . '/visitor_navbar.php'; ?>
     <main>
         <div class="gallery-grid">
