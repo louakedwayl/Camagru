@@ -181,6 +181,14 @@ span.post-caption-username
     content: "...";
     color: black;
 }
+
+footer
+{
+    margin-top: 50px;
+    padding-bottom: 20px;
+    margin-right: 60px;
+}
+
 /* BOTTOM */
 @media (max-width: 1050px) 
 {

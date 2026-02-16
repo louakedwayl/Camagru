@@ -80,5 +80,6 @@
         </div>
     </dialog>
     <?php require_once "modale_report.php" ?>
+    <?php require_once "footer.php"; ?>
 </body>
 </html>

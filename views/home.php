@@ -66,18 +66,20 @@
                     <img class="icon-comment" src="assets/images/icon/comment.svg" data-post-id="<?php echo $post['id']; ?>">
                     <span class="comments-count"><?php echo $post['comments_count'] > 0 ? $post['comments_count'] : ''; ?></span>
                 </div>
-                <div class="caption-container">
-                    <span class="post-caption-username"><?php echo htmlspecialchars($post['username']); ?></span>
-                    <span class="post-caption" data-full-text="<?php echo htmlspecialchars($post['caption']); ?>">
-                        <?php
-                            $caption = htmlspecialchars($post['caption']);
-                            echo strlen($caption) > 100 ? substr($caption, 0, 100) : $caption;
-                        ?>
-                    </span>
-                    <?php if (strlen($post['caption']) > 100): ?>
-                    <a href="#" class="more-link">more</a>
-                    <?php endif; ?>
-                </div>
+            <?php if (!empty($post['caption'])): ?>
+            <div class="caption-container">
+                <span class="post-caption-username"><?php echo htmlspecialchars($post['username']); ?></span>
+                <span class="post-caption" data-full-text="<?php echo htmlspecialchars($post['caption']); ?>">
+                    <?php
+                        $caption = htmlspecialchars($post['caption']);
+                        echo strlen($caption) > 100 ? substr($caption, 0, 100) : $caption;
+                    ?>
+                </span>
+                <?php if (strlen($post['caption']) > 100): ?>
+                <a href="#" class="more-link">more</a>
+                <?php endif; ?>
+            </div>
+            <?php endif; ?>
             </div>
             <?php endforeach; ?>
         </div>
@@ -91,5 +93,6 @@
         </div>
     </dialog>
     <?php require_once "modale_report.php" ?>
+    <?php require_once "footer.php"; ?>
 </body>
 </html>
