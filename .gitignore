@@ -1,3 +1,4 @@
 # Avatar uploads
 assets/images/avatars/*
 !assets/images/avatars/.gitkeep
+.env
