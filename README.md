@@ -4,7 +4,7 @@ A simplified Instagram clone built from scratch as part of the [École 42](https
 
 <table>
   <tr>
-    <td><img src="assets/images/Camagru_layout.png" alt="Layout" width="400"></td>
+    <td><img src="assets/images/Camagru_layout2.png" alt="Layout" width="400"></td>
     <td><img src="assets/images/Camagru_home.png" alt="Home" width="400"></td>
   </tr>
   <tr>
