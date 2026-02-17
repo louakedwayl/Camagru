@@ -1,6 +1,6 @@
 # Camagru
 
-A full-stack Instagram clone built from scratch as part of the [École 42](https://42.fr/) curriculum — no frameworks, no libraries, just raw PHP, JavaScript, HTML, and CSS.
+A full-stack Instagram clone built from scratch — no frameworks, no libraries, just raw PHP, JavaScript, HTML, and CSS.
 
 The application replicates the core Instagram experience: webcam photo capture, sticker overlays composited server-side with GD, a public gallery with social interactions, and a real-time notification system. Everything runs in Docker with a MySQL backend.
 
