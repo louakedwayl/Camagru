@@ -1,41 +1,71 @@
 # Camagru
 
-# Introduction
-
-Instagram is a social media platform that allows users to share photos and videos with their followers.\
-The goal of this project is to create a simplified clone of Instagram called Camagru. I had to develop a web application that allows users to take photos using their webcam, apply fun filters and stickers to them, and share their creations in a public gallery. The application also includes social features such as liking and commenting on photos.\
-This project is built from scratch using vanilla PHP, HTML, CSS, and JavaScript, without any frameworks. All user data is stored in a database, and the application implements essential security features such as password hashing, SQL injection prevention, and XSS protection.\
-Here are some key features I've implemented to make Camagru a functional and secure photo-sharing platform:
+A simplified Instagram clone built from scratch as part of the [École 42](https://42.fr/) curriculum. Users can capture photos via webcam, apply stickers, and share them in a public gallery with social interactions.
 
 <p align="center">
   <img src="assets/images/Camagru_layout.png" alt="Camagru Layout">
 </p>
 
-## Clone the repository
+## Stack
+
+- **Backend** — PHP (vanilla, no framework)
+- **Frontend** — HTML, CSS, JavaScript (vanilla)
+- **Database** — MySQL
+- **Infrastructure** — Docker / Docker Compose
+
+## Features
+
+- User registration and login with email verification
+- Webcam capture and file upload
+- Sticker/filter overlay on images (server-side compositing with GD)
+- Public gallery with pagination
+- Like and comment system
+- Real-time notification bar (likes & comments)
+- Email notifications on interactions
+- User profile with avatar upload
+- Real-time search
+- Responsive design
+
+## Security
+
+- Password hashing (bcrypt)
+- Prepared statements (SQL injection prevention)
+- Output escaping (XSS protection)
+- Server-side input validation
+- CSRF token protection
+
+## Getting Started
+
+### Prerequisites
+
+- Docker & Docker Compose
+- A `.env` file (available on request — see below)
+
+### Clone
+
 ```bash
 git clone git@github.com:louakedwayl/Camagru.git
+cd Camagru
 ```
 
-## 🛠️ Installation
+### Run
+
 ```bash
 make && make run
 ```
 
-## Access Camagru
-```bash
-http://localhost:8080/
-```
+Then open [http://localhost:8080](http://localhost:8080).
 
-## 📝 License
-© This project is licensed under the MIT License.
+### Environment
 
----
+This project requires a `.env` file containing database credentials and mail configuration. It is not included in the repository for security reasons.
 
-## 👤 Auteur
+To request it: **wlouaked@student.42.fr**
 
-**Louaked Wayl**
+## License
 
-- GitHub: [@louakedwayl](https://github.com/louakedwayl)
-- LinkedIn: [@louakedwayl](https://www.linkedin.com/in/louakedwayl)
-- Root-Me: [@louakedwayl](https://www.root-me.org/louakedwayl)
----
+© 2025 Wayl Louaked. Licensed under the [MIT License](LICENSE).
+
+## Author
+
+**Wayl Louaked** — [@louakedwayl](https://github.com/louakedwayl) · [LinkedIn](https://www.linkedin.com/in/louakedwayl) · [Root-Me](https://www.root-me.org/louakedwayl)
