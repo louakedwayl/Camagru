@@ -5,6 +5,15 @@ A simplified Instagram clone built from scratch as part of the [École 42](https
 <p align="center">
   <img src="assets/images/Camagru_layout.png" alt="Camagru Layout">
 </p>
+<p align="center">
+  <img src="assets/images/Camagru_home.png" alt="Camagru Layout">
+</p>
+<p align="center">
+  <img src="assets/images/Camagru_explorer.png" alt="Camagru Layout">
+</p>
+<p align="center">
+  <img src="assets/images/Camagru_create.png" alt="Camagru Layout">
+</p>
 
 ## Stack
 
