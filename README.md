@@ -1,14 +1,18 @@
 # Camagru
 
-A simplified Instagram clone built from scratch as part of the [École 42](https://42.fr/) curriculum. Users can capture photos via webcam, apply stickers, and share them in a public gallery with social interactions.
+A full-stack Instagram clone built from scratch — no frameworks, no libraries, just raw PHP, JavaScript, HTML, and CSS.
+
+The application replicates the core Instagram experience: webcam photo capture, sticker overlays composited server-side with GD, a public gallery with social interactions, and a real-time notification system. Everything runs in Docker with a MySQL backend.
+
+Built with a strong focus on security: all inputs are validated and sanitized, passwords are hashed with bcrypt, queries use prepared statements, and every form is protected against CSRF.
 
 <table>
   <tr>
-    <td><img src="assets/images/Camagru_layout2.png" alt="Layout" width="400"></td>
-    <td><img src="assets/images/Camagru_home.png" alt="Home" width="400"></td>
+    <td><img src="assets/images/Camagru_layout2.png" alt="Login" width="400"></td>
+    <td><img src="assets/images/Camagru_home.png" alt="Profile" width="400"></td>
   </tr>
   <tr>
-    <td><img src="assets/images/Camagru_explorer.png" alt="Explorer" width="400"></td>
+    <td><img src="assets/images/Camagru_explorer.png" alt="Explore" width="400"></td>
     <td><img src="assets/images/Camagru_create.png" alt="Create" width="400"></td>
   </tr>
 </table>
@@ -58,7 +62,7 @@ cd Camagru
 ### Run
 
 ```bash
-make && make run
+make
 ```
 
 Then open [http://localhost:8080](http://localhost:8080).
