@@ -2,18 +2,16 @@
 
 A simplified Instagram clone built from scratch as part of the [École 42](https://42.fr/) curriculum. Users can capture photos via webcam, apply stickers, and share them in a public gallery with social interactions.
 
-<p align="center">
-  <img src="assets/images/Camagru_layout.png" alt="Camagru Layout">
-</p>
-<p align="center">
-  <img src="assets/images/Camagru_home.png" alt="Camagru Layout">
-</p>
-<p align="center">
-  <img src="assets/images/Camagru_explorer.png" alt="Camagru Layout">
-</p>
-<p align="center">
-  <img src="assets/images/Camagru_create.png" alt="Camagru Layout">
-</p>
+<table>
+  <tr>
+    <td><img src="assets/images/Camagru_layout.png" alt="Layout" width="400"></td>
+    <td><img src="assets/images/Camagru_home.png" alt="Home" width="400"></td>
+  </tr>
+  <tr>
+    <td><img src="assets/images/Camagru_explorer.png" alt="Explorer" width="400"></td>
+    <td><img src="assets/images/Camagru_create.png" alt="Create" width="400"></td>
+  </tr>
+</table>
 
 ## Stack
 
