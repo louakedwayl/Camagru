@@ -5,15 +5,14 @@ A full-stack Instagram clone built from scratch — no frameworks, no libraries,
 The application replicates the core Instagram experience: webcam photo capture, sticker overlays composited server-side with GD, a public gallery with social interactions, and a real-time notification system. Everything runs in Docker with a MySQL backend.
 
 Built with a strong focus on security: all inputs are validated and sanitized, passwords are hashed with bcrypt, queries use prepared statements, and every form is protected against CSRF.
-
 <table>
   <tr>
-    <td><img src="assets/images/Camagru_layout.png" alt="Login" width="400"></td>
-    <td><img src="assets/images/Camagru_home.png" alt="Profile" width="400"></td>
+    <td align="center"><img src="assets/images/Camagru_layout.png" alt="Login" width="400"></td>
+    <td align="center"><img src="assets/images/Camagru_home.png" alt="Home" width="400"></td>
   </tr>
   <tr>
-    <td><img src="assets/images/Camagru_explorer.png" alt="Explore" width="400"></td>
-    <td><img src="assets/images/Camagru_create.png" alt="Create" width="400"></td>
+    <td align="center"><img src="assets/images/Camagru_explorer.png" alt="Explore" width="400"></td>
+    <td align="center"><img src="assets/images/Camagru_create.png" alt="Create" width="400"></td>
   </tr>
 </table>
 
