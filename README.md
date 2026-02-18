@@ -8,7 +8,7 @@ Built with a strong focus on security: all inputs are validated and sanitized, p
 
 <table>
   <tr>
-    <td><img src="assets/images/Camagru_layout.png" alt="Login" width="400"></td>
+    <td><img src="assets/images/Camagru_layout.png" alt="Login" width="100%"></td>
     <td><img src="assets/images/Camagru_home.png" alt="Profile" width="400"></td>
   </tr>
   <tr>
