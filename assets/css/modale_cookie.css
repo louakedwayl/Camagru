@@ -10,6 +10,8 @@
     transform: translateX(-50%);
     top: auto;
     margin: 0;
+        background-color:#FBFBFB ;
+
 }
 
 #cookie-modal::backdrop {
