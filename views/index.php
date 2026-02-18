@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/footer.css">
     <link rel="stylesheet" href="assets/css/index.css">
+    <link rel="stylesheet" href="assets/css/modale_cookie.css">
     <title>Camagru</title>
     <script src="assets/js/login.js" defer></script>
 </head>
@@ -39,6 +40,7 @@
             </div>
         </div>
     </main>
-    <?php require_once "footer.php" ?>
+    <?php require_once "views/modale_cookies.php" ?>
+    <?php require_once "views/footer.php" ?>
 </body>
 </html>
