@@ -384,6 +384,8 @@ public function uploadAvatar(): void
 
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['username'] = $user['username'];
+                $_SESSION['full_name'] = $user['full_name'];
+                $_SESSION['email'] = $user['email'];
 
                 echo json_encode(['success' => true]);
             } 
