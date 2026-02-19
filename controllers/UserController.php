@@ -279,7 +279,7 @@ public function uploadAvatar(): void
         imagecopyresampled(
             $thumb, $source,
             0, 0,
-            ($width - $size) / 2, ($height - $size) / 2,
+            (int)(($width - $size) / 2), (int)(($height - $size) / 2),
             $size, $size,
             $size, $size
         );
