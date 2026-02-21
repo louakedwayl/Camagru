@@ -169,6 +169,19 @@ main form
 
 @media (max-width: 400px)
 {
+    body
+    {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    main
+    {
+        width: 100%;
+        gap: 10px;
+    }
+
     .top,
     .bottom
     {
@@ -180,6 +193,6 @@ main form
     .top input,
     .top button
     {
-        width: 85%;
+        width: 90%;
     }
 }
