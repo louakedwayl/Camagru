@@ -2,6 +2,11 @@
     outline: 1px solid red;
 } */
 
+body
+{
+    overflow: hidden;
+}
+
 main
 {
     display: flex;

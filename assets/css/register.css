@@ -1,3 +1,9 @@
+body
+{
+    overflow: hidden;
+}
+
+
 .overlay {
   display: none ;
   position: fixed;
