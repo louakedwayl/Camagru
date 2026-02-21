@@ -140,6 +140,9 @@ div.snackbar
     align-items: center;
     color: #FAFAFA;
     font-size: 14px;
+    left: 0;
+    right: 0;
+    top: 0
 }
 
 div.snackbar p
@@ -147,6 +150,7 @@ div.snackbar p
     display: none;
     margin: 0;
     padding: 0;
+    text-align: center;
 }
 
 main form
@@ -160,5 +164,22 @@ main form
     footer
     {
         display: none;
+    }
+}
+
+@media (max-width: 400px)
+{
+    .top,
+    .bottom
+    {
+        width: 100%;
+        border-left: none;
+        border-right: none;
+    }
+
+    .top input,
+    .top button
+    {
+        width: 85%;
     }
 }
