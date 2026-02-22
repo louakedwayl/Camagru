@@ -4,12 +4,20 @@ require_once 'controllers/UserController.php';
 require_once 'controllers/PostController.php';
 require_once 'controllers/ReportController.php';
 require_once 'controllers/NotificationController.php';
+
 if (session_status() === PHP_SESSION_NONE) session_start();
+
+
+header("Cache-Control: no-cache, no-store, must-revalidate");
+header("Pragma: no-cache");
+header("Expires: 0");
+
 if (!isset($_SESSION['admin_setup_done'])) 
 {
 require_once 'config/setup.php';
 $_SESSION['admin_setup_done'] = true;
 }
+
 $action = $_GET['action'] ?? '';
 
 $user_controller = new UserController();
