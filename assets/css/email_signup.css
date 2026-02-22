@@ -31,14 +31,14 @@ main
     margin-bottom: 10px;
     font-size: 13px;
     text-align: center;
+    color: #262626;
 }
 
-.top1
+.top1 a
 {
     text-decoration: none;
-    color : #5063F9;
+    color: #5063F9;
     font-weight: 500;
-    font-size: 13px;
 }
 
 .top2
