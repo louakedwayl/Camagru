@@ -172,28 +172,22 @@ main form
     }
 }
 
-@media (max-width: 400px)
+@media (max-width: 480px)
 {
     body
     {
         display: flex;
         flex-direction: column;
         justify-content: center;
-        padding-bottom: 60px; /* hauteur approximative du footer */
+        padding-bottom: 60px;
     }
-
     main
     {
         width: 100%;
-        gap: 10px;
-    }
-
-    .top,
-    .bottom
-    {
-        width: 100%;
-        border-left: none;
-        border-right: none;
+        gap: 25px;
+        grid-column: 1 / -1;
+        grid-row: auto;
+        margin-top: 20px;
     }
 
     .top input,
