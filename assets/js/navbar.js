@@ -17,9 +17,10 @@ if (searchLink) {
 if (searchCross) {
     searchCross.addEventListener('click', () => {
         searchBar.style.display = "none";
-        nav.style.display = "flex";
+        nav.style.display = "";
     });
 }
+
 
 if (notificationLink) {
     notificationLink.addEventListener('click', function(e) {
@@ -32,6 +33,6 @@ if (notificationLink) {
 if (notificationCross) {
     notificationCross.addEventListener('click', () => {
         notificationBar.style.display = "none";
-        nav.style.display = "flex";
+        nav.style.display = "";
     });
 }
