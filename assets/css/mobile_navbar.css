@@ -44,4 +44,7 @@
     .mobile-top-bar {
         padding: 0 15px;
     }
+    .mobile-top-bar .notification {
+    margin-right: 5px;
+}
 }
