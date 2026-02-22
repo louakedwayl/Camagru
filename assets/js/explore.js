@@ -1,6 +1,6 @@
-const exploreIcon = document.querySelector("img.icon.explore");
-
-exploreIcon.src = "assets/images/icon/compass_black.svg";
+document.querySelectorAll("img.icon.explore, img.explore-icon").forEach(img => {
+    img.src = "assets/images/icon/compass_black.svg";
+});
 
 const exploreItems = document.querySelectorAll('.explore-item');
 

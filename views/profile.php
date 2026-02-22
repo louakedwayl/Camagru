@@ -6,6 +6,7 @@
     <title>Camagru</title>
     <link rel="stylesheet" href="assets/css/profile.css">
     <link rel="stylesheet" href="assets/css/modale_edit_profile.css">
+    <link rel="stylesheet" href="assets/css/mobile_navbar.css">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/images/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon/favicon-16x16.png">
@@ -15,6 +16,7 @@
     <script defer src="assets/js/report.js"></script>
 </head>
 <body>
+    <?php require_once "mobile_navbar.php"; ?>
     <?php require_once __DIR__ . '/navbar.php'; ?>
     <main>
         <header>

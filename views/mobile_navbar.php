@@ -17,9 +17,9 @@
         <img src="assets/images/icon/search.svg" alt="search">
     </a>
     <a href="index.php?action=explore">
-        <img src="assets/images/icon/compass.svg" alt="explore">
+        <img class="explore-icon" src="assets/images/icon/compass.svg" alt="explore">
     </a>
     <a href="index.php?action=profile">
-        <img class="mobile-profile" src="assets/images/default-avatar.jpeg" alt="profile">
+        <img class="mobile-profile profile-icon" src="assets/images/default-avatar.jpeg" alt="profile">
     </a>
 </div>

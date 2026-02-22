@@ -9,8 +9,9 @@ const changePhotoInput = document.getElementById('change-photo-input');
 const editAvatarPreview = document.getElementById('edit-avatar-preview');
 const btnPublicView = document.querySelector('.btn-public-view');
 
-profileIcon.style.border = "2px solid #262626";
-
+document.querySelectorAll("img.icon.profile, img.profile-icon").forEach(img => {
+    img.style.border = "2px solid #262626";
+});
 
 // OPENING / CLOSING MODAL
 
