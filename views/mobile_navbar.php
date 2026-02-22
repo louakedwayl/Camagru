@@ -10,8 +10,8 @@
 
 <!-- MOBILE BOTTOM BAR -->
 <div class="mobile-bottom-bar">
-    <a href="index.php?action=home">
-        <img src="assets/images/icon/home.svg" alt="home">
+    <a href="index.php?action=home" >
+        <img class="house" src="assets/images/icon/home.svg" alt="home">
     </a>
     <a href="#" id="mobile-search-link">
         <img src="assets/images/icon/search.svg" alt="search">

@@ -1,5 +1,7 @@
-const iconHome = document.querySelector("img.house");
-iconHome.src = "assets/images/icon/home_black.svg";
+document.querySelectorAll("img.house").forEach(img => {
+    img.src = "assets/images/icon/home_black.svg";
+});
+
 const imgComments = document.querySelectorAll("img.icon-comment");
 
 const moreLinks = document.querySelectorAll('.more-link');
