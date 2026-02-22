@@ -86,7 +86,7 @@ main
 }
 .gallery-grid .gallery-top:first-child 
 {
-    margin-top: 40px;
+    margin-top: 0px;
 }
 .post-item {
     position: relative;
@@ -190,13 +190,25 @@ footer
 }
 
 /* BOTTOM */
-@media (max-width: 1050px) 
+@media (max-width: 1150px) 
 {
     .user-menu 
     {
         display: none;
     }
 }
+
+@media (max-width: 900px) {
+    main {
+        width: 100%;
+        justify-content: center;
+    }
+    .gallery-grid {
+        margin: 0 auto;
+    }
+}
+
+
 @media (max-width: 620px) {
     .gallery-grid {
         width: 100%;
@@ -218,6 +230,7 @@ footer
         width: 100%;
     }
 }
+
 .icon-like.disabled,
 .icon-comment.disabled {
     pointer-events: none;

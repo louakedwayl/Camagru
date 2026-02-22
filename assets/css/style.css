@@ -17,7 +17,7 @@ body
 
 img.three-dots {
     margin-left: auto;
-    margin-right: 10px;
+    margin-right: 12px ;
     margin-top: 3px;
     transition: transform 0.2s ease, opacity 0.2s ease;
 }
@@ -31,23 +31,6 @@ img.three-dots:active {
     transform: scale(1.1);
 }
 
-/* === THREE DOTS === */
-
-img.three-dots {
-    margin-left: auto;
-    margin-right: 10px;
-    margin-top: 3px;
-    transition: transform 0.2s ease, opacity 0.2s ease;
-}
-
-img.three-dots:hover {
-    transform: scale(1.25);
-    opacity: 0.85;
-}
-
-img.three-dots:active {
-    transform: scale(1.1);
-}
 
 /* === MODALE OPTIONS === */
 
