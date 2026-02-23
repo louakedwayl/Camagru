@@ -134,6 +134,15 @@
    MOBILE NOTIFICATION BAR
    ============================================ */
 
+.mobile-top-bar .notification {
+    position: relative;
+}
+
+.mobile-top-bar .notification .notif-badge {
+    top: -2px;
+    left: auto;
+    right: -4px;
+}
 
 @media (max-width: 900px) {
     #notification-bar {

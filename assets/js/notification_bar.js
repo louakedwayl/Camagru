@@ -117,8 +117,7 @@ function markNotificationsAsRead() {
     fetch('index.php?action=mark_notifications_read', { method: 'POST' })
         .then(res => res.json())
         .then(() => {
-            const badge = document.querySelector('.notif-badge');
-            if (badge) badge.remove();
+            document.querySelectorAll('.notif-badge').forEach(b => b.remove());
         })
         .catch(err => console.error('Error marking notifications:', err));
 }
@@ -142,19 +141,30 @@ function loadUnreadCount() {
  * Show the red badge on the heart icon
  */
 function showBadge(count) {
+    // Desktop sidebar
     const heartBtn = document.getElementById('notif-heart-btn');
-    if (!heartBtn) return;
+    if (heartBtn) {
+        const existing = heartBtn.querySelector('.notif-badge');
+        if (existing) existing.remove();
+        if (count > 0) {
+            const badge = document.createElement('span');
+            badge.className = 'notif-badge';
+            heartBtn.appendChild(badge);
+        }
+    }
 
-    const existing = heartBtn.querySelector('.notif-badge');
-    if (existing) existing.remove();
-
-    if (count > 0) {
-        const badge = document.createElement('span');
-        badge.className = 'notif-badge';
-        heartBtn.appendChild(badge);
+    // Mobile top bar
+    const mobileBtn = document.querySelector('.mobile-top-bar .notification');
+    if (mobileBtn) {
+        const existing = mobileBtn.querySelector('.notif-badge');
+        if (existing) existing.remove();
+        if (count > 0) {
+            const badge = document.createElement('span');
+            badge.className = 'notif-badge';
+            mobileBtn.appendChild(badge);
+        }
     }
 }
-
 // ============================================
 // UTILITY FUNCTIONS
 // ============================================
