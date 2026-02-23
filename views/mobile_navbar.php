@@ -1,4 +1,5 @@
 <!-- MOBILE TOP BAR -->
+<?php if (isset($_GET['action']) && $_GET['action'] === 'home' || !isset($_GET['action'])): ?>
 <div class="mobile-top-bar">
     <a class="create" href="index.php?action=create">
         <img src="assets/images/icon/create.svg" alt="create">
@@ -7,6 +8,7 @@
         <img src="assets/images/icon/heart.svg" alt="notifications">
     </a>
 </div>
+<?php endif; ?>
 
 <!-- MOBILE BOTTOM BAR -->
 <div class="mobile-bottom-bar">
