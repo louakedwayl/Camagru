@@ -36,3 +36,20 @@ if (notificationCross) {
         nav.style.display = "";
     });
 }
+
+const mobileSearchLink = document.getElementById('mobile-search-link');
+if (mobileSearchLink) {
+    mobileSearchLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        searchBar.style.display = "flex";
+    });
+}
+
+window.addEventListener('resize', function() {
+    if (window.innerWidth > 900 && searchBar.style.display === "flex") {
+        nav.style.display = "none";
+    }
+    if (window.innerWidth > 900 && searchBar.style.display !== "flex") {
+        nav.style.display = "";
+    }
+});
