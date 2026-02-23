@@ -86,7 +86,7 @@ main
 }
 .gallery-grid .gallery-top:first-child 
 {
-    margin-top: 0px;
+    margin-top: 40px;
 }
 .post-item {
     position: relative;
@@ -205,6 +205,12 @@ footer
     .gallery-grid {
         margin: 0 auto;
     }
+    .gallery-grid .gallery-top:first-child 
+    {
+        margin-top: 0px;
+    }
+
+
 }
 
 
