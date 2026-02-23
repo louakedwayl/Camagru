@@ -20,7 +20,8 @@
     <?php require_once __DIR__ . '/navbar.php'; ?>
     <main>
         <header>
-            <form id="avatar-form" enctype="multipart/form-data">
+    <img class="mobile-more-icon" src="assets/images/icon/more.svg" alt="more">
+        <form id="avatar-form" enctype="multipart/form-data">
                 <label for="avatar-input" class="avatar-label">
                     <img src="<?= htmlspecialchars($user['avatar_path'] ?? 'assets/images/default-avatar.jpeg') ?>" 
                          class="profile-avatar" 
