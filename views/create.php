@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/footer.css">
     <link rel="stylesheet" href="assets/css/create.css">
+    <link rel="stylesheet" href="assets/css/mobile_navbar.css">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/images/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon/favicon-16x16.png">
@@ -15,6 +16,7 @@
     <script defer src="assets/js/report.js"></script>
 </head>
 <body>
+    <?php require_once __DIR__ . '/mobile_navbar.php'; ?>
     <?php require_once __DIR__ . '/navbar.php'; ?>
 
     <main class="create-page">
@@ -24,7 +26,6 @@
             <!-- EDITOR HEADER -->
             <div class="editor-header">
                 <span class="editor-title">Create new post</span>
-                <button class="btn-share" disabled>Share</button>
             </div>
 
             <!-- EDITOR BODY -->
@@ -92,28 +93,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- ===== PREVIOUS PHOTOS ===== -->
-        <?php if (!empty($userPosts)): ?>
-        <div class="previous-section">
-            <div class="previous-grid" id="previous-grid">
-                <?php foreach ($userPosts as $post): ?>
-                <div class="previous-item" data-post-id="<?= $post['id'] ?>">
-                    <img src="<?= htmlspecialchars($post['image_path']) ?>" alt="Previous photo" class="previous-img">
-                    <div class="previous-overlay">
-                        <span class="gallery-stat">
-                            <img src="assets/images/icon/heart_white.svg" class="gallery-stat-icon"> <?= $post['likes_count'] ?? 0 ?>
-                        </span>
-                        <span class="gallery-stat">
-                            <img src="assets/images/icon/comment_white.svg" class="gallery-stat-icon"> <?= $post['comments_count'] ?? 0 ?>
-                        </span>
-                    </div>
-                </div>
-                <?php endforeach; ?>
-            </div>
-        </div>
-        <?php endif; ?>
-    </main>
 
     <?php require_once "modale_report.php" ?>
 </body>

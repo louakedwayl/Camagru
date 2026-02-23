@@ -47,31 +47,7 @@ body {
     color: #262626;
 }
 
-.btn-share {
-    background: none;
-    border: none;
-    color: #B7C6FF;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: default;
-    padding: 8px 20px;
-    border-radius: 8px;
-    transition: all 0.2s ease;
-}
 
-.btn-share:not(:disabled) {
-    color: #fff;
-    background: #5063F9;
-    cursor: pointer;
-}
-
-.btn-share:not(:disabled):hover {
-    background: #3d4fd4;
-}
-
-.btn-share:not(:disabled):active {
-    transform: scale(0.97);
-}
 
 /* BODY */
 
@@ -454,6 +430,11 @@ body {
     .create-page {
         padding-left: 265px;
     }
+
+    .editor-container {
+        width: 90%;
+        max-width: 1400px;
+    }
 }
 
 @media (max-width: 1439px) {
@@ -473,21 +454,43 @@ body {
     }
 }
 
-/* Stack layout on smaller screens */
-@media (max-width: 850px) {
+@media (max-width: 900px) {
+    .create-page {
+        padding-left: 20px;
+        padding-top: 40px;
+        padding-bottom: 80px;
+    }
+
+    .editor-container {
+        height: auto;
+    }
+
     .editor-body {
         flex-direction: column;
     }
 
     .editor-preview {
         width: 100%;
-        min-height: 400px;
+        min-height: 350px;
+        max-height: 50vh;
     }
 
     .editor-panel {
         width: 100%;
         border-left: none;
         border-top: 1px solid #efefef;
+        display: flex;
+        flex-direction: column;
+    }
+
+
+    .capture-section {
+        order: -1;
+    }
+
+    .stickers-section {
+        max-height: 200px;
+        overflow-y: auto;
     }
 
     .stickers-grid {
@@ -496,17 +499,21 @@ body {
 }
 
 @media (max-width: 480px) {
-    .editor-container {
-        border-radius: 0;
-        border-left: none;
-        border-right: none;
-    }
+
 
     .create-page {
         padding-left: 0;
         padding-right: 0;
-        padding-top: 60px;
+        padding-top: 20px;
     }
+
+    .editor-container {
+        border-radius: 0;
+        border-left: none;
+        border-right: none;
+        border-top: none;
+    }
+
 
     .previous-section {
         padding: 0 12px;
