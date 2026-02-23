@@ -94,7 +94,6 @@ main
     height: 600px; 
     overflow: hidden;
     border-radius: 4px;
-    background-color: #efefef;
     cursor: pointer;
 }
 .post-item img {
@@ -212,7 +211,6 @@ footer
 @media (max-width: 620px) {
     .gallery-grid {
         width: 100%;
-        padding: 0 10px;
     }
     .gallery-top {
         width: 100%;
@@ -220,6 +218,7 @@ footer
     .post-item {
         width: 100%;
         height: auto;
+        border-radius: 0px;
     }
     .post-item img {
         width: 100%;
