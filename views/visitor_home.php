@@ -55,6 +55,7 @@
                     <img class="icon-like disabled" src="assets/images/icon/heart.svg">
                     <img class="icon-comment disabled" src="assets/images/icon/comment.svg">
                 </div>
+                <?php if (!empty($post['caption'])): ?>
                 <div class="caption-container">
                     <span class="post-caption-username"><?php echo htmlspecialchars($post['username']); ?></span>
                     <span class="post-caption" data-full-text="<?php echo htmlspecialchars($post['caption']); ?>">
@@ -67,6 +68,7 @@
                     <a href="#" class="more-link">more</a>
                     <?php endif; ?>
                 </div>
+                <?php endif; ?>
             </div>
             <?php endforeach; ?>
         </div>

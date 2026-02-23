@@ -159,3 +159,59 @@ h2
         z-index: 200;
     }
 }
+
+@media (max-width: 440px) {
+
+    #search-input {
+    width: 350px;
+    }
+
+    .search-cross-surronded {
+    left: 350px;
+    }
+}
+
+@media (max-width: 390px) {
+
+    #search-input {
+    width: 320px;
+    }
+
+    .search-cross-surronded {
+    left: 320px;
+    }
+
+}
+
+@media (max-width: 365px) {
+
+    #search-input {
+    width: 280px;
+    }
+
+    .search-cross-surronded {
+    left: 280px;
+    }
+}
+
+@media (max-width: 320px) {
+
+    #search-input {
+    width: 240px;
+    }
+
+    .search-cross-surronded {
+    left: 240px;
+    }
+}
+
+@media (max-width: 280px) {
+
+    #search-input {
+    width: 200px;
+    }
+
+    .search-cross-surronded {
+    left: 200px;
+    }
+}
