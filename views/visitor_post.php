@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/footer.css">
     <link rel="stylesheet" href="assets/css/post.css">
+    <link rel="stylesheet" href="assets/css/mobile_navbar.css">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/images/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon/favicon-16x16.png">
@@ -15,8 +16,9 @@
     <script defer src="assets/js/visitor_post.js"></script>
 </head>
 <body>
+    <?php require_once "visitor_mobile_navbar.php"; ?>
     <?php require_once __DIR__ . '/visitor_navbar.php'; ?>
-    <main class="post-page">
+        <main class="post-page">
         <div class="post-container">
             <!-- HEADER MOBILE -->
             <div class="post-header post-header-mobile">

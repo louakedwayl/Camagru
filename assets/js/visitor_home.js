@@ -1,7 +1,8 @@
 // === HOME VISITOR JS ===
 
-const iconHome = document.querySelector("img.house");
-iconHome.src = "assets/images/icon/home_black.svg";
+document.querySelectorAll("img.house").forEach(img => {
+    img.src = "assets/images/icon/home_black.svg";
+});
 
 // "more" link for captions
 document.querySelectorAll('.more-link').forEach(link => {
