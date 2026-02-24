@@ -21,7 +21,24 @@
     <main>
         <header>
     <img class="mobile-more-icon" src="assets/images/icon/more.svg" alt="more">
-        <form id="avatar-form" enctype="multipart/form-data">
+    <div class="mobile-hamburger">
+    <ul>
+        <li>
+            <a href="#" class="report hamburger">
+                <span class="link-area-hamburger report">
+                    <img class="icon report" src="assets/images/icon/report.svg" alt="report icon">
+                    <span class="report">Report a problem</span>
+                </span>
+            </a>
+        </li>
+        <li>
+            <a href="index.php?action=logout">
+                <span class="link-area-hamburger logout">Log out</span>
+            </a>
+        </li>
+    </ul>
+</div>    
+    <form id="avatar-form" enctype="multipart/form-data">
                 <label for="avatar-input" class="avatar-label">
                     <img src="<?= htmlspecialchars($user['avatar_path'] ?? 'assets/images/default-avatar.jpeg') ?>" 
                          class="profile-avatar" 

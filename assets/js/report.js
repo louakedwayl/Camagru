@@ -97,3 +97,17 @@ if (reportModal) {
         }
     });
 }
+
+const mobileReportBtn = document.querySelector(".mobile-hamburger a.report.hamburger");
+
+if (mobileReportBtn) {
+    mobileReportBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        mobileHamburger.style.display = "none";
+        const reportModal = document.getElementById('modale-report');
+        if (reportModal) {
+            reportModal.showModal();
+            document.body.style.overflow = "hidden";
+        }
+    });
+}

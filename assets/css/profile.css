@@ -25,6 +25,10 @@ main {
     display: none;
 }
 
+.mobile-hamburger {
+    display: none;
+}
+
 /* ===== BUTTONS ===== */
 
 .btn-edit-profile,
@@ -270,19 +274,84 @@ footer p {
 }
 
 @media (max-width: 900px) {
-        .mobile-more-icon {
+    .mobile-more-icon {
         display: block;
         position: absolute;
-        top: 25px;
-        right: 20px;
-        width: 24px;
-        height: 24px;
+        top: 20px;
+        right: 80px;
+        width: 28px;
+        height: 28px;
         cursor: pointer;
+    }
+
+    .mobile-hamburger {
+        position: absolute;
+        top: 58px;
+        right: 80px;
+        width: 235px;
+        border-radius: 13px;
+        background: #fafafa;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        z-index: 200;
+        padding: 0;
+         height: 110px;
+
+    }
+
+    .mobile-hamburger ul {
+        display: flex;
+        flex-direction: column;
+        list-style: none;
+        width: 100%;
+    }
+
+    .mobile-hamburger li {
+        padding: 2px 0 1px;
+    }
+
+    .mobile-hamburger a {
+        text-decoration: none;
+        color: black;
+    }
+
+    .mobile-hamburger .link-area-hamburger.report {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+        margin-left: 5px;
+        margin-top: 4px;
+        width: 224px;
+        padding: 12px 0 12px 7px;
+        border-radius: 13px;
+    }
+
+    .mobile-hamburger .link-area-hamburger.logout {
+        display: flex;
+        align-items: center;
+        margin-top: 15px;
+        margin-left: 5px;
+        width: 224px;
+        padding: 12px 0px 12px 53px;
+        border-radius: 10px;
+    }
+
+    .mobile-hamburger img.icon.report {
+        width: 28px;
+        height: 28px;
+    }
+
+    header {
+        position: relative;
+        width: 100%;
     }
 
     main {
         position: relative;
         margin-left: 0px;
+    }
+
+    .separator-line {
+        width: 100%;
     }
 }
 
@@ -295,6 +364,8 @@ footer p {
 @media (max-width: 650px) {
     main {
         padding-top: 20px;
+        width: 100%;
+        overflow-x: hidden;
     }
 
     header {
@@ -340,5 +411,25 @@ footer p {
 
     div#gallery-empty-state {
         padding-top: 80px;
+        padding-left: 15px;
+        padding-right: 15px;
+        text-align: center;
+        word-wrap: break-word;
+    }
+
+    span#share-photo {
+        font-size: 24px;
+    }
+
+    span#text-share-photo {
+        font-size: 15px;
+    }
+
+    .mobile-more-icon {
+        right: 50px;
+    }
+
+    .mobile-hamburger {
+        right: 40px;
     }
 }

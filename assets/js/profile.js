@@ -8,6 +8,7 @@ const currentAvatar = document.getElementById('current-avatar');
 const changePhotoInput = document.getElementById('change-photo-input');
 const editAvatarPreview = document.getElementById('edit-avatar-preview');
 const btnPublicView = document.querySelector('.btn-public-view');
+const shareFirstPhotoLink = document.querySelector("a#create-link");
 
 document.querySelectorAll("img.icon.profile, img.profile-icon").forEach(img => {
     img.style.border = "2px solid #262626";
@@ -172,4 +173,37 @@ galleryItems.forEach(item => {
         const postId = item.getAttribute('data-post-id');
         window.location.href = 'index.php?action=post&id=' + postId;
     });
+});
+
+
+if (shareFirstPhotoLink) {
+    shareFirstPhotoLink.addEventListener("click", () => {
+        window.location.href = 'index.php?action=create';
+    });
+}
+
+const mobileMoreIcon = document.querySelector(".mobile-more-icon");
+const mobileHamburger = document.querySelector(".mobile-hamburger");
+
+if (mobileMoreIcon && mobileHamburger) {
+    mobileMoreIcon.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const isOpen = mobileHamburger.style.display === "block";
+        mobileHamburger.style.display = isOpen ? "none" : "block";
+    });
+
+    document.addEventListener("click", () => {
+        mobileHamburger.style.display = "none";
+    });
+
+    mobileHamburger.addEventListener("click", (e) => {
+        e.stopPropagation();
+    });
+}
+
+window.addEventListener("resize", () => {
+    if (window.innerWidth > 900 && mobileHamburger) {
+        mobileHamburger.style.display = "none";
+    }
 });
