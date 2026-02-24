@@ -42,7 +42,7 @@ img.three-dots:active {
     max-width: 400px;
     width: 90%;
     background: white;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 16px rgb(255, 0, 0);
     margin: auto;
 }
 
@@ -61,7 +61,7 @@ img.three-dots:active {
     background: white;
     cursor: pointer;
     font-size: 14px;
-    border-bottom: 1px solid #dbdbdb;
+    border-bottom: 1px solid #dbdbdb !important; 
     transition: background-color 0.2s;
     text-align: center;
     color: #000;
