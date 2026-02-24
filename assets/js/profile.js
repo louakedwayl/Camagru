@@ -9,18 +9,31 @@ const changePhotoInput = document.getElementById('change-photo-input');
 const editAvatarPreview = document.getElementById('edit-avatar-preview');
 const btnPublicView = document.querySelector('.btn-public-view');
 const shareFirstPhotoLink = document.querySelector("a#create-link");
+const mobileMoreIcon = document.querySelector(".mobile-more-icon");
+const mobileHamburger = document.querySelector(".mobile-hamburger");
+const mobileReportBtn = document.querySelector(".mobile-hamburger a.report.hamburger");
+
+function lockScroll() {
+    document.documentElement.classList.add('modal-open');
+    document.body.classList.add('modal-open');
+}
+
+function unlockScroll() {
+    document.documentElement.classList.remove('modal-open');
+    document.body.classList.remove('modal-open');
+}
 
 document.querySelectorAll("img.icon.profile, img.profile-icon").forEach(img => {
     img.style.border = "2px solid #262626";
 });
 
-// OPENING / CLOSING MODAL
+// OPENING / CLOSING EDIT PROFILE MODAL
 
 if (btnEditProfile) {
     btnEditProfile.addEventListener('click', (e) => {
         e.preventDefault();
         modalEditProfile.style.display = 'block';
-        document.body.style.overflow = 'hidden';
+        lockScroll();
     });
 }
 
@@ -28,7 +41,7 @@ if (modalEditClose) {
     modalEditClose.addEventListener('click', (e) => {
         e.preventDefault();
         modalEditProfile.style.display = 'none';
-        document.body.style.overflow = '';
+        unlockScroll();
     });
 }
 
@@ -36,12 +49,13 @@ document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' || e.key === 'Esc') {
         if (modalEditProfile.style.display === 'block') {
             modalEditProfile.style.display = 'none';
-            document.body.style.overflow = '';
+            unlockScroll();
         }
     }
 });
 
-// Direct upload from the modal
+// AVATAR UPLOAD FROM MODAL
+
 if (changePhotoInput) {
     changePhotoInput.addEventListener('change', async (e) => {
         const file = e.target.files[0];
@@ -75,12 +89,12 @@ if (changePhotoInput) {
             if (data.success) {
                 currentAvatar.src = data.avatar_path;
                 editAvatarPreview.src = data.avatar_path;
-                
+
                 const overlay = document.querySelector('.edit-avatar-container .avatar-overlay');
                 const cameraIcon = document.querySelector('.edit-avatar-container .camera-white-icon');
                 if (overlay) overlay.style.display = 'none';
                 if (cameraIcon) cameraIcon.style.display = 'none';
-                
+
                 const profileOverlay = document.querySelector('.avatar-label .avatar-overlay');
                 const profileCameraIcon = document.querySelector('.avatar-label .camera-white-icon');
                 if (profileOverlay) profileOverlay.style.display = 'none';
@@ -96,7 +110,8 @@ if (changePhotoInput) {
     });
 }
 
-// Upload direct depuis la page profile
+// AVATAR UPLOAD FROM PROFILE PAGE
+
 avatarInput.addEventListener('change', async (e) => {
     const file = e.target.files[0];
     if (!file) return;
@@ -136,12 +151,12 @@ avatarInput.addEventListener('change', async (e) => {
         if (data.success) {
             currentAvatar.src = data.avatar_path;
             editAvatarPreview.src = data.avatar_path;
-            
+
             const profileOverlay = document.querySelector('.avatar-label .avatar-overlay');
             const profileCameraIcon = document.querySelector('.avatar-label .camera-white-icon');
             if (profileOverlay) profileOverlay.style.display = 'none';
             if (profileCameraIcon) profileCameraIcon.style.display = 'none';
-            
+
             const overlay = document.querySelector('.edit-avatar-container .avatar-overlay');
             const cameraIcon = document.querySelector('.edit-avatar-container .camera-white-icon');
             if (overlay) overlay.style.display = 'none';
@@ -158,13 +173,16 @@ avatarInput.addEventListener('change', async (e) => {
     }
 });
 
+// PUBLIC VIEW
 
 if (btnPublicView) {
-    btnPublicView.addEventListener('click', function() {
+    btnPublicView.addEventListener('click', function () {
         const username = document.querySelector('.username').textContent;
         window.location.href = `?action=user_profile&username=${username}`;
     });
 }
+
+// GALLERY ITEMS
 
 const galleryItems = document.querySelectorAll('.gallery-item');
 
@@ -175,6 +193,7 @@ galleryItems.forEach(item => {
     });
 });
 
+// SHARE FIRST PHOTO LINK
 
 if (shareFirstPhotoLink) {
     shareFirstPhotoLink.addEventListener("click", () => {
@@ -182,8 +201,7 @@ if (shareFirstPhotoLink) {
     });
 }
 
-const mobileMoreIcon = document.querySelector(".mobile-more-icon");
-const mobileHamburger = document.querySelector(".mobile-hamburger");
+// MOBILE HAMBURGER
 
 if (mobileMoreIcon && mobileHamburger) {
     mobileMoreIcon.addEventListener("click", (e) => {
@@ -191,10 +209,12 @@ if (mobileMoreIcon && mobileHamburger) {
         e.stopPropagation();
         const isOpen = mobileHamburger.style.display === "block";
         mobileHamburger.style.display = isOpen ? "none" : "block";
+        mobileMoreIcon.src = isOpen ? "assets/images/icon/more.svg" : "assets/images/icon/more_black.svg";
     });
 
     document.addEventListener("click", () => {
         mobileHamburger.style.display = "none";
+        mobileMoreIcon.src = "assets/images/icon/more.svg";
     });
 
     mobileHamburger.addEventListener("click", (e) => {
@@ -202,8 +222,26 @@ if (mobileMoreIcon && mobileHamburger) {
     });
 }
 
+// MOBILE REPORT BUTTON
+
+if (mobileReportBtn) {
+    mobileReportBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        mobileHamburger.style.display = "none";
+        mobileMoreIcon.src = "assets/images/icon/more.svg";
+        const reportModal = document.getElementById('modale-report');
+        if (reportModal) {
+            reportModal.showModal();
+            lockScroll();
+        }
+    });
+}
+
+// RESIZE LISTENER
+
 window.addEventListener("resize", () => {
     if (window.innerWidth > 900 && mobileHamburger) {
         mobileHamburger.style.display = "none";
+        mobileMoreIcon.src = "assets/images/icon/more.svg";
     }
 });

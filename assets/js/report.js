@@ -1,12 +1,20 @@
-const reportModal = document.getElementById('modale-report');
+function lockScroll() {
+    document.documentElement.classList.add('modal-open');
+    document.body.classList.add('modal-open');
+}
 
+function unlockScroll() {
+    document.documentElement.classList.remove('modal-open');
+    document.body.classList.remove('modal-open');
+}
+
+const reportModal = document.getElementById('modale-report');
 if (reportModal) {
     const reportForm = reportModal.querySelector('form');
     const reportTextarea = reportForm.querySelector('textarea.report');
     const reportSendBtn = reportForm.querySelector('button.report.send');
     const crossModale = reportModal.querySelector('a.modale.cross');
 
-    // Activer/désactiver le bouton selon le contenu du textarea
     reportTextarea.addEventListener('input', () => {
         if (reportTextarea.value.trim().length > 0) {
             reportSendBtn.disabled = false;
@@ -19,32 +27,27 @@ if (reportModal) {
         }
     });
 
-    // État initial : bouton désactivé
     reportSendBtn.disabled = true;
     reportSendBtn.style.backgroundColor = '#B7C6FF';
     reportSendBtn.style.cursor = 'not-allowed';
 
-    // Fermer avec la croix
     crossModale.addEventListener('click', (e) => {
         e.preventDefault();
         reportModal.close();
-        document.body.style.overflow = "";
+        unlockScroll();
     });
 
-    // Fermer avec ESC
     reportModal.addEventListener('cancel', () => {
-        document.body.style.overflow = "";
+        unlockScroll();
     });
 
-    // Fermer en cliquant sur le backdrop
     reportModal.addEventListener('click', (e) => {
         if (e.target === reportModal) {
             reportModal.close();
-            document.body.style.overflow = "";
+            unlockScroll();
         }
     });
 
-    // Reset du bouton quand la modale se ferme
     reportModal.addEventListener('close', () => {
         reportForm.reset();
         reportSendBtn.disabled = true;
@@ -53,15 +56,10 @@ if (reportModal) {
         reportSendBtn.querySelector('span').textContent = 'Send report';
     });
 
-    // Envoyer le report
     reportForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        
         const message = reportTextarea.value.trim();
-        
-        if (!message) {
-            return;
-        }
+        if (!message) return;
 
         reportSendBtn.disabled = true;
         reportSendBtn.style.backgroundColor = '#B7C6FF';
@@ -70,18 +68,15 @@ if (reportModal) {
         try {
             const response = await fetch('index.php?action=submit_report', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ message })
             });
-
             const data = await response.json();
 
             if (data.success) {
                 alert('Report sent successfully. Thank you!');
                 reportModal.close();
-                document.body.style.overflow = "";
+                unlockScroll();
             } else {
                 alert(data.message || 'Error sending report.');
                 reportSendBtn.disabled = false;
@@ -94,20 +89,6 @@ if (reportModal) {
             reportSendBtn.disabled = false;
             reportSendBtn.style.backgroundColor = '#5063F9';
             reportSendBtn.querySelector('span').textContent = 'Send report';
-        }
-    });
-}
-
-const mobileReportBtn = document.querySelector(".mobile-hamburger a.report.hamburger");
-
-if (mobileReportBtn) {
-    mobileReportBtn.addEventListener("click", (e) => {
-        e.preventDefault();
-        mobileHamburger.style.display = "none";
-        const reportModal = document.getElementById('modale-report');
-        if (reportModal) {
-            reportModal.showModal();
-            document.body.style.overflow = "hidden";
         }
     });
 }

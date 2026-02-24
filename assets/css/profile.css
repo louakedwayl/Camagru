@@ -433,3 +433,11 @@ footer p {
         right: 40px;
     }
 }
+
+html.modal-open,
+body.modal-open {
+    overflow: hidden !important;
+    position: fixed !important;
+    width: 100% !important;
+    height: 100% !important;
+}
