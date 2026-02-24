@@ -244,6 +244,8 @@
 
 /* === RESPONSIVE === */
 
+/* === RESPONSIVE === */
+
 @media (min-width: 1440px) {
     .post-page {
         padding-left: 350px;
@@ -263,24 +265,38 @@
     }
 }
 
-
 @media (max-width: 768px) {
-    .post-page {
-        padding-top: 30px;
-        margin-bottom: 50px;
+    body.post-body {
+        display: flex !important;
+        flex-direction: column !important;
+        height: auto !important;
+        min-height: 100vh;
     }
 
+    .post-page {
+        padding: 0;
+        margin-bottom: 60px;
+        min-height: auto;
+    }
 
     .post-container {
         flex-direction: column;
-        width: 95%;
-        max-width: 600px;
-        margin: 0 auto;
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
         height: auto;
+        border: none;
+        border-radius: 0;
     }
 
     .post-image-side {
         min-width: 100%;
+    }
+
+    .post-image-side img {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 4/5;
     }
 
     .post-details-side {

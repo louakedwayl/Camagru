@@ -15,7 +15,7 @@
     <script defer src="assets/js/report.js"></script>
     <script defer src="assets/js/post.js"></script>
 </head>
-<body>
+<body >
     <?php require_once "mobile_navbar.php"; ?>
     <?php require_once __DIR__ . '/navbar.php'; ?>
     <main class="post-page">
