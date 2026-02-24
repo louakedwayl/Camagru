@@ -1,0 +1,126 @@
+.modal-legal {
+    display: none;
+    position: fixed;
+    padding: 0;
+    border: none;
+    margin: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    max-height: 80vh;
+    background: transparent;
+    z-index: 101;
+    animation: fadeInLegal 0.2s ease;
+}
+
+.modal-legal[open] {
+    display: block;
+}
+
+.modal-legal::backdrop {
+    background-color: rgba(0, 0, 0, 0.65);
+    animation: fadeInBackdropLegal 0.2s ease;
+}
+
+.modal-legal-content {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-legal-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 16px 24px;
+    border-bottom: 1px solid #dbdbdb;
+    background: #fff;
+    flex-shrink: 0;
+}
+
+.modal-legal-header h2 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #262626;
+    margin: 0;
+}
+
+.modal-legal-close {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    object-fit: contain;
+    transition: opacity 0.2s;
+}
+
+.modal-legal-close:hover {
+    opacity: 0.6;
+}
+
+.modal-legal-body {
+    padding: 24px;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.modal-legal-body h3 {
+    font-size: 14px;
+    font-weight: 600;
+    color: #262626;
+    margin-top: 20px;
+    margin-bottom: 8px;
+}
+
+.modal-legal-body h3:first-child {
+    margin-top: 0;
+}
+
+.modal-legal-body p {
+    font-size: 13px;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 12px;
+}
+
+.modal-legal-body strong {
+    color: #262626;
+}
+
+@keyframes fadeInLegal {
+    from { opacity: 0; transform: translate(-50%, calc(-50% - 10px)); }
+    to { opacity: 1; transform: translate(-50%, -50%); }
+}
+
+@keyframes fadeInBackdropLegal {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@media (max-width: 600px) {
+    .modal-legal {
+        width: 95vw;
+        max-width: none;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        margin: 0;
+    }
+
+    .modal-legal-body {
+        padding: 16px;
+    }
+
+    .modal-legal-header {
+        padding: 14px 16px;
+    }
+}

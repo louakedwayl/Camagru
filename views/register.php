@@ -7,10 +7,12 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/footer.css">
     <link rel="stylesheet" href="assets/css/register.css">
+    <link rel="stylesheet" href="assets/css/modale_legal.css">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/images/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon/favicon-16x16.png">
     <script defer src="assets/js/register.js"></script>
+    <script defer src="assets/js/legal_modals.js"></script>
 </head>
 <body>
     <div class="overlay"></div>
@@ -43,6 +45,6 @@
         </div>
     </main>
     <?php require_once "footer.php" ?>
-    <?php require_once "modale_learn_more.php" ?>
+    <?php require_once "modale_legal.php" ?>
 </body>
 </html>
