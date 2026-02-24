@@ -333,26 +333,61 @@ input:checked + .slider:before {
 
 /* Responsive */
 @media (max-width: 600px) {
-    .modal-edit-content {
-        width: 95%;
-        margin: 20px auto;
+    .modal-edit-profile {
+        width: 95% !important;
+        max-width: none !important;
+        top: 50% !important;
+        left: 50% !important;
+        transform: translate(-50%, -50%) !important;
+        margin: 0 !important;
     }
-    
+
+    .modal-edit-content {
+        width: 100%;
+        margin: 0;
+        border-radius: 12px;
+        max-height: 85vh;
+    }
+
     .profile-photo-section {
         padding: 16px;
     }
-    
+
     .form-group-edit {
         flex-direction: column;
         align-items: flex-start;
         gap: 8px;
+        padding: 16px;
     }
-    
-    .form-group-edit label {
+
+    .form-group-edit label:not(.switch) {
         min-width: auto;
     }
-    
-    .form-group-edit input {
+
+    .input-error-container {
         width: 100%;
+        max-width: 100%;
+    }
+
+    .form-group-edit input[type="text"],
+    .form-group-edit input[type="email"],
+    .form-group-edit input[type="password"] {
+        width: 100% !important;
+    }
+
+    p.error-edit {
+        width: 100%;
+    }
+
+    .notification-group {
+        width: 100%;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .btn-save-profile {
+        margin: 16px;
+        width: calc(100% - 32px);
     }
 }
