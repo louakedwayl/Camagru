@@ -55,6 +55,7 @@ main
 {
     display: flex;
     margin-top: 3px;
+    align-items: center;
 }
 .post-username
 {
