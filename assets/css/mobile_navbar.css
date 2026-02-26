@@ -58,9 +58,10 @@
         border-radius: 50%;
         border: 1px solid #dbdbdb;
     }
-
-    body {
-        padding-bottom: 50px;
+    .gallery-grid::after {
+        content: "";
+        display: block;
+        height: 50px;
     }
 }
 
@@ -69,6 +70,7 @@
         padding-left: calc((100vw - 665px) / 2);
         padding-right: calc((100vw - 560px) / 2);
     }
+    
 }
 
 @media (max-width: 620px) {
