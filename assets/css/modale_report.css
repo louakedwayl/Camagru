@@ -57,6 +57,9 @@ textarea.report {
     padding: 3px;
     border: 1px solid #ddd;
     outline: none;
+    resize: none;
+    overflow-y: auto;
+    scrollbar-width: none;
 }
 
 div.report.button {
