@@ -1,6 +1,10 @@
-document.querySelectorAll("img.explore-icon").forEach(img => {
-    img.src = "assets/images/icon/compass_black.svg";
-});
+// Mobile
+const mobileIcon = document.querySelector("img.explore-icon");
+if (mobileIcon) mobileIcon.src = "assets/images/icon/compass_black.svg";
+
+// Desktop
+const desktopIcon = document.querySelector("img.icon.explore:not(.nav)");
+if (desktopIcon) desktopIcon.src = "assets/images/icon/compass_black.svg";
 
 document.querySelectorAll('.explore-item').forEach(item => {
     item.addEventListener('click', () => {
