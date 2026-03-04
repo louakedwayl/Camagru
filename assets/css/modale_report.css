@@ -13,6 +13,7 @@ dialog#modale-report {
     border-radius: 20px;
     z-index: 101;
     animation: slideDownReport 0.3s ease;
+    overflow: hidden;
 }
 
 dialog#modale-report[open] {
