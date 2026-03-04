@@ -60,6 +60,11 @@ textarea.report {
     resize: none;
     overflow-y: auto;
     scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+textarea.report::-webkit-scrollbar {
+    display: none;
 }
 
 div.report.button {
