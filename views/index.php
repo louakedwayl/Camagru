@@ -3,14 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Camagru — Photo Sharing App by Wayl Louaked</title>
+    <meta name="description" content="Camagru — A full-stack Instagram clone built with vanilla PHP, JavaScript and MySQL. Webcam capture, sticker compositing, social features. École 42 project." />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://camagru.wayl.dev/" />
     <link rel="apple-touch-icon" sizes="180x180" href="assets/images/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon/favicon-16x16.png">
+    <!-- Open Graph -->
+    <meta property="og:title" content="Camagru — Photo Sharing App by Wayl Louaked" />
+    <meta property="og:description" content="Full-stack Instagram clone: PHP, JS, MySQL, Docker. Webcam capture, GD compositing, social features." />
+    <meta property="og:url" content="https://camagru.wayl.dev/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Camagru" />
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Camagru — Photo Sharing App by Wayl Louaked" />
+    <meta name="twitter:description" content="Full-stack Instagram clone: PHP, JS, MySQL, Docker. Webcam capture, GD compositing, social features." />
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/footer.css">
     <link rel="stylesheet" href="assets/css/index.css">
     <link rel="stylesheet" href="assets/css/modale_cookie.css">
-    <title>Camagru</title>
     <script src="assets/js/login.js" defer></script>
 </head>
 <body>
