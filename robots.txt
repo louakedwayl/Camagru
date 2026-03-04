@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://camagru.wayl.dev/sitemap.xml
