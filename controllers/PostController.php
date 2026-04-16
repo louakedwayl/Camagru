@@ -114,28 +114,32 @@ public function showPostVisitor(): void
 
 public function capture(): void
 {
+    ob_start();
     if (session_status() === PHP_SESSION_NONE) session_start();
-    
+
     header('Content-Type: application/json');
     
     if (!isset($_SESSION['user_id'])) {
+        ob_clean();
         echo json_encode(['success' => false, 'error' => 'Not logged in']);
         exit;
     }
 
     if (!isset($_FILES['image']) || $_FILES['image']['error'] !== UPLOAD_ERR_OK) {
+        ob_clean();
         echo json_encode(['success' => false, 'error' => 'No image received']);
         exit;
     }
 
     $tmpPath = $_FILES['image']['tmp_name'];
-    $baseImage = imagecreatefrompng($tmpPath);
-    
+    $baseImage = @imagecreatefrompng($tmpPath);
+
     if (!$baseImage) {
-        $baseImage = imagecreatefromjpeg($tmpPath);
+        $baseImage = @imagecreatefromjpeg($tmpPath);
     }
-    
+
     if (!$baseImage) {
+        ob_clean();
         echo json_encode(['success' => false, 'error' => 'Invalid image']);
         exit;
     }
@@ -180,6 +184,7 @@ public function capture(): void
 
     $success = $this->postModel->createPost($userId, $dbPath, $caption ?: null);
 
+    ob_clean();
     echo json_encode(['success' => $success]);
     exit;
 }

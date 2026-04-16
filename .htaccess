@@ -1,3 +1,7 @@
+php_flag display_errors Off
+php_value upload_max_filesize 10M
+php_value post_max_size 15M
+
 RewriteEngine On
 
 # Serve existing files directly
