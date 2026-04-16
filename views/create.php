@@ -46,6 +46,8 @@
                         <button class="sticker-btn" id="sticker-plus">+</button>
                         <button class="sticker-btn sticker-btn-delete" id="sticker-delete">×</button>
                     </div>
+                    <!-- Freeze snapshot -->
+                    <img id="freeze-snapshot" style="display:none; position:absolute; inset:0; width:100%; height:100%; object-fit:contain; z-index:50;">
                     <!-- No source placeholder -->
                     <div class="preview-placeholder" id="preview-placeholder">
                         <img src="assets/images/icon/camera.svg" class="placeholder-icon">
@@ -96,5 +98,18 @@
         </div>
 
     <?php require_once "modale_report.php" ?>
+
+
+    <!-- Photo partagée popup -->
+    <dialog id="shared-modal">
+        <div class="shared-modal-inner">
+            <div class="shared-modal-check">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"/>
+                </svg>
+            </div>
+            <span class="shared-modal-text">Photo partagée</span>
+        </div>
+    </dialog>
 </body>
 </html>

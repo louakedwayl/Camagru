@@ -4,6 +4,52 @@ body {
     grid-template-rows: unset !important;
 }
 
+/* ===== SHARED POPUP ===== */
+
+#shared-modal {
+    border: none;
+    border-radius: 14px;
+    padding: 0;
+    background: transparent;
+    box-shadow: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+}
+
+#shared-modal::backdrop {
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.shared-modal-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    background: #fff;
+    border-radius: 14px;
+    padding: 32px 48px;
+    min-width: 220px;
+}
+
+.shared-modal-check {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: #5063F9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.shared-modal-text {
+    font-size: 16px;
+    font-weight: 600;
+    color: #262626;
+}
+
 
 /* ===== CREATE PAGE ===== */
 

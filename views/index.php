@@ -56,5 +56,6 @@
     </main>
     <?php require_once "views/modale_cookies.php" ?>
     <?php require_once "views/footer.php" ?>
+    <script src="assets/js/cookie.js" defer></script>
 </body>
 </html>
