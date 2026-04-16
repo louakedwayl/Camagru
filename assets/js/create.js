@@ -378,7 +378,17 @@ btnCapture.addEventListener('click', async () => {
             const result = await response.json();
 
             if (result.success) {
-                window.location.reload();
+                // Freeze preview
+                const snapshot = document.getElementById('freeze-snapshot');
+                snapshot.src = canvas.toDataURL('image/png');
+                snapshot.style.display = 'block';
+                document.getElementById('webcam').style.display = 'none';
+                document.getElementById('uploaded-preview').style.display = 'none';
+                document.getElementById('sticker-canvas').style.display = 'none';
+
+                // Show popup
+                document.getElementById('shared-modal').showModal();
+                setTimeout(() => window.location.reload(), 2000);
             } else {
                 alert(result.error || 'Error capturing image');
             }
