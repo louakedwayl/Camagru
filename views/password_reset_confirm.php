@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/images/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon/favicon-16x16.png">
@@ -14,7 +15,7 @@
 </head>
 <body>
     <header>
-        <img src="assets//images/logo.png" alt="Camagru Logo">
+        <img src="assets/images/logo.png" alt="Camagru Logo">
         <div class="header-button">
             <a href="index.php?action=index" class="button">Log In</a>
             <a href="index.php?action=register" class="text">Sign Up</a>

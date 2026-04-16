@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light">
     <title>Camagru — Photo Sharing App by Wayl Louaked</title>
     <meta name="description" content="Camagru — A full-stack Instagram clone built with vanilla PHP, JavaScript and MySQL. Webcam capture, sticker compositing, social features. École 42 project." />
     <meta name="robots" content="index, follow" />

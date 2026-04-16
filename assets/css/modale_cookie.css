@@ -1,17 +1,17 @@
 #cookie-modal {
     border: none;
-    border-radius: 12px;
-    padding: 24px;
-    width: 360px;
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
+    border-radius: 16px;
+    padding: 20px;
+    width: min(380px, calc(100vw - 24px));
+    box-shadow: 0 4px 32px rgba(0, 0, 0, 0.12);
     position: fixed;
-    bottom: 120px;
+    bottom: 130px;
     left: 50%;
     transform: translateX(-50%);
     top: auto;
     margin: 0;
-        background-color:#FBFBFB ;
-
+    background-color: #FBFBFB;
+    z-index: 999;
 }
 
 #cookie-modal::backdrop {
@@ -21,17 +21,41 @@
 .cookie-header {
     display: flex;
     align-items: center;
-    gap: 10px;
-    margin-bottom: 12px;
-    font-weight: 600;
+    gap: 8px;
+    margin-bottom: 10px;
+    font-weight: 700;
     font-size: 15px;
+    color: #262626;
 }
 
-#cookie-modal p {
+#cookie-modal > p {
     font-size: 13px;
     color: #555;
-    margin-bottom: 16px;
+    margin-bottom: 12px;
     line-height: 1.5;
+}
+
+.cookie-demo {
+    background: #f0f2ff;
+    border: 1px solid #d6daff;
+    border-radius: 10px;
+    padding: 10px 12px;
+    margin-bottom: 14px;
+}
+
+.cookie-demo-text {
+    font-size: 12px;
+    color: #555;
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+
+.cookie-demo-credentials {
+    display: flex;
+    gap: 12px;
+    font-size: 13px;
+    color: #262626;
+    flex-wrap: wrap;
 }
 
 .cookie-actions {
@@ -41,13 +65,18 @@
 
 .cookie-actions button {
     flex: 1;
-    padding: 8px 0;
+    padding: 9px 0;
     border-radius: 8px;
     border: none;
     outline: none;
     font-size: 13px;
     font-weight: 600;
     cursor: pointer;
+    transition: opacity 0.15s;
+}
+
+.cookie-actions button:hover {
+    opacity: 0.85;
 }
 
 #accept-cookies {
@@ -58,4 +87,25 @@
 #decline-cookies {
     background: #efefef;
     color: #262626;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 900px) {
+    #cookie-modal {
+        bottom: 70px;
+        width: calc(100vw - 24px);
+        border-radius: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    #cookie-modal {
+        padding: 16px;
+        bottom: 66px;
+    }
+
+    .cookie-demo-credentials {
+        flex-direction: column;
+        gap: 4px;
+    }
 }
