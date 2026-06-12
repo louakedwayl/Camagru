@@ -3,10 +3,11 @@ body {
     grid-template-columns: unset !important;
     grid-template-rows: unset !important;
 }
-main 
+main
 {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
 /* USER MENU */
 .user-menu {

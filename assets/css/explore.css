@@ -12,11 +12,11 @@ body {
 
 main {
     display: flex;
+    flex-direction: column;
+    align-items: center;
     margin-left: 338px;
     padding-top: 70px;
     padding-bottom: 100px;
-
-    justify-content: center;
 }
 
 .explore-grid {

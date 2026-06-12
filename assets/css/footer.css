@@ -27,3 +27,54 @@ footer p
         display: none;
     }
 }
+
+/* --- Pagination (galeries home / explore) --- */
+/* navbar.css style le sélecteur nu `nav` (position fixed, width 338px,
+   border-right, display none en mobile) : on neutralise tout ici car
+   la pagination est aussi un <nav>. */
+.pagination
+{
+    display: flex;
+    position: static;
+    width: auto;
+    height: auto;
+    border: none;
+    z-index: auto;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    padding: 24px 0 8px;
+}
+
+.pagination-link
+{
+    color: #262626;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    padding: 6px 14px;
+    border: 1px solid #dbdbdb;
+    border-radius: 8px;
+    background: #fff;
+}
+
+.pagination-link:hover
+{
+    background: #fafafa;
+}
+
+.pagination-info
+{
+    color: #8e8e8e;
+    font-size: 14px;
+}
+
+@media (max-width: 900px)
+{
+    /* dégage la mobile-bottom-bar fixe (50px) */
+    .pagination
+    {
+        padding-bottom: 66px;
+    }
+}
