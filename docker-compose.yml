@@ -1,8 +1,9 @@
 services:
   apache:
     build: .
+    restart: unless-stopped
     ports:
-      - "8080:80"
+      - "127.0.0.1:8080:80"
     volumes:
       - .:/var/www/html
       - uploads_data:/var/www/html/public/uploads
@@ -13,6 +14,7 @@ services:
 
   database:
     image: mysql:8.0
+    restart: unless-stopped
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
