@@ -6,8 +6,6 @@ The application replicates the core Instagram experience: webcam photo capture, 
 
 Built with a strong focus on security: all inputs are validated and sanitized, passwords are hashed with bcrypt, queries use prepared statements, and every form is protected against CSRF.
 
-> **Live Demo** — [https://camagru.wayl.dev](https://camagru.wayl.dev)
-
 <table>
   <tr>
     <td align="center"><img src="assets/images/Camagru_layout.png" alt="Login" width="400"></td>
