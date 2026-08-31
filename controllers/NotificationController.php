@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 require_once __DIR__ . '/../models/NotificationModel.php';
+require_once __DIR__ . '/../utils/view_helpers.php';
 
 class NotificationController
 {
@@ -30,6 +31,12 @@ class NotificationController
         $userId = (int)$_SESSION['user_id'];
         $notifications = $this->notificationModel->getNotifications($userId);
         $unreadCount = $this->notificationModel->countUnread($userId);
+
+        // La barre de notifications affiche une petite vignette du post
+        foreach ($notifications as &$n) {
+            $n['post_image'] = post_thumb($n['post_image']);
+        }
+        unset($n);
 
         echo json_encode([
             'success' => true,

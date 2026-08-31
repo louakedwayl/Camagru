@@ -1,0 +1,121 @@
+(() => {
+    const form = document.querySelector<HTMLFormElement>('form')!;
+    const pass1 = document.getElementById('pass1') as HTMLInputElement;
+    const pass2 = document.getElementById('pass2') as HTMLInputElement;
+    const btn = document.getElementById('submit-btn') as HTMLButtonElement;
+
+
+    const errSize = document.querySelector<HTMLElement>('.error.password')!;
+    const errUpper = document.querySelector<HTMLElement>('.error.uppercase')!;
+    const errMatch = document.querySelector<HTMLElement>('.errorMatch')!;
+    const errTimeout = document.querySelector<HTMLElement>('.errorTimeout')!;
+
+    interface UpdatePasswordResponse {
+        success: boolean;
+    }
+
+
+    function validatePass1() {
+        errSize.style.display = "none";
+        errUpper.style.display = "none";
+        errMatch.style.display = "none";
+        pass1.style.borderColor = "";
+        pass1.style.marginBottom = "12px";
+        pass2.style.borderColor = "";
+
+        if (pass1.value === "") return;
+
+        if (pass1.value.length < 6) {
+            errSize.style.display = "block";
+            pass1.style.borderColor = "red";
+            pass1.style.marginBottom = "0px";
+        }
+        else if (!/[A-Z]/.test(pass1.value))
+        {
+            errUpper.style.display = "block";
+            pass1.style.borderColor = "red";
+            pass1.style.marginBottom = "0px";
+        }
+    }
+
+    function validatePass2()
+    {
+        errMatch.style.display = "none";
+        pass2.style.borderColor = "";
+
+        if (pass2.value === "") return;
+
+        const isPass1Valid = pass1.value.length >= 6 && /[A-Z]/.test(pass1.value);
+
+        if (!isPass1Valid) {
+            return;
+        }
+
+        if (pass1.value !== pass2.value)
+        {
+            errMatch.style.display = "block";
+            pass2.style.borderColor = "red";
+        }
+    }
+
+    function checkButton() {
+        const v1 = pass1.value;
+        const v2 = pass2.value;
+
+        const isStrong = v1.length >= 6 && /[A-Z]/.test(v1);
+        const match = v1 === v2 && v1 !== "";
+
+        if (isStrong && match) {
+            btn.classList.add('active');
+        } else {
+            btn.classList.remove('active');
+        }
+    }
+
+    pass1.addEventListener("blur", () => {
+        validatePass1();
+        if (pass2.value !== "") validatePass2();
+    });
+
+    pass2.addEventListener("blur", validatePass2);
+    pass1.addEventListener("input", checkButton);
+    pass2.addEventListener("input", checkButton);
+
+
+    form.addEventListener('submit', async (e) =>
+    {
+        e.preventDefault();
+
+        if (!btn.classList.contains('active'))
+            return;
+
+        const formData = new FormData(form);
+
+        try
+        {
+            btn.disabled = true;
+
+            const response = await fetch("index.php?action=update_password",
+            {
+                method: "POST",
+                body: formData
+            });
+
+            const data: UpdatePasswordResponse = await response.json();
+
+            if (data.success)
+            {
+                window.location.href = "index.php?action=home";
+            }
+            else
+            {
+                btn.disabled = false;
+                errTimeout.style.display = "block";
+            }
+        }
+        catch (error)
+        {
+            btn.disabled = false;
+        }
+    });
+})();

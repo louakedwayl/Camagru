@@ -58,7 +58,7 @@
                 <img class="three-dots" src="assets/images/icon/three-dots.svg" alt="Three dots icon" data-post-id="<?php echo $post['id']; ?>">
             </div>
             <div class="post-item">
-                <img src="<?php echo htmlspecialchars($post['image_path']); ?>" alt="Post">
+                <img src="<?php echo htmlspecialchars($post['image_path']); ?>" alt="Post" loading="lazy">
             </div>
             <div class="gallery-bottom">
                 <div class="post-actions">
@@ -86,6 +86,7 @@
             </div>
             <?php endforeach; ?>
         </div>
+        <?php $paginationAction = 'home'; require __DIR__ . '/pagination.php'; ?>
     </main>
     <dialog id="modal-post-options" class="modal-post-options">
         <div class="modal-options-content">

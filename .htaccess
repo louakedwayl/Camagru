@@ -2,6 +2,24 @@ php_flag display_errors Off
 php_value upload_max_filesize 10M
 php_value post_max_size 15M
 
+# Cache navigateur pour les assets statiques (les noms de fichiers uploadés sont uniques)
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/jpeg "access plus 30 days"
+    ExpiresByType image/png "access plus 30 days"
+    ExpiresByType image/gif "access plus 30 days"
+    ExpiresByType image/webp "access plus 30 days"
+    ExpiresByType image/svg+xml "access plus 30 days"
+    ExpiresByType image/x-icon "access plus 30 days"
+    ExpiresByType text/css "access plus 7 days"
+    ExpiresByType application/javascript "access plus 7 days"
+</IfModule>
+
+# Compression gzip du texte (HTML/CSS/JS/JSON/SVG)
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/css application/javascript application/json image/svg+xml
+</IfModule>
+
 RewriteEngine On
 
 # Serve existing files directly

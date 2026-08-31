@@ -5,6 +5,7 @@ declare(strict_types=1);
 require_once __DIR__ . '/../models/PostModel.php';
 require_once __DIR__ . '/../models/NotificationModel.php';
 require_once __DIR__ . '/../utils/Mailer.php';
+require_once __DIR__ . '/../utils/ImageProcessor.php';
 
 class PostController
 {
@@ -82,15 +83,28 @@ public function toggleLike(): void
 
 
 
+/**
+ * Reads ?page= and returns [page, totalPages, offset] for a given page size
+ */
+private function paginate(int $perPage): array
+{
+    $total = $this->postModel->getTotalPosts();
+    $totalPages = max(1, (int)ceil($total / $perPage));
+    $page = max(1, min((int)($_GET['page'] ?? 1), $totalPages));
+    return [$page, $totalPages, ($page - 1) * $perPage];
+}
+
 public function homeVisitor(): void
 {
-    $posts = $this->postModel->getAllPosts() ?? [];
+    [$page, $totalPages, $offset] = $this->paginate(12);
+    $posts = $this->postModel->getAllPosts(0, 12, $offset);
     require __DIR__ . '/../views/visitor_home.php';
 }
 
 public function exploreVisitor(): void
 {
-    $posts = $this->postModel->getAllPosts();
+    [$page, $totalPages, $offset] = $this->paginate(24);
+    $posts = $this->postModel->getAllPosts(0, 24, $offset);
     require __DIR__ . '/../views/visitor_explore.php';
 }
 
@@ -171,12 +185,13 @@ public function capture(): void
         imagedestroy($stickerImg);
     }
 
-    $filename = uniqid('post_') . '.png';
+    $filename = uniqid('post_') . '.webp';
     $savePath = __DIR__ . '/../public/uploads/posts/' . $filename;
     $dbPath = 'public/uploads/posts/' . $filename;
 
-    imagesavealpha($baseImage, true);
-    imagepng($baseImage, $savePath);
+    // Image pleine taille (1280px max) + miniature pour les grilles, en WebP
+    ImageProcessor::saveWebp($baseImage, $savePath, ImageProcessor::FULL_MAX_DIM, ImageProcessor::FULL_QUALITY);
+    ImageProcessor::saveWebp($baseImage, ImageProcessor::thumbPath($savePath), ImageProcessor::THUMB_MAX_DIM, ImageProcessor::THUMB_QUALITY);
     imagedestroy($baseImage);
 
     $caption = trim($_POST['caption'] ?? '');
@@ -211,10 +226,14 @@ public function deletePostAction(): void
     $post = $this->postModel->getPostById($postId);
     
     if ($post && $post['user_id'] == $_SESSION['user_id']) {
-        // Delete the image file
+        // Delete the image file and its thumbnail
         $filePath = __DIR__ . '/../' . $post['image_path'];
         if (file_exists($filePath)) {
             unlink($filePath);
+        }
+        $thumbPath = ImageProcessor::thumbPath($filePath);
+        if (file_exists($thumbPath)) {
+            unlink($thumbPath);
         }
     }
 
@@ -235,8 +254,8 @@ public function deletePostAction(): void
             exit;
         }
 
-        $postModel = new PostModel();
-        $posts = $postModel->getAllPosts((int)$_SESSION['user_id']);
+        [$page, $totalPages, $offset] = $this->paginate(12);
+        $posts = $this->postModel->getAllPosts((int)$_SESSION['user_id'], 12, $offset);
 
         require __DIR__ . '/../views/home.php';
     }
@@ -258,7 +277,8 @@ public function deletePostAction(): void
     {
         if (session_status() === PHP_SESSION_NONE) session_start();
 
-        $posts = $this->postModel->getAllPosts();
+        [$page, $totalPages, $offset] = $this->paginate(24);
+        $posts = $this->postModel->getAllPosts(0, 24, $offset);
         require __DIR__ . '/../views/explore.php';
     }
 

@@ -4,6 +4,7 @@ require_once 'controllers/UserController.php';
 require_once 'controllers/PostController.php';
 require_once 'controllers/ReportController.php';
 require_once 'controllers/NotificationController.php';
+require_once 'utils/view_helpers.php';
 
 if (session_status() === PHP_SESSION_NONE) session_start();
 

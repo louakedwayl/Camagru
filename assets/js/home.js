@@ -1,123 +1,115 @@
-document.querySelectorAll("img.house").forEach(img => {
-    img.src = "assets/images/icon/home_black.svg";
-});
-
-const imgComments = document.querySelectorAll("img.icon-comment");
-
-const moreLinks = document.querySelectorAll('.more-link');
-moreLinks.forEach(link => {
-    link.addEventListener('click', function(e) {
-        e.preventDefault();
-        const captionContainer = this.closest('.caption-container');
-        const caption = captionContainer.querySelector('.post-caption');
-        const fullText = caption.getAttribute('data-full-text');
-        caption.textContent = fullText;
-        caption.classList.add('expanded');
-        this.remove();
+"use strict";
+(() => {
+    document.querySelectorAll("img.house").forEach(img => {
+        img.src = "assets/images/icon/home_black.svg";
     });
-});
-
-// Modale post options
-let currentPostUsername = null;
-let currentPostId = null;
-const threeDotsButtons = document.querySelectorAll('.three-dots');
-const modalPostOptions = document.getElementById('modal-post-options');
-const optionCancel = document.querySelector('.option-cancel');
-const optionReport = document.querySelector('.option-report');
-const optionGoToPost = document.querySelectorAll('.option-action')[0];
-const optionGoToProfile = document.querySelectorAll('.option-action')[1];
-
-
-threeDotsButtons.forEach(btn => {
-    btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        const galleryTop = btn.closest('.gallery-top');
-        currentPostUsername = galleryTop.querySelector('.post-username').textContent;
-        currentPostId = btn.getAttribute('data-post-id');
-        modalPostOptions.showModal();
+    const imgComments = document.querySelectorAll("img.icon-comment");
+    const moreLinks = document.querySelectorAll('.more-link');
+    moreLinks.forEach(link => {
+        link.addEventListener('click', function (e) {
+            e.preventDefault();
+            const captionContainer = this.closest('.caption-container');
+            const caption = captionContainer.querySelector('.post-caption');
+            const fullText = caption.getAttribute('data-full-text');
+            caption.textContent = fullText;
+            caption.classList.add('expanded');
+            this.remove();
+        });
     });
-});
-
-optionCancel.addEventListener('click', () => {
-    modalPostOptions.close();
-});
-
-optionReport.addEventListener('click', () => {
-    modalPostOptions.close();
-    const reportModal = document.getElementById('modale-report');
-    reportModal.showModal();
-    document.body.style.overflow = "hidden";
-});
-
-optionGoToPost.addEventListener('click', () => {
-    modalPostOptions.close();
-    window.location.href = 'index.php?action=post&id=' + currentPostId;
-});
-
-optionGoToProfile.addEventListener('click', () => {
-    modalPostOptions.close();
-    window.location.href = 'index.php?action=user_profile&username=' + currentPostUsername;
-});
-
-
-imgComments.forEach(icon => {
-    icon.addEventListener("click", () => {
-        const postId = icon.getAttribute('data-post-id');
-        window.location.href = 'index.php?action=post&id=' + postId;
+    // Modale post options
+    let currentPostUsername = null;
+    let currentPostId = null;
+    const threeDotsButtons = document.querySelectorAll('.three-dots');
+    const modalPostOptions = document.getElementById('modal-post-options');
+    const optionCancel = document.querySelector('.option-cancel');
+    const optionReport = document.querySelector('.option-report');
+    const optionGoToPost = document.querySelectorAll('.option-action')[0];
+    const optionGoToProfile = document.querySelectorAll('.option-action')[1];
+    threeDotsButtons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const galleryTop = btn.closest('.gallery-top');
+            currentPostUsername = galleryTop.querySelector('.post-username').textContent;
+            currentPostId = btn.getAttribute('data-post-id');
+            modalPostOptions.showModal();
+        });
     });
-});
-
-// Click on avatar or username -> go to profile
-document.querySelectorAll('.post-user-avatar, .post-username').forEach(el => {
-    el.style.cursor = 'pointer';
-    el.addEventListener('click', () => {
-        const username = el.closest('.gallery-top').querySelector('.post-username').textContent;
-        window.location.href = 'index.php?action=user_profile&username=' + username;
+    optionCancel.addEventListener('click', () => {
+        modalPostOptions.close();
     });
-});
-
-// Toggle like
-document.querySelectorAll('.icon-like').forEach(icon => {
-  icon.addEventListener('click', async () => {
-    const postId = icon.getAttribute('data-post-id');
-    const wasLiked = icon.classList.contains('liked');
-    const countEl = document.querySelector(`.likes-count[data-post-id="${postId}"]`);
-    const prevCount = countEl.textContent;
-
-    // Optimistic update
-    if (wasLiked) {
-      icon.src = 'assets/images/icon/heart.svg';
-      icon.classList.remove('liked');
-      const n = parseInt(prevCount) - 1;
-      countEl.textContent = n > 0 ? n : '';
-    } else {
-      icon.src = 'assets/images/icon/heart_red.svg';
-      icon.classList.add('liked');
-      const n = (parseInt(prevCount) || 0) + 1;
-      countEl.textContent = n;
-    }
-
-    try {
-      const res = await fetch('index.php?action=toggle_like', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: 'post_id=' + postId
-      });
-      const data = await res.json();
-      if (!data.success) throw new Error('Server rejected');
-      // Sync with server truth
-      countEl.textContent = data.likes_count > 0 ? data.likes_count : '';
-    } catch (err) {
-      // Revert on failure
-      if (wasLiked) {
-        icon.src = 'assets/images/icon/heart_red.svg';
-        icon.classList.add('liked');
-      } else {
-        icon.src = 'assets/images/icon/heart.svg';
-        icon.classList.remove('liked');
-      }
-      countEl.textContent = prevCount;
-      console.error('Like error:', err);
-    }
-  });
-});
+    optionReport.addEventListener('click', () => {
+        modalPostOptions.close();
+        const reportModal = document.getElementById('modale-report');
+        reportModal.showModal();
+        document.body.style.overflow = "hidden";
+    });
+    optionGoToPost.addEventListener('click', () => {
+        modalPostOptions.close();
+        window.location.href = 'index.php?action=post&id=' + currentPostId;
+    });
+    optionGoToProfile.addEventListener('click', () => {
+        modalPostOptions.close();
+        window.location.href = 'index.php?action=user_profile&username=' + currentPostUsername;
+    });
+    imgComments.forEach(icon => {
+        icon.addEventListener("click", () => {
+            const postId = icon.getAttribute('data-post-id');
+            window.location.href = 'index.php?action=post&id=' + postId;
+        });
+    });
+    // Click on avatar or username -> go to profile
+    document.querySelectorAll('.post-user-avatar, .post-username').forEach(el => {
+        el.style.cursor = 'pointer';
+        el.addEventListener('click', () => {
+            const username = el.closest('.gallery-top').querySelector('.post-username').textContent;
+            window.location.href = 'index.php?action=user_profile&username=' + username;
+        });
+    });
+    // Toggle like
+    document.querySelectorAll('.icon-like').forEach(icon => {
+        icon.addEventListener('click', async () => {
+            const postId = icon.getAttribute('data-post-id');
+            const wasLiked = icon.classList.contains('liked');
+            const countEl = document.querySelector(`.likes-count[data-post-id="${postId}"]`);
+            const prevCount = countEl.textContent;
+            // Optimistic update
+            if (wasLiked) {
+                icon.src = 'assets/images/icon/heart.svg';
+                icon.classList.remove('liked');
+                const n = parseInt(prevCount) - 1;
+                countEl.textContent = n > 0 ? String(n) : '';
+            }
+            else {
+                icon.src = 'assets/images/icon/heart_red.svg';
+                icon.classList.add('liked');
+                const n = (parseInt(prevCount) || 0) + 1;
+                countEl.textContent = String(n);
+            }
+            try {
+                const res = await fetch('index.php?action=toggle_like', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: 'post_id=' + postId
+                });
+                const data = await res.json();
+                if (!data.success)
+                    throw new Error('Server rejected');
+                // Sync with server truth
+                countEl.textContent = data.likes_count > 0 ? String(data.likes_count) : '';
+            }
+            catch (err) {
+                // Revert on failure
+                if (wasLiked) {
+                    icon.src = 'assets/images/icon/heart_red.svg';
+                    icon.classList.add('liked');
+                }
+                else {
+                    icon.src = 'assets/images/icon/heart.svg';
+                    icon.classList.remove('liked');
+                }
+                countEl.textContent = prevCount;
+                console.error('Like error:', err);
+            }
+        });
+    });
+})();

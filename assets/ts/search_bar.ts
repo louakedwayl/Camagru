@@ -1,0 +1,105 @@
+(() => {
+    interface SearchUser {
+        username: string;
+        fullname: string;
+        avatar: string;
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const searchInput = document.getElementById('search-input') as HTMLInputElement;
+        const searchGrayIcon = document.querySelector<HTMLElement>('.icon.search-gray')!;
+        const searchCrossSurronded = document.querySelector<HTMLElement>('.search-cross-surronded')!;
+        const searchCross = document.querySelector<HTMLElement>('.search-cross');
+        let searchTimeout: number | undefined;
+
+        searchCrossSurronded.style.display = 'none';
+
+        searchInput.addEventListener('focus', function() {
+            searchGrayIcon.style.display = 'none';
+            searchCrossSurronded.style.display = 'block';
+        });
+
+        searchInput.addEventListener('blur', function() {
+            if (this.value.length === 0) {
+                searchGrayIcon.style.display = 'block';
+                searchCrossSurronded.style.display = 'none';
+            }
+        });
+
+        searchCrossSurronded.addEventListener('click', function() {
+            searchInput.value = '';
+            searchGrayIcon.style.display = 'block';
+            searchCrossSurronded.style.display = 'none';
+            document.getElementById('search-results')!.innerHTML = '';
+            searchInput.focus();
+        });
+
+        if (searchCross) {
+            searchCross.addEventListener('click', function() {
+                searchInput.value = '';
+                searchGrayIcon.style.display = 'block';
+                searchCrossSurronded.style.display = 'none';
+                document.getElementById('search-results')!.innerHTML = '';
+                document.getElementById('search-bar')!.style.display = 'none';
+            });
+        }
+
+        searchInput.addEventListener('input', function() {
+            const query = this.value.trim();
+            if (query.length > 0) {
+                searchGrayIcon.style.display = 'none';
+                searchCrossSurronded.style.display = 'block';
+            } else {
+                searchGrayIcon.style.display = 'block';
+                searchCrossSurronded.style.display = 'none';
+                document.getElementById('search-results')!.innerHTML = '';
+                return;
+            }
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(() => {
+                fetchSearchResults(query);
+            }, 300);
+        });
+
+        function fetchSearchResults(query: string) {
+            fetch('?action=search_users&q=' + encodeURIComponent(query))
+                .then(response => response.text())
+                .then(data => {
+                    try {
+                        const jsonData: SearchUser[] = JSON.parse(data);
+                        displayResults(jsonData);
+                    } catch(e) {
+                        console.error('Erreur parsing JSON:', e);
+                    }
+                })
+                .catch(error => {
+                    console.error('Erreur recherche:', error);
+                });
+        }
+
+        function displayResults(users: SearchUser[]) {
+            const resultsContainer = document.getElementById('search-results')!;
+            if (users.length === 0) {
+                resultsContainer.innerHTML = '<div class="search-empty">No results found.</div>';
+                return;
+            }
+
+            const isVisitor = window.location.href.includes('visitor_');
+            const profileAction = isVisitor ? 'visitor_profile' : 'user_profile';
+
+            let html = '';
+            users.forEach(user => {
+                html += `
+                    <div class="search-result-item" onclick="window.location.href='?action=${profileAction}&username=${user.username}'">
+                        <img class="search-result-avatar" src="${user.avatar}" alt="${user.username}">
+                        <div class="search-result-info">
+                            <div class="search-result-username">${user.username}</div>
+                            <div class="search-result-fullname">${user.fullname}</div>
+                        </div>
+                    </div>
+                `;
+            });
+            resultsContainer.innerHTML = html;
+        }
+    });
+})();

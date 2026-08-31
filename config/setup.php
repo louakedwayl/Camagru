@@ -3,6 +3,7 @@
 
 require_once __DIR__ . '/Database.php';
 require_once __DIR__ . '/../models/UserModel.php';
+require_once __DIR__ . '/../utils/ImageProcessor.php';
 
 const CAPTIONS = [
     1 => "A frozen stage for raw connection. Blades strike, time slows, and balance becomes instinct. Two bodies in sync, carving stories into the ice. There's something primal about this dance on frozen water, where trust isn't spoken but felt through every movement. The cold air bites, but the warmth of partnership cuts through it. In these moments, you realize it's not about perfection—it's about presence, about finding rhythm in the chaos, about two souls learning to move as one. The ice remembers every mark we leave, a temporary testimony to something timeless.",
@@ -182,6 +183,9 @@ try
                 $destPath = __DIR__ . '/../public/uploads/posts/' . $newFileName;
 
                 if (copy($sourcePath, $destPath)) {
+                    // Miniature WebP pour les grilles
+                    ImageProcessor::makeThumbFromFile($destPath);
+
                     $sql = "INSERT INTO posts (user_id, image_path, caption) VALUES (:uid, :path, :cap)";
                     $pdo->prepare($sql)->execute([
                         ':uid'  => $userIds[$post['user']],

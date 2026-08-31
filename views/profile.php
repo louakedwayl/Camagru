@@ -76,7 +76,7 @@
             <div class="gallery">
                 <?php foreach ($userPosts as $post) { ?>
                 <div class="gallery-item" data-post-id="<?= $post['id'] ?>">
-                    <img src="<?= htmlspecialchars($post['image_path']) ?>" alt="Post image" class="gallery-img">
+                    <img src="<?= htmlspecialchars(post_thumb($post['image_path'])) ?>" alt="Post image" class="gallery-img" loading="lazy">
                     <div class="gallery-overlay">
                         <span class="gallery-stat">
                             <img src="assets/images/icon/heart_white.svg" class="gallery-stat-icon"> <?= $post['likes_count'] ?? 0 ?>

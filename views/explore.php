@@ -23,9 +23,9 @@
         <div class="explore-grid">
             <?php foreach ($posts as $post) { ?>
             <div class="explore-item" data-post-id="<?= $post['id'] ?>">
-                <img src="<?= htmlspecialchars($post['image_path']) ?>"
+                <img src="<?= htmlspecialchars(post_thumb($post['image_path'])) ?>"
                     alt="Post by <?= htmlspecialchars($post['username']) ?>"
-                    class="explore-img">
+                    class="explore-img" loading="lazy">
                 <div class="explore-overlay">
                     <span class="explore-stat">
                         <img src="assets/images/icon/heart_white.svg" class="explore-stat-icon"> <?= $post['likes_count'] ?>
@@ -37,6 +37,7 @@
             </div>
             <?php } ?>
         </div>
+        <?php $paginationAction = 'explore'; require __DIR__ . '/pagination.php'; ?>
     </main>
     <?php require_once "footer.php" ?>
     <?php require_once "modale_report.php" ?>

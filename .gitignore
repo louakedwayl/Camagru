@@ -2,3 +2,5 @@
 assets/images/avatars/*
 !assets/images/avatars/.gitkeep
 .env
+# Node
+node_modules/

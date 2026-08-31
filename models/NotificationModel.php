@@ -51,33 +51,23 @@ class NotificationModel
      */
     public function getNotifications(int $userId, int $limit = 50): array
     {
+        // For comment notifications, join the actor's latest comment on the post
+        // (groupwise max instead of a correlated subquery per row)
         $stmt = $this->db->prepare(
             "SELECT n.id, n.type, n.post_id, n.is_read, n.created_at,
-                    u.username AS actor_username, 
+                    u.username AS actor_username,
                     u.avatar_path AS actor_avatar,
                     p.image_path AS post_image,
                     c.content AS comment_content
              FROM notifications n
              JOIN users u ON u.id = n.actor_id
              JOIN posts p ON p.id = n.post_id
-             LEFT JOIN comments c ON c.user_id = n.actor_id 
-                 AND c.post_id = n.post_id 
-                 AND n.type = 'comment'
-             ORDER BY n.created_at DESC
-             LIMIT ?
-        ");
-        // For the comment join, get the latest comment by that user on that post
-        $stmt = $this->db->prepare(
-            "SELECT n.id, n.type, n.post_id, n.is_read, n.created_at,
-                    u.username AS actor_username, 
-                    u.avatar_path AS actor_avatar,
-                    p.image_path AS post_image,
-                    (SELECT c.content FROM comments c 
-                     WHERE c.user_id = n.actor_id AND c.post_id = n.post_id 
-                     ORDER BY c.created_at DESC LIMIT 1) AS comment_content
-             FROM notifications n
-             JOIN users u ON u.id = n.actor_id
-             JOIN posts p ON p.id = n.post_id
+             LEFT JOIN (
+                 SELECT user_id, post_id, MAX(id) AS last_comment_id
+                 FROM comments
+                 GROUP BY user_id, post_id
+             ) lc ON n.type = 'comment' AND lc.user_id = n.actor_id AND lc.post_id = n.post_id
+             LEFT JOIN comments c ON c.id = lc.last_comment_id
              WHERE n.user_id = ?
              ORDER BY n.created_at DESC
              LIMIT ?

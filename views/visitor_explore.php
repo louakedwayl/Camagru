@@ -23,7 +23,7 @@
         <div class="explore-grid">
             <?php foreach ($posts as $post) { ?>
             <div class="explore-item" data-post-id="<?= $post['id'] ?>">
-                <img src="<?= htmlspecialchars($post['image_path']) ?>"
+                <img loading="lazy" src="<?= htmlspecialchars(post_thumb($post['image_path'])) ?>"
                     alt="Post by <?= htmlspecialchars($post['username']) ?>"
                     class="explore-img">
                 <div class="explore-overlay">
@@ -37,6 +37,7 @@
             </div>
             <?php } ?>
         </div>
+        <?php $paginationAction = 'visitor_explore'; require __DIR__ . '/pagination.php'; ?>
     </main>
     <?php require_once "footer.php" ?>
     <?php require_once "modale_report.php" ?>

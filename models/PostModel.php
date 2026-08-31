@@ -17,11 +17,11 @@ class PostModel
      * Récupère tous les posts pour l'affichage de la galerie
      * On peut joindre la table users pour avoir le nom du créateur si besoin
      */
-    public function getAllPosts(int $currentUserId = 0): array
+    public function getAllPosts(int $currentUserId = 0, int $limit = 24, int $offset = 0): array
     {
         try {
             $sql = "
-                SELECT 
+                SELECT
                     p.id,
                     p.image_path,
                     p.caption,
@@ -37,13 +37,17 @@ class PostModel
                 LEFT JOIN likes l ON p.id = l.post_id
                 LEFT JOIN comments c ON p.id = c.post_id
                 GROUP BY p.id, p.image_path, p.caption, p.created_at, p.user_id, u.username, u.avatar_path
-                ORDER BY p.id ASC
+                ORDER BY p.id DESC
+                LIMIT :limit OFFSET :offset
             ";
-            
+
             $stmt = $this->db->prepare($sql);
-            $stmt->execute([':current_user' => $currentUserId]);
+            $stmt->bindValue(':current_user', $currentUserId, PDO::PARAM_INT);
+            $stmt->bindValue(':limit', max(1, $limit), PDO::PARAM_INT);
+            $stmt->bindValue(':offset', max(0, $offset), PDO::PARAM_INT);
+            $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
-            
+
         } catch (PDOException $e) {
             return [];
         }
